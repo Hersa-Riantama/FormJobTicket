@@ -26,6 +26,10 @@ class Buku extends BaseController
         // }
         $model = new BukuModel();
             $data = $model->getBuku();
+            if ($this->request->isAJAX()) {
+                // Respond with JSON for AJAX requests (e.g., for your DataTables or API use)
+                return $this->respond(['buku' => $data]);
+            }
             $Vdata = [
                 'buku' => $data,
                 'judul' => 'List Buku',
@@ -42,7 +46,6 @@ class Buku extends BaseController
         //     // Jika Authorization header tidak valid
         //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
         // }
-        $id_buku = base64_decode($id_buku);
             // Ambil rules validasi dari model
             $rules = $this->model->validationRules();
             
@@ -53,27 +56,25 @@ class Buku extends BaseController
                 ];
                 return $this->failValidationErrors($response);
             }
-
-            // Data untuk update
-            $data = [
+            $Data = $this->model->find($id_buku);
+            if (!$Data) {
+                $response = [
+                    'Pesan' => 'Data Pegawai dengan ID tersebut tidak ditemukan'
+                ];
+                return $this->failNotFound('Data Pegawai dengan ID tersebut tidak ditemukan');
+            }
+            $this->model->update($id_buku, [
                 'kode_buku' => esc($this->request->getVar('kode_buku')),
                 'judul_buku' => esc($this->request->getVar('judul_buku')),
                 'pengarang' => esc($this->request->getVar('pengarang')),
                 'target_terbit' => esc($this->request->getVar('target_terbit')),
-                'warna' => esc($this->request->getVar('warna')),
-            ];
+                'warna' => esc($this->request->getVar('target_terbit')),
+            ]);
 
-            // Update data buku berdasarkan id_buku
-            if ($this->model->update($id_buku, $data)) {
-                // Response berhasil
-                $response = [
-                    'pesan' => 'Data Buku Berhasil diperbarui'
-                ];
-                return $this->respondUpdated($response);
-            } else {
-                // Jika gagal update
-                return $this->fail('Gagal memperbarui data buku');
-            }
+            $response = [
+                'Pesan' => 'Data Pegawai Berhasil dirubah'
+            ];
+            return $this->respond($response);
     }
     public function delete($id_buku = null)
     {
