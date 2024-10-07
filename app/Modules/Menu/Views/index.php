@@ -9,7 +9,7 @@
             <div class="row">
 
                 <!-- Column 1 -->
-                <div class="col-lg-3 col-md-6 col-3 mb-4">
+                <div class="col-lg-auto col-md-auto col-auto mb-4">
                     <div class="card h-100">
                         <div class="card-body">
                             <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah User</span>
@@ -21,7 +21,7 @@
                 <!-- / Column 1 -->
 
                 <!-- Column 2 -->
-                <div class="col-lg-3 col-md-6 col-3 mb-4">
+                <div class="col-lg-auto col-md-auto col-auto mb-4">
                     <div class="card h-100">
                         <div class="card-body">
                             <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Form Tiket</span>
@@ -33,7 +33,7 @@
                 <!-- / Column 2 -->
 
                 <!-- Column 3 -->
-                <div class="col-lg-3 col-md-6 col-3 mb-4">
+                <div class="col-lg-auto col-md-auto col-auto mb-4">
                     <div class="card h-100">
                         <div class="card-body">
                             <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Buku</span>

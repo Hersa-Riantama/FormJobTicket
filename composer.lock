@@ -202,12 +202,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "0dfb69d79d0964b8a80bfa92c07f50e3e8d73542"
+                "reference": "acc12399c90611e3cb478d0ec72f2c2ebbc429d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/0dfb69d79d0964b8a80bfa92c07f50e3e8d73542",
-                "reference": "0dfb69d79d0964b8a80bfa92c07f50e3e8d73542",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/acc12399c90611e3cb478d0ec72f2c2ebbc429d1",
+                "reference": "acc12399c90611e3cb478d0ec72f2c2ebbc429d1",
                 "shasum": ""
             },
             "require": {
@@ -265,7 +265,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-20T19:34:15+00:00"
+            "time": "2024-09-30T20:32:32+00:00"
         },
         {
             "name": "fakerphp/faker",
@@ -626,12 +626,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "bd4c3ede126f8fc08bd76a2842adb0b20cb55caa"
+                "reference": "c77064a1c8f3b6b29b48ca641c4eea3fc49b3d6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/bd4c3ede126f8fc08bd76a2842adb0b20cb55caa",
-                "reference": "bd4c3ede126f8fc08bd76a2842adb0b20cb55caa",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c77064a1c8f3b6b29b48ca641c4eea3fc49b3d6a",
+                "reference": "c77064a1c8f3b6b29b48ca641c4eea3fc49b3d6a",
                 "shasum": ""
             },
             "require": {
@@ -677,7 +677,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-29T12:41:37+00:00"
+            "time": "2024-10-06T14:58:32+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -1004,12 +1004,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "afe194425e5fbbaa2314f6f845f79fbeb8fa8cb7"
+                "reference": "75fe120e6c8d9e3ff35cf9ece828cca72731a2b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/afe194425e5fbbaa2314f6f845f79fbeb8fa8cb7",
-                "reference": "afe194425e5fbbaa2314f6f845f79fbeb8fa8cb7",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/75fe120e6c8d9e3ff35cf9ece828cca72731a2b9",
+                "reference": "75fe120e6c8d9e3ff35cf9ece828cca72731a2b9",
                 "shasum": ""
             },
             "require": {
@@ -1099,7 +1099,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-29T06:20:47+00:00"
+            "time": "2024-10-06T11:28:46+00:00"
         },
         {
             "name": "psr/container",

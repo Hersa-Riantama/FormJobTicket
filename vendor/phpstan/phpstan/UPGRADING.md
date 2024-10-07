@@ -1,5 +1,3 @@
-This document is a work in progress.
-
 Upgrading from PHPStan 1.x to 2.0
 =================================
 
@@ -9,7 +7,7 @@ PHPStan now requires PHP 7.4 or newer to run.
 
 ## Upgrading guide for end users
 
-The best way do get ready for upgrade to PHPStan 2.0 is to update to the **latest PHPStan 1.12 release**
+The best way to get ready for upgrade to PHPStan 2.0 is to update to the **latest PHPStan 1.12 release**
 and enable [**Bleeding Edge**](https://phpstan.org/blog/what-is-bleeding-edge). This will enable the new rules and behaviours that 2.0 turns on for all users.
 
 Also make sure to install and enable [`phpstan/phpstan-deprecation-rules`](https://github.com/phpstan/phpstan-deprecation-rules).
@@ -35,6 +33,13 @@ Don't forget to update [3rd party PHPStan extensions](https://phpstan.org/user-g
 After changing your `composer.json`, run `composer update 'phpstan/*' -W`.
 
 It's up to you whether you go through the new reported errors or if you just put them all to the [baseline](https://phpstan.org/user-guide/baseline) ;) Everyone who's on PHPStan 1.12 should be able to upgrade to PHPStan 2.0.
+
+### Noteworthy changes to code analysis
+
+* [**Enhancements in handling parameters passed by reference**](https://phpstan.org/blog/enhancements-in-handling-parameters-passed-by-reference)
+* [**Validate inline PHPDoc `@var` tag type**](https://phpstan.org/blog/phpstan-1-10-comes-with-lie-detector#validate-inline-phpdoc-%40var-tag-type)
+* [**List type enforced**](https://phpstan.org/blog/phpstan-1-9-0-with-phpdoc-asserts-list-type#list-type)
+* **Always `true` conditions always reported**: previously reported only with phpstan-strict-rules, this is now always reported.
 
 ### Removed option `checkMissingIterableValueType`
 
@@ -96,14 +101,26 @@ parameters:
 
 Appending `(?)` in `ignoreErrors` is not supported.
 
+### Docker images no longer tagged without a PHP version
+
+Tags without a PHP version are no longer published - `nightly`, `2`, `latest` are no longer updated. Instead, use `nightly-php8.3`, `2-php8.3`, `latest-php8.3`. You can replace `8.3` with PHP versions `8.0`-`8.3`.
+
 ### Minor backward compatibility breaks
 
 * Removed unused config parameter `cache.nodesByFileCountMax`
 * Removed unused config parameter `memoryLimitFile`
 * Removed unused feature toggle `disableRuntimeReflectionProvider`
 * Removed unused config parameter `staticReflectionClassNamePatterns`
+* Remove `fixerTmpDir` config parameter, use `pro.tmpDir` instead
+* Remove `tempResultCachePath` config parameter, use `resultCachePath` instead
+* `additionalConfigFiles` config parameter must be a list
 
 ## Upgrading guide for extension developers
+
+> [!NOTE]
+> Please switch to PHPStan 2.0 in a new major version of your extension. It's not feasible to try to support both PHPStan 1.x and PHPStan 2.x with the same extension code.
+>
+> You can definitely get closer to supporting PHPStan 2.0 without increasing major version by solving reported deprecations and other issues by analysing your extension code with PHPStan & phpstan-deprecation-rules & Bleeding Edge, but the final leap and solving backward incompatibilities should be done by requiring `"phpstan/phpstan": "^2.0"` in your `composer.json`, and releasing a new major version.
 
 ### PHPStan now uses nikic/php-parser v5
 
@@ -181,7 +198,7 @@ $returnType = ParametersAcceptorSelector::selectSingle($function->getVariants())
 
 **After**:
 
-```
+```php
 $returnType = $node->getFunctionReflection()->getReturnType();
 ```
 
@@ -229,6 +246,16 @@ Use [`PHPStan\Reflection\ReflectionProvider`](https://apiref.phpstan.org/2.0.x/P
 
 Instead of `PHPStanTestCase::createBroker()`, call `PHPStanTestCase::createReflectionProvider()`.
 
+### List type is enabled for everyone
+
+Removed static methods from `AccessoryArrayListType` class:
+
+* `isListTypeEnabled()`
+* `setListTypeEnabled()`
+* `intersectWith()`
+
+Instead of `AccessoryArrayListType::intersectWith($type)`, do `TypeCombinator::intersect($type, new AccessoryArrayListType())`.
+
 ### Minor backward compatibility breaks
 
 * Classes that were previously `@final` were made `final`
@@ -262,6 +289,7 @@ Instead of `PHPStanTestCase::createBroker()`, call `PHPStanTestCase::createRefle
 * Remove `ConstantArrayType::removeFirst()`, use [`Type::shiftArray()`](https://apiref.phpstan.org/2.0.x/PHPStan.Type.Type.html#_shiftArray) instead
 * Remove `ConstantArrayType::reverse()`, use [`Type::reverseArray()`](https://apiref.phpstan.org/2.0.x/PHPStan.Type.Type.html#_reverseArray) instead
 * Remove `ConstantArrayType::chunk()`, use [`Type::chunkArray()`](https://apiref.phpstan.org/2.0.x/PHPStan.Type.Type.html#_chunkArray) instead
+* Remove `ConstantArrayType::slice()`, use [`Type::sliceArray()`](https://apiref.phpstan.org/2.0.x/PHPStan.Type.Type.html#_sliceArray) instead
 * Made `TypeUtils` thinner by removing methods:
   * Remove `TypeUtils::getArrays()` and `getAnyArrays()`, use [`Type::getArrays()`](https://apiref.phpstan.org/2.0.x/PHPStan.Type.Type.html#_getArrays) instead
   * Remove `TypeUtils::getConstantArrays()` and `getOldConstantArrays()`, use [`Type::getConstantArrays()`](https://apiref.phpstan.org/2.0.x/PHPStan.Type.Type.html#_getConstantArrays) instead
@@ -273,6 +301,28 @@ Instead of `PHPStanTestCase::createBroker()`, call `PHPStanTestCase::createRefle
   * Remove `TypeUtils::getEnumCaseObjects()`, use [`Type::getEnumCases()`](https://apiref.phpstan.org/2.0.x/PHPStan.Type.Type.html#_getEnumCases) instead
   * Remove `TypeUtils::containsCallable()`, use [`Type::isCallable()`](https://apiref.phpstan.org/2.0.x/PHPStan.Type.Type.html#_isCallable) instead
 * Removed `Scope::doNotTreatPhpDocTypesAsCertain()`, use `getNativeType()` instead
-* Parameter `$isList` in `ConstantArrayType` constructor can only be `TrinaryLogic`, no longer bool
-* Parameter `$nextAutoIndexes` in `ConstantArrayType` constructor can only be `non-empty-list<int>`, no longer int
+* Parameter `$isList` in `ConstantArrayType` constructor can only be `TrinaryLogic`, no longer `bool`
+* Parameter `$nextAutoIndexes` in `ConstantArrayType` constructor can only be `non-empty-list<int>`, no longer `int`
 * Remove `ConstantType` interface, use [`Type::isConstantValue()`](https://apiref.phpstan.org/2.0.x/PHPStan.Type.Type.html#_isConstantValue) instead
+* `acceptsNamedArguments()` in `FunctionReflection`, `ExtendedMethodReflection` and `CallableParametersAcceptor` interfaces returns `TrinaryLogic` instead of `bool`
+* Remove `FunctionReflection::isFinal()`
+* [`Type::getProperty()`](https://apiref.phpstan.org/2.0.x/PHPStan.Type.Type.html#_getProperty) now returns [`ExtendedPropertyReflection`](https://apiref.phpstan.org/2.0.x/PHPStan.Reflection.ExtendedPropertyReflection.html)
+* Remove `__set_state()` on objects that should not be serialized in cache
+* Parameter `$selfClass` of [`TypehintHelper::decideTypeFromReflection()`](https://apiref.phpstan.org/2.0.x/PHPStan.Type.TypehintHelper.html#_decideTypeFromReflection) no longer accepts `string`
+* `LevelsTestCase::dataTopics()` data provider made static
+* `PHPStan\Node\Printer\Printer` no longer autowired as `PhpParser\PrettyPrinter\Standard`, use `PHPStan\Node\Printer\Printer` in the typehint
+* Remove `Type::acceptsWithReason()`, `Type:accepts()` return type changed from `TrinaryLogic` to [`AcceptsResult`](https://apiref.phpstan.org/2.0.x/PHPStan.Type.AcceptsResult.html)
+* Remove `CompoundType::isAcceptedWithReasonBy()`, `CompoundType::isAcceptedBy()` return type changed from `TrinaryLogic` to [`AcceptsResult`](https://apiref.phpstan.org/2.0.x/PHPStan.Type.AcceptsResult.html)
+* `RuleLevelHelper::accepts()` return type changed from `bool` to [`RuleLevelHelperAcceptsResult`](https://apiref.phpstan.org/2.0.x/PHPStan.Type.AcceptsResult.html)
+* Changes around `ClassConstantReflection`
+  * Class `ClassConstantReflection` removed from BC promise, renamed to `RealClassConstantReflection`
+  * Interface `ConstantReflection` renamed to `ClassConstantReflection`
+  * Added more methods around PHPDoc types and native types to the (new) `ClassConstantReflection`
+  * Interface `GlobalConstantReflection` renamed to `ConstantReflection`
+* Renamed interfaces and classes from `*WithPhpDocs` to `Extended*`
+  * `ParametersAcceptorWithPhpDocs` -> `ExtendedParametersAcceptor`
+  * `ParameterReflectionWithPhpDocs` -> `ExtendedParameterReflection`
+  * `FunctionVariantWithPhpDocs` -> `ExtendedFunctionVariant`
+* `ClassPropertyNode::getNativeType()` return type changed from AST node to `Type|null`
+* Class `PHPStan\Node\ClassMethod` (accessible from `ClassMethodsNode`) is no longer an AST node
+  * Call `PHPStan\Node\ClassMethod::getNode()` to access the original AST node

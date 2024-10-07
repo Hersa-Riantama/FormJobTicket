@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'simpletine/codeigniter4-hmvc',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'd67a67cd0e7a84f681c3a1b0b9beb024ca0c501b',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'doctrine/instantiator' => array(
             'pretty_version' => '2.0.x-dev',
             'version' => '2.0.9999999.9999999-dev',
-            'reference' => '0dfb69d79d0964b8a80bfa92c07f50e3e8d73542',
+            'reference' => 'acc12399c90611e3cb478d0ec72f2c2ebbc429d1',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/instantiator',
             'aliases' => array(),
@@ -96,7 +96,7 @@
         'phpstan/phpstan' => array(
             'pretty_version' => '2.0.x-dev',
             'version' => '2.0.9999999.9999999-dev',
-            'reference' => 'bd4c3ede126f8fc08bd76a2842adb0b20cb55caa',
+            'reference' => 'c77064a1c8f3b6b29b48ca641c4eea3fc49b3d6a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpstan/phpstan',
             'aliases' => array(),
@@ -150,7 +150,7 @@
         'phpunit/phpunit' => array(
             'pretty_version' => '9.6.x-dev',
             'version' => '9.6.9999999.9999999-dev',
-            'reference' => 'afe194425e5fbbaa2314f6f845f79fbeb8fa8cb7',
+            'reference' => '75fe120e6c8d9e3ff35cf9ece828cca72731a2b9',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/phpunit',
             'aliases' => array(),
@@ -325,9 +325,9 @@
             'dev_requirement' => true,
         ),
         'simpletine/codeigniter4-hmvc' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'd67a67cd0e7a84f681c3a1b0b9beb024ca0c501b',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
