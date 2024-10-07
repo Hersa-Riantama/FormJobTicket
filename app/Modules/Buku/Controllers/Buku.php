@@ -26,7 +26,10 @@ class Buku extends BaseController
         // }
         $model = new BukuModel();
             $data = $model->getBuku();
-            return $this->respond($data);
+            $Vdata = [
+                'buku' => $data,
+            ];
+            return view($this->folder_directory . 'data_buku',$Vdata);
     }
     public function update($id_buku = null)
     {

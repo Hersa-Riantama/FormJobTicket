@@ -29,26 +29,27 @@
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        <tr>
-                            <td>Kode Buku</td>
-                            <td>Judul Buku</td>
-                            <td>Pengarang</td>
-                            <td>Target Terbit</td>
-                            <td>Warna</td>
-                            <td>Warna</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                        <i class="bx bx-dots-horizontal-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-file me-2"></i> Detail</a>
-                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-2"></i> Edit</a>
-                                        <a class="dropdown-item" style="color: red;" href="javascript:void(0);"><i class="bx bx-trash me-2"></i> Delete</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                    <?php foreach ($buku as $item): ?>
+                                        <tr>
+                                            <td><?= esc($item['kode_buku']); ?></td>
+                                            <td><?= esc($item['judul_buku']); ?></td>
+                                            <td><?= esc($item['pengarang']); ?></td>
+                                            <td><?= esc($item['target_terbit']); ?></td>
+                                            <td><?= esc($item['warna']); ?></td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                        <i class="bx bx-dots-horizontal-rounded"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-file me-2"></i> Detail</a>
+                                                        <a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id="<?= esc($item['id_buku']); ?>"><i class="bx bx-edit-alt me-2"></i> Edit</a>
+                                                        <a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id="<?= esc($item['id_buku']); ?>"><i class="bx bx-trash me-2"></i> Delete</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

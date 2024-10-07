@@ -172,7 +172,7 @@
                         <ul class="menu-sub">
                             <li class="menu-item">
                                 <a
-                                    href="http://localhost:8080/data-buku"
+                                    href="http://localhost:8080/api/buku"
                                     class="menu-link">
                                     <div data-i18n="CRM">List Buku</div>
                                 </a>
