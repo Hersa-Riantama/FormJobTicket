@@ -35,6 +35,7 @@
                             <td>Pengarang</td>
                             <td>Target Terbit</td>
                             <td>Warna</td>
+                            <td>Warna</td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
