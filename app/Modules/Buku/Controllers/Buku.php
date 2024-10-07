@@ -28,6 +28,7 @@ class Buku extends BaseController
             $data = $model->getBuku();
             $Vdata = [
                 'buku' => $data,
+                'judul' => 'List Buku',
             ];
             return view($this->folder_directory . 'data_buku',$Vdata);
     }
