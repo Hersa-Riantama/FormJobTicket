@@ -1,11 +1,47 @@
 <?php
 
-namespace Modules\Buku\Models;
+namespace App\Modules\Buku\Models;
 
 use CodeIgniter\Model;
 
 class BukuModel extends Model
 {
-    protected $table            = 'table'; 
-    protected $allowedFields    = [];
+    protected $table            = 'tbl_buku';
+    protected $primaryKey       = 'id_buku';
+    protected $useAutoIncrement = true;
+    protected $allowedFields    = ['kode_buku', 
+                                    'judul_buku', 
+                                    'pengarang',
+                                    'target_terbit',
+                                    'warna'];
+
+    // protected bool $allowEmptyInserts = false;
+    // protected bool $updateOnlyChanged = true;
+
+    // protected array $casts = [];
+    // protected array $castHandlers = [];
+
+    // Dates
+    protected $useTimestamps = true;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+
+    // Fungsi untuk validasi data sebelum insert
+    public function validationRules()
+    {
+        return [
+            'kode_buku' => 'required|min_length[3]',
+            'judul_buku' => 'required', 
+            'pengarang' => 'required',
+            'target_terbit' => 'required',
+            'warna' => 'required',
+        ];
+    }
+
+    // (Opsional) Hash password sebelum disimpan
+    public function getBuku()
+    {
+        return $this->findAll();
+    }
 }
