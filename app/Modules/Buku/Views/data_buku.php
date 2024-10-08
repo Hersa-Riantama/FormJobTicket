@@ -63,19 +63,19 @@
                             <div class="mb-3">
                                 <label class="form-label">Warna</label><br>
                                 <div>
-                                    <input type="radio" id="bw" name="warna" value="BW">
+                                    <input type="radio" id="bw" name="warna" value="BW" required>
                                     <label for="bw">BW</label>
                                 </div>
                                 <div>
-                                    <input type="radio" id="2-2" name="warna" value="2/2">
+                                    <input type="radio" id="2-2" name="warna" value="2/2" required>
                                     <label for="2-2">2/2</label>
                                 </div>
                                 <div>
-                                    <input type="radio" id="3-3" name="warna" value="3/3">
+                                    <input type="radio" id="3-3" name="warna" value="3/3" required>
                                     <label for="3-3">3/3</label>
                                 </div>
                                 <div>
-                                    <input type="radio" id="4-4" name="warna" value="4/4">
+                                    <input type="radio" id="4-4" name="warna" value="4/4" required>
                                     <label for="4-4">4/4</label>
                                 </div>
                             </div>
@@ -117,19 +117,19 @@
                             <div class="mb-3">
                                 <label class="form-label">Warna</label><br>
                                 <div>
-                                    <input type="radio" id="bw" name="warna" value="BW">
+                                    <input type="radio" id="bw" name="warna" value="BW" required>
                                     <label for="bw">BW</label>
                                 </div>
                                 <div>
-                                    <input type="radio" id="2-2" name="warna" value="2/2">
+                                    <input type="radio" id="2-2" name="warna" value="2/2" required>
                                     <label for="2-2">2/2</label>
                                 </div>
                                 <div>
-                                    <input type="radio" id="3-3" name="warna" value="3/3">
+                                    <input type="radio" id="3-3" name="warna" value="3/3" required>
                                     <label for="3-3">3/3</label>
                                 </div>
                                 <div>
-                                    <input type="radio" id="4-4" name="warna" value="4/4">
+                                    <input type="radio" id="4-4" name="warna" value="4/4" required>
                                     <label for="4-4">4/4</label>
                                 </div>
                             </div>
@@ -322,7 +322,7 @@ $(document).on('submit', '#addForm', function(event) {
     var judul_buku = $('#judul_buku').val();
     var pengarang = $('#pengarang').val();
     var target_terbit = $('#target_terbit').val();
-    var warna = $('#warna').val();
+    var warna = $('input[name="warna"]:checked').val();
 
     $.ajax({
         type: 'POST',
