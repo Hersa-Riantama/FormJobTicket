@@ -123,10 +123,21 @@
                                         <input class="form-control" type="text" value="" id="nomor_job" name="nomor_job" placeholder="Masukkan Nomor Job" style="border: 1px solid black;" />
                                     </div>
                                 </div>
-                                <div class="mb-3 row">
+                                <!-- <div class="mb-3 row">
                                     <label for="kode_buku" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">KODE BUKU</label>
                                     <div class="col-md-9">
                                         <input class="form-control" type="text" value="" id="kode_buku" name="kode_buku" placeholder="Masukkan Kode Buku" style="border: 1px solid black;" />
+                                    </div>
+                                </div> -->
+                                <div class="mb-3 row">
+                                    <label for="kode_buku" class="form-label col-md-3 text-primary" style="font-size: var(--bs-body-font-size)">Kode Buku</label>
+                                    <div class="col-md-9">
+                                        <select id="kode_buku" class="form-select" name="kode_buku" style="border: 1px solid black;">
+                                            <option selected disabled>Kode Buku</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
