@@ -123,12 +123,6 @@
                                         <input class="form-control" type="text" value="" id="nomor_job" name="nomor_job" placeholder="Masukkan Nomor Job" style="border: 1px solid black;" />
                                     </div>
                                 </div>
-                                <!-- <div class="mb-3 row">
-                                    <label for="kode_buku" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">KODE BUKU</label>
-                                    <div class="col-md-9">
-                                        <input class="form-control" type="text" value="" id="kode_buku" name="kode_buku" placeholder="Masukkan Kode Buku" style="border: 1px solid black;" />
-                                    </div>
-                                </div> -->
                                 <div class="mb-3 row">
                                     <label for="kode_buku" class="form-label col-md-3 text-primary" style="font-size: var(--bs-body-font-size)">Kode Buku</label>
                                     <div class="col-md-9">
@@ -260,39 +254,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <!-- Test -->
-                                        <!-- <div class="row justify-content-center mb-1">
-                                                            <div class="col-xl-auto mx-1 mb-0">
-                                                                <div class="row justify-content-center border boder-box border-dark rounded mb-2 px-3">
-                                                                    <div class="form-check justify-center">
-                                                                        <input class="form-check-input" type="checkbox" value="Audio Mp3" id="defaultCheck12" style="border: 1px solid pink;" />
-                                                                        <label class="form-check-label text-primary" for="defaultCheck12"> Audio Mp3 </label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row justify-content-center border boder-box border-dark rounded mb-0 px-3">
-                                                                    <div class="form-check justify-center">
-                                                                        <input class="form-check-input" type="checkbox" value="PDF & RAR" id="defaultCheck13" style="border: 1px solid pink;" />
-                                                                        <label class="form-check-label text-primary" for="defaultCheck13"> PDF & RAR </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-auto mx-1 mb-1">
-                                                                <div class="row justify-content-center border boder-box border-dark rounded mb-2 px-3">
-                                                                    <div class="form-check justify-center">
-                                                                        <input class="form-check-input" type="checkbox" value="Video Mp4" id="defaultCheck14" style="border: 1px solid pink;" />
-                                                                        <label class="form-check-label text-primary" for="defaultCheck14"> Video Mp4 </label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row justify-content-center border boder-box border-dark rounded mb-0 px-3">
-                                                                    <div class="form-check justify-center">
-                                                                        <input class="form-check-input" type="checkbox" value="fla/xfl3" id="defaultCheck15" style="border: 1px solid pink;" />
-                                                                        <label class="form-check-label text-primary" for="defaultCheck15"> fla/xfl </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-                                        <!-- / Test -->
 
                                         <div class="row justify-content-center mb-1">
                                             <div class="col-xl-auto border boder-box border-dark rounded mx-1 mb-2">

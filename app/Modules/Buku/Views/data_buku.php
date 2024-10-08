@@ -36,43 +36,43 @@
         <!--/ Basic Bootstrap Table -->
         <!-- Edit Modal -->
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form id="editForm" action="javascript:void(0);" method="post">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel">Edit Buku</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="kode_buku" class="form-label">kode Buku</label>
-                            <input type="text" class="form-control" name="kode_buku" required>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="editForm" action="javascript:void(0);" method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Edit Buku</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="mb-3">
-                            <label for="judul_buku" class="form-label">Judul Buku</label>
-                            <input type="text" class="form-control" name="judul_buku" required>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="kode_buku" class="form-label">kode Buku</label>
+                                <input type="text" class="form-control" name="kode_buku" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="judul_buku" class="form-label">Judul Buku</label>
+                                <input type="text" class="form-control" name="judul_buku" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pengarang" class="form-label">Pengarang</label>
+                                <input type="text" class="form-control" name="pengarang" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="target_terbit" class="form-label">Target Terbit</label>
+                                <input type="date" class="form-control" name="target_terbit" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="warna" class="form-label">Warna</label>
+                                <input type="text" class="form-control" name="warna" required>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="pengarang" class="form-label">Pengarang</label>
-                            <input type="text" class="form-control" name="pengarang" required>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
-                        <div class="mb-3">
-                            <label for="target_terbit" class="form-label">Target Terbit</label>
-                            <input type="date" class="form-control" name="target_terbit" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="warna" class="form-label">Warna</label>
-                            <input type="text" class="form-control" name="warna" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
     </div>
     <!-- / Content -->
@@ -104,7 +104,7 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         // Fetch and display the data in the table (as you already have)
         $.ajax({
             url: '<?= base_url('buku') ?>',
@@ -112,7 +112,7 @@
             dataType: 'json',
             success: function(data) {
                 var bukuData = '';
-                
+
                 $.each(data.buku, function(index, value) {
                     bukuData += '<tr>';
                     bukuData += '<td>' + value.kode_buku + '</td>';
@@ -126,13 +126,14 @@
                     bukuData += '</td>';
                     bukuData += '</tr>';
                 });
-                
+
                 $('#bukuData').html(bukuData);
             },
             error: function(xhr, status, error) {
                 console.log(error);
             }
         });
+
         function loadBuku() {
             $.ajax({
                 url: '<?= base_url('buku') ?>',
@@ -147,13 +148,13 @@
         // Click event to open edit modal and populate the fields
         $(document).on('click', '.btn-edit', function(e) {
             e.preventDefault();
-            
+
             // Get the book ID from the data-id attribute
             var id = $(this).data('id_buku');
 
             // Fetch the book data using the id
             $.ajax({
-                url: '<?= base_url('buku') ?>/' + id,  // Endpoint untuk mendapatkan data pegawai
+                url: '<?= base_url('buku') ?>/' + id, // Endpoint untuk mendapatkan data pegawai
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
@@ -168,7 +169,7 @@
                     } else {
                         console.error('Response is invalid:', response);
                     }
-                    
+
                     // Tampilkan modal
                     $('#editModal').modal('show');
                 }
@@ -179,10 +180,10 @@
         $('#editForm').on('submit', function(e) {
             e.preventDefault();
 
-            var formData = $(this).serialize();  // Get the form data
-            
+            var formData = $(this).serialize(); // Get the form data
+
             $.ajax({
-                url: '<?= base_url('buku') ?>',  // Change this to your update URL
+                url: '<?= base_url('buku') ?>', // Change this to your update URL
                 type: 'POST',
                 data: formData,
                 success: function(response) {
@@ -197,8 +198,6 @@
             });
         });
     });
-
-
 </script>
 <!-- / Layout wrapper -->
 <?= $this->endSection(); ?>
