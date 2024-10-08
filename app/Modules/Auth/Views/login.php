@@ -164,7 +164,7 @@
 
                         <p class="text-center">
                             <span>Belum punya akun?</span>
-                            <a href="http://localhost:8080/daftar">
+                            <a href="http://localhost:8080/api/daftar">
                                 <span>Daftar</span>
                             </a>
                         </p>

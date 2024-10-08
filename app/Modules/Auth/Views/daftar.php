@@ -195,7 +195,7 @@
 
                         <p class="text-center">
                             <span>Sudah punya akun?</span>
-                            <a href="http://localhost:8080/login">
+                            <a href="http://localhost:8080/api/login">
                                 <span>Login</span>
                             </a>
                         </p>
