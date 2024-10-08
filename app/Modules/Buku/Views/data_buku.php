@@ -9,7 +9,7 @@
         <div class="row justify-content-end">
             <!-- <div class="col-xl-8">
             </div> -->
-            <div class="col-xl-auto mb-4 justify-conten-end">
+            <div class="col-xl-auto mb-4 justify-content-end">
                 <button class="btn btn-primary d-grid">Tambah Buku</button>
             </div>
         </div>
