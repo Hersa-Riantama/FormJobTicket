@@ -189,7 +189,7 @@ $(document).on('click', '.dropdown-item-delete', function() {
 
 // Fungsi untuk update data
 $(document).on('click', '#btn-update', function() {
-    var id = $('#id_buku').val();
+    var id_buku = $('#id_buku').val();
     var kode_buku = $('#kode_buku').val();
     var judul_buku = $('#judul_buku').val();
     var pengarang = $('#pengarang').val();
@@ -197,7 +197,7 @@ $(document).on('click', '#btn-update', function() {
     var warna = $('#warna').val();
     $.ajax({
         type: 'PUT',
-        url: 'http://localhost:8080/api/buku/' + id,
+        url: 'http://localhost:8080/api/buku/' + id_buku,
         data: {
             kode_buku: kode_buku,
             judul_buku: judul_buku,

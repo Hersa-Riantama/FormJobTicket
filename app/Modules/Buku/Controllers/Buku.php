@@ -47,6 +47,34 @@ class Buku extends BaseController
             ];
             return view($this->folder_directory . 'data_buku',$Vdata);
     }
+    public function create()
+    {
+        // $authHeader = $this->request->getHeader('Authorization');
+        // if ($authHeader && $authHeader->getValue() === $this->value) {
+        // }else {
+        //     // Jika header Authorization tidak valid
+        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
+        // }
+        $rules = $this->model->validationRules();
+            if (!$this->validate($rules)) {
+                $response = [
+                    'pesan' => $this->validator->getErrors()
+                ];
+                return $this->failValidationErrors($response);
+            }
+            $this->model->insert([
+                'kode_buku' => esc($this->request->getVar('kode_buku')),
+                'judul_buku' => esc($this->request->getVar('judul_buku')),
+                'pengarang' => esc($this->request->getVar('pengarang')),
+                'target_terbit' => esc($this->request->getVar('target_terbit')),
+                'warna' => esc($this->request->getVar('warna')),
+            ]);
+            // Response berhasil
+            $response = [
+                'Pesan' => 'Data Buku Berhasil ditambahkan'
+            ];
+            return $this->respondCreated($response);
+    }
     public function update($id_buku = null)
     {
         // $authHeader = $this->request->getHeader('Authorization');
