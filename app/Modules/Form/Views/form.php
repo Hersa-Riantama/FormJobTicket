@@ -24,14 +24,14 @@
                                 <div class="row">
                                     <div class="col-xl">
                                         <div class="card border" style="background-color:pink;">
-                                            <h3 class="text-center rounded mb-0 py-1" style="background-color:lightpink;">Form</h3>
-                                            <div class="card-body m-0 p-0">
+                                            <h3 class="text-center rounded mb-0 p-2" style="background-color:lightpink;">Form</h3>
+                                            <div class="card-body m-0 p-2">
                                                 <h1 class="text-center mb-0 display-1">C</h1>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-xl">
-                                        <h1 class="text-center display-1 mb-0" style="font-size: 6rem;">1</h1>
+                                        <h1 class="text-center display-1 mb-0 mt-1" style="font-size: 7rem;">1</h1>
                                     </div>
                                 </div>
                             </div>
