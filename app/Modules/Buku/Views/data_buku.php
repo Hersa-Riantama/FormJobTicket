@@ -9,7 +9,7 @@
         <div class="row justify-content-end">
             <!-- <div class="col-xl-8">
             </div> -->
-            <div class="col-xl-auto mb-4 justify-content-end">
+            <div class="col-xl-auto mb-4 justify-conten-end">
                 <button class="btn btn-primary d-grid">Tambah Buku</button>
             </div>
         </div>
@@ -45,34 +45,35 @@
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="kode_buku" class="form-label">kode Buku</label>
-                                <input type="text" class="form-control" name="kode_buku" required>
+                                <label for="kode_buku" class="form-label">Kode Buku</label>
+                                <input type="text" class="form-control" id="kode_buku" name="kode_buku" required>
                             </div>
                             <div class="mb-3">
                                 <label for="judul_buku" class="form-label">Judul Buku</label>
-                                <input type="text" class="form-control" name="judul_buku" required>
+                                <input type="text" class="form-control" id="judul_buku" name="judul_buku" required>
                             </div>
                             <div class="mb-3">
                                 <label for="pengarang" class="form-label">Pengarang</label>
-                                <input type="text" class="form-control" name="pengarang" required>
+                                <input type="text" class="form-control" id="pengarang" name="pengarang" required>
                             </div>
                             <div class="mb-3">
                                 <label for="target_terbit" class="form-label">Target Terbit</label>
-                                <input type="date" class="form-control" name="target_terbit" required>
+                                <input type="year" class="form-control" id="target_terbit" name="target_terbit" required>
                             </div>
                             <div class="mb-3">
                                 <label for="warna" class="form-label">Warna</label>
-                                <input type="text" class="form-control" name="warna" required>
+                                <input type="text" class="form-control" id="warna" name="warna" required>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" id="btn-update" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
 
     </div>
     <!-- / Content -->
@@ -104,100 +105,140 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        // Fetch and display the data in the table (as you already have)
-        $.ajax({
-            url: '<?= base_url('buku') ?>',
-            type: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                var bukuData = '';
-
-                $.each(data.buku, function(index, value) {
-                    bukuData += '<tr>';
-                    bukuData += '<td>' + value.kode_buku + '</td>';
-                    bukuData += '<td>' + value.judul_buku + '</td>';
-                    bukuData += '<td>' + value.pengarang + '</td>';
-                    bukuData += '<td>' + value.target_terbit + '</td>';
-                    bukuData += '<td>' + value.warna + '</td>';
-                    bukuData += '<td>';
-                    bukuData += '<a href="#" class="btn btn-info btn-sm btn-edit" data-id="' + value.id_buku + '">Edit</a> ';
-                    bukuData += '<a href="#" class="btn btn-danger btn-sm btn-delete" data-id="' + value.id_buku + '">Delete</a>';
-                    bukuData += '</td>';
-                    bukuData += '</tr>';
-                });
-
-                $('#bukuData').html(bukuData);
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
-            }
-        });
-
-        function loadBuku() {
-            $.ajax({
-                url: '<?= base_url('buku') ?>',
-                type: 'GET',
-                success: function(response) {
-                    // Update the employee data here
-                    // For example, you can update a table or a list with the new data
-                    $('data_buku').html(response);
-                }
+    // Fungsi untuk menampilkan data dari database
+function loadData() {
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/api/buku',
+        dataType: 'json',
+        success: function(data) {
+            var bukuData = '';
+            $.each(data.buku, function(key, value) {
+                bukuData += '<tr>';
+                bukuData += '<td>' + value.kode_buku + '</td>';
+                bukuData += '<td>' + value.judul_buku + '</td>';
+                bukuData += '<td>' + value.pengarang + '</td>';
+                bukuData += '<td>' + value.target_terbit + '</td>';
+                bukuData += '<td>' + value.warna + '</td>';
+                bukuData += '<td>';
+                bukuData += '<div class="dropdown">';
+                bukuData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
+                bukuData += '<i class="bx bx-dots-horizontal-rounded"></i>';
+                bukuData += '</button>';
+                bukuData += '<div class="dropdown-menu">';
+                bukuData += '<a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-file me-2"></i> Detail</a>';
+                bukuData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
+                bukuData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-trash me-2"></i> Delete</a>';
+                bukuData += '</div>';
+                bukuData += '</div>';
+                bukuData += '</td>';
+                bukuData += '</tr>';
             });
+            $('#bukuData').html(bukuData);
         }
-        // Click event to open edit modal and populate the fields
-        $(document).on('click', '.btn-edit', function(e) {
-            e.preventDefault();
-
-            // Get the book ID from the data-id attribute
-            var id = $(this).data('id_buku');
-
-            // Fetch the book data using the id
-            $.ajax({
-                url: '<?= base_url('buku') ?>/' + id, // Endpoint untuk mendapatkan data pegawai
-                type: 'GET',
-                dataType: 'json',
-                success: function(response) {
-                    console.log(response); // Inspect the response object
-                    if (response && response.data_buku) {
-                        // Isi form modal dengan data pegawai
-                        $('#kode_buku').val(response.data_buku.kode_buku);
-                        $('#judul_buku').val(response.data_buku.judul_buku);
-                        $('#pengarang').val(response.data_buku.pengarang);
-                        $('#target_terbit').val(response.data_buku.target_terbit);
-                        $('#warna').val(response.data_buku.warna);
-                    } else {
-                        console.error('Response is invalid:', response);
-                    }
-
-                    // Tampilkan modal
-                    $('#editModal').modal('show');
-                }
-            });
-        });
-
-        // Submitting the edited data
-        $('#editForm').on('submit', function(e) {
-            e.preventDefault();
-
-            var formData = $(this).serialize(); // Get the form data
-
-            $.ajax({
-                url: '<?= base_url('buku') ?>', // Change this to your update URL
-                type: 'POST',
-                data: formData,
-                success: function(response) {
-                    alert('Data updated successfully!');
-
-                    // Reload or refresh the table
-                    location.reload(); // You can use location.reload() or fetch the table data again
-                },
-                error: function(xhr, status, error) {
-                    console.log(error);
-                }
-            });
-        });
     });
+}
+
+// Fungsi untuk edit data
+$(document).on('click', '.dropdown-item-edit', function() {
+    var id_buku = $(this).data('id_buku'); // Ambil ID dari data-id_buku
+    console.log('ID Buku:', id_buku); // Log ID untuk memverifikasi
+
+    if (!id_buku) {
+        console.log('ID tidak ditemukan!'); // Log jika ID undefined
+        return; // Hentikan eksekusi jika ID tidak valid
+    }
+
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/api/buku/' + id_buku,
+        dataType: 'json',
+        success: function(response) {
+            console.log('Respons API:', response); // Lihat respons API
+            
+            // Pastikan untuk memeriksa data_buku dari respons
+            if (response.data_buku) {
+                $('#kode_buku').val(response.data_buku.kode_buku);
+                $('#judul_buku').val(response.data_buku.judul_buku);
+                $('#pengarang').val(response.data_buku.pengarang);
+                $('#target_terbit').val(response.data_buku.target_terbit);
+                $('#warna').val(response.data_buku.warna);
+            } else {
+                console.log('Data buku tidak ditemukan'); // Log jika data_buku tidak ada
+            }
+
+            // Tampilkan modal setelah data berhasil diisi
+            $('#editModal').modal('show');
+        },
+        error: function(xhr, status, error) {
+            console.log('Error:', xhr.responseText); // Log jika terjadi error
+        }
+    });
+});
+
+// Fungsi untuk delete data
+$(document).on('click', '.dropdown-item-delete', function() {
+    var id_buku = $(this).data('id_buku');
+    $.ajax({
+        type: 'DELETE',
+        url: 'http://localhost:8080/api/buku/' + id_buku,
+        success: function() {
+            loadData();
+        }
+    });
+});
+
+// Fungsi untuk update data
+$(document).on('click', '#btn-update', function() {
+    var id = $('#id_buku').val();
+    var kode_buku = $('#kode_buku').val();
+    var judul_buku = $('#judul_buku').val();
+    var pengarang = $('#pengarang').val();
+    var target_terbit = $('#target_terbit').val();
+    var warna = $('#warna').val();
+    $.ajax({
+        type: 'PUT',
+        url: 'http://localhost:8080/api/buku/' + id,
+        data: {
+            kode_buku: kode_buku,
+            judul_buku: judul_buku,
+            pengarang: pengarang,
+            target_terbit: target_terbit,
+            warna: warna
+        },
+        success: function() {
+            loadData();
+            $('#modal-edit').modal('hide');
+        }
+    });
+});
+
+// Fungsi untuk tambah data
+$(document).on('click', '#btn-tambah', function() {
+    var kode_buku = $('#kode_buku_tambah').val();
+    var judul_buku = $('#judul_buku_tambah').val();
+    var pengarang = $('#pengarang_tambah').val();
+    var target_terbit = $('#target_terbit_tambah').val();
+    var warna = $('#warna_tambah').val();
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:8080/api/buku',
+        data: {
+            kode_buku: kode_buku,
+            judul_buku: judul_buku,
+            pengarang: pengarang,
+            target_terbit: target_terbit,
+            warna: warna
+        },
+        success: function() {
+            loadData();
+            $('#modal-tambah').modal('hide');
+        }
+    });
+});
+
+// Load data saat pertama kali halaman diakses
+loadData();
 </script>
 <!-- / Layout wrapper -->
 <?= $this->endSection(); ?>
