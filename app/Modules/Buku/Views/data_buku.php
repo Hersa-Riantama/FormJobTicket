@@ -61,8 +61,23 @@
                                 <input type="year" class="form-control" id="target_terbit" name="target_terbit" required>
                             </div>
                             <div class="mb-3">
-                                <label for="warna" class="form-label">Warna</label>
-                                <input type="text" class="form-control" id="warna" name="warna" required>
+                                <label class="form-label">Warna</label><br>
+                                <div>
+                                    <input type="radio" id="bw" name="warna" value="BW">
+                                    <label for="bw">BW</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="2-2" name="warna" value="2/2">
+                                    <label for="2-2">2/2</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="3-3" name="warna" value="3/3">
+                                    <label for="3-3">3/3</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="4-4" name="warna" value="4/4">
+                                    <label for="4-4">4/4</label>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -73,7 +88,6 @@
                 </div>
             </div>
         </div>
-        <!-- Add Buku Modal -->
         <!-- Modal Tambah Buku -->
         <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -101,8 +115,23 @@
                                 <input type="year" class="form-control" id="target_terbit" name="target_terbit" required>
                             </div>
                             <div class="mb-3">
-                                <label for="warna" class="form-label">Warna</label>
-                                <input type="text" class="form-control" id="warna" name="warna" required>
+                                <label class="form-label">Warna</label><br>
+                                <div>
+                                    <input type="radio" id="bw" name="warna" value="BW">
+                                    <label for="bw">BW</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="2-2" name="warna" value="2/2">
+                                    <label for="2-2">2/2</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="3-3" name="warna" value="3/3">
+                                    <label for="3-3">3/3</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="4-4" name="warna" value="4/4">
+                                    <label for="4-4">4/4</label>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -203,7 +232,11 @@ $(document).on('click', '.dropdown-item-edit', function() {
                 $('#judul_buku').val(response.data_buku.judul_buku);
                 $('#pengarang').val(response.data_buku.pengarang);
                 $('#target_terbit').val(response.data_buku.target_terbit);
-                $('#warna').val(response.data_buku.warna);
+
+                // Mengatur pilihan radio button untuk warna
+                $('input[name="warna"]').prop('checked', false); // Reset pilihan
+                $('input[name="warna"][value="' + response.data_buku.warna + '"]').prop('checked', true);
+
                 $('#btn-update').data('id_buku', response.data_buku.id_buku);
             } else {
                 console.log('Data buku tidak ditemukan'); // Log jika data_buku tidak ada
@@ -243,7 +276,7 @@ $(document).on('click', '#btn-update', function() {
         var judul_buku = $('#judul_buku').val();
         var pengarang = $('#pengarang').val();
         var target_terbit = $('#target_terbit').val();
-        var warna = $('#warna').val();
+        var warna = $('input[name="warna"]:checked').val();
 
         $('#editModal').modal('show');
         $.ajax({
