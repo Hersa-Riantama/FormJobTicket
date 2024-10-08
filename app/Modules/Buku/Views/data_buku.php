@@ -5,11 +5,11 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Buku /</span> List Buku</h4>
+        <h4 class="py-3 mb-0"><span class="text-muted fw-light">Buku /</span> List Buku</h4>
         <div class="row justify-content-end">
             <!-- <div class="col-xl-8">
             </div> -->
-            <div class="col-xl-auto mb-4 justify-conten-end">
+            <div class="col-xl-auto mb-4 justify-content-end">
                 <button class="btn btn-primary d-grid" id="btn-add">Tambah Buku</button>
             </div>
         </div>
@@ -143,9 +143,6 @@
             </div>
         </div>
 
-
-
-
     </div>
     <!-- / Content -->
 
@@ -174,174 +171,175 @@
 <!-- Overlay -->
 <div class="layout-overlay layout-menu-toggle"></div>
 </div>
+<!-- / Layout wrapper -->
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     // Fungsi untuk menampilkan data dari database
-function loadData() {
-    $.ajax({
-        type: 'GET',
-        url: 'http://localhost:8080/api/buku',
-        dataType: 'json',
-        success: function(data) {
-            var bukuData = '';
-            $.each(data.buku, function(key, value) {
-                bukuData += '<tr>';
-                bukuData += '<td>' + value.kode_buku + '</td>';
-                bukuData += '<td>' + value.judul_buku + '</td>';
-                bukuData += '<td>' + value.pengarang + '</td>';
-                bukuData += '<td>' + value.target_terbit + '</td>';
-                bukuData += '<td>' + value.warna + '</td>';
-                bukuData += '<td>';
-                bukuData += '<div class="dropdown">';
-                bukuData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
-                bukuData += '<i class="bx bx-dots-horizontal-rounded"></i>';
-                bukuData += '</button>';
-                bukuData += '<div class="dropdown-menu">';
-                bukuData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
-                bukuData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-trash me-2"></i> Delete</a>';
-                bukuData += '</div>';
-                bukuData += '</div>';
-                bukuData += '</td>';
-                bukuData += '</tr>';
-            });
-            $('#bukuData').html(bukuData);
-        }
-    });
-}
-
-// Fungsi untuk edit data
-$(document).on('click', '.dropdown-item-edit', function() {
-    var id_buku = $(this).data('id_buku'); // Ambil ID dari data-id_buku
-    console.log('ID Buku:', id_buku); // Log ID untuk memverifikasi
-
-    if (!id_buku) {
-        console.log('ID tidak ditemukan!'); // Log jika ID undefined
-        return; // Hentikan eksekusi jika ID tidak valid
-    }
-
-    $.ajax({
-        type: 'GET',
-        url: 'http://localhost:8080/api/buku/' + id_buku,
-        dataType: 'json',
-        success: function(response) {
-            console.log('Respons API:', response); // Lihat respons API
-            
-            // Pastikan untuk memeriksa data_buku dari respons
-            if (response.data_buku) {
-                $('#kode_buku').val(response.data_buku.kode_buku);
-                $('#judul_buku').val(response.data_buku.judul_buku);
-                $('#pengarang').val(response.data_buku.pengarang);
-                $('#target_terbit').val(response.data_buku.target_terbit);
-
-                // Mengatur pilihan radio button untuk warna
-                $('input[name="warna"]').prop('checked', false); // Reset pilihan
-                $('input[name="warna"][value="' + response.data_buku.warna + '"]').prop('checked', true);
-
-                $('#btn-update').data('id_buku', response.data_buku.id_buku);
-            } else {
-                console.log('Data buku tidak ditemukan'); // Log jika data_buku tidak ada
+    function loadData() {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/api/buku',
+            dataType: 'json',
+            success: function(data) {
+                var bukuData = '';
+                $.each(data.buku, function(key, value) {
+                    bukuData += '<tr>';
+                    bukuData += '<td>' + value.kode_buku + '</td>';
+                    bukuData += '<td>' + value.judul_buku + '</td>';
+                    bukuData += '<td>' + value.pengarang + '</td>';
+                    bukuData += '<td>' + value.target_terbit + '</td>';
+                    bukuData += '<td>' + value.warna + '</td>';
+                    bukuData += '<td>';
+                    bukuData += '<div class="dropdown">';
+                    bukuData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
+                    bukuData += '<i class="bx bx-dots-horizontal-rounded"></i>';
+                    bukuData += '</button>';
+                    bukuData += '<div class="dropdown-menu">';
+                    bukuData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
+                    bukuData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-trash me-2"></i> Delete</a>';
+                    bukuData += '</div>';
+                    bukuData += '</div>';
+                    bukuData += '</td>';
+                    bukuData += '</tr>';
+                });
+                $('#bukuData').html(bukuData);
             }
-
-            // Tampilkan modal setelah data berhasil diisi
-            $('#editModal').modal('show');
-        },
-        error: function(xhr, status, error) {
-            console.log('Error:', xhr.responseText); // Log jika terjadi error
-        }
-    });
-});
-
-// Fungsi untuk delete data
-$(document).on('click', '.dropdown-item-delete', function() {
-    var id_buku = $(this).data('id_buku');
-    $.ajax({
-        type: 'DELETE',
-        url: 'http://localhost:8080/api/buku/' + id_buku,
-        success: function() {
-            loadData();
-        }
-    });
-});
-
-// Fungsi untuk update data
-$(document).on('click', '#btn-update', function() {
-    var id_buku = $(this).data('id_buku');
-    console.log(id_buku);
-    if (!id_buku) {
-        console.log('ID buku tidak ditemukan!'); // Log jika ID tidak ada
-        return; // Hentikan eksekusi jika ID tidak valid
+        });
     }
-    if (id_buku) {
+
+    // Fungsi untuk edit data
+    $(document).on('click', '.dropdown-item-edit', function() {
+        var id_buku = $(this).data('id_buku'); // Ambil ID dari data-id_buku
+        console.log('ID Buku:', id_buku); // Log ID untuk memverifikasi
+
+        if (!id_buku) {
+            console.log('ID tidak ditemukan!'); // Log jika ID undefined
+            return; // Hentikan eksekusi jika ID tidak valid
+        }
+
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/api/buku/' + id_buku,
+            dataType: 'json',
+            success: function(response) {
+                console.log('Respons API:', response); // Lihat respons API
+
+                // Pastikan untuk memeriksa data_buku dari respons
+                if (response.data_buku) {
+                    $('#kode_buku').val(response.data_buku.kode_buku);
+                    $('#judul_buku').val(response.data_buku.judul_buku);
+                    $('#pengarang').val(response.data_buku.pengarang);
+                    $('#target_terbit').val(response.data_buku.target_terbit);
+
+                    // Mengatur pilihan radio button untuk warna
+                    $('input[name="warna"]').prop('checked', false); // Reset pilihan
+                    $('input[name="warna"][value="' + response.data_buku.warna + '"]').prop('checked', true);
+
+                    $('#btn-update').data('id_buku', response.data_buku.id_buku);
+                } else {
+                    console.log('Data buku tidak ditemukan'); // Log jika data_buku tidak ada
+                }
+
+                // Tampilkan modal setelah data berhasil diisi
+                $('#editModal').modal('show');
+            },
+            error: function(xhr, status, error) {
+                console.log('Error:', xhr.responseText); // Log jika terjadi error
+            }
+        });
+    });
+
+    // Fungsi untuk delete data
+    $(document).on('click', '.dropdown-item-delete', function() {
+        var id_buku = $(this).data('id_buku');
+        $.ajax({
+            type: 'DELETE',
+            url: 'http://localhost:8080/api/buku/' + id_buku,
+            success: function() {
+                loadData();
+            }
+        });
+    });
+
+    // Fungsi untuk update data
+    $(document).on('click', '#btn-update', function() {
+        var id_buku = $(this).data('id_buku');
+        console.log(id_buku);
+        if (!id_buku) {
+            console.log('ID buku tidak ditemukan!'); // Log jika ID tidak ada
+            return; // Hentikan eksekusi jika ID tidak valid
+        }
+        if (id_buku) {
+            var kode_buku = $('#kode_buku').val();
+            var judul_buku = $('#judul_buku').val();
+            var pengarang = $('#pengarang').val();
+            var target_terbit = $('#target_terbit').val();
+            var warna = $('input[name="warna"]:checked').val();
+
+            $('#editModal').modal('show');
+            $.ajax({
+                type: 'PUT',
+                url: 'http://localhost:8080/api/buku/' + id_buku,
+                data: JSON.stringify({
+                    kode_buku: kode_buku,
+                    judul_buku: judul_buku,
+                    pengarang: pengarang,
+                    target_terbit: target_terbit,
+                    warna: warna
+                }),
+                contentType: 'application/json',
+                success: function(response) {
+                    console.log('Response:', response);
+                    loadData();
+                    $('#editModal').modal('hide');
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error:', xhr.responseText);
+                }
+            });
+        } else {
+            console.log('ID Buku tidak ditemukan pada tombol');
+        }
+    });
+
+    // Fungsi untuk menampilkan modal tambah
+    $(document).on('click', '#btn-add', function() {
+        // Reset semua input di dalam form agar kosong
+        $('#addForm')[0].reset();
+
+        // Tampilkan modal menggunakan Bootstrap
+        $('#addModal').modal('show');
+    });
+
+    // Fungsi untuk tambah data
+    $(document).on('submit', '#addForm', function(event) {
+        event.preventDefault(); // Mencegah pengiriman form secara default
+
+        // Ambil data dari form
         var kode_buku = $('#kode_buku').val();
         var judul_buku = $('#judul_buku').val();
         var pengarang = $('#pengarang').val();
         var target_terbit = $('#target_terbit').val();
         var warna = $('input[name="warna"]:checked').val();
 
-        $('#editModal').modal('show');
         $.ajax({
-            type: 'PUT',
-            url: 'http://localhost:8080/api/buku/' + id_buku,
-            data: JSON.stringify({
-                kode_buku: kode_buku,
-                judul_buku: judul_buku,
-                pengarang: pengarang,
-                target_terbit: target_terbit,
-                warna: warna
-            }),
-            contentType: 'application/json',
+            type: 'POST',
+            url: 'http://localhost:8080/api/buku',
+            data: $(this).serialize(), // Serialize form data
             success: function(response) {
-                console.log('Response:', response);
-                loadData();
-                $('#editModal').modal('hide');
+                console.log(response); // Menampilkan respon sukses
+                $('#addModal').modal('hide'); // Menutup modal
+                loadData(); // Panggil fungsi untuk memuat data (misalnya dari database)
             },
-            error: function(xhr, status, error) {
-                console.log('Error:', xhr.responseText);
+            error: function(xhr) {
+                console.log(xhr.responseJSON); // Menampilkan error jika ada
             }
         });
-    } else {
-        console.log('ID Buku tidak ditemukan pada tombol');
-    }
-});
-
-// Fungsi untuk menampilkan modal tambah
-$(document).on('click', '#btn-add', function() {
-    // Reset semua input di dalam form agar kosong
-    $('#addForm')[0].reset();
-
-    // Tampilkan modal menggunakan Bootstrap
-    $('#addModal').modal('show');
-});
-
-// Fungsi untuk tambah data
-$(document).on('submit', '#addForm', function(event) {
-    event.preventDefault(); // Mencegah pengiriman form secara default
-
-    // Ambil data dari form
-    var kode_buku = $('#kode_buku').val();
-    var judul_buku = $('#judul_buku').val();
-    var pengarang = $('#pengarang').val();
-    var target_terbit = $('#target_terbit').val();
-    var warna = $('input[name="warna"]:checked').val();
-
-    $.ajax({
-        type: 'POST',
-        url: 'http://localhost:8080/api/buku',
-        data: $(this).serialize(), // Serialize form data
-        success: function(response) {
-            console.log(response); // Menampilkan respon sukses
-            $('#addModal').modal('hide'); // Menutup modal
-            loadData(); // Panggil fungsi untuk memuat data (misalnya dari database)
-        },
-        error: function(xhr) {
-            console.log(xhr.responseJSON); // Menampilkan error jika ada
-        }
     });
-});
 
-
-// Load data saat pertama kali halaman diakses
-loadData();
+    // Load data saat pertama kali halaman diakses
+    loadData();
 </script>
-<!-- / Layout wrapper -->
+
 <?= $this->endSection(); ?>
