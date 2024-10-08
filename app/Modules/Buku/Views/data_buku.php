@@ -181,7 +181,7 @@ $(document).on('click', '.dropdown-item-delete', function() {
     var id_buku = $(this).data('id_buku');
     $.ajax({
         type: 'DELETE',
-        url: 'http://localhost:8080/api/buku/' + id,
+        url: 'http://localhost:8080/api/buku/' + id_buku,
         success: function() {
             loadData();
         }
