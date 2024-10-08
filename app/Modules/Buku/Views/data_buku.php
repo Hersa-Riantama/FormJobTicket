@@ -10,7 +10,7 @@
             <!-- <div class="col-xl-8">
             </div> -->
             <div class="col-xl-auto mb-4 justify-conten-end">
-                <button class="btn btn-primary d-grid">Tambah Buku</button>
+                <button class="btn btn-primary d-grid" id="btn-add">Tambah Buku</button>
             </div>
         </div>
         <!-- Basic Bootstrap Table -->
@@ -67,12 +67,54 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" id="btn-update" data-id_buku="" class="btn btn-primary">Save changes</button>
+                            <button type="submit" id="btn-update" data-id_buku="" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <!-- Add Buku Modal -->
+        <!-- Modal Tambah Buku -->
+        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="addForm" action="javascript:void(0);" method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addModalLabel">Tambah Buku</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="kode_buku" class="form-label">Kode Buku</label>
+                                <input type="text" class="form-control" id="kode_buku" name="kode_buku" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="judul_buku" class="form-label">Judul Buku</label>
+                                <input type="text" class="form-control" id="judul_buku" name="judul_buku" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pengarang" class="form-label">Pengarang</label>
+                                <input type="text" class="form-control" id="pengarang" name="pengarang" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="target_terbit" class="form-label">Target Terbit</label>
+                                <input type="year" class="form-control" id="target_terbit" name="target_terbit" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="warna" class="form-label">Warna</label>
+                                <input type="text" class="form-control" id="warna" name="warna" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary" id="btn-tambah">Simpan Buku</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
 
 
     </div>
@@ -203,6 +245,7 @@ $(document).on('click', '#btn-update', function() {
         var target_terbit = $('#target_terbit').val();
         var warna = $('#warna').val();
 
+        $('#editModal').modal('show');
         $.ajax({
             type: 'PUT',
             url: 'http://localhost:8080/api/buku/' + id_buku,
@@ -228,29 +271,41 @@ $(document).on('click', '#btn-update', function() {
     }
 });
 
+// Fungsi untuk menampilkan modal tambah
+$(document).on('click', '#btn-add', function() {
+    // Reset semua input di dalam form agar kosong
+    $('#addForm')[0].reset();
+
+    // Tampilkan modal menggunakan Bootstrap
+    $('#addModal').modal('show');
+});
+
 // Fungsi untuk tambah data
-$(document).on('click', '#btn-tambah', function() {
-    var kode_buku = $('#kode_buku_tambah').val();
-    var judul_buku = $('#judul_buku_tambah').val();
-    var pengarang = $('#pengarang_tambah').val();
-    var target_terbit = $('#target_terbit_tambah').val();
-    var warna = $('#warna_tambah').val();
+$(document).on('submit', '#addForm', function(event) {
+    event.preventDefault(); // Mencegah pengiriman form secara default
+
+    // Ambil data dari form
+    var kode_buku = $('#kode_buku').val();
+    var judul_buku = $('#judul_buku').val();
+    var pengarang = $('#pengarang').val();
+    var target_terbit = $('#target_terbit').val();
+    var warna = $('#warna').val();
+
     $.ajax({
         type: 'POST',
         url: 'http://localhost:8080/api/buku',
-        data: {
-            kode_buku: kode_buku,
-            judul_buku: judul_buku,
-            pengarang: pengarang,
-            target_terbit: target_terbit,
-            warna: warna
+        data: $(this).serialize(), // Serialize form data
+        success: function(response) {
+            console.log(response); // Menampilkan respon sukses
+            $('#addModal').modal('hide'); // Menutup modal
+            loadData(); // Panggil fungsi untuk memuat data (misalnya dari database)
         },
-        success: function() {
-            loadData();
-            $('#modal-tambah').modal('hide');
+        error: function(xhr) {
+            console.log(xhr.responseJSON); // Menampilkan error jika ada
         }
     });
 });
+
 
 // Load data saat pertama kali halaman diakses
 loadData();
