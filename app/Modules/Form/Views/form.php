@@ -230,7 +230,7 @@
                                         <h6 class="text-center rounded py-2" style="background-color:pink;">Diterima</h6>
                                         <div class="row mt-4">
                                             <div class="col-xl mb-2">
-                                                <div class="card h-100 mb-5 rounded-bottom" style="border: 1px solid pink;">
+                                                <div class="card h-100 mb-5" style="border: 1px solid pink;">
                                                     <div class="card-body p-1">
                                                         <p class="text-end" style="font-size:x-small; color:white;">dd/mm/yyyy</p>
                                                     </div>
