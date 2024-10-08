@@ -9,18 +9,20 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
-$routes->group(
-    'login',
-    ['namespace' => '\Modules\Auth\Controllers'],
-    function ($routes) {
-        $routes->get('/', 'Auth::login');
-    }
-);
+$routes->group('api', ['namespace' => '\Modules\Auth\Controllers'], function($routes) {
+    $routes->get('user','Auth::index');
+    $routes->post('regis','Auth::regis');
+    $routes->post('verify_user/(:num)', 'Auth::verifyUser/$1');
+    $routes->post('login', 'Auth::login');
+});
 
 $routes->group(
-    'daftar',
+    'api',
     ['namespace' => '\Modules\Auth\Controllers'],
     function ($routes) {
-        $routes->get('/', 'Auth::daftar');
+        $routes->get('login', 'Auth::login');
+        $routes->post('login', 'Auth::Flogin');
+        $routes->post('daftar','Auth::regis');
+        $routes->get('daftar', 'Auth::daftar');
     }
 );
