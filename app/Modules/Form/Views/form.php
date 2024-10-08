@@ -14,7 +14,7 @@
                         <!-- <img src="<//?= base_url('upload/' . $file_name) ?>" alt=""> -->
                     </div>
                     <div class="col-xl-3 mb-2">
-                        <h3 class="card-header text-center mb-2">Platform Digital
+                        <h3 class="card-header text-center mb-2" style="font-size: 1.69vw;">Platform Digital
                             <script>
                                 document.write(new Date().getFullYear());
                             </script>
