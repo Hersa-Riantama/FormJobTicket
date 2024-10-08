@@ -226,7 +226,7 @@
                                             <div class="col-xl mb-2">
                                                 <div class="card h-100 mb-5" style="border: 1px solid pink;">
                                                     <div class="card-body p-1">
-                                                        <p class="text-end" style="font-size:x-small; color:white;">dd/mm/yyyy</p>
+                                                        <p class="text-end" style="font-size:x-small; color: var(--bs-card-bg);">dd/mm/yyyy</p>
                                                     </div>
                                                     <p class="text-start mb-0 px-1" style="font-size:x-small;">nama</p>
                                                     <p class="text-center rounded-bottom text-primary mb-0 py-1" style="font-size:x-small;background-color:pink;">Admin <br>Multimedia</p>
