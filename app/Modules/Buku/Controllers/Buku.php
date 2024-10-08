@@ -5,6 +5,7 @@ namespace Modules\Buku\Controllers;
 use App\Modules\Buku\Models\BukuModel;
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\CLI\Console;
 
 class Buku extends BaseController
 {
@@ -85,35 +86,23 @@ class Buku extends BaseController
         //     // Jika Authorization header tidak valid
         //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
         // }
-            // Ambil rules validasi dari model
-            $rules = $this->model->validationRules();
-            
-            // Validasi input
-            if (!$this->validate($rules)) {
-                $response = [
-                    'pesan' => $this->validator->getErrors()
-                ];
-                return $this->failValidationErrors($response);
+            $buku = $this->model->find($id_buku);
+            if ($buku == null) {
+                return $this->failNotFound('Data Buku dengan ID tersebut tidak ditemukan');
             }
-            $Data = $this->model->find($id_buku);
-            if (!$Data) {
-                $response = [
-                    'Pesan' => 'Data Pegawai dengan ID tersebut tidak ditemukan'
-                ];
-                return $this->failNotFound('Data Pegawai dengan ID tersebut tidak ditemukan');
-            }
-            $this->model->update($id_buku, [
+            log_message('debug', 'ID Buku yang diterima: ' . $id_buku);
+            $buku = [
                 'kode_buku' => esc($this->request->getVar('kode_buku')),
                 'judul_buku' => esc($this->request->getVar('judul_buku')),
                 'pengarang' => esc($this->request->getVar('pengarang')),
                 'target_terbit' => esc($this->request->getVar('target_terbit')),
-                'warna' => esc($this->request->getVar('target_terbit')),
-            ]);
-
-            $response = [
-                'Pesan' => 'Data Pegawai Berhasil dirubah'
+                'warna' => esc($this->request->getVar('warna')),
             ];
-            return $this->respond($response);
+            $this->model->update($id_buku,$buku);
+            return $this->respondUpdated([
+                'pesan' => 'Data Buku Berhasil di update',
+                'data_buku' => $buku
+            ]);
     }
     public function delete($id_buku = null)
     {

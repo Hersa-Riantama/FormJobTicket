@@ -67,7 +67,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" id="btn-update" class="btn btn-primary">Save changes</button>
+                            <button type="submit" id="btn-update" data-id_buku="" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
                 </div>
@@ -162,6 +162,7 @@ $(document).on('click', '.dropdown-item-edit', function() {
                 $('#pengarang').val(response.data_buku.pengarang);
                 $('#target_terbit').val(response.data_buku.target_terbit);
                 $('#warna').val(response.data_buku.warna);
+                $('#btn-update').data('id_buku', response.data_buku.id_buku);
             } else {
                 console.log('Data buku tidak ditemukan'); // Log jika data_buku tidak ada
             }
@@ -189,27 +190,42 @@ $(document).on('click', '.dropdown-item-delete', function() {
 
 // Fungsi untuk update data
 $(document).on('click', '#btn-update', function() {
-    var id_buku = $('#id_buku').val();
-    var kode_buku = $('#kode_buku').val();
-    var judul_buku = $('#judul_buku').val();
-    var pengarang = $('#pengarang').val();
-    var target_terbit = $('#target_terbit').val();
-    var warna = $('#warna').val();
-    $.ajax({
-        type: 'PUT',
-        url: 'http://localhost:8080/api/buku/' + id_buku,
-        data: {
-            kode_buku: kode_buku,
-            judul_buku: judul_buku,
-            pengarang: pengarang,
-            target_terbit: target_terbit,
-            warna: warna
-        },
-        success: function() {
-            loadData();
-            $('#modal-edit').modal('hide');
-        }
-    });
+    var id_buku = $(this).data('id_buku');
+    console.log(id_buku);
+    if (!id_buku) {
+        console.log('ID buku tidak ditemukan!'); // Log jika ID tidak ada
+        return; // Hentikan eksekusi jika ID tidak valid
+    }
+    if (id_buku) {
+        var kode_buku = $('#kode_buku').val();
+        var judul_buku = $('#judul_buku').val();
+        var pengarang = $('#pengarang').val();
+        var target_terbit = $('#target_terbit').val();
+        var warna = $('#warna').val();
+
+        $.ajax({
+            type: 'PUT',
+            url: 'http://localhost:8080/api/buku/' + id_buku,
+            data: JSON.stringify({
+                kode_buku: kode_buku,
+                judul_buku: judul_buku,
+                pengarang: pengarang,
+                target_terbit: target_terbit,
+                warna: warna
+            }),
+            contentType: 'application/json',
+            success: function(response) {
+                console.log('Response:', response);
+                loadData();
+                $('#editModal').modal('hide');
+            },
+            error: function(xhr, status, error) {
+                console.log('Error:', xhr.responseText);
+            }
+        });
+    } else {
+        console.log('ID Buku tidak ditemukan pada tombol');
+    }
 });
 
 // Fungsi untuk tambah data
