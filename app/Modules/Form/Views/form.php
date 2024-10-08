@@ -157,20 +157,20 @@
                                     <label for="warna" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">WARNA</label>
                                     <div class="col-md">
                                         <div class="form-check form-check-inline rounded p-2 mb-2" style="border: 1px solid black;">
-                                            <input class="form-check-input one-checkbox mx-1" type="checkbox" id="inlineCheckbox1" name="inlineCheckbox1" value="BW" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary px-2" for="inlineCheckbox1">BW</label>
+                                            <input class="form-check-input mx-1" type="radio" id="inlineRadio1" name="inlineRadioOption" value="BW" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary px-2" for="inlineRadio1">BW</label>
                                         </div>
                                         <div class="form-check form-check-inline rounded p-2 mb-2" style="border: 1px solid black;">
-                                            <input class="form-check-input one-checkbox mx-1" type="checkbox" id="inlineCheckbox2" name="inlineCheckbox2" value="2/2" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary px-2" for="inlineCheckbox2">2/2</label>
+                                            <input class="form-check-input mx-1" type="radio" id="inlineRadio2" name="inlineRadioOption" value="2/2" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary px-2" for="inlineRadio2">2/2</label>
                                         </div>
                                         <div class="form-check form-check-inline rounded p-2 mb-2" style="border: 1px solid black;">
-                                            <input class="form-check-input one-checkbox mx-1" type="checkbox" id="inlineCheckbox3" name="inlineCheckbox2" value="3/3" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary px-2" for="inlineCheckbox3">3/3</label>
+                                            <input class="form-check-input mx-1" type="radio" id="inlineRadio3" name="inlineRadioOption" value="3/3" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary px-2" for="inlineRadio3">3/3</label>
                                         </div>
                                         <div class="form-check form-check-inline rounded p-2 mb-2" style="border: 1px solid black;">
-                                            <input class="form-check-input one-checkbox mx-1" type="checkbox" id="inlineCheckbox4" name="inlineCheckbox4" value="4/4" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary px-2" for="inlineCheckbox4">4/4</label>
+                                            <input class="form-check-input mx-1" type="radio" id="inlineRadio4" name="inlineRadioOption" value="4/4" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary px-2" for="inlineRadio4">4/4</label>
                                         </div>
                                     </div>
                                 </div>
