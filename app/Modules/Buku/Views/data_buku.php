@@ -126,7 +126,6 @@ function loadData() {
                 bukuData += '<i class="bx bx-dots-horizontal-rounded"></i>';
                 bukuData += '</button>';
                 bukuData += '<div class="dropdown-menu">';
-                bukuData += '<a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-file me-2"></i> Detail</a>';
                 bukuData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
                 bukuData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-trash me-2"></i> Delete</a>';
                 bukuData += '</div>';
