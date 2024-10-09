@@ -199,7 +199,7 @@
         var formData = $(this).serialize();
         $.ajax({
             type: 'POST',
-            url: '<?php echo base_url('regis'); ?>',
+            url: '<?php echo base_url('daftar'); ?>',
             data: formData,
             dataType: 'json',
             success: function(response) {
