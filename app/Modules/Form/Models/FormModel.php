@@ -6,6 +6,6 @@ use CodeIgniter\Model;
 
 class FormModel extends Model
 {
-    protected $table            = 'table'; 
+    protected $table            = 'tbl_tiket';
     protected $allowedFields    = [];
 }

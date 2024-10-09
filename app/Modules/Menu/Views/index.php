@@ -13,7 +13,7 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah User</span>
-                            <h3 class="card-title text-center fs-1 my-3">10</h3>
+                            <h3 class="card-title text-center fs-1 my-3"><?= $user; ?></h3>
                             <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/data-user">Selengkapnya</a>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Form Tiket</span>
-                            <h3 class="card-title text-center fs-1 my-3">20</h3>
+                            <h3 class="card-title text-center fs-1 my-3"><?= $form; ?></h3>
                             <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/data-form">Selengkapnya</a>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Buku</span>
-                            <h3 class="card-title text-center fs-1 my-3">30</h3>
+                            <h3 class="card-title text-center fs-1 my-3"><?= $buku; ?></h3>
                             <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/data-buku">Selengkapnya</a>
                         </div>
                     </div>
