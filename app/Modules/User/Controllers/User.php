@@ -3,10 +3,12 @@
 namespace Modules\User\Controllers;
 
 use App\Controllers\BaseController;
+use CodeIgniter\API\ResponseTrait;
 use Modules\User\Models\UserModel;
 
 class User extends BaseController
 {
+    use ResponseTrait;
     protected $folder_directory = "Modules\\User\\Views\\";
     protected $model;
 
