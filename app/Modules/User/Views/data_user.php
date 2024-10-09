@@ -23,27 +23,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody class="table-border-bottom-0">
-                        <tr>
-                            <td>Nama</td>
-                            <td>NIK</td>
-                            <td>Email</td>
-                            <td>No.Telepon</td>
-                            <td>Jenis Kelamin</td>
-                            <td>Level User</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                        <i class="bx bx-dots-horizontal-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-file me-2"></i> Verfikasi</a>
-                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-2"></i> Edit</a>
-                                        <a class="dropdown-item" style="color: red;" href="javascript:void(0);"><i class="bx bx-trash me-2"></i> Delete</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                    <tbody class="table-border-bottom-0" id="UserData">
                     </tbody>
                 </table>
             </div>
@@ -78,5 +58,41 @@
 <!-- Overlay -->
 <div class="layout-overlay layout-menu-toggle"></div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function loadData() {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/api/user',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                var UserData = '';
+                $.each(data.user, function(key, value) {
+                    UserData += '<tr>';
+                    UserData += '<td>' + value.nama + '</td>';
+                    UserData += '<td>' + value.nomor_induk + '</td>';
+                    UserData += '<td>' + value.email + '</td>';
+                    UserData += '<td>' + value.no_tlp + '</td>';
+                    UserData += '<td>' + value.jk + '</td>';
+                    UserData += '<td>' + value.level_user + '</td>';
+                    UserData += '<td>';
+                    UserData += '<div class="dropdown">';
+                    UserData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
+                    UserData += '<i class="bx bx-dots-horizontal-rounded"></i>';
+                    UserData += '</button>';
+                    UserData += '<div class="dropdown-menu">';
+                    UserData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
+                    UserData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-trash me-2"></i> Delete</a>';
+                    UserData += '</div>';
+                    UserData += '</div>';
+                    UserData += '</td>';
+                    UserData += '</tr>';
+                });
+                $('#UserData').html(UserData);
+            }
+        });
+    }
+</script>
 <!-- / Layout wrapper -->
 <?= $this->endSection(); ?>

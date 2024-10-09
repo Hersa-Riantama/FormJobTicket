@@ -3,10 +3,18 @@
 namespace Modules\User\Controllers;
 
 use App\Controllers\BaseController;
+use Modules\User\Models\UserModel;
 
 class User extends BaseController
 {
     protected $folder_directory = "Modules\\User\\Views\\";
+    protected $model;
+
+    public function __construct()
+    {
+        // Load PegawaiModel untuk digunakan dalam method controller
+        $this->model = new UserModel();
+    }
 
     public function index()
     {
@@ -14,9 +22,15 @@ class User extends BaseController
     }
     public function data_user()
     {
-        $data = [
+        $model = new UserModel();
+        $data = $model->getUser();
+        if ($this->request->isAJAX()) {
+            return $this->respond(['user' => $data]);
+        }
+        $Udata = [
+            'user' => $data,
             'judul' => 'List User',
         ];
-        return view($this->folder_directory . 'data_user', $data);
+        return view($this->folder_directory . 'data_user', $Udata);
     }
 }

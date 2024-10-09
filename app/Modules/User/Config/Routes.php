@@ -18,9 +18,9 @@ $routes->group(
 );
 
 $routes->group(
-    'data-user',
+    'api',
     ['namespace' => '\Modules\User\Controllers'],
     function ($routes) {
-        $routes->get('/', 'User::data_user');
+        $routes->get('user', 'User::data_user');
     }
 );

@@ -5,7 +5,8 @@ namespace Modules\User\Models;
 use CodeIgniter\Model;
 
 class UserModel extends Model
-{protected $table            = 'tbl_user';
+{
+    protected $table            = 'tbl_user';
     protected $primaryKey       = 'id_user';
     protected $useAutoIncrement = true;
     protected $allowedFields    = ['nama', 'nomor_induk', 'email','no_tlp','jk','password','avatar','verifikasi','status_user','level_user' ];
@@ -37,7 +38,7 @@ class UserModel extends Model
     }
 
     // (Opsional) Hash password sebelum disimpan
-    public function getPegawai()
+    public function getUser()
     {
         return $this->findAll();
     }

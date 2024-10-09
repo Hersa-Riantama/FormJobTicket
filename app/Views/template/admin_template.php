@@ -156,7 +156,7 @@
                         <ul class="menu-sub">
                             <li class="menu-item">
                                 <a
-                                    href="http://localhost:8080/data-user"
+                                    href="http://localhost:8080/api/user"
                                     class="menu-link">
                                     <div data-i18n="CRM">List User</div>
                                 </a>
