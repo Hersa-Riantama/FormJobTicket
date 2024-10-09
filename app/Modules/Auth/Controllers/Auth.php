@@ -94,19 +94,21 @@ class Auth extends BaseController
             ];
             return $this->response->setJSON($response, 400);
         }
-        $this->model->insert([
+        // Insert data into database
+        $data = [
             'nama' => esc($this->request->getVar('nama')),
             'nomor_induk' => esc($this->request->getVar('nomor_induk')),
             'email' => esc($this->request->getVar('email')),
             'no_tlp' => esc($this->request->getVar('no_tlp')),
             'jk' => esc($this->request->getVar('jk')),
-            'password' => md5(esc($this->request->getVar('password'))),
             'level_user' => esc($this->request->getVar('level_user')),
-        ]);
-
+            'password' => md5(esc($this->request->getVar('password'))),
+        ];
+        $this->model->insert($data);
         // Response berhasil
         $response = [
-            'Pesan' => 'Data Pegawai Berhasil ditambahkan'
+            'Pesan' => 'Data Pegawai Berhasil ditambahkan',
+            'Status' => 'success',
         ];
         return $this->response->setJSON($response)->setStatusCode(200);
         // // Ambil nilai Authorization header

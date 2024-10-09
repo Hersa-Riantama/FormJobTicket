@@ -193,39 +193,27 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('formAuthentication');
-    const button = document.getElementById('mendaftar');
-
-    button.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-        const xhr = new XMLHttpRequest();
-
-        xhr.open('POST', '<?php echo base_url('daftar'); ?>', true);
-        xhr.send(formData);
-
-        xhr.onload = function () {
-            const response = JSON.parse(xhr.responseText);
-            if (xhr.status === 201) {
-                alert(response.Pesan); // Menampilkan pesan sukses
-                window.location.href = '<?= base_url('login'); ?>';
-            } else if (xhr.status === 400) {
-                // Menangani kesalahan validasi
-                const errors = response.Pesan; // Memastikan ini berisi kesalahan
-                for (const key in errors) {
-                    const errorMessage = errors[key];
-                    // Menampilkan pesan kesalahan di dekat input yang sesuai
-                    const errorSpan = document.getElementById(key + 'Error');
-                    if (errorSpan) {
-                        errorSpan.textContent = errorMessage;
-                    }
+    $(document).ready(function() {
+    $('#formAuthentication').submit(function(event) {
+        event.preventDefault();
+        var formData = $(this).serialize();
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url('regis'); ?>',
+            data: formData,
+            dataType: 'json',
+            success: function(response) {
+                if (response.Status === 'success') {
+                    alert(response.Pesan);
+                    window.location.href = '<?php echo base_url('login'); ?>';
+                } else {
+                    alert(response.Pesan);
                 }
-            } else {
-                console.error('Error:', xhr.statusText);
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
             }
-        };
+        });
     });
 });
 </script>
