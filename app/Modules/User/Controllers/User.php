@@ -33,4 +33,26 @@ class User extends BaseController
         ];
         return view($this->folder_directory . 'data_user', $Udata);
     }
+    public function verifyUser($id_user)
+    {
+        // $authHeader = $this->request->getHeader('Authorization');
+        // if ($authHeader && $authHeader->getValue() === $this->value) { 
+        // }else {
+        //     return $this->failNotFound('Anda Tidak Memiliki Kunci Akses');
+        // }
+        $user = $this->model->find($id_user);
+
+            if (!$user) {
+                return $this->failNotFound('User tidak ditemukan');
+            }
+    
+            $user['verifikasi'] = 'Y'; // Ubah status verifikasi menjadi 1
+            $user['status_user'] = 'aktif'; // Ubah status user menjadi aktif
+    
+            if ($this->model->save($user)) {
+                return $this->response->setJSON(['pesan' => 'Verifikasi berhasil']);
+            } else {
+                return $this->fail(['pesan' => 'Verifikasi gagal']);
+        }  
+    }
 }

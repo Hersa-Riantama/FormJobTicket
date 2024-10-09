@@ -22,5 +22,6 @@ $routes->group(
     ['namespace' => '\Modules\User\Controllers'],
     function ($routes) {
         $routes->get('user', 'User::tampil');
+        $routes->post('verify_user/(:segment)', 'User::verifyUser/$1');
     }
 );
