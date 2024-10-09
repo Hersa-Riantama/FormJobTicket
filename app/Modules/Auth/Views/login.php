@@ -123,10 +123,10 @@
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input
-                                    type="text"
+                                    type="email"
                                     class="form-control"
                                     id="email"
-                                    name="email-username"
+                                    name="email"
                                     placeholder="Masukkan Email"
                                     autofocus />
                             </div>
@@ -215,32 +215,44 @@
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('formAuthentication');
-    const button = document.querySelector('button[type="submit"]');
+        const form = document.getElementById('formAuthentication');
+        const button = document.querySelector('button[type="submit"]');
 
-    button.addEventListener('click', function (e) {
-        e.preventDefault();
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
 
-        const formData = new FormData(form);
-        const xhr = new XMLHttpRequest();
+            const formData = new FormData(form);
+            const xhr = new XMLHttpRequest();
 
-        xhr.open('POST', '<?php echo base_url('login'); ?>', true);
-        xhr.send(formData);
+            xhr.open('POST', '<?= base_url('login'); ?>', true);
+            xhr.send(formData);
 
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                const response = JSON.parse(xhr.responseText);
-                if (response.Status === 'success') {
-                    // Redirect ke halaman dashboard
-                    window.location.href = '<?php echo base_url('dashboard'); ?>';
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.Status === 'success') {
+                        // Redirect ke halaman dashboard
+                        window.location.href = '<?= base_url('dashboard'); ?>';
+                    } else {
+                        // Tampilkan pesan error dari server
+                        if (response.Pesan === 'User belum diverifikasi') {
+                            alert('Akun Anda belum diverifikasi. Silakan cek email Anda untuk verifikasi akun.');
+                        } else {
+                            alert(response.Pesan);
+                        }
+                    }
                 } else {
-                    // Tampilkan pesan error
-                    alert(response.Pesan);
+                    // Penanganan jika status HTTP bukan 200
+                    console.error('Error:', xhr.statusText);
+                    alert('Terjadi kesalahan. Coba lagi nanti.');
                 }
-            }
-        };
-    });
-});
-</script>
+            };
 
+            xhr.onerror = function () {
+                console.error('Request failed.');
+                alert('Gagal terhubung ke server.');
+            };
+        });
+    });
+</script>
 </html>

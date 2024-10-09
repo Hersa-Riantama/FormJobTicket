@@ -3,11 +3,17 @@
 namespace Modules\Auth\Controllers;
 
 use App\Controllers\BaseController;
+use Modules\Auth\Models\AuthModel;
 
 class Auth extends BaseController
 {
     protected $folder_directory = "Modules\\Auth\\Views\\";
+    protected $model;
 
+    public function __construct()
+    {
+        $this->model = new AuthModel();
+    }
     public function Flogin()
     {
         // Ambil data inputan dari request
@@ -23,20 +29,34 @@ class Auth extends BaseController
 
         if (!$validation->run(compact('email', 'password'))) {
             // Jika validasi gagal, kembalikan error
-            return $this->fail($validation->getErrors());
+            $errors = $validation->getErrors();
+            $response = [
+                'Pesan' => 'Validasi gagal',
+                'Status' => 'error',
+                'Errors' => $errors  // Menyertakan pesan error spesifik
+            ];
+            return $this->response->setJSON($response)->setStatusCode(400);
         }
 
         // Cari user berdasarkan email di database
         $user = $this->model->where('email', $email)->first();
         if (!$user) {
             // Jika user tidak ditemukan di database
-            return $this->failNotFound('User tidak ditemukan');
+            $response = [
+                'Pesan' => 'User tidak ditemukan',
+                'Status' => 'error'
+            ];
+            return $this->response->setJSON($response)->setStatusCode(404);
         }
-
+        $passmd5 = md5($password);
         // Verifikasi password dengan password yang ada di database
-        if (!password_verify($password, $user['password'])) {
+        if ($passmd5 !== ($user['password'])) {
             // Jika password tidak cocok
-            return $this->fail('Password salah');
+            $response = [
+                'Pesan' => 'Password salah',
+                'Status' => 'error'
+            ];
+            return $this->response->setJSON($response)->setStatusCode(401);
         }
 
         // Cek status verifikasi user di database
@@ -49,7 +69,7 @@ class Auth extends BaseController
             'Pesan' => 'Berhasil Login',
             'Status' => 'success'
         ];
-        return $this->respond($response);
+        return $this->response->setJSON($response)->setStatusCode(200);
         // // Ambil nilai Authorization header
         // $authHeader = $this->request->getHeader('Authorization');
         // // Cek apakah header Authorization ada dan nilai key cocok
@@ -70,11 +90,9 @@ class Auth extends BaseController
             $response = [
                 'Pesan' => $this->validator->getErrors()
             ];
-            return $this->failValidationErrors($response);
+            return $this->response->setJSON($response, 400);
         }
-
-        // Jika validasi berhasil, insert data ke database
-        $data = [
+        $this->model->insert([
             'nama' => esc($this->request->getVar('nama')),
             'nomor_induk' => esc($this->request->getVar('nomor_induk')),
             'email' => esc($this->request->getVar('email')),
@@ -82,14 +100,13 @@ class Auth extends BaseController
             'jk' => esc($this->request->getVar('jk')),
             'password' => md5(esc($this->request->getVar('password'))),
             'level_user' => esc($this->request->getVar('level_user')),
-        ];
-        $this->model->insert($data);
+        ]);
 
         // Response berhasil
         $response = [
             'Pesan' => 'Data Pegawai Berhasil ditambahkan'
         ];
-        return $this->respondCreated($response);
+        return $this->response->setJSON($response)->setStatusCode(200);
         // // Ambil nilai Authorization header
         // $authHeader = $this->request->getHeader('Authorization');
         

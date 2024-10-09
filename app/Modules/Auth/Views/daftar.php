@@ -94,7 +94,7 @@
 
                             <div class="mb-3">
                                 <label for="jk" class="form-label">Jenis Jelamin</label>
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" name="jk" aria-label="Default select example"required>
                                     <option selected disabled>Pilih Jenis Kelamin</option>
                                     <option value="Laki-Laki">Laki-Laki</option>
                                     <option value="Perempuan">Perempuan</option>
@@ -103,7 +103,7 @@
 
                             <div class="mb-3">
                                 <label for="level_user" class="form-label">Level User</label>
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select"  name= "level_user" aria-label="Default select example" required>
                                     <option selected disabled>Pilih Level User</option>
                                     <option value="1">Admin Sistem</option>
                                     <option value="2">Admin Multimedia</option>
@@ -203,18 +203,27 @@
         const formData = new FormData(form);
         const xhr = new XMLHttpRequest();
 
-        xhr.open('POST', '<?php echo base_url('regis'); ?>', true);
+        xhr.open('POST', '<?php echo base_url('daftar'); ?>', true);
         xhr.send(formData);
 
         xhr.onload = function () {
+            const response = JSON.parse(xhr.responseText);
             if (xhr.status === 201) {
-                const response = JSON.parse(xhr.responseText);
-                if (response.Status === 'success') {
-                    alert(response.Pesan); // Display the success message
-                    // You can also update the UI or redirect to another page
-                } else {
-                    console.error('Error:', xhr.statusText);
+                alert(response.Pesan); // Menampilkan pesan sukses
+                window.location.href = '<?= base_url('login'); ?>';
+            } else if (xhr.status === 400) {
+                // Menangani kesalahan validasi
+                const errors = response.Pesan; // Memastikan ini berisi kesalahan
+                for (const key in errors) {
+                    const errorMessage = errors[key];
+                    // Menampilkan pesan kesalahan di dekat input yang sesuai
+                    const errorSpan = document.getElementById(key + 'Error');
+                    if (errorSpan) {
+                        errorSpan.textContent = errorMessage;
+                    }
                 }
+            } else {
+                console.error('Error:', xhr.statusText);
             }
         };
     });

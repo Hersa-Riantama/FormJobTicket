@@ -31,8 +31,9 @@ class AuthModel extends Model
             'nomor_induk' => 'required|is_unique[tbl_user.nomor_induk]', 
             'email' => 'required|valid_email|is_unique[tbl_user.email]',
             'no_tlp' => 'required|numeric',
-            'jk' => 'required|in_list[L,P]',
+            'jk' => 'required|in_list[Laki-Laki,Perempuan]',
             'password' => 'required|min_length[6]',
+            'level_user' => 'required',
         ];
     }
 
