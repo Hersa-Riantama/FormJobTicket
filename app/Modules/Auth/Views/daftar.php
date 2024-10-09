@@ -208,9 +208,13 @@
 
         xhr.onload = function () {
             if (xhr.status === 201) {
-                console.log('Data berhasil ditambahkan!');
-            } else {
-                console.error('Error:', xhr.statusText);
+                const response = JSON.parse(xhr.responseText);
+                if (response.Status === 'success') {
+                    alert(response.Pesan); // Display the success message
+                    // You can also update the UI or redirect to another page
+                } else {
+                    console.error('Error:', xhr.statusText);
+                }
             }
         };
     });

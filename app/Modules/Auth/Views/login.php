@@ -214,7 +214,33 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 <script>
-    
+    document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('formAuthentication');
+    const button = document.querySelector('button[type="submit"]');
+
+    button.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('POST', '<?php echo base_url('login'); ?>', true);
+        xhr.send(formData);
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                if (response.Status === 'success') {
+                    // Redirect ke halaman dashboard
+                    window.location.href = '<?php echo base_url('dashboard'); ?>';
+                } else {
+                    // Tampilkan pesan error
+                    alert(response.Pesan);
+                }
+            }
+        };
+    });
+});
 </script>
 
 </html>

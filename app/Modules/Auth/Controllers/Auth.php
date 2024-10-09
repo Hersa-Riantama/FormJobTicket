@@ -44,18 +44,12 @@ class Auth extends BaseController
             // Jika user belum diverifikasi
             return $this->fail('User belum diverifikasi');
         }
-
-        // Jika login berhasil, kembalikan respon dengan data user
-        return $this->respond([
-            'status' => 200,
-            'message' => 'Login berhasil',
-            'user' => [
-                'id_user' => $user['id_user'],
-                'nama' => $user['nama'],
-                'email' => $user['email'],
-                'level_user' => $user['level_user'],
-            ]
-        ]);
+        // Response berhasil
+        $response = [
+            'Pesan' => 'Berhasil Login',
+            'Status' => 'success'
+        ];
+        return $this->respond($response);
         // // Ambil nilai Authorization header
         // $authHeader = $this->request->getHeader('Authorization');
         // // Cek apakah header Authorization ada dan nilai key cocok
