@@ -3,10 +3,11 @@
 namespace Modules\Auth\Controllers;
 
 use App\Controllers\BaseController;
-use CodeIgniter\RESTful\ResourceController;
+use CodeIgniter\API\ResponseTrait;
 
-class Auth extends ResourceController
+class Auth extends BaseController
 {
+    use ResponseTrait;
     protected $folder_directory = "Modules\\Auth\\Views\\";
     protected $model;
 
