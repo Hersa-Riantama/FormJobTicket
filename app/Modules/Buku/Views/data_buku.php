@@ -62,19 +62,19 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Warna</label><br>
-                                <div>
+                                <div class="form-check-inline">
                                     <input type="radio" id="bw" name="warna" value="BW" required>
                                     <label for="bw">BW</label>
                                 </div>
-                                <div>
+                                <div class="form-check-inline">
                                     <input type="radio" id="2-2" name="warna" value="2/2" required>
                                     <label for="2-2">2/2</label>
                                 </div>
-                                <div>
+                                <div class="form-check-inline">
                                     <input type="radio" id="3-3" name="warna" value="3/3" required>
                                     <label for="3-3">3/3</label>
                                 </div>
-                                <div>
+                                <div class="form-check-inline">
                                     <input type="radio" id="4-4" name="warna" value="4/4" required>
                                     <label for="4-4">4/4</label>
                                 </div>
@@ -116,19 +116,19 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Warna</label><br>
-                                <div>
+                                <div class="form-check-inline">
                                     <input type="radio" id="warna_bw" name="warna" value="BW" required>
                                     <label for="warna_bw">BW</label>
                                 </div>
-                                <div>
+                                <div class="form-check-inline">
                                     <input type="radio" id="warna_2-2" name="warna" value="2/2" required>
                                     <label for="warna_2-2">2/2</label>
                                 </div>
-                                <div>
+                                <div class="form-check-inline">
                                     <input type="radio" id="warna_3-3" name="warna" value="3/3" required>
                                     <label for="warna_3-3">3/3</label>
                                 </div>
-                                <div>
+                                <div class="form-check-inline">
                                     <input type="radio" id="warna_4-4" name="warna" value="4/4" required>
                                     <label for="warna_4-4">4/4</label>
                                 </div>
