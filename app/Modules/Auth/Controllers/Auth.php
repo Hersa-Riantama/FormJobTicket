@@ -80,7 +80,7 @@ class Auth extends BaseController
         }
 
         // Jika validasi berhasil, insert data ke database
-        $this->model->insert([
+        $data = [
             'nama' => esc($this->request->getVar('nama')),
             'nomor_induk' => esc($this->request->getVar('nomor_induk')),
             'email' => esc($this->request->getVar('email')),
@@ -88,7 +88,8 @@ class Auth extends BaseController
             'jk' => esc($this->request->getVar('jk')),
             'password' => md5(esc($this->request->getVar('password'))),
             'level_user' => esc($this->request->getVar('level_user')),
-        ]);
+        ];
+        $this->model->insert($data);
 
         // Response berhasil
         $response = [

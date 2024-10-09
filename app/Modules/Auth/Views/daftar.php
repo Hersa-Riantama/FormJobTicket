@@ -136,7 +136,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <button class="btn btn-primary d-grid w-100">Mendaftar</button>
+                            <button class="btn btn-primary d-grid w-100" id="mendaftar">Mendaftar</button>
                         </form>
                         <!-- / Form -->
 
@@ -192,5 +192,28 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('formAuthentication');
+    const button = document.getElementById('mendaftar');
 
+    button.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('POST', '<?php echo base_url('regis'); ?>', true);
+        xhr.send(formData);
+
+        xhr.onload = function () {
+            if (xhr.status === 201) {
+                console.log('Data berhasil ditambahkan!');
+            } else {
+                console.error('Error:', xhr.statusText);
+            }
+        };
+    });
+});
+</script>
 </html>
