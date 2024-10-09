@@ -82,7 +82,7 @@
                 
                 // Tombol Verifikasi (Hanya muncul jika user belum diverifikasi)
                 if (value.verifikasi === 'N') { // Jika user belum diverifikasi
-                    UserData += '<td><button class="badge btn btn-primary btn-verify" data-id="' + value.id_user + '">Verifikasi</button></td>';
+                    UserData += '<td><button class="badge btn btn-primary btn-verify" data-id_user="' + value.id_user + '">Verifikasi</button></td>';
                 } else {
                     UserData += '<td><span class="badge bg-success">Terverifikasi</span></td>';
                 }
@@ -93,8 +93,8 @@
                 UserData += '<i class="bx bx-dots-horizontal-rounded"></i>';
                 UserData += '</button>';
                 UserData += '<div class="dropdown-menu">';
-                UserData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
-                UserData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-trash me-2"></i> Delete</a>';
+                UserData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_user="' + value.id_user + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
+                UserData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_user="' + value.id_user + '"><i class="bx bx-trash me-2"></i> Delete</a>';
                 UserData += '</div>';
                 UserData += '</div>';
                 UserData += '</td>';
@@ -106,9 +106,10 @@
 }
 // Fungsi untuk memverifikasi user
 function verifikasiUser(id_user) {
+    console.log(id_user);
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:8080/api/verify_user',
+        url: 'http://localhost:8080/api/verify_user/'+ id_user,
         data: { id_user: id_user },
         success: function(response) {
             alert(response.Pesan); // Tampilkan pesan dari response
@@ -123,7 +124,7 @@ function verifikasiUser(id_user) {
 
 // Event listener untuk tombol Verifikasi
 $(document).on('click', '.btn-verify', function() {
-    var id_user = $(this).data('id');
+    var id_user = $(this).data('id_user');
     if (confirm('Apakah Anda yakin ingin memverifikasi user ini?')) {
         verifikasiUser(id_user);
     }

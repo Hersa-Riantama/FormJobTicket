@@ -35,26 +35,37 @@ class User extends BaseController
         ];
         return view($this->folder_directory . 'data_user', $Udata);
     }
-    public function verifyUser($id_user)
+    public function verifyUser($id_user = null)
     {
         // $authHeader = $this->request->getHeader('Authorization');
         // if ($authHeader && $authHeader->getValue() === $this->value) { 
         // }else {
         //     return $this->failNotFound('Anda Tidak Memiliki Kunci Akses');
         // }
-        $user = $this->model->find($id_user);
+        // Ambil model user
+        log_message('info', 'Verifikasi user dengan ID: ' . $id_user);
+        $model = new UserModel();
 
-            if (!$user) {
-                return $this->failNotFound('User tidak ditemukan');
-            }
-    
-            $user['verifikasi'] = 'Y'; // Ubah status verifikasi menjadi 1
-            $user['status_user'] = 'aktif'; // Ubah status user menjadi aktif
-    
-            if ($this->model->save($user)) {
-                return $this->response->setJSON(['pesan' => 'Verifikasi berhasil']);
-            } else {
-                return $this->fail(['pesan' => 'Verifikasi gagal']);
-        }  
+        // Cari user berdasarkan ID
+        $user = $model->find($id_user);
+
+        // Jika user tidak ditemukan
+        if (!$user) {
+            return $this->response->setJSON([
+                'Pesan' => 'User tidak ditemukan',
+                'Status' => 'error'
+            ], 404);
+        }
+
+        // Ubah status verifikasi user menjadi 'Y' (verified)
+        $user['verifikasi'] = 'Y';
+        $user['status_user'] = 'aktif';
+        $model->update($id_user, $user);
+
+        // Response sukses
+        return $this->response->setJSON([
+            'Pesan' => 'User berhasil diverifikasi',
+            'Status' => 'success'
+        ]); 
     }
 }
