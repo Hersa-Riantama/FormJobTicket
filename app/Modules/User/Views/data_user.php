@@ -15,7 +15,7 @@
                     <thead>
                         <tr>
                             <th>Nama</th>
-                            <th>Nomer Induk</th>
+                            <th>Nomor Induk</th>
                             <th>Email</th>
                             <th>No.Telepon</th>
                             <th>Jenis Kelamin</th>
@@ -63,42 +63,43 @@
     $(document).ready(function() {
         loadData();
     });
-        function loadData() {
-            $.ajax({
-                type: 'GET',
-                url: 'http://localhost:8080/api/user',
-                dataType: 'json',
-                success: function(data) {
-                    console.log(data); // Tambahkan ini untuk memeriksa data
-                    var UserData = '';
-                    $.each(data.user, function(key, value) {
-                        UserData += '<tr>';
-                        UserData += '<td>' + value.nama + '</td>';
-                        UserData += '<td>' + value.nomor_induk + '</td>';
-                        UserData += '<td>' + value.email + '</td>';
-                        UserData += '<td>' + value.no_tlp + '</td>';
-                        UserData += '<td>' + value.jk + '</td>';
-                        UserData += '<td>' + value.level_user + '</td>';
-                        UserData += '<td>';
-                        UserData += '<div class="dropdown">';
-                        UserData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
-                        UserData += '<i class="bx bx-dots-horizontal-rounded"></i>';
-                        UserData += '</button>';
-                        UserData += '<div class="dropdown-menu">';
-                        UserData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
-                        UserData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-trash me-2"></i> Delete</a>';
-                        UserData += '</div>';
-                        UserData += '</div>';
-                        UserData += '</td>';
-                        UserData += '</tr>';
-                    });
-                    $('#UserData').html(UserData);
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', status, error); // Tangani error
-                }
-            });
-        }
+
+    function loadData() {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/api/user',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data); // Tambahkan ini untuk memeriksa data
+                var UserData = '';
+                $.each(data.user, function(key, value) {
+                    UserData += '<tr>';
+                    UserData += '<td>' + value.nama + '</td>';
+                    UserData += '<td>' + value.nomor_induk + '</td>';
+                    UserData += '<td>' + value.email + '</td>';
+                    UserData += '<td>' + value.no_tlp + '</td>';
+                    UserData += '<td>' + value.jk + '</td>';
+                    UserData += '<td>' + value.level_user + '</td>';
+                    UserData += '<td>';
+                    UserData += '<div class="dropdown">';
+                    UserData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
+                    UserData += '<i class="bx bx-dots-horizontal-rounded"></i>';
+                    UserData += '</button>';
+                    UserData += '<div class="dropdown-menu">';
+                    UserData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
+                    UserData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-trash me-2"></i> Delete</a>';
+                    UserData += '</div>';
+                    UserData += '</div>';
+                    UserData += '</td>';
+                    UserData += '</tr>';
+                });
+                $('#UserData').html(UserData);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', status, error); // Tangani error
+            }
+        });
+    }
 </script>
 <!-- / Layout wrapper -->
 <?= $this->endSection(); ?>
