@@ -236,7 +236,7 @@
                     } else {
                         // Tampilkan pesan error dari server
                         if (response.Pesan === 'User belum diverifikasi') {
-                            alert('Akun Anda belum diverifikasi. Silakan cek email Anda untuk verifikasi akun.');
+                            alert('Akun Anda belum diverifikasi.');
                         } else {
                             alert(response.Pesan);
                         }
@@ -244,7 +244,7 @@
                 } else {
                     // Penanganan jika status HTTP bukan 200
                     console.error('Error:', xhr.statusText);
-                    alert('Terjadi kesalahan. Coba lagi nanti.');
+                    alert('Akun anda belum diverifikasi. Segera Hubungan Admin Sistem untuk verifikasi!');
                 }
             };
 
