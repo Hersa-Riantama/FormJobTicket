@@ -82,7 +82,7 @@
                 
                 // Tombol Verifikasi (Hanya muncul jika user belum diverifikasi)
                 if (value.verifikasi === 'N') { // Jika user belum diverifikasi
-                    UserData += '<td><button class="badge btn btn-primary btn-verify" data-id_user="' + value.id_user + '">Verifikasi</button></td>';
+                    UserData += '<td><button class="badge btn btn-danger btn-verify" data-id_user="' + value.id_user + '">Verifikasi</button></td>';
                 } else {
                     UserData += '<td><span class="badge bg-success">Terverifikasi</span></td>';
                 }
