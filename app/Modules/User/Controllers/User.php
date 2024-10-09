@@ -20,12 +20,12 @@ class User extends BaseController
     {
         return view($this->folder_directory . 'index');
     }
-    public function data_user()
+    public function tampil()
     {
         $model = new UserModel();
         $data = $model->getUser();
         if ($this->request->isAJAX()) {
-            return $this->respond(['user' => $data]);
+            return $this->response->setJSON((['user' => $data]));
         }
         $Udata = [
             'user' => $data,
