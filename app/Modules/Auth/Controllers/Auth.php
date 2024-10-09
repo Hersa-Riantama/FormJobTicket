@@ -3,10 +3,10 @@
 namespace Modules\Auth\Controllers;
 
 use App\Controllers\BaseController;
+use Modules\Auth\Models\AuthModel;
 
 class Auth extends BaseController
 {
-    use ResponseTrait;
     protected $folder_directory = "Modules\\Auth\\Views\\";
     protected $model;
 
@@ -109,7 +109,7 @@ class Auth extends BaseController
         return $this->response->setJSON($response)->setStatusCode(200);
         // // Ambil nilai Authorization header
         // $authHeader = $this->request->getHeader('Authorization');
-
+        
         // // Cek apakah header Authorization ada dan nilai key cocok
         // if ($authHeader && $authHeader->getValue() === $this->value) {
         // } else {
