@@ -3,10 +3,12 @@
 namespace Modules\Auth\Controllers;
 
 use App\Controllers\BaseController;
+use CodeIgniter\RESTful\ResourceController;
 
-class Auth extends BaseController
+class Auth extends ResourceController
 {
     protected $folder_directory = "Modules\\Auth\\Views\\";
+    protected $model;
 
     public function Flogin()
     {
@@ -92,7 +94,7 @@ class Auth extends BaseController
         return $this->respondCreated($response);
         // // Ambil nilai Authorization header
         // $authHeader = $this->request->getHeader('Authorization');
-        
+
         // // Cek apakah header Authorization ada dan nilai key cocok
         // if ($authHeader && $authHeader->getValue() === $this->value) {
         // } else {
