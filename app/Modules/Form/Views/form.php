@@ -6,7 +6,7 @@
     <form action="javascript:void(0);" method="post">
         <div class="form-group">
 
-            <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
                 <h4 class="py-3 mb-4"><span class="text-muted fw-light">Form /</span> Form Job Ticket</h4>
                 <div class="row">
                     <div class="col-xl-9 mb-2">
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
                 <h5 class="card-header mb-3">TIKET PEMESANAN DAN APPROVAL KONTEN MULTIMEDIA
                     <script>
                         document.write(new Date().getFullYear());
@@ -49,7 +49,7 @@
                 <!-- Row 1 -->
                 <div class="row">
                     <!-- Column 1 -->
-                    <div class="col-xl-4 mb-2">
+                    <div class="col-xl-4 mb-5">
                         <div class="card h-100 mb-4 border border-dark">
                             <h5 class="text-center rounded mt-4 mb-0 mx-4 py-2" style="background-color:pink;">Pembuatan Konten Multimedia</h5>
                             <!-- Checkboxes and Radios -->
@@ -100,7 +100,7 @@
                         </div>
                     </div>
                     <!-- Column 2 -->
-                    <div class="col-xl-8 mb-2">
+                    <div class="col-xl-8 mb-5">
                         <div class="card h-100 mb-4 border border-dark">
                             <div class="card-body">
                                 <div class="mb-3 row">
@@ -184,11 +184,11 @@
                 </div>
             </div>
 
-            <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
                 <!-- Row 2 -->
                 <div class="row">
                     <!-- Column 1 -->
-                    <div class="col-xl-4">
+                    <div class="col-xl-4 mb-5">
                         <div class="card h-100 border border-dark">
                             <div class="card-body">
                                 <div class="row mb-0">
@@ -238,7 +238,7 @@
                         </div>
                     </div>
                     <!-- Column 2 -->
-                    <div class="col-xl-4">
+                    <div class="col-xl-4 mb-5">
                         <div class="card h-100 border border-dark">
                             <div class="card-body">
                                 <div class="row">
@@ -299,7 +299,7 @@
                         </div>
                     </div>
                     <!-- Column 3 -->
-                    <div class="col-xl-4">
+                    <div class="col-xl-4 mb-5">
                         <div class="card h-100 border border-dark">
                             <div class="card-body">
                                 <div class="row">
@@ -344,11 +344,11 @@
                 </div>
             </div>
 
-            <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
                 <!-- Row 3 -->
                 <div class="row">
                     <!-- Column 1 -->
-                    <div class="col-xl-4">
+                    <div class="col-xl-4 mb-5">
                         <div class="card h-100 border border-dark">
                             <div class="card-body">
                                 <div class="row mb-0">
@@ -409,7 +409,7 @@
                         </div>
                     </div>
                     <!-- Column 2 -->
-                    <div class="col-xl-8">
+                    <div class="col-xl-8 mb-5">
                         <div class="card h-100 border border-dark">
                             <div class="card-body">
                                 <div class="row mb-0">
@@ -451,9 +451,9 @@
                 </div>
             </div>
 
-            <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
                 <!-- Row 4 -->
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mb-3">
                     <div class="col-xl-6">
                         <button class="btn btn-primary d-grid w-100">Simpan</button>
                     </div>
