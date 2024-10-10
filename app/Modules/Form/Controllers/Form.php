@@ -3,10 +3,13 @@
 namespace Modules\Form\Controllers;
 
 use App\Controllers\BaseController;
+use CodeIgniter\API\ResponseTrait;
 
 class Form extends BaseController
 {
+    use ResponseTrait;
     protected $folder_directory = "Modules\\Form\\Views\\";
+    protected $model;
 
     public function index()
     {
@@ -20,55 +23,55 @@ class Form extends BaseController
         //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
         // }
         $rules = $this->model->validationRules();
-            if (!$this->validate($rules)) {
-                $response = [
-                    'pesan' => $this->validator->getErrors()
-                ];
-                return $this->failValidationErrors($response);
-            }
-            $nama_kategori = esc($this->request->getVar('nama_kategori'));
-            $kategoriModel = new \Modules\Kategori\Models\KategoriModel();
-            $kategori = $kategoriModel->where('nama_kategori', $nama_kategori)->first();
-            $tgl_order = date('y-m-d', strtotime($this->request->getVar('tgl_order')));
-            $this->model->insert([
-                'kode_form' => esc($this->request->getVar('kode_form')),
-                'id_kategori' => esc($this->request->getVar('id_kategori')),
-                'tgl_order' => esc($tgl_order),
-                'id_user' => esc($this->request->getVar('id_user')),
-                'nomor_job' => esc($this->request->getVar('nomor_job')),
-                'id_buku' => esc($this->request->getVar('id_buku')),
-            ]);
-            $id_tiket = $this->model->getInsertID();
-            $kelengkapanModel = new \Modules\Kelengkapan\Models\KelengkapanModel();
-            $kelengkapan = $this->request->getVar('kelengkapan');
-            if (is_array($kelengkapan) && count($kelengkapan)> 0) {
-                foreach ($kelengkapan as $nama_kelengkapan){
-                    $kelengkapanModel->insert([
-                        'id_tiket' => $id_tiket,
-                        'nama_kelengkapan' => esc($nama_kelengkapan),
-                    ]);
-                }
-            }
-            $statusKelengkapanModel = new \Modules\Status_Kelengkapan\Models\StatusKelengkapanModel();
-            $tahap_kelengkapan = esc($this->request->getVar('tahap_kelengkapan'));
-            $status_kelengkapan = esc($this->request->getVar('status_kelengkapan'));
-            if (!empty($tahap_kelengkapan) && !empty($status_kelengkapan)) {
-                $statusKelengkapanModel->insert([
-                    'id_tiket' => $id_tiket,
-                    'tahap_kelengkapan' => !empty($tahap_kelengkapan)? $tahap_kelengkapan : 'N',
-                    'status_kelengkapan' => !empty($status_kelengkapan)? $status_kelengkapan : 'N',
-                ]);
-            }else {
-                $statusKelengkapanModel->insert([
-                    'id_tiket'           => $id_tiket, 
-                    'tahap_kelengkapan'   => 'N',
-                    'status_kelengkapan'  => 'N'
-                ]);
-            }
+        if (!$this->validate($rules)) {
             $response = [
-                'Pesan' => 'Tiket Berhasil ditambahkan'
+                'pesan' => $this->validator->getErrors()
             ];
-            return $this->respondCreated($response);
+            return $this->failValidationErrors($response);
+        }
+        $nama_kategori = esc($this->request->getVar('nama_kategori'));
+        $kategoriModel = new \Modules\Kategori\Models\KategoriModel();
+        $kategori = $kategoriModel->where('nama_kategori', $nama_kategori)->first();
+        $tgl_order = date('y-m-d', strtotime($this->request->getVar('tgl_order')));
+        $this->model->insert([
+            'kode_form' => esc($this->request->getVar('kode_form')),
+            'id_kategori' => esc($this->request->getVar('id_kategori')),
+            'tgl_order' => esc($tgl_order),
+            'id_user' => esc($this->request->getVar('id_user')),
+            'nomor_job' => esc($this->request->getVar('nomor_job')),
+            'id_buku' => esc($this->request->getVar('id_buku')),
+        ]);
+        $id_tiket = $this->model->getInsertID();
+        $kelengkapanModel = new \Modules\Kelengkapan\Models\KelengkapanModel();
+        $kelengkapan = $this->request->getVar('kelengkapan');
+        if (is_array($kelengkapan) && count($kelengkapan) > 0) {
+            foreach ($kelengkapan as $nama_kelengkapan) {
+                $kelengkapanModel->insert([
+                    'id_tiket' => $id_tiket,
+                    'nama_kelengkapan' => esc($nama_kelengkapan),
+                ]);
+            }
+        }
+        $statusKelengkapanModel = new \Modules\Status_Kelengkapan\Models\StatusKelengkapanModel();
+        $tahap_kelengkapan = esc($this->request->getVar('tahap_kelengkapan'));
+        $status_kelengkapan = esc($this->request->getVar('status_kelengkapan'));
+        if (!empty($tahap_kelengkapan) && !empty($status_kelengkapan)) {
+            $statusKelengkapanModel->insert([
+                'id_tiket' => $id_tiket,
+                'tahap_kelengkapan' => !empty($tahap_kelengkapan) ? $tahap_kelengkapan : 'N',
+                'status_kelengkapan' => !empty($status_kelengkapan) ? $status_kelengkapan : 'N',
+            ]);
+        } else {
+            $statusKelengkapanModel->insert([
+                'id_tiket'           => $id_tiket,
+                'tahap_kelengkapan'   => 'N',
+                'status_kelengkapan'  => 'N'
+            ]);
+        }
+        $response = [
+            'Pesan' => 'Tiket Berhasil ditambahkan'
+        ];
+        return $this->respondCreated($response);
     }
     public function form()
     {
