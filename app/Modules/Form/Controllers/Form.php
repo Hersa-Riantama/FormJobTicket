@@ -27,7 +27,7 @@ class Form extends BaseController
                 return $this->failValidationErrors($response);
             }
             $nama_kategori = esc($this->request->getVar('nama_kategori'));
-            $kategoriModel = new \App\Modules\Kategori\Models\Kategori();
+            $kategoriModel = new \Modules\Kategori\Models\KategoriModel();
             $kategori = $kategoriModel->where('nama_kategori', $nama_kategori)->first();
             $tgl_order = date('y-m-d', strtotime($this->request->getVar('tgl_order')));
             $this->model->insert([
