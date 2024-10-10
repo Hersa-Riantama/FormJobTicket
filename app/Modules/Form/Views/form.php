@@ -488,11 +488,10 @@
 <!-- / Layout wrapper -->
 <script>
     const dates = document.querySelectorAll('.text-end');
-        const currentDate = new Date();
-        const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
-
-        dates.forEach(date => {
-            date.textContent = formattedDate;
-        });
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+    dates.forEach(date => {
+        date.textContent = formattedDate;
+    });
 </script>
 <?= $this->endSection(); ?>
