@@ -126,7 +126,7 @@
                                     <label for="kode_buku" class="form-label col-md-3 text-primary" style="font-size: var(--bs-body-font-size)">Kode Buku</label>
                                     <div class="col-md-9">
                                         <select id="kode_buku" class="form-select" name="kode_buku" style="border: 1px solid black;">
-                                            <option selected disabled>Kode Buku</option>
+                                            <option value="">Pilih Kode Buku</option>
                                             <option value="1">One</option>
                                             <option value="2">Two</option>
                                             <option value="3">Three</option>
