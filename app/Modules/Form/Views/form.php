@@ -9,11 +9,11 @@
             <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
                 <h4 class="py-3 mb-4"><span class="text-muted fw-light">Form /</span> Form Job Ticket</h4>
                 <div class="row">
-                    <div class="col-xl-9 mb-2">
+                    <div class="col-xl-9 mb-5">
                         <h1 class="card-header mb-2 display-1">Form <br>Job Ticket</h1>
                         <!-- <img src="<//?= base_url('upload/' . $file_name) ?>" alt=""> -->
                     </div>
-                    <div class="col-xl-3 mb-2">
+                    <div class="col-xl-3 mb-5">
                         <h3 class="card-header text-center mb-2">Platform Digital
                             <script>
                                 document.write(new Date().getFullYear());
@@ -420,9 +420,9 @@
                                             <div class="col-xl mb-2 px-0">
                                                 <div class="card h-100 mb-5" style="border: 1px solid pink;">
                                                     <div class="card-body p-1">
-                                                        <p class="text-end" style="font-size:x-small;"></p>
+                                                        <p class="text-end" style="font-size:x-small; color: var(--bs-card-bg);">dd/mm/yyyy</p>
                                                     </div>
-                                                    <p class="text-start mb-0 px-1" style="font-size:x-small;"></p>
+                                                    <p class="text-start mb-0 px-1" style="font-size:x-small; color: var(--bs-card-bg);">nama</p>
                                                     <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Manager</br>Platform Digital</p>
                                                 </div>
                                             </div>
