@@ -36,7 +36,7 @@ class Form extends BaseController
                 'id_buku' => esc($this->request->getVar('id_buku')),
             ]);
             $id_tiket = $this->model->getInsertID();
-            $kelengkapanModel = new \Modules\Kelengkapan\Models\Kelengkapan();
+            $kelengkapanModel = new \Modules\Kelengkapan\Models\KelengkapanModel();
             $kelengkapan = $this->request->getVar('kelengkapan');
             if (is_array($kelengkapan) && count($kelengkapan)> 0) {
                 foreach ($kelengkapan as $nama_kelengkapan){
@@ -46,7 +46,7 @@ class Form extends BaseController
                     ]);
                 }
             }
-            $statusKelengkapanModel = new \Modules\Status_Kelengkapan\Models\Status_Kelengkapan();
+            $statusKelengkapanModel = new \Modules\Status_Kelengkapan\Models\StatusKelengkapanModel();
             $tahap_kelengkapan = esc($this->request->getVar('tahap_kelengkapan'));
             $status_kelengkapan = esc($this->request->getVar('status_kelengkapan'));
             if (!empty($tahap_kelengkapan) && !empty($status_kelengkapan)) {
