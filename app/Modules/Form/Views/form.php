@@ -145,7 +145,7 @@
                                 <div class="mb-3 row">
                                     <label for="target_terbit" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">TARGET TERBIT</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" type="year" value="" id="terget_terbit" name="target_terbit" placeholder="Masukkan Target Terbit" style="border: 1px solid black;" />
+                                        <input class="form-control" type="year" value="" id="target_terbit" name="target_terbit" placeholder="Masukkan Target Terbit" style="border: 1px solid black;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -543,7 +543,7 @@
                         $('#judul_buku').val(data.judul_buku);
                         $('#pengarang').val(data.pengarang);
                         $('#target_terbit').val(data.target_terbit);
-                        $('#warna').val(data.warna);
+                        $('input[name="inlineRadioOption"][value="' + data.warna + '"]').prop('checked', true);
                     }
                 });
             }
