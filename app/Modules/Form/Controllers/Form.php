@@ -4,11 +4,12 @@ namespace Modules\Form\Controllers;
 
 use App\Controllers\BaseController;
 use App\Modules\Buku\Models\BukuModel;
+use Modules\Form\Models\FormModel;
 
 class Form extends BaseController
 {
-    protected $folder_directory = "Modules\\Form\\Views\\";
     protected $model;
+    protected $folder_directory = "Modules\\Form\\Views\\";
 
     public function __construct()
     {
@@ -18,14 +19,12 @@ class Form extends BaseController
     {
         return view($this->folder_directory . 'index');
     }
-    public function getBukuOptions()
-    {
+    public function getBukuOptions() {
         $bukuModel = new BukuModel();
         $data = $bukuModel->findAll(); // Fetch all buku data
         return $this->response->setJSON($data);
     }
-    public function getBukuDetails($kode_buku)
-    {
+    public function getBukuDetails($kode_buku) {
         $bukuModel = new BukuModel();
         $data = $bukuModel->where('kode_buku', $kode_buku)->first();
         return $this->response->setJSON($data);
@@ -42,23 +41,29 @@ class Form extends BaseController
                 $response = [
                     'pesan' => $this->validator->getErrors()
                 ];
-                return $this->failValidationErrors($response);
+                return $this->response->setJSON($response);
             }
+            $id_buku = esc($this->request->getVar('id_buku'));
+            $bukuModel = new BukuModel();
+            $buku = $bukuModel->where('judul_buku', $id_buku)->first();
+            if (!$buku) {
+                return $this->response->setJSON('Buku tidak ditemukan');
+            }
+            $id_buku = $buku['judul_buku'];
             $nama_kategori = esc($this->request->getVar('nama_kategori'));
             $kategoriModel = new \Modules\Kategori\Models\KategoriModel();
             $kategori = $kategoriModel->where('nama_kategori', $nama_kategori)->first();
             if (!$kategori) {
-                return $this->failNotFound('Kategori tidak ditemukan');
+                return $this->response->setJSON('Kategori tidak ditemukan');
             }
             $id_kategori = $kategori['id_kategori'];
             $tgl_order = date('y-m-d', strtotime($this->request->getVar('tgl_order')));
             $this->model->insert([
-                'kode_form' => esc($this->request->getVar('kode_form')),
-                'id_kategori' => $id_kategori,
+                'id_kategori' => esc($id_kategori),
                 'tgl_order' => esc($tgl_order),
                 'id_user' => esc($this->request->getVar('id_user')),
                 'nomor_job' => esc($this->request->getVar('nomor_job')),
-                'id_buku' => esc($this->request->getVar('id_buku')),
+                'id_buku' => esc($id_buku),
             ]);
             $id_tiket = $this->model->getInsertID();
             $kelengkapanModel = new \Modules\Kelengkapan\Models\KelengkapanModel();
@@ -90,7 +95,7 @@ class Form extends BaseController
             $response = [
                 'Pesan' => 'Tiket Berhasil ditambahkan'
             ];
-            return $this->respondCreated($response);
+            return $this->response->setJSON($response);
     }
     public function form()
     {
