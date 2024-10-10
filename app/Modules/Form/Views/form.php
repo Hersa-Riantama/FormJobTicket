@@ -14,7 +14,7 @@
                         <!-- <img src="<//?= base_url('upload/' . $file_name) ?>" alt=""> -->
                     </div>
                     <div class="col-xl-3 mb-2">
-                        <h3 class="card-header text-center mb-2" style="font-size: 1.69vw;">Platform Digital
+                        <h3 class="card-header text-center mb-2">Platform Digital
                             <script>
                                 document.write(new Date().getFullYear());
                             </script>
@@ -197,29 +197,29 @@
                                         <h6 class="text-center rounded py-2" style="background-color:pink;">Pemesan</h6>
                                         <div class="row mt-4">
 
-                                            <div class="col-xl mb-2" style="padding-right: 0;">
-                                                <div class="card h-100 mb-5" style="border-radius: 0.375rem 0 0 0.375rem; border: 1px solid pink;">
+                                            <div class="col-xl mb-2">
+                                                <div class="card h-100 mb-5" style="border: 1px solid pink;">
                                                     <div class="card-body p-1">
                                                         <p class="text-end" style="font-size:x-small;">dd/mm/yyyy</p>
                                                     </div>
                                                     <p class="text-start mb-0 px-1" style="font-size:x-small;">nama</p>
-                                                    <p class="text-center text-primary mb-0" style="font-size:x-small;background-color:pink; border-radius: 0 0 0 0.2rem; padding: 0.725rem 0 0.725rem;">Editor</p>
+                                                    <p class="text-center text-primary rounded-bottom mb-0" style="font-size:x-small;background-color:pink; padding: 0.725rem 0 0.725rem;">Editor</p>
                                                 </div>
                                             </div>
-                                            <div class="col-xl mb-2" style="padding-left: 0;">
-                                                <div class="card h-100 mb-5" style="border-radius: 0 0.375rem 0.375rem 0; border: 1px solid pink;">
+                                            <div class="col-xl mb-2">
+                                                <div class="card h-100 mb-5" style="border: 1px solid pink;">
                                                     <div class="card-body p-1">
                                                         <p class="text-end" style="font-size:x-small;">dd/mm/yyyy</p>
                                                     </div>
                                                     <p class="text-start mb-0 px-1" style="font-size:x-small;">nama</p>
-                                                    <p class="text-center text-primary mb-0" style="font-size:x-small;background-color:pink; border-radius: 0 0 0.2rem 0; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
+                                                    <p class="text-center text-primary rounded-bottom mb-0" style="font-size:x-small;background-color:pink; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
                                                 </div>
                                             </div>
 
                                         </div>
                                     </div>
 
-                                    <div class="col-xl-4" style="padding-left: 0;">
+                                    <div class="col-xl-4">
                                         <h6 class="text-center rounded py-2" style="background-color:pink;">Diterima</h6>
                                         <div class="row mt-4">
                                             <div class="col-xl mb-2">
@@ -228,7 +228,7 @@
                                                         <p class="text-end" style="font-size:x-small; color: var(--bs-card-bg);">dd/mm/yyyy</p>
                                                     </div>
                                                     <p class="text-start mb-0 px-1" style="font-size:x-small;">nama</p>
-                                                    <p class="text-center rounded-bottom text-primary mb-0 py-1" style="font-size:x-small;background-color:pink;">Admin <br>Multimedia</p>
+                                                    <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Admin <br>Multimedia</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -307,7 +307,7 @@
                                     <div class="col-xl">
                                         <h6 class="text-center rounded py-2" style="background-color:pink;">KELENGKAPAN FILE KONTEN QR CODE</h6>
                                         <div class="row mt-4">
-                                            <div class="col-xl-4 mb-2" style="padding-right: 1%;">
+                                            <div class="col-xl-4 mb-2">
                                                 <div class="card h-100 mb-4" style="border: 1px solid pink;">
                                                     <div class="card-body">
 
@@ -315,7 +315,7 @@
                                                     <p class="text-center rounded-bottom text-primary mb-0 p-1" style="font-size:x-small;background-color:pink;">Penyerahan Tahap 1</p>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-4 mb-2" style="padding-left: 2%; padding-right: 2%;">
+                                            <div class="col-xl-4 mb-2">
                                                 <div class="card h-100 mb-4" style="border: 1px solid pink;">
                                                     <div class="card-body">
 
@@ -323,7 +323,7 @@
                                                     <p class="text-center rounded-bottom text-primary mb-0 p-1" style="font-size:x-small;background-color:pink;">Penyerahan Tahap 2</p>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-4 mb-2" style="padding-left: 1%;">
+                                            <div class="col-xl-4 mb-2">
                                                 <div class="card h-100 mb-4" style="border: 1px solid pink;">
                                                     <div class="card-body">
 
@@ -417,28 +417,28 @@
                                     <div class="col-xl-4">
                                         <h6 class="text-center rounded py-2" style="background-color:pink;">Approval</h6>
                                         <div class="row mt-4">
-                                            <div class="col-xl mb-2" style="padding-right: 0;">
-                                                <div class="card h-100 mb-5" style="border-radius: 0.375rem 0 0 0.375rem; border: 1px solid pink;">
+                                            <div class="col-xl mb-2">
+                                                <div class="card h-100 mb-5" style="border: 1px solid pink;">
                                                     <div class="card-body p-1">
                                                         <p class="text-end" style="font-size:x-small;"></p>
                                                     </div>
                                                     <p class="text-start mb-0 px-1" style="font-size:x-small;"></p>
-                                                    <p class="text-center text-primary mb-0 py-1" style="font-size:x-small;background-color:pink; border-radius: 0 0 0 0.2rem;">Manager</br>Platform Digital</p>
+                                                    <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Manager</br>Platform Digital</p>
                                                 </div>
                                             </div>
-                                            <div class="col-xl mb-2" style="padding-left: 0;">
-                                                <div class="card h-100 mb-5" style="border-radius: 0 0.375rem 0.375rem 0; border: 1px solid pink;">
+                                            <div class="col-xl mb-2">
+                                                <div class="card h-100 mb-5" style="border: 1px solid pink;">
                                                     <div class="card-body p-1">
                                                         <p class="text-end" style="font-size:x-small;">dd/mm/yyyy</p>
                                                     </div>
                                                     <p class="text-start mb-0 px-1" style="font-size:x-small;">nama</p>
-                                                    <p class="text-center text-primary mb-0" style="font-size:x-small;background-color:pink; border-radius: 0 0 0.2rem 0; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
+                                                    <p class="text-center text-primary rounded-bottom mb-0" style="font-size:x-small;background-color:pink; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xl-8" style="padding-left: 0;">
+                                    <div class="col-xl-8">
                                         <h6 class="text-center rounded py-2" style="background-color:pink;">Catatan</h6>
                                         <div class="row mt-4 mx-1">
                                             <textarea class="form-control" id="Textarea1" name="Textarea1" rows="5" style="border: 1px solid pink;"></textarea>
