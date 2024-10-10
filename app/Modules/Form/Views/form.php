@@ -193,7 +193,7 @@
                             <div class="card-body">
                                 <div class="row mb-0">
 
-                                    <div class="col-xl-8 px-2">
+                                    <div class="col-xl-8 px-2 mb-3">
                                         <h6 class="text-center rounded py-2" style="background-color:pink;">Pemesan</h6>
                                         <div class="row mt-4 mx-0">
 
@@ -414,7 +414,7 @@
                             <div class="card-body">
                                 <div class="row mb-0">
 
-                                    <div class="col-xl-4">
+                                    <div class="col-xl-4 mb-3">
                                         <h6 class="text-center rounded py-2" style="background-color:pink;">Approval</h6>
                                         <div class="row mt-4 mx-0">
                                             <div class="col-xl mb-2 px-0">

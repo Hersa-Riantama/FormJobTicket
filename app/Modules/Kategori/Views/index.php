@@ -1,0 +1,1 @@
+<h1>Kategori Index Page</h1>
