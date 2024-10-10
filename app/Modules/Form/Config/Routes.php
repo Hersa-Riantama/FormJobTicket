@@ -22,6 +22,7 @@ $routes->group(
     ['namespace' => '\Modules\Form\Controllers'],
     function ($routes) {
         $routes->get('form', 'Form::form');
+        $routes->post('form','Form::createForm');
     }
 );
 
