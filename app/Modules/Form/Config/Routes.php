@@ -18,17 +18,17 @@ $routes->group(
 );
 
 $routes->group(
-    'form',
+    'api',
     ['namespace' => '\Modules\Form\Controllers'],
     function ($routes) {
-        $routes->get('/', 'Form::form');
+        $routes->get('form', 'Form::form');
     }
 );
 
 $routes->group(
-    'data-form',
+    'api',
     ['namespace' => '\Modules\Form\Controllers'],
     function ($routes) {
-        $routes->get('/', 'Form::data_form');
+        $routes->get('listform', 'Form::data_form');
     }
 );

@@ -133,14 +133,14 @@
                         <ul class="menu-sub">
                             <li class="menu-item">
                                 <a
-                                    href="http://localhost:8080/form"
+                                    href="http://localhost:8080/api/form"
                                     class="menu-link">
                                     <div data-i18n="CRM">Form Job Ticket</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a
-                                    href="http://localhost:8080/data-form"
+                                    href="http://localhost:8080/api/listform"
                                     class="menu-link">
                                     <div data-i18n="eCommerce">List Form</div>
                                 </a>
