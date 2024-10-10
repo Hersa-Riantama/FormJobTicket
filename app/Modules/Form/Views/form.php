@@ -9,11 +9,11 @@
             <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
                 <h4 class="py-3 mb-4"><span class="text-muted fw-light">Form /</span> Form Job Ticket</h4>
                 <div class="row">
-                    <div class="col-xl-9 mb-2">
+                    <div class="col-xl-9 mb-5">
                         <h1 class="card-header mb-2 display-1">Form <br>Job Ticket</h1>
                         <!-- <img src="<//?= base_url('upload/' . $file_name) ?>" alt=""> -->
                     </div>
-                    <div class="col-xl-3 mb-2">
+                    <div class="col-xl-3 mb-5">
                         <h3 class="card-header text-center mb-2">Platform Digital
                             <script>
                                 document.write(new Date().getFullYear());
