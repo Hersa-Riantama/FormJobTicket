@@ -4,12 +4,15 @@ namespace Modules\Menu\Controllers;
 
 use App\Controllers\BaseController;
 use App\Modules\Buku\Models\BukuModel;
+use CodeIgniter\API\ResponseTrait;
 use Modules\Form\Models\FormModel;
 use Modules\User\Models\UserModel;
 
 class Menu extends BaseController
 {
+    use ResponseTrait;
     protected $folder_directory = "Modules\\Menu\\Views\\";
+    protected $model;
 
     public function index()
     {
