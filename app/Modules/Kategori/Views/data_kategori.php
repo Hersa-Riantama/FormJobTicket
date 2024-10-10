@@ -5,32 +5,22 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Form /</span> Kelola Tiket</h4>
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Kategori /</span> Kelola Kategori</h4>
 
         <!-- Basic Bootstrap Table -->
         <div class="card">
-            <h5 class="card-header">List Tiket</h5>
+            <h5 class="card-header">List Kategori</h5>
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Kode Form</th>
-                            <th>Kategori</th>
-                            <th>Tanggal Order</th>
-                            <th>User</th>
-                            <th>Nomor Job</th>
-                            <th>Buku</th>
+                            <th>Nama Kategori</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
                         <tr>
-                            <td>Kode Form</td>
-                            <td>Kategori</td>
-                            <td>DD/MM/YYYY</td>
-                            <td>Nama User</td>
-                            <td>Nomor Job</td>
-                            <td>Buku</td>
+                            <td>Nama Kategori</td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

@@ -5,7 +5,7 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 mb-4"><span class="text-muted fw-light">User /</span> List User</h4>
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">User /</span> Kelola User</h4>
 
         <!-- Basic Bootstrap Table -->
         <div class="card">
@@ -64,72 +64,74 @@
     $(document).ready(function() {
         loadData();
     });
+
     function loadData() {
-    $.ajax({
-        type: 'GET',
-        url: 'http://localhost:8080/api/user',
-        dataType: 'json',
-        success: function(data) {
-            var UserData = '';
-            $.each(data.user, function(key, value) {
-                UserData += '<tr>';
-                UserData += '<td>' + value.nama + '</td>';
-                UserData += '<td>' + value.nomor_induk + '</td>';
-                UserData += '<td>' + value.email + '</td>';
-                UserData += '<td>' + value.no_tlp + '</td>';
-                UserData += '<td>' + value.jk + '</td>';
-                UserData += '<td>' + value.level_user + '</td>';
-                
-                // Tombol Verifikasi (Hanya muncul jika user belum diverifikasi)
-                if (value.verifikasi === 'N') { // Jika user belum diverifikasi
-                    UserData += '<td><button class="badge btn btn-danger btn-verify" data-id_user="' + value.id_user + '">Verifikasi</button></td>';
-                } else {
-                    UserData += '<td><span class="badge bg-success">Terverifikasi</span></td>';
-                }
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/api/user',
+            dataType: 'json',
+            success: function(data) {
+                var UserData = '';
+                $.each(data.user, function(key, value) {
+                    UserData += '<tr>';
+                    UserData += '<td>' + value.nama + '</td>';
+                    UserData += '<td>' + value.nomor_induk + '</td>';
+                    UserData += '<td>' + value.email + '</td>';
+                    UserData += '<td>' + value.no_tlp + '</td>';
+                    UserData += '<td>' + value.jk + '</td>';
+                    UserData += '<td>' + value.level_user + '</td>';
 
-                UserData += '<td>';
-                UserData += '<div class="dropdown">';
-                UserData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
-                UserData += '<i class="bx bx-dots-horizontal-rounded"></i>';
-                UserData += '</button>';
-                UserData += '<div class="dropdown-menu">';
-                UserData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_user="' + value.id_user + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
-                UserData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_user="' + value.id_user + '"><i class="bx bx-trash me-2"></i> Delete</a>';
-                UserData += '</div>';
-                UserData += '</div>';
-                UserData += '</td>';
-                UserData += '</tr>';
-            });
-            $('#UserData').html(UserData);
-        }
-    });
-}
-// Fungsi untuk memverifikasi user
-function verifikasiUser(id_user) {
-    console.log(id_user);
-    $.ajax({
-        type: 'POST',
-        url: 'http://localhost:8080/api/verify_user/'+ id_user,
-        data: { id_user: id_user },
-        success: function(response) {
-            alert(response.Pesan); // Tampilkan pesan dari response
-            loadData(); // Reload data setelah verifikasi berhasil
-        },
-        error: function(xhr) {
-            console.error('Error:', xhr.responseText);
-            alert('Gagal memverifikasi user.');
-        }
-    });
-}
+                    // Tombol Verifikasi (Hanya muncul jika user belum diverifikasi)
+                    if (value.verifikasi === 'N') { // Jika user belum diverifikasi
+                        UserData += '<td><button class="badge btn btn-danger btn-verify" data-id_user="' + value.id_user + '">Verifikasi</button></td>';
+                    } else {
+                        UserData += '<td><span class="badge bg-success">Terverifikasi</span></td>';
+                    }
 
-// Event listener untuk tombol Verifikasi
-$(document).on('click', '.btn-verify', function() {
-    var id_user = $(this).data('id_user');
-    if (confirm('Apakah Anda yakin ingin memverifikasi user ini?')) {
-        verifikasiUser(id_user);
+                    UserData += '<td>';
+                    UserData += '<div class="dropdown">';
+                    UserData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
+                    UserData += '<i class="bx bx-dots-horizontal-rounded"></i>';
+                    UserData += '</button>';
+                    UserData += '<div class="dropdown-menu">';
+                    UserData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_user="' + value.id_user + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
+                    UserData += '<a class="dropdown-item dropdown-item-delete" style="color: orangered;" href="javascript:void(0);" data-id_user="' + value.id_user + '"><i class="bx bx-user-x me-2"></i> Suspend</a>';
+                    UserData += '</div>';
+                    UserData += '</div>';
+                    UserData += '</td>';
+                    UserData += '</tr>';
+                });
+                $('#UserData').html(UserData);
+            }
+        });
     }
-});
+    // Fungsi untuk memverifikasi user
+    function verifikasiUser(id_user) {
+        console.log(id_user);
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/api/verify_user/' + id_user,
+            data: {
+                id_user: id_user
+            },
+            success: function(response) {
+                alert(response.Pesan); // Tampilkan pesan dari response
+                loadData(); // Reload data setelah verifikasi berhasil
+            },
+            error: function(xhr) {
+                console.error('Error:', xhr.responseText);
+                alert('Gagal memverifikasi user.');
+            }
+        });
+    }
 
+    // Event listener untuk tombol Verifikasi
+    $(document).on('click', '.btn-verify', function() {
+        var id_user = $(this).data('id_user');
+        if (confirm('Apakah Anda yakin ingin memverifikasi user ini?')) {
+            verifikasiUser(id_user);
+        }
+    });
 </script>
 <!-- / Layout wrapper -->
 <?= $this->endSection(); ?>

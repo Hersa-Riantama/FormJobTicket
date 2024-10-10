@@ -5,7 +5,7 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 mb-0"><span class="text-muted fw-light">Buku /</span> List Buku</h4>
+        <h4 class="py-3 mb-0"><span class="text-muted fw-light">Buku /</span> Kelola Buku</h4>
         <div class="row justify-content-end">
             <!-- <div class="col-xl-8">
             </div> -->

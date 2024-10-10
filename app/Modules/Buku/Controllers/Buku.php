@@ -45,7 +45,7 @@ class Buku extends BaseController
         }
         $Vdata = [
             'buku' => $data,
-            'judul' => 'List Buku',
+            'judul' => 'Kelola Buku',
         ];
         return view($this->folder_directory . 'data_buku', $Vdata);
     }
@@ -127,7 +127,7 @@ class Buku extends BaseController
     public function data_buku()
     {
         $data = [
-            'judul' => 'List Buku',
+            'judul' => 'Kelola Buku',
         ];
         return view($this->folder_directory . 'data_buku', $data);
     }

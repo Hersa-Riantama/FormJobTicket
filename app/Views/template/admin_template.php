@@ -126,29 +126,6 @@
                     </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-detail"></i>
-                            <div data-i18n="Dashboards">Form</div>
-                            <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a
-                                    href="http://localhost:8080/api/form"
-                                    class="menu-link">
-                                    <div data-i18n="CRM">Form Job Ticket</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a
-                                    href="http://localhost:8080/api/listform"
-                                    class="menu-link">
-                                    <div data-i18n="eCommerce">List Form</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-user"></i>
                             <div data-i18n="Dashboards">User</div>
                             <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
@@ -158,7 +135,23 @@
                                 <a
                                     href="http://localhost:8080/api/user"
                                     class="menu-link">
-                                    <div data-i18n="CRM">List User</div>
+                                    <div data-i18n="CRM">Kelola User</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-category"></i>
+                            <div data-i18n="Dashboards">Kategori</div>
+                            <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a
+                                    href="http://localhost:8080/api/kategori"
+                                    class="menu-link">
+                                    <div data-i18n="CRM">Kelola Kategori</div>
                                 </a>
                             </li>
                         </ul>
@@ -174,7 +167,30 @@
                                 <a
                                     href="http://localhost:8080/api/buku"
                                     class="menu-link">
-                                    <div data-i18n="CRM">List Buku</div>
+                                    <div data-i18n="CRM">Kelola Buku</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-detail"></i>
+                            <div data-i18n="Dashboards">Tiket</div>
+                            <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a
+                                    href="http://localhost:8080/api/form"
+                                    class="menu-link">
+                                    <div data-i18n="CRM">Form Job Ticket</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a
+                                    href="http://localhost:8080/api/listform"
+                                    class="menu-link">
+                                    <div data-i18n="eCommerce">Kelola Tiket</div>
                                 </a>
                             </li>
                         </ul>
@@ -186,18 +202,17 @@
             <!-- Layout container -->
             <div class="layout-page">
                 <!-- Navbar -->
-                <nav
-                    class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-                    id="layout-navbar">
+                <!-- <nav
+                    class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
                         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
                             <i class="bx bx-menu bx-sm"></i>
                         </a>
                     </div>
 
-                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                        <!-- Search -->
-                        <div class="navbar-nav align-items-center">
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse"> -->
+                <!-- Search -->
+                <!-- <div class="navbar-nav align-items-center">
                             <div class="nav-item d-flex align-items-center">
                                 <i class="bx bx-search fs-4 lh-0"></i>
                                 <input
@@ -206,12 +221,12 @@
                                     placeholder="Search..."
                                     aria-label="Search..." />
                             </div>
-                        </div>
-                        <!-- /Search -->
+                        </div> -->
+                <!-- /Search -->
 
-                        <ul class="navbar-nav flex-row align-items-center ms-auto">
-                            <!-- Place this tag where you want the button to render. -->
-                            <!-- <li class="nav-item lh-1 me-3">
+                <!-- <ul class="navbar-nav flex-row align-items-center ms-auto"> -->
+                <!-- Place this tag where you want the button to render. -->
+                <!-- <li class="nav-item lh-1 me-3">
                                 <a
                                     class="github-button"
                                     href="https://github.com/themeselection/sneat-html-admin-template-free"
@@ -221,8 +236,8 @@
                                     aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
                             </li> -->
 
-                            <!-- User -->
-                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                <!-- User -->
+                <!-- <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
                                         <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
@@ -259,7 +274,7 @@
                                             <span class="align-middle">Settings</span>
                                         </a>
                                     </li>
-                                    <!-- <li>
+                                    <li>
                                         <a class="dropdown-item" href="#">
                                             <span class="d-flex align-items-center align-middle">
                                                 <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
@@ -267,7 +282,7 @@
                                                 <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
                                             </span>
                                         </a>
-                                    </li> -->
+                                    </li>
                                     <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
@@ -278,11 +293,11 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
-                            <!--/ User -->
-                        </ul>
-                    </div>
-                </nav>
+                            </li> -->
+                <!--/ User -->
+                <!-- </ul> -->
+                <!-- </div> -->
+                <!-- </nav> -->
                 <!-- / Navbar -->
 
                 <?= $this->renderSection('content'); ?>

@@ -10,6 +10,9 @@ class Kategori extends BaseController
 
     public function index()
     {
-        return view($this->folder_directory . 'index');
+        $data = [
+            'judul' => 'Kelola Kategori',
+        ];
+        return view($this->folder_directory . 'index', $data);
     }
 }

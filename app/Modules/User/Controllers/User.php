@@ -31,7 +31,7 @@ class User extends BaseController
         }
         $Udata = [
             'user' => $data,
-            'judul' => 'List User',
+            'judul' => 'Kelola User',
         ];
         return view($this->folder_directory . 'data_user', $Udata);
     }
@@ -66,6 +66,6 @@ class User extends BaseController
         return $this->response->setJSON([
             'Pesan' => 'User berhasil diverifikasi',
             'Status' => 'success'
-        ]); 
+        ]);
     }
 }
