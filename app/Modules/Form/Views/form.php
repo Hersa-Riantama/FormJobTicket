@@ -14,7 +14,7 @@
                         <!-- <img src="<//?= base_url('upload/' . $file_name) ?>" alt=""> -->
                     </div>
                     <div class="col-xl-3 mb-2">
-                        <h3 class="card-header text-center mb-2" style="font-size: 1.69vw;">Platform Digital
+                        <h3 class="card-header text-center mb-2">Platform Digital
                             <script>
                                 document.write(new Date().getFullYear());
                             </script>
@@ -55,7 +55,7 @@
                             <!-- Checkboxes and Radios -->
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md">
+                                    <div class="col-md px-3">
                                         <!-- <small class="text-light fw-medium">Checkboxes</small> -->
                                         <div class="form-check mt-4">
                                             <input class="form-check-input" type="checkbox" value="QR CODE" id="defaultCheck1" style="border: 1px solid pink;" />
@@ -193,42 +193,42 @@
                             <div class="card-body">
                                 <div class="row mb-0">
 
-                                    <div class="col-xl-8">
+                                    <div class="col-xl-8 px-2">
                                         <h6 class="text-center rounded py-2" style="background-color:pink;">Pemesan</h6>
-                                        <div class="row mt-4">
+                                        <div class="row mt-4 mx-0">
 
-                                            <div class="col-xl mb-2" style="padding-right: 0;">
-                                                <div class="card h-100 mb-5" style="border-radius: 0.375rem 0 0 0.375rem; border: 1px solid pink;">
+                                            <div class="col-xl mb-2 px-0">
+                                                <div class="card h-100 mb-5" style="border: 1px solid pink;">
                                                     <div class="card-body p-1">
                                                         <p class="text-end" style="font-size:x-small;">dd/mm/yyyy</p>
                                                     </div>
                                                     <p class="text-start mb-0 px-1" style="font-size:x-small;">nama</p>
-                                                    <p class="text-center text-primary mb-0" style="font-size:x-small;background-color:pink; border-radius: 0 0 0 0.2rem; padding: 0.725rem 0 0.725rem;">Editor</p>
+                                                    <p class="text-center text-primary rounded-bottom mb-0" style="font-size:x-small;background-color:pink; padding: 0.725rem 0 0.725rem;">Editor</p>
                                                 </div>
                                             </div>
-                                            <div class="col-xl mb-2" style="padding-left: 0;">
-                                                <div class="card h-100 mb-5" style="border-radius: 0 0.375rem 0.375rem 0; border: 1px solid pink;">
+                                            <div class="col-xl mb-2 px-0">
+                                                <div class="card h-100 mb-5" style="border: 1px solid pink;">
                                                     <div class="card-body p-1">
                                                         <p class="text-end" style="font-size:x-small;">dd/mm/yyyy</p>
                                                     </div>
                                                     <p class="text-start mb-0 px-1" style="font-size:x-small;">nama</p>
-                                                    <p class="text-center text-primary mb-0" style="font-size:x-small;background-color:pink; border-radius: 0 0 0.2rem 0; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
+                                                    <p class="text-center text-primary rounded-bottom mb-0" style="font-size:x-small;background-color:pink; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
                                                 </div>
                                             </div>
 
                                         </div>
                                     </div>
 
-                                    <div class="col-xl-4" style="padding-left: 0;">
+                                    <div class="col-xl-4 px-2">
                                         <h6 class="text-center rounded py-2" style="background-color:pink;">Diterima</h6>
-                                        <div class="row mt-4">
-                                            <div class="col-xl mb-2">
+                                        <div class="row mt-4 mx-0">
+                                            <div class="col-xl mb-2 px-0">
                                                 <div class="card h-100 mb-5" style="border: 1px solid pink;">
                                                     <div class="card-body p-1">
                                                         <p class="text-end" style="font-size:x-small; color: var(--bs-card-bg);">dd/mm/yyyy</p>
                                                     </div>
                                                     <p class="text-start mb-0 px-1" style="font-size:x-small;">nama</p>
-                                                    <p class="text-center rounded-bottom text-primary mb-0 py-1" style="font-size:x-small;background-color:pink;">Admin <br>Multimedia</p>
+                                                    <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Admin <br>Multimedia</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -243,10 +243,10 @@
                             <div class="card-body">
                                 <div class="row">
 
-                                    <div class="col-xl">
+                                    <div class="col-xl px-2">
                                         <h6 class="text-center rounded py-2" style="background-color:pink;">KELENGKAPAN FILE YANG DISERTAKAN</h6>
-                                        <div class="row justify-content-center">
-                                            <div class="col-xl-auto border boder-box border-dark rounded mx-1 mb-2 mt-2">
+                                        <div class="row mx-0 justify-content-center">
+                                            <div class="col-xl-auto border boder-box border-dark rounded px-1 mx-1 mb-2 mt-2">
                                                 <div class="form-check justify-center">
                                                     <input class="form-check-input" type="checkbox" value="Image/Foto/Ilustrasi" id="defaultCheck11" style="border: 1px solid pink;" />
                                                     <label class="form-check-label text-primary" for="defaultCheck11"> Image/Foto/Ilustrasi </label>
@@ -254,14 +254,14 @@
                                             </div>
                                         </div>
 
-                                        <div class="row justify-content-center mb-1">
-                                            <div class="col-xl-auto border boder-box border-dark rounded mx-1 mb-2">
+                                        <div class="row mx-0 justify-content-center">
+                                            <div class="col-xl-auto border boder-box border-dark rounded px-1 mx-1 mb-2">
                                                 <div class="form-check justify-center">
                                                     <input class="form-check-input" type="checkbox" value="Audio Mp3" id="defaultCheck12" style="border: 1px solid pink;" />
                                                     <label class="form-check-label text-primary" for="defaultCheck12"> Audio Mp3 </label>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-auto border boder-box border-dark rounded mx-1 mb-2">
+                                            <div class="col-xl-auto border boder-box border-dark rounded px-1 mx-1 mb-2">
                                                 <div class="form-check justify-center">
                                                     <input class="form-check-input" type="checkbox" value="PDF & RAR" id="defaultCheck13" style="border: 1px solid pink;" />
                                                     <label class="form-check-label text-primary" for="defaultCheck13"> PDF & RAR </label>
@@ -269,14 +269,14 @@
                                             </div>
                                         </div>
 
-                                        <div class="row justify-content-center mb-1">
-                                            <div class="col-xl-auto border boder-box border-dark rounded mx-1 mb-2">
+                                        <div class="row mx-0 justify-content-center">
+                                            <div class="col-xl-auto border boder-box border-dark rounded px-1 mx-1 mb-2">
                                                 <div class="form-check justify-center">
                                                     <input class="form-check-input" type="checkbox" value="Video Mp4" id="defaultCheck14" style="border: 1px solid pink;" />
                                                     <label class="form-check-label text-primary" for="defaultCheck14"> Video Mp4 </label>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-auto border boder-box border-dark rounded mx-1 mb-2">
+                                            <div class="col-xl-auto border boder-box border-dark rounded px-1 mx-1 mb-2">
                                                 <div class="form-check justify-center">
                                                     <input class="form-check-input" type="checkbox" value="fla/xfl" id="defaultCheck15" style="border: 1px solid pink;" />
                                                     <label class="form-check-label text-primary" for="defaultCheck15"> fla/xfl </label>
@@ -284,8 +284,8 @@
                                             </div>
                                         </div>
 
-                                        <div class="row justify-content-center mb-0">
-                                            <div class="col-xl-auto border boder-box border-dark rounded mx-1 mb-2">
+                                        <div class="row mx-0 justify-content-center">
+                                            <div class="col-xl-auto border boder-box border-dark rounded px-1 mx-1 mb-2">
                                                 <div class="form-check justify-center">
                                                     <input class="form-check-input" type="checkbox" value="Dummy" id="defaultCheck16" style="border: 1px solid pink;" />
                                                     <label class="form-check-label text-primary" for="defaultCheck16"> Dummy </label>
@@ -306,8 +306,8 @@
 
                                     <div class="col-xl">
                                         <h6 class="text-center rounded py-2" style="background-color:pink;">KELENGKAPAN FILE KONTEN QR CODE</h6>
-                                        <div class="row mt-4">
-                                            <div class="col-xl-4 mb-2" style="padding-right: 1%;">
+                                        <div class="row mt-4 mx-0">
+                                            <div class="col-xl-4 mb-2 px-1">
                                                 <div class="card h-100 mb-4" style="border: 1px solid pink;">
                                                     <div class="card-body">
 
@@ -315,7 +315,7 @@
                                                     <p class="text-center rounded-bottom text-primary mb-0 p-1" style="font-size:x-small;background-color:pink;">Penyerahan Tahap 1</p>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-4 mb-2" style="padding-left: 2%; padding-right: 2%;">
+                                            <div class="col-xl-4 mb-2 px-1">
                                                 <div class="card h-100 mb-4" style="border: 1px solid pink;">
                                                     <div class="card-body">
 
@@ -323,7 +323,7 @@
                                                     <p class="text-center rounded-bottom text-primary mb-0 p-1" style="font-size:x-small;background-color:pink;">Penyerahan Tahap 2</p>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-4 mb-2" style="padding-left: 1%;">
+                                            <div class="col-xl-4 mb-2 px-1">
                                                 <div class="card h-100 mb-4" style="border: 1px solid pink;">
                                                     <div class="card-body">
 
@@ -332,7 +332,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <p class="rounded-bottom text-primary mt-2 mb-0" style="font-size:xx-small;">
+                                        <p class="text-primary mt-2 mx-1 mb-0" style="font-size:xx-small;">
                                             *Penyerahan konten Qr code dapat diserahkan semua atau melalui 3 tahap
                                             penyerahan, maksimal 1 bulan setelah buku terbit konten sudah lengkap.
                                         </p>
@@ -416,29 +416,29 @@
 
                                     <div class="col-xl-4">
                                         <h6 class="text-center rounded py-2" style="background-color:pink;">Approval</h6>
-                                        <div class="row mt-4">
-                                            <div class="col-xl mb-2" style="padding-right: 0;">
-                                                <div class="card h-100 mb-5" style="border-radius: 0.375rem 0 0 0.375rem; border: 1px solid pink;">
+                                        <div class="row mt-4 mx-0">
+                                            <div class="col-xl mb-2 px-0">
+                                                <div class="card h-100 mb-5" style="border: 1px solid pink;">
                                                     <div class="card-body p-1">
                                                         <p class="text-end" style="font-size:x-small;"></p>
                                                     </div>
                                                     <p class="text-start mb-0 px-1" style="font-size:x-small;"></p>
-                                                    <p class="text-center text-primary mb-0 py-1" style="font-size:x-small;background-color:pink; border-radius: 0 0 0 0.2rem;">Manager</br>Platform Digital</p>
+                                                    <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Manager</br>Platform Digital</p>
                                                 </div>
                                             </div>
-                                            <div class="col-xl mb-2" style="padding-left: 0;">
-                                                <div class="card h-100 mb-5" style="border-radius: 0 0.375rem 0.375rem 0; border: 1px solid pink;">
+                                            <div class="col-xl mb-2 px-0">
+                                                <div class="card h-100 mb-5" style="border: 1px solid pink;">
                                                     <div class="card-body p-1">
                                                         <p class="text-end" style="font-size:x-small;">dd/mm/yyyy</p>
                                                     </div>
                                                     <p class="text-start mb-0 px-1" style="font-size:x-small;">nama</p>
-                                                    <p class="text-center text-primary mb-0" style="font-size:x-small;background-color:pink; border-radius: 0 0 0.2rem 0; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
+                                                    <p class="text-center text-primary rounded-bottom mb-0" style="font-size:x-small;background-color:pink; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xl-8" style="padding-left: 0;">
+                                    <div class="col-xl-8">
                                         <h6 class="text-center rounded py-2" style="background-color:pink;">Catatan</h6>
                                         <div class="row mt-4 mx-1">
                                             <textarea class="form-control" id="Textarea1" name="Textarea1" rows="5" style="border: 1px solid pink;"></textarea>
