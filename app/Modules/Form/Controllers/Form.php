@@ -3,6 +3,7 @@
 namespace Modules\Form\Controllers;
 
 use App\Controllers\BaseController;
+use App\Modules\Buku\Models\BukuModel;
 
 class Form extends BaseController
 {
@@ -11,6 +12,16 @@ class Form extends BaseController
     public function index()
     {
         return view($this->folder_directory . 'index');
+    }
+    public function getBukuOptions() {
+        $bukuModel = new BukuModel();
+        $data = $bukuModel->findAll(); // Fetch all buku data
+        return $this->response->setJSON($data);
+    }
+    public function getBukuDetails($kode_buku) {
+        $bukuModel = new BukuModel();
+        $data = $bukuModel->where('kode_buku', $kode_buku)->first();
+        return $this->response->setJSON($data);
     }
     public function createForm()
     {

@@ -22,6 +22,8 @@ $routes->group(
     ['namespace' => '\Modules\Form\Controllers'],
     function ($routes) {
         $routes->get('form', 'Form::form');
+        $routes->get('tampilbuku', 'Form::getBukuOptions');
+        $routes->get('tampilbuku/(:segment)', 'Form::getBukuDetails/$1');
         $routes->post('form','Form::createForm');
     }
 );
@@ -33,3 +35,4 @@ $routes->group(
         $routes->get('listform', 'Form::data_form');
     }
 );
+

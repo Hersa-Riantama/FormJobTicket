@@ -145,7 +145,7 @@
                                 <div class="mb-3 row">
                                     <label for="target_terbit" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">TARGET TERBIT</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" type="text" value="" id="terget_terbit" name="target_terbit" placeholder="Masukkan Target Terbit" style="border: 1px solid black;" />
+                                        <input class="form-control" type="year" value="" id="terget_terbit" name="target_terbit" placeholder="Masukkan Target Terbit" style="border: 1px solid black;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -486,12 +486,68 @@
 <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     const dates = document.querySelectorAll('.text-end');
     const currentDate = new Date();
     const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
     dates.forEach(date => {
         date.textContent = formattedDate;
+    });
+    $(document).ready(function() {
+        $('#formTiket').submit(function(event) {
+            event.preventDefault();
+            
+            var formData = $(this).serialize();
+            var formUrl = 'http://localhost:8080/api/form'; // Ganti '/form' dengan URL endpoint yang sesuai
+
+            $.ajax({
+                type: 'POST',
+                url: formUrl, // Tidak lagi menggunakan PHP echo di sini
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.Status === 'success') {
+                        alert(response.Pesan);
+                        window.location.href = '<?= base_url('form'); ?>'; // Redirect ke URL yang sesuai
+                    } else {
+                        alert(response.Pesan);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error:', error); // Bisa juga menampilkan alert di sini
+                }
+            });
+        });
+        $.ajax({
+            url: 'http://localhost:8080/api/tampilbuku',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                $.each(data, function(index, buku) {
+                    $('#kode_buku').append(`<option value="${buku.kode_buku}">${buku.kode_buku}</option>`);
+                });
+            }
+        });
+        $('#kode_buku').change(function() {
+            var kode_buku = $(this).val();
+            if (kode_buku) {
+                $.ajax({
+                    url: 'http://localhost:8080/api/tampilbuku/' + kode_buku, // Replace with your endpoint
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log('Response data:', data);
+                        // Update the fields based on the selected kode_buku
+                        $('#judul_buku').val(data.judul_buku);
+                        $('#pengarang').val(data.pengarang);
+                        $('#target_terbit').val(data.target_terbit);
+                        $('#warna').val(data.warna);
+                    }
+                });
+            }
+        });
     });
 </script>
 <?= $this->endSection(); ?>
