@@ -29,10 +29,14 @@ class Form extends BaseController
             $nama_kategori = esc($this->request->getVar('nama_kategori'));
             $kategoriModel = new \Modules\Kategori\Models\KategoriModel();
             $kategori = $kategoriModel->where('nama_kategori', $nama_kategori)->first();
+            if (!$kategori) {
+                return $this->failNotFound('Kategori tidak ditemukan');
+            }
+            $id_kategori = $kategori['id_kategori'];
             $tgl_order = date('y-m-d', strtotime($this->request->getVar('tgl_order')));
             $this->model->insert([
                 'kode_form' => esc($this->request->getVar('kode_form')),
-                'id_kategori' => esc($this->request->getVar('id_kategori')),
+                'id_kategori' => $id_kategori,
                 'tgl_order' => esc($tgl_order),
                 'id_user' => esc($this->request->getVar('id_user')),
                 'nomor_job' => esc($this->request->getVar('nomor_job')),

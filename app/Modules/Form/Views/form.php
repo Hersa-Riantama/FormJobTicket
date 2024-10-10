@@ -3,7 +3,7 @@
 <!-- Content wrapper -->
 <div class="content-wrapper">
     <!-- Content -->
-    <form action="javascript:void(0);" method="post">
+    <form id="formTiket" action="javascript:void(0);" method="post">
         <div class="form-group">
 
             <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
@@ -126,10 +126,7 @@
                                     <label for="kode_buku" class="form-label col-md-3 text-primary" style="font-size: var(--bs-body-font-size)">Kode Buku</label>
                                     <div class="col-md-9">
                                         <select id="kode_buku" class="form-select" name="kode_buku" style="border: 1px solid black;">
-                                            <option value="">Pilih Kode Buku</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                            <!-- ajax -->
                                         </select>
                                     </div>
                                 </div>
@@ -199,7 +196,7 @@
 
                                             <div class="col-xl mb-2 px-0">
                                                 <div class="card h-100 mb-5" style="border: 1px solid pink;">
-                                                    <div class="card-body p-1">
+                                                    <div class="card-body p-1" class="CurentDate">
                                                         <p class="text-end" style="font-size:x-small;">dd/mm/yyyy</p>
                                                     </div>
                                                     <p class="text-start mb-0 px-1" style="font-size:x-small;">nama</p>
@@ -208,7 +205,7 @@
                                             </div>
                                             <div class="col-xl mb-2 px-0">
                                                 <div class="card h-100 mb-5" style="border: 1px solid pink;">
-                                                    <div class="card-body p-1">
+                                                    <div class="card-body p-1" class="CurentDate">
                                                         <p class="text-end" style="font-size:x-small;">dd/mm/yyyy</p>
                                                     </div>
                                                     <p class="text-start mb-0 px-1" style="font-size:x-small;">nama</p>
@@ -428,7 +425,7 @@
                                             </div>
                                             <div class="col-xl mb-2 px-0">
                                                 <div class="card h-100 mb-5" style="border: 1px solid pink;">
-                                                    <div class="card-body p-1">
+                                                    <div class="card-body p-1" id="CurentDate">
                                                         <p class="text-end" style="font-size:x-small;">dd/mm/yyyy</p>
                                                     </div>
                                                     <p class="text-start mb-0 px-1" style="font-size:x-small;">nama</p>
@@ -455,7 +452,7 @@
                 <!-- Row 4 -->
                 <div class="row justify-content-center mb-3">
                     <div class="col-xl-6">
-                        <button class="btn btn-primary d-grid w-100">Simpan</button>
+                        <button class="btn btn-primary d-grid w-100" id="btnsimpan">Simpan</button>
                     </div>
                 </div>
             </div>
@@ -489,4 +486,13 @@
 <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
+<script>
+    const dates = document.querySelectorAll('.text-end');
+        const currentDate = new Date();
+        const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+
+        dates.forEach(date => {
+            date.textContent = formattedDate;
+        });
+</script>
 <?= $this->endSection(); ?>
