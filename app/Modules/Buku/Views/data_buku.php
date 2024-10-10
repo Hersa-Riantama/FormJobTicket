@@ -5,14 +5,13 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 mb-0"><span class="text-muted fw-light">Buku /</span> Kelola Buku</h4>
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Buku /</span> Kelola Buku</h4>
         <div class="row justify-content-end">
-            <!-- <div class="col-xl-8">
-            </div> -->
             <div class="col-xl-auto mb-4 justify-content-end">
                 <button class="btn btn-primary d-grid" id="btn-add">Tambah Buku</button>
             </div>
         </div>
+
         <!-- Basic Bootstrap Table -->
         <div class="card">
             <h5 class="card-header">List Buku</h5>
@@ -81,7 +80,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                             <button type="submit" id="btn-update" data-id_buku="" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>
@@ -136,7 +135,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-primary" id="btn-tambah">Simpan Buku</button>
+                            <button type="submit" class="btn btn-primary" id="btn-tambah">Simpan</button>
                         </div>
                     </form>
                 </div>

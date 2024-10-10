@@ -6,6 +6,11 @@
 
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-3 mb-4"><span class="text-muted fw-light">Kategori /</span> Kelola Kategori</h4>
+        <div class="row justify-content-end">
+            <div class="col-xl-auto mb-4 justify-content-end">
+                <button class="btn btn-primary d-grid" id="btn-add">Tambah Buku</button>
+            </div>
+        </div>
 
         <!-- Basic Bootstrap Table -->
         <div class="card">
@@ -27,7 +32,6 @@
                                         <i class="bx bx-dots-horizontal-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-file me-2"></i> Detail</a>
                                         <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-2"></i> Edit</a>
                                         <a class="dropdown-item" style="color: red;" href="javascript:void(0);"><i class="bx bx-trash me-2"></i> Delete</a>
                                     </div>
