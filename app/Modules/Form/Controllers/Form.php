@@ -83,7 +83,7 @@ class Form extends BaseController
     public function data_form()
     {
         $data = [
-            'judul' => 'List Form',
+            'judul' => 'Kelola Tiket',
         ];
         return view($this->folder_directory . 'data_form', $data);
     }

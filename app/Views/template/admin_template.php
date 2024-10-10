@@ -126,29 +126,6 @@
                     </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-detail"></i>
-                            <div data-i18n="Dashboards">Form</div>
-                            <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a
-                                    href="http://localhost:8080/api/form"
-                                    class="menu-link">
-                                    <div data-i18n="CRM">Form Job Ticket</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a
-                                    href="http://localhost:8080/api/listform"
-                                    class="menu-link">
-                                    <div data-i18n="eCommerce">List Form</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-user"></i>
                             <div data-i18n="Dashboards">User</div>
                             <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
@@ -158,7 +135,23 @@
                                 <a
                                     href="http://localhost:8080/api/user"
                                     class="menu-link">
-                                    <div data-i18n="CRM">List User</div>
+                                    <div data-i18n="CRM">Kelola User</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-category"></i>
+                            <div data-i18n="Dashboards">Kategori</div>
+                            <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a
+                                    href="http://localhost:8080/api/kategori"
+                                    class="menu-link">
+                                    <div data-i18n="CRM">Kelola Kategori</div>
                                 </a>
                             </li>
                         </ul>
@@ -174,7 +167,30 @@
                                 <a
                                     href="http://localhost:8080/api/buku"
                                     class="menu-link">
-                                    <div data-i18n="CRM">List Buku</div>
+                                    <div data-i18n="CRM">Kelola Buku</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-detail"></i>
+                            <div data-i18n="Dashboards">Tiket</div>
+                            <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a
+                                    href="http://localhost:8080/api/form"
+                                    class="menu-link">
+                                    <div data-i18n="CRM">Form Job Ticket</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a
+                                    href="http://localhost:8080/api/listform"
+                                    class="menu-link">
+                                    <div data-i18n="eCommerce">Kelola Tiket</div>
                                 </a>
                             </li>
                         </ul>
