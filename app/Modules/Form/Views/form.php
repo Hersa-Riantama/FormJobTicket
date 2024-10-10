@@ -420,9 +420,9 @@
                                             <div class="col-xl mb-2 px-0">
                                                 <div class="card h-100 mb-5" style="border: 1px solid pink;">
                                                     <div class="card-body p-1">
-                                                        <p class="text-end" style="font-size:x-small;"></p>
+                                                        <p class="text-end" style="font-size:x-small; color: var(--bs-card-bg);">dd/mm/yyyy</p>
                                                     </div>
-                                                    <p class="text-start mb-0 px-1" style="font-size:x-small;"></p>
+                                                    <p class="text-start mb-0 px-1" style="font-size:x-small; color: var(--bs-card-bg);">nama</p>
                                                     <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Manager</br>Platform Digital</p>
                                                 </div>
                                             </div>
