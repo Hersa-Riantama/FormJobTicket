@@ -497,6 +497,12 @@
     $(document).ready(function() {
         $('#formTiket').submit(function(event) {
             event.preventDefault();
+
+            // Collect selected checkboxes for kategori
+            var selectedKategoris = [];
+            $('input[type="checkbox"]:checked').each(function() {
+                selectedKategoris.push($(this).val());
+            });
             
             var formData = $(this).serialize();
             var formUrl = 'http://localhost:8080/api/form'; // Ganti '/form' dengan URL endpoint yang sesuai
@@ -507,6 +513,7 @@
                 data: formData,
                 dataType: 'json',
                 success: function(response) {
+                    console.log('Respons dari Server:', response); // Debugging
                     if (response.Status === 'success') {
                         alert(response.Pesan);
                         window.location.href = '<?= base_url('form'); ?>'; // Redirect ke URL yang sesuai
@@ -515,7 +522,10 @@
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.log('Error:', error); // Bisa juga menampilkan alert di sini
+                    console.log('Error:', error); // Debugging error
+                    console.log('Status:', status); // Status error
+                    console.log('xhr:', xhr); // XHR object untuk melihat lebih detail
+                    alert('Terjadi kesalahan saat menyimpan data.'); // Bisa juga menampilkan alert di sini
                 }
             });
         });

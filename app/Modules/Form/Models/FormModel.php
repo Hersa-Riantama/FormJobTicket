@@ -29,7 +29,6 @@ class FormModel extends Model
     public function validationRules()
     {
         return [
-            'kode_form' => 'required|min_length[2]',
             'id_kategori' =>  'required',
             'tgl_order' =>  'required',
             'id_user' =>  'required',
