@@ -17,7 +17,7 @@ class Form extends BaseController
     }
     public function index()
     {
-        return view($this->folder_directory . 'index');
+        
     }
     public function getBukuOptions() {
         $bukuModel = new BukuModel();
@@ -116,10 +116,16 @@ class Form extends BaseController
     }
     public function data_form()
     {
-        $data = [
-            'judul' => 'List Form',
+        $model = new FormModel();
+        $data = $model->getTiket();
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON(['tiket' => $data]);
+        }
+        $Tdata = [
+            'tiket' => $data,
+            'judul' => 'Kelola Tiket',
         ];
-        return view($this->folder_directory . 'data_form', $data);
+        return view($this->folder_directory . 'data_form',$Tdata);
     }
 }
     

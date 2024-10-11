@@ -23,27 +23,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody class="table-border-bottom-0">
-                        <tr>
-                            <td>Kode Form</td>
-                            <td>Kategori</td>
-                            <td>DD/MM/YYYY</td>
-                            <td>Nama User</td>
-                            <td>Nomor Job</td>
-                            <td>Buku</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                        <i class="bx bx-dots-horizontal-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-file me-2"></i> Detail</a>
-                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-2"></i> Edit</a>
-                                        <a class="dropdown-item" style="color: red;" href="javascript:void(0);"><i class="bx bx-trash me-2"></i> Delete</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                    <tbody class="table-border-bottom-0" id="formData">
                     </tbody>
                 </table>
             </div>
@@ -79,4 +59,43 @@
 <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script>
+    $(document).ready(function() {
+        loadData();
+    });
+    function loadData() {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/api/listform',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                var formData = '';
+                $.each(data.tiket, function(key, value) {
+                    formData += '<tr>';
+                    formData += '<td>' + value.kode_form + '</td>';
+                    formData += '<td>' + value.id_kategori + '</td>';
+                    formData += '<td>' + value.tgl_order + '</td>';
+                    formData += '<td>' + value.id_user + '</td>';
+                    formData += '<td>' + value.nomor_job + '</td>';
+                    formData += '<td>' + value.id_buku + '</td>';
+                    formData += '<td>';
+                    formData += '<div class="dropdown">';
+                    formData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
+                    formData += '<i class="bx bx-dots-horizontal-rounded"></i>';
+                    formData += '</button>';
+                    formData += '<div class="dropdown-menu">';
+                    formData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
+                    formData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '"><i class="bx bx-trash me-2"></i> Delete</a>';
+                    formData += '</div>';
+                    formData += '</div>';
+                    formData += '</td>';
+                    formData += '</tr>';
+                });
+                $('#formData').html(formData);
+            }
+        });
+    }
+ </script>
 <?= $this->endSection(); ?>
