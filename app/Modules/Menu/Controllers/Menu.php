@@ -27,4 +27,12 @@ class Menu extends BaseController
         ];
         return view($this->folder_directory . 'index', $data);
     }
+
+    public function beranda()
+    {
+        $data = [
+            'judul' => 'Beranda',
+        ];
+        return view($this->folder_directory . 'beranda', $data);
+    }
 }

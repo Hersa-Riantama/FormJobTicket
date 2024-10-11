@@ -17,3 +17,12 @@ $routes->group(
         $routes->get('/', 'Menu::index');
     }
 );
+
+$routes->group(
+    'beranda',
+    ['namespace' => '\Modules\Menu\Controllers'],
+    function ($routes) {
+
+        $routes->get('/', 'Menu::beranda');
+    }
+);
