@@ -42,4 +42,10 @@ class FormModel extends Model
     {
         return $this->findAll();
     }
+    public function getTiketWithDetails() {
+        return $this->select('tbl_tiket.*, tbl_kategori.nama_kategori, tbl_buku.judul_buku')
+                    ->join('tbl_kategori', 'tbl_kategori.id_kategori = tbl_tiket.id_kategori', 'left')
+                    ->join('tbl_buku', 'tbl_buku.id_buku = tbl_tiket.id_buku', 'left')
+                    ->findAll();
+    }
 }

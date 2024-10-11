@@ -5,6 +5,7 @@ namespace Modules\Form\Controllers;
 use App\Controllers\BaseController;
 use App\Modules\Buku\Models\BukuModel;
 use Modules\Form\Models\FormModel;
+use Modules\Kategori\Models\KategoriModel;
 
 class Form extends BaseController
 {
@@ -107,6 +108,17 @@ class Form extends BaseController
         // }else {
         //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
         // }
+    public function getKategori() {
+        $kategoriModel = new KategoriModel();  // Pastikan KategoriModel sudah di-load
+        $kategori = $kategoriModel->getKategori();
+            
+        if ($kategori) {
+            return $this->response->setJSON($kategori);  // Mengembalikan JSON
+        } else {
+            return $this->response->setJSON(['error' => 'No categories found'], 404);  // Error handling
+        }
+    }
+        
     public function form()
     {
         $data = [
@@ -126,6 +138,13 @@ class Form extends BaseController
             'judul' => 'Kelola Tiket',
         ];
         return view($this->folder_directory . 'data_form',$Tdata);
+    }
+    public function listTiket() {
+        $tiketModel = new FormModel();
+        $tiket = $tiketModel->getTiketWithDetails();
+    
+        // Debug output
+        return $this->response->setJSON($tiket);
     }
 }
     

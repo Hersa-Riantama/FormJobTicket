@@ -29,6 +29,7 @@ $routes->group(
     }
 );
 $routes->post('/get-email', '\Modules\User\Controllers\User::getEmail');
+$routes->post('api/kategori', '\Modules\Kategori\Controllers\Kategori::getKategori');
 
 $routes->group(
     'api',

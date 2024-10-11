@@ -66,36 +66,100 @@
     });
     function loadData() {
         $.ajax({
+            url: 'http://localhost:8080/api/kategori',
+            dataType: 'json',
+            success: function(response) {
+                console.log('Kategori Data:', response);  // Pastikan kategori data benar
+            },
+            error: function(xhr, status, error) {
+                console.log('Error:', error);  // Debugging error jika ada
+                console.log('Status:', status); // Status error
+                console.log('xhr:', xhr); // XHR object untuk melihat lebih detail
+            }
+        });
+
+        $.ajax({
+            url: 'http://localhost:8080/api/buku',
+            dataType: 'json',
+            success: function(bukuData) {
+                console.log('Buku Data:', bukuData);  // Pastikan buku data benar
+            }
+        });
+        $.ajax({
             type: 'GET',
             url: 'http://localhost:8080/api/listform',
             dataType: 'json',
             success: function(data) {
                 console.log(data);
-                var formData = '';
-                $.each(data.tiket, function(key, value) {
-                    formData += '<tr>';
-                    formData += '<td>' + value.kode_form + '</td>';
-                    formData += '<td>' + value.id_kategori + '</td>';
-                    formData += '<td>' + value.tgl_order + '</td>';
-                    formData += '<td>' + value.id_user + '</td>';
-                    formData += '<td>' + value.nomor_job + '</td>';
-                    formData += '<td>' + value.id_buku + '</td>';
-                    formData += '<td>';
-                    formData += '<div class="dropdown">';
-                    formData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
-                    formData += '<i class="bx bx-dots-horizontal-rounded"></i>';
-                    formData += '</button>';
-                    formData += '<div class="dropdown-menu">';
-                    formData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
-                    formData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '"><i class="bx bx-trash me-2"></i> Delete</a>';
-                    formData += '</div>';
-                    formData += '</div>';
-                    formData += '</td>';
-                    formData += '</tr>';
+                // Call API to get categories and books
+                $.when(
+                    $.ajax({ url: 'http://localhost:8080/api/kategori', dataType: 'json' }),
+                    $.ajax({ url: 'http://localhost:8080/api/buku', dataType: 'json' })
+                ).done(function(kategoriResponse, bukuResponse) {
+                    var kategoriMap = {};
+                    var bukuMap = {};
+                    console.log('Kategori Response:', kategoriResponse[0]);
+                    console.log('Buku Response:', bukuResponse[0]);
+                    
+
+                    // Map kategori by id
+                    $.each(kategoriResponse[0], function(key, kategori) {
+                        console.log('kategori item',kategori);
+                        if (kategori.id_kategori && kategori.nama_kategori) {
+                            kategoriMap[kategori.id_kategori] = kategori.nama_kategori;
+                        } else {
+                            console.log('Kategori missing fields:', kategori);
+                        }
+                    });
+
+                    // Map buku by id
+                    $.each(bukuResponse[0], function(key, buku) {
+                        console.log('kategori item',kategori);
+                        // Check if id_buku and judul_buku exist in the response
+                        if (buku.id_buku && buku.judul_buku) {
+                            bukuMap[buku.id_buku] = buku.judul_buku;
+                        } else {
+                            console.log('Buku missing fields:', buku);
+                        }
+                    });
+                    console.log(kategoriMap);
+                    console.log(bukuMap);
+
+                    var formData = '';
+                    $.each(data.tiket, function(key, value) {
+                        var nama_kategori = kategoriMap[value.id_kategori] || 'Unknown Kategori';
+                        var judul_buku = bukuMap[value.id_buku] || 'Unknown Buku';
+
+                        formData += '<tr>';
+                        formData += '<td>' + value.kode_form + '</td>';
+                        formData += '<td>' + nama_kategori + '</td>';
+                        formData += '<td>' + value.tgl_order + '</td>';
+                        formData += '<td>' + value.id_user + '</td>';
+                        formData += '<td>' + value.nomor_job + '</td>';
+                        formData += '<td>' + judul_buku + '</td>';
+                        formData += '<td>';
+                        formData += '<div class="dropdown">';
+                        formData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
+                        formData += '<i class="bx bx-dots-horizontal-rounded"></i>';
+                        formData += '</button>';
+                        formData += '<div class="dropdown-menu">';
+                        formData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
+                        formData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '"><i class="bx bx-trash me-2"></i> Delete</a>';
+                        formData += '</div>';
+                        formData += '</div>';
+                        formData += '</td>';
+                        formData += '</tr>';
+                    });
+
+                    $('#formData').html(formData);
                 });
-                $('#formData').html(formData);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching List Form:', error);
+                alert('Failed to fetch data from API.');
             }
         });
     }
+
  </script>
 <?= $this->endSection(); ?>
