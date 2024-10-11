@@ -10,19 +10,17 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 
 $routes->group(
-    'dashboard',
-    ['namespace' => '\Modules\Menu\Controllers'],
+    'index',
+    ['namespace' => '\Modules\Kategori\Controllers'],
     function ($routes) {
-
-        $routes->get('/', 'Menu::index');
+        $routes->get('/', 'Kategori::index');
     }
 );
 
 $routes->group(
-    'beranda',
-    ['namespace' => '\Modules\Menu\Controllers'],
+    'api',
+    ['namespace' => '\Modules\Kategori\Controllers'],
     function ($routes) {
-
-        $routes->get('/', 'Menu::beranda');
+        $routes->get('kategori', 'Kategori::data_kategori');
     }
 );

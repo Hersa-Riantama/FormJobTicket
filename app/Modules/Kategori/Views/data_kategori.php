@@ -8,7 +8,7 @@
         <h4 class="py-3 mb-4"><span class="text-muted fw-light">Kategori /</span> Kelola Kategori</h4>
         <div class="row justify-content-end">
             <div class="col-xl-auto mb-4 justify-content-end">
-                <button class="btn btn-primary d-grid" id="btn-add">Tambah Buku</button>
+                <button class="btn btn-primary d-grid" id="btn-add">Tambah Kategori</button>
             </div>
         </div>
 
