@@ -25,8 +25,10 @@ $routes->group(
         $routes->get('tampilbuku', 'Form::getBukuOptions');
         $routes->get('tampilbuku/(:segment)', 'Form::getBukuDetails/$1');
         $routes->post('form','Form::createForm');
+        
     }
 );
+$routes->post('/get-email', '\Modules\User\Controllers\User::getEmail');
 
 $routes->group(
     'api',

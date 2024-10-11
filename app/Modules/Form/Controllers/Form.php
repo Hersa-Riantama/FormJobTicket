@@ -31,11 +31,6 @@ class Form extends BaseController
     }
     public function createForm()
     {
-        // $authHeader = $this->request->getHeader('Authorization');
-        // if ($authHeader && $authHeader->getValue() === $this->value) {
-        // }else {
-        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
-        // }
         $rules = $this->model->validationRules();
             if (!$this->validate($rules)) {
                 $response = [
@@ -43,29 +38,38 @@ class Form extends BaseController
                 ];
                 return $this->response->setJSON($response);
             }
-            $id_buku = esc($this->request->getVar('id_buku'));
+            $kode_buku = esc($this->request->getVar('id_buku'));
             $bukuModel = new BukuModel();
-            $buku = $bukuModel->where('judul_buku', $id_buku)->first();
+            $buku = $bukuModel->where('kode_buku', $kode_buku)->first();
             if (!$buku) {
-                return $this->response->setJSON('Buku tidak ditemukan');
+                return $this->response->setJSON(['pesan' => 'Buku tidak ditemukan']);
             }
-            $id_buku = $buku['judul_buku'];
-            $nama_kategori = esc($this->request->getVar('nama_kategori'));
-            $kategoriModel = new \Modules\Kategori\Models\KategoriModel();
-            $kategori = $kategoriModel->where('nama_kategori', $nama_kategori)->first();
-            if (!$kategori) {
-                return $this->response->setJSON('Kategori tidak ditemukan');
+            $id_buku = $buku['id_buku'];
+
+            // Get selected id_kategori from checkboxes
+            $id_kategoris = $this->request->getVar('id_kategori'); // This should be an array
+            // Check if id_kategori is provided
+            if (empty($id_kategoris)) {
+                return $this->response->setJSON(['pesan' => 'id_kategori is required']);
             }
-            $id_kategori = $kategori['id_kategori'];
+            // Loop through the selected id_kategori and insert them into tbl_tiket
+            foreach ($id_kategoris as $id_kategori) {
+                // Make sure id_kategori is a number or valid value
+                if (!is_numeric($id_kategori)) {
+                    return $this->response->setJSON(['pesan' => 'Invalid id_kategori value']);
+                }
+            }
             $tgl_order = date('y-m-d', strtotime($this->request->getVar('tgl_order')));
             $this->model->insert([
                 'id_kategori' => esc($id_kategori),
+                'id_buku' => esc($id_buku),
                 'tgl_order' => esc($tgl_order),
                 'id_user' => esc($this->request->getVar('id_user')),
                 'nomor_job' => esc($this->request->getVar('nomor_job')),
-                'id_buku' => esc($id_buku),
+                
             ]);
             $id_tiket = $this->model->getInsertID();
+            //insert tbl_kelengkapan
             $kelengkapanModel = new \Modules\Kelengkapan\Models\KelengkapanModel();
             $kelengkapan = $this->request->getVar('kelengkapan');
             if (is_array($kelengkapan) && count($kelengkapan)> 0) {
@@ -76,6 +80,7 @@ class Form extends BaseController
                     ]);
                 }
             }
+            //insert tbl_status_kelengkapan
             $statusKelengkapanModel = new \Modules\Status_Kelengkapan\Models\StatusKelengkapanModel();
             $tahap_kelengkapan = esc($this->request->getVar('tahap_kelengkapan'));
             $status_kelengkapan = esc($this->request->getVar('status_kelengkapan'));
@@ -97,6 +102,11 @@ class Form extends BaseController
             ];
             return $this->response->setJSON($response);
     }
+        // $authHeader = $this->request->getHeader('Authorization');
+        // if ($authHeader && $authHeader->getValue() === $this->value) {
+        // }else {
+        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
+        // }
     public function form()
     {
         $data = [
@@ -112,3 +122,4 @@ class Form extends BaseController
         return view($this->folder_directory . 'data_form', $data);
     }
 }
+    

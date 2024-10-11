@@ -58,40 +58,40 @@
                                     <div class="col-md px-3">
                                         <!-- <small class="text-light fw-medium">Checkboxes</small> -->
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="QR CODE" id="defaultCheck1" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary" for="defaultCheck1"> QR CODE </label>
+                                            <input class="form-check-input" type="checkbox" value="1" name="id_kategori[]" id="kategori1" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary" for="kategori1"> QR CODE </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="Animasi/Motion/Info Graphic" id="defaultCheck3" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary" for="defaultCheck3"> Animasi/Motion/Info Graphic </label>
+                                            <input class="form-check-input" type="checkbox" value="2" name="id_kategori[]" id="kategori2" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary" for="kategori2"> Animasi/Motion/Info Graphic </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="CBT/Aplikasi" id="defaultCheck4" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary" for="defaultCheck4"> CBT/Aplikasi </label>
+                                            <input class="form-check-input" type="checkbox" value="3" name="id_kategori[]" id="kategori3" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary" for="kategori3"> CBT/Aplikasi </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="Editing Video/Audio" id="defaultCheck5" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary" for="defaultCheck5"> Editing Video/Audio </label>
+                                            <input class="form-check-input" type="checkbox" value="4" name="id_kategori[]" id="kategori4" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary" for="kategori4"> Editing Video/Audio </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="Template Media Mengajar" id="defaultCheck6" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary" for="defaultCheck6"> Template Media Mengajar </label>
+                                            <input class="form-check-input" type="checkbox" value="5" name="id_kategori[]" id="kategori5" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary" for="kategori5"> Template Media Mengajar </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="Template Video" id="defaultCheck7" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary" for="defaultCheck7"> Template Video </label>
+                                            <input class="form-check-input" type="checkbox" value="6" name="id_kategori[]" id="kategori6" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary" for="kategori6"> Template Video </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="Game Edukasi" id="defaultCheck8" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary" for="defaultCheck8"> Game Edukasi </label>
+                                            <input class="form-check-input" type="checkbox" value="7" name="id_kategori[]" id="kategori7" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary" for="kategori7"> Game Edukasi </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="Augmented Reality (AR)" id="defaultCheck9" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary" for="defaultCheck9"> Augmented Reality (AR) </label>
+                                            <input class="form-check-input" type="checkbox" value="8" name="id_kategori[]" id="kategori8" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary" for="kategori8"> Augmented Reality (AR) </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="Lainnya" id="defaultCheck10" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary" for="defaultCheck10"> Lainnya </label>
+                                            <input class="form-check-input" type="checkbox" value="9" name="id_kategori[]" id="kategori9" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary" for="kategori9"> Lainnya </label>
                                         </div>
                                     </div>
                                 </div>
@@ -106,14 +106,14 @@
                                 <div class="mb-3 row">
                                     <label for="tanggal_order" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">Tanggal Order</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" type="date" value="" id="tanggal_order" name="tanggal_order" style="border: 1px solid black;" placeholder="dd/mm/yyyy" />
+                                        <input class="form-control" type="date" value="" id="tgl_order" name="tgl_order" style="border: 1px solid black;" placeholder="dd/mm/yyyy" required />
                                     </div>
                                 </div>
 
                                 <div class="mb-3 row">
                                     <label for="pemesan" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">PEMESAN</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" type="text" value="" id="pemesan" name="pemesan" placeholder="Masukkan Pemesan" style="border: 1px solid black;" />
+                                        <input class="form-control" type="text" value="" id="id_user" name="id_user" placeholder="Masukkan Pemesan" style="border: 1px solid black;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -125,7 +125,7 @@
                                 <div class="mb-3 row">
                                     <label for="kode_buku" class="form-label col-md-3 text-primary" style="font-size: var(--bs-body-font-size)">Kode Buku</label>
                                     <div class="col-md-9">
-                                        <select id="kode_buku" class="form-select" name="kode_buku" style="border: 1px solid black;">
+                                        <select id="kode_buku" class="form-select" name="id_buku" style="border: 1px solid black;">
                                             <!-- ajax -->
                                         </select>
                                     </div>
@@ -245,22 +245,21 @@
                                         <div class="row mx-0 justify-content-center">
                                             <div class="col-xl-auto border boder-box border-dark rounded px-1 mx-1 mb-2 mt-2">
                                                 <div class="form-check justify-center">
-                                                    <input class="form-check-input" type="checkbox" value="Image/Foto/Ilustrasi" id="defaultCheck11" style="border: 1px solid pink;" />
+                                                    <input class="form-check-input" type="checkbox" name="kelengkapan[]" value="Image/Foto/Ilustrasi" id="defaultCheck11" style="border: 1px solid pink;" />
                                                     <label class="form-check-label text-primary" for="defaultCheck11"> Image/Foto/Ilustrasi </label>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="row mx-0 justify-content-center">
                                             <div class="col-xl-auto border boder-box border-dark rounded px-1 mx-1 mb-2">
                                                 <div class="form-check justify-center">
-                                                    <input class="form-check-input" type="checkbox" value="Audio Mp3" id="defaultCheck12" style="border: 1px solid pink;" />
+                                                    <input class="form-check-input" type="checkbox" name="kelengkapan[]" value="Audio Mp3" id="defaultCheck12" style="border: 1px solid pink;" />
                                                     <label class="form-check-label text-primary" for="defaultCheck12"> Audio Mp3 </label>
                                                 </div>
                                             </div>
                                             <div class="col-xl-auto border boder-box border-dark rounded px-1 mx-1 mb-2">
                                                 <div class="form-check justify-center">
-                                                    <input class="form-check-input" type="checkbox" value="PDF & RAR" id="defaultCheck13" style="border: 1px solid pink;" />
+                                                    <input class="form-check-input" type="checkbox" name="kelengkapan[]" value="PDF & RAR" id="defaultCheck13" style="border: 1px solid pink;" />
                                                     <label class="form-check-label text-primary" for="defaultCheck13"> PDF & RAR </label>
                                                 </div>
                                             </div>
@@ -269,13 +268,13 @@
                                         <div class="row mx-0 justify-content-center">
                                             <div class="col-xl-auto border boder-box border-dark rounded px-1 mx-1 mb-2">
                                                 <div class="form-check justify-center">
-                                                    <input class="form-check-input" type="checkbox" value="Video Mp4" id="defaultCheck14" style="border: 1px solid pink;" />
+                                                    <input class="form-check-input" type="checkbox" name="kelengkapan[]" value="Video Mp4" id="defaultCheck14" style="border: 1px solid pink;" />
                                                     <label class="form-check-label text-primary" for="defaultCheck14"> Video Mp4 </label>
                                                 </div>
                                             </div>
                                             <div class="col-xl-auto border boder-box border-dark rounded px-1 mx-1 mb-2">
                                                 <div class="form-check justify-center">
-                                                    <input class="form-check-input" type="checkbox" value="fla/xfl" id="defaultCheck15" style="border: 1px solid pink;" />
+                                                    <input class="form-check-input" type="checkbox" name="kelengkapan[]" value="fla/xfl" id="defaultCheck15" style="border: 1px solid pink;" />
                                                     <label class="form-check-label text-primary" for="defaultCheck15"> fla/xfl </label>
                                                 </div>
                                             </div>
@@ -284,12 +283,11 @@
                                         <div class="row mx-0 justify-content-center">
                                             <div class="col-xl-auto border boder-box border-dark rounded px-1 mx-1 mb-2">
                                                 <div class="form-check justify-center">
-                                                    <input class="form-check-input" type="checkbox" value="Dummy" id="defaultCheck16" style="border: 1px solid pink;" />
+                                                    <input class="form-check-input" type="checkbox" name="kelengkapan[]" value="Dummy" id="defaultCheck16" style="border: 1px solid pink;" />
                                                     <label class="form-check-label text-primary" for="defaultCheck16"> Dummy </label>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -500,11 +498,16 @@
 
             // Collect selected checkboxes for kategori
             var selectedKategoris = [];
+            var selectedkelengkapans = [];
             $('input[type="checkbox"]:checked').each(function() {
                 selectedKategoris.push($(this).val());
             });
+            // Add the selected kelengkapan to FormData
+            $("input[name='kelengkapan[]']:checked").each(function () {
+                selectedkelengkapans.push($(this).val());
+            });
             
-            var formData = $(this).serialize();
+            var formData = $(this).serialize() + selectedkelengkapans.join(',') + selectedKategoris.join(',');
             var formUrl = 'http://localhost:8080/api/form'; // Ganti '/form' dengan URL endpoint yang sesuai
 
             $.ajax({
@@ -558,6 +561,24 @@
                 });
             }
         });
+        function getUserEmail() {
+            var id_user = document.getElementById('id_user').value;
+            
+            if (id_user !== "") {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/get-email', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        document.getElementById('email').value = xhr.responseText;
+                    }
+                };
+                xhr.send('id_user=' + id_user);
+            } else {
+                document.getElementById('email').value = '';  // Kosongkan email jika ID user dihapus
+            }
+        }
+
     });
 </script>
 <?= $this->endSection(); ?>
