@@ -1708,7 +1708,7 @@
                 <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/front-pages/help-center-landing.html" class="footer-link">Help Center</a>
               </li>
               <li>
-                <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/auth-login-cover.html" target="_blank" class="footer-link">Login/Register</a>
+                <a href="http://localhost:8008/api/login" target="_blank" class="footer-link">Login/Register</a>
               </li>
             </ul>
           </div>
