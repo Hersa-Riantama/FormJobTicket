@@ -66,26 +66,6 @@
     });
     function loadData() {
         $.ajax({
-            url: 'http://localhost:8080/api/kategori',
-            dataType: 'json',
-            success: function(response) {
-                console.log('Kategori Data:', response);  // Pastikan kategori data benar
-            },
-            error: function(xhr, status, error) {
-                console.log('Error:', error);  // Debugging error jika ada
-                console.log('Status:', status); // Status error
-                console.log('xhr:', xhr); // XHR object untuk melihat lebih detail
-            }
-        });
-
-        $.ajax({
-            url: 'http://localhost:8080/api/buku',
-            dataType: 'json',
-            success: function(bukuData) {
-                console.log('Buku Data:', bukuData);  // Pastikan buku data benar
-            }
-        });
-        $.ajax({
             type: 'GET',
             url: 'http://localhost:8080/api/listform',
             dataType: 'json',
@@ -98,13 +78,9 @@
                 ).done(function(kategoriResponse, bukuResponse) {
                     var kategoriMap = {};
                     var bukuMap = {};
-                    console.log('Kategori Response:', kategoriResponse[0]);
-                    console.log('Buku Response:', bukuResponse[0]);
-                    
 
                     // Map kategori by id
                     $.each(kategoriResponse[0], function(key, kategori) {
-                        console.log('kategori item',kategori);
                         if (kategori.id_kategori && kategori.nama_kategori) {
                             kategoriMap[kategori.id_kategori] = kategori.nama_kategori;
                         } else {
@@ -122,8 +98,6 @@
                             console.log('Buku missing fields:', buku);
                         }
                     });
-                    console.log(kategoriMap);
-                    console.log(bukuMap);
 
                     var formData = '';
                     $.each(data.tiket, function(key, value) {

@@ -23,21 +23,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody class="table-border-bottom-0">
-                        <tr>
-                            <td>Nama Kategori</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                        <i class="bx bx-dots-horizontal-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-2"></i> Edit</a>
-                                        <a class="dropdown-item" style="color: red;" href="javascript:void(0);"><i class="bx bx-trash me-2"></i> Delete</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                    <tbody class="table-border-bottom-0" id="kategoriData">
                     </tbody>
                 </table>
             </div>
@@ -73,4 +59,37 @@
 <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        loadData();
+    });
+    function loadData() {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/api/kategori',
+            dataType: 'json',
+            success: function(data) {
+                var kategoriData = '';
+                $.each(data.kategori, function(key, value) {
+                    kategoriData += '<tr>';
+                    kategoriData += '<td>' + value.nama_kategori + '</td>';
+                    kategoriData += '<td>';
+                    kategoriData += '<div class="dropdown">';
+                    kategoriData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
+                    kategoriData += '<i class="bx bx-dots-horizontal-rounded"></i>';
+                    kategoriData += '</button>';
+                    kategoriData += '<div class="dropdown-menu">';
+                    kategoriData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_kategori="' + value.id_kategori + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
+                    kategoriData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_kategori="' + value.id_kategori + '"><i class="bx bx-trash me-2"></i> Delete</a>';
+                    kategoriData += '</div>';
+                    kategoriData += '</div>';
+                    kategoriData += '</td>';
+                    kategoriData += '</tr>';
+                });
+                $('#kategoriData').html(kategoriData);
+            }
+        });
+    }
+</script>
 <?= $this->endSection(); ?>
