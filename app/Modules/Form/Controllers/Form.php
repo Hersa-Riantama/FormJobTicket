@@ -16,16 +16,15 @@ class Form extends BaseController
     {
         $this->model = new FormModel(); // Inisialisasi model
     }
-    public function index()
+    public function index() {}
+    public function getBukuOptions()
     {
-        
-    }
-    public function getBukuOptions() {
         $bukuModel = new BukuModel();
         $data = $bukuModel->findAll(); // Fetch all buku data
         return $this->response->setJSON($data);
     }
-    public function getBukuDetails($kode_buku) {
+    public function getBukuDetails($kode_buku)
+    {
         $bukuModel = new BukuModel();
         $data = $bukuModel->where('kode_buku', $kode_buku)->first();
         return $this->response->setJSON($data);
@@ -33,96 +32,97 @@ class Form extends BaseController
     public function createForm()
     {
         $rules = $this->model->validationRules();
-            if (!$this->validate($rules)) {
-                $response = [
-                    'pesan' => $this->validator->getErrors()
-                ];
-                return $this->response->setJSON($response);
-            }
-            $kode_buku = esc($this->request->getVar('id_buku'));
-            $bukuModel = new BukuModel();
-            $buku = $bukuModel->where('kode_buku', $kode_buku)->first();
-            if (!$buku) {
-                return $this->response->setJSON(['pesan' => 'Buku tidak ditemukan']);
-            }
-            $id_buku = $buku['id_buku'];
-
-            // Get selected id_kategori from checkboxes
-            $id_kategoris = $this->request->getVar('id_kategori'); // This should be an array
-            // Check if id_kategori is provided
-            if (empty($id_kategoris)) {
-                return $this->response->setJSON(['pesan' => 'id_kategori is required']);
-            }
-            // Loop through the selected id_kategori and insert them into tbl_tiket
-            foreach ($id_kategoris as $id_kategori) {
-                // Make sure id_kategori is a number or valid value
-                if (!is_numeric($id_kategori)) {
-                    return $this->response->setJSON(['pesan' => 'Invalid id_kategori value']);
-                }
-            }
-            $tgl_order = date('y-m-d', strtotime($this->request->getVar('tgl_order')));
-            $this->model->insert([
-                'id_kategori' => esc($id_kategori),
-                'id_buku' => esc($id_buku),
-                'tgl_order' => esc($tgl_order),
-                'id_user' => esc($this->request->getVar('id_user')),
-                'nomor_job' => esc($this->request->getVar('nomor_job')),
-                
-            ]);
-            $id_tiket = $this->model->getInsertID();
-            //insert tbl_kelengkapan
-            $kelengkapanModel = new \Modules\Kelengkapan\Models\KelengkapanModel();
-            $kelengkapan = $this->request->getVar('kelengkapan');
-            if (is_array($kelengkapan) && count($kelengkapan)> 0) {
-                foreach ($kelengkapan as $nama_kelengkapan){
-                    $kelengkapanModel->insert([
-                        'id_tiket' => $id_tiket,
-                        'nama_kelengkapan' => esc($nama_kelengkapan),
-                    ]);
-                }
-            }
-            //insert tbl_status_kelengkapan
-            $statusKelengkapanModel = new \Modules\Status_Kelengkapan\Models\StatusKelengkapanModel();
-            $tahap_kelengkapan = esc($this->request->getVar('tahap_kelengkapan'));
-            $status_kelengkapan = esc($this->request->getVar('status_kelengkapan'));
-            if (!empty($tahap_kelengkapan) && !empty($status_kelengkapan)) {
-                $statusKelengkapanModel->insert([
-                    'id_tiket' => $id_tiket,
-                    'tahap_kelengkapan' => !empty($tahap_kelengkapan)? $tahap_kelengkapan : 'N',
-                    'status_kelengkapan' => !empty($status_kelengkapan)? $status_kelengkapan : 'N',
-                ]);
-            }else {
-                $statusKelengkapanModel->insert([
-                    'id_tiket'           => $id_tiket, 
-                    'tahap_kelengkapan'   => 'N',
-                    'status_kelengkapan'  => 'N'
-                ]);
-            }
+        if (!$this->validate($rules)) {
             $response = [
-                'Pesan' => 'Tiket Berhasil ditambahkan'
+                'pesan' => $this->validator->getErrors()
             ];
             return $this->response->setJSON($response);
+        }
+        $kode_buku = esc($this->request->getVar('id_buku'));
+        $bukuModel = new BukuModel();
+        $buku = $bukuModel->where('kode_buku', $kode_buku)->first();
+        if (!$buku) {
+            return $this->response->setJSON(['pesan' => 'Buku tidak ditemukan']);
+        }
+        $id_buku = $buku['id_buku'];
+
+        // Get selected id_kategori from checkboxes
+        $id_kategoris = $this->request->getVar('id_kategori'); // This should be an array
+        // Check if id_kategori is provided
+        if (empty($id_kategoris)) {
+            return $this->response->setJSON(['pesan' => 'id_kategori is required']);
+        }
+        // Loop through the selected id_kategori and insert them into tbl_tiket
+        foreach ($id_kategoris as $id_kategori) {
+            // Make sure id_kategori is a number or valid value
+            if (!is_numeric($id_kategori)) {
+                return $this->response->setJSON(['pesan' => 'Invalid id_kategori value']);
+            }
+        }
+        $tgl_order = date('y-m-d', strtotime($this->request->getVar('tgl_order')));
+        $this->model->insert([
+            'id_kategori' => esc($id_kategori),
+            'id_buku' => esc($id_buku),
+            'tgl_order' => esc($tgl_order),
+            'id_user' => esc($this->request->getVar('id_user')),
+            'nomor_job' => esc($this->request->getVar('nomor_job')),
+
+        ]);
+        $id_tiket = $this->model->getInsertID();
+        //insert tbl_kelengkapan
+        $kelengkapanModel = new \Modules\Kelengkapan\Models\KelengkapanModel();
+        $kelengkapan = $this->request->getVar('kelengkapan');
+        if (is_array($kelengkapan) && count($kelengkapan) > 0) {
+            foreach ($kelengkapan as $nama_kelengkapan) {
+                $kelengkapanModel->insert([
+                    'id_tiket' => $id_tiket,
+                    'nama_kelengkapan' => esc($nama_kelengkapan),
+                ]);
+            }
+        }
+        //insert tbl_status_kelengkapan
+        $statusKelengkapanModel = new \Modules\Status_Kelengkapan\Models\StatusKelengkapanModel();
+        $tahap_kelengkapan = esc($this->request->getVar('tahap_kelengkapan'));
+        $status_kelengkapan = esc($this->request->getVar('status_kelengkapan'));
+        if (!empty($tahap_kelengkapan) && !empty($status_kelengkapan)) {
+            $statusKelengkapanModel->insert([
+                'id_tiket' => $id_tiket,
+                'tahap_kelengkapan' => !empty($tahap_kelengkapan) ? $tahap_kelengkapan : 'N',
+                'status_kelengkapan' => !empty($status_kelengkapan) ? $status_kelengkapan : 'N',
+            ]);
+        } else {
+            $statusKelengkapanModel->insert([
+                'id_tiket'           => $id_tiket,
+                'tahap_kelengkapan'   => 'N',
+                'status_kelengkapan'  => 'N'
+            ]);
+        }
+        $response = [
+            'Pesan' => 'Tiket Berhasil ditambahkan'
+        ];
+        return $this->response->setJSON($response);
     }
-        // $authHeader = $this->request->getHeader('Authorization');
-        // if ($authHeader && $authHeader->getValue() === $this->value) {
-        // }else {
-        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
-        // }
-    public function getKategori() {
+    // $authHeader = $this->request->getHeader('Authorization');
+    // if ($authHeader && $authHeader->getValue() === $this->value) {
+    // }else {
+    //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
+    // }
+    public function getKategori()
+    {
         $kategoriModel = new KategoriModel();  // Pastikan KategoriModel sudah di-load
         $kategori = $kategoriModel->getKategori();
-            
+
         if ($kategori) {
             return $this->response->setJSON($kategori);  // Mengembalikan JSON
         } else {
             return $this->response->setJSON(['error' => 'No categories found'], 404);  // Error handling
         }
     }
-        
+
     public function form()
     {
         $data = [
-            'judul' => 'Form Job Ticket',
+            'judul' => 'Form QR Code',
         ];
         return view($this->folder_directory . 'form', $data);
     }
@@ -137,14 +137,14 @@ class Form extends BaseController
             'tiket' => $data,
             'judul' => 'Kelola Tiket',
         ];
-        return view($this->folder_directory . 'data_form',$Tdata);
+        return view($this->folder_directory . 'data_form', $Tdata);
     }
-    public function listTiket() {
+    public function listTiket()
+    {
         $tiketModel = new FormModel();
         $tiket = $tiketModel->getTiketWithDetails();
-    
+
         // Debug output
         return $this->response->setJSON($tiket);
     }
 }
-    

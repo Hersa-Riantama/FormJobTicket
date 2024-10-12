@@ -183,7 +183,7 @@
                                 <a
                                     href="http://localhost:8080/api/form"
                                     class="menu-link">
-                                    <div data-i18n="CRM">Form Job Ticket</div>
+                                    <div data-i18n="CRM">Form QR Code</div>
                                 </a>
                             </li>
                             <li class="menu-item">
