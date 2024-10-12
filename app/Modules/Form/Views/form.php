@@ -376,7 +376,7 @@
                                     <div class="card-body pb-0">
                                         <div class="row mb-0">
 
-                                            <div class="col-xl-8 mb-3">
+                                            <div class="col-xl-7 mb-3">
                                                 <h6 class="text-center rounded py-2" style="background-color:pink;"><i>Approval</i></h6>
                                                 <div class="row mt-4 mx-0">
                                                     <div class="col-xl mb-2 px-0">
@@ -405,7 +405,7 @@
                                                 </p>
                                             </div>
 
-                                            <div class="col-xl-4">
+                                            <div class="col-xl-4" style="margin-left: auto;">
                                                 <h6 class="text-center rounded py-2" style="background-color:pink;">Arsip</h6>
                                                 <div class="row mt-4 mx-0">
                                                     <div class="col-xl mb-2 px-0">
