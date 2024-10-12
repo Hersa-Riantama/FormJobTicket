@@ -16,7 +16,7 @@ $routes->get('/', 'Home::index');
 //         $routes->get('/', 'Buku::data_buku');
 //     }
 // );
-$routes->group('api', ['namespace' => '\Modules\Buku\Controllers'], function($routes) {
+$routes->group('api', ['namespace' => '\Modules\Buku\Controllers'], function ($routes) {
     $routes->get('buku', 'Buku::index');
     $routes->get('buku/(:segment)', 'Buku::show/$1');
     $routes->post('buku', 'Buku::create');

@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+// $routes->get('/', 'Home::index');
 
 $routes->group(
     'index',
@@ -24,8 +24,7 @@ $routes->group(
         $routes->get('form', 'Form::form');
         $routes->get('tampilbuku', 'Form::getBukuOptions');
         $routes->get('tampilbuku/(:segment)', 'Form::getBukuDetails/$1');
-        $routes->post('form','Form::createForm');
-        
+        $routes->post('form', 'Form::createForm');
     }
 );
 $routes->post('/get-email', '\Modules\User\Controllers\User::getEmail');
@@ -38,4 +37,3 @@ $routes->group(
         $routes->get('listform', 'Form::data_form');
     }
 );
-
