@@ -136,7 +136,7 @@ class Auth extends BaseController
         $this->model->insert($data);
         // Response berhasil
         $response = [
-            'Pesan' => 'Data Pegawai Berhasil ditambahkan',
+            'Pesan' => 'Data User Berhasil ditambahkan',
             'Status' => 'success',
         ];
         return $this->response->setJSON($response)->setStatusCode(200);
