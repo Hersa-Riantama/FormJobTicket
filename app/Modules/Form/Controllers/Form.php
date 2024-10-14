@@ -4,31 +4,39 @@ namespace Modules\Form\Controllers;
 
 use App\Controllers\BaseController;
 use App\Modules\Buku\Models\BukuModel;
+use Modules\Auth\Models\AuthModel;
 use Modules\Form\Models\FormModel;
 use Modules\Kategori\Models\KategoriModel;
 
 class Form extends BaseController
 {
     protected $model;
+    protected $AuthModel;
     protected $folder_directory = "Modules\\Form\\Views\\";
 
     public function __construct()
     {
         $this->model = new FormModel(); // Inisialisasi model
+        $this->AuthModel = new AuthModel();
+        $this->session = session();
     }
+
     public function index() {}
+
     public function getBukuOptions()
     {
         $bukuModel = new BukuModel();
         $data = $bukuModel->findAll(); // Fetch all buku data
         return $this->response->setJSON($data);
     }
+
     public function getBukuDetails($kode_buku)
     {
         $bukuModel = new BukuModel();
         $data = $bukuModel->where('kode_buku', $kode_buku)->first();
         return $this->response->setJSON($data);
     }
+
     public function createForm()
     {
         $rules = $this->model->validationRules();
@@ -121,8 +129,14 @@ class Form extends BaseController
 
     public function form()
     {
+        $authModel = new AuthModel();
+
+        // Ambil data user berdasarkan ID dari sesi
+        $userId = session()->get('id_user');
+        $userData = $authModel->find($userId);
         $data = [
             'judul' => 'Form QR Code',
+            'user' => $userData,
         ];
         return view($this->folder_directory . 'form', $data);
     }

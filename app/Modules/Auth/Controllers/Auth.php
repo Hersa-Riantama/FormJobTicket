@@ -15,7 +15,30 @@ class Auth extends BaseController
     public function __construct()
     {
         $this->model = new AuthModel();
+        $this->session = session();
     }
+
+    public function getUserById()
+    {
+        // Periksa apakah user sudah login
+        if (!$this->session->has('logged_in') || !$this->session->get('logged_in')) {
+            return $this->respond(['status' => 'error', 'message' => 'User not logged in'], 401);
+        }
+
+        // Ambil ID user dari session
+        $userId = $this->session->get('id_user');
+
+        // Panggil model untuk mengambil data berdasarkan ID
+        $userModel = new AuthModel();
+        $userData = $userModel->find($userId);
+
+        if ($userData) {
+            return $this->respond(['status' => 'success', 'data' => $userData], 200);
+        } else {
+            return $this->respond(['status' => 'error', 'message' => 'User not found'], 404);
+        }
+    }
+
     public function Flogin()
     {
         // Ambil data inputan dari request
@@ -71,6 +94,12 @@ class Auth extends BaseController
             'Pesan' => 'Berhasil Login',
             'Status' => 'success'
         ];
+
+        // Set session
+        $this->session->set([
+            'id_user' => $user['id_user'],
+            'logged_in' => true
+        ]);
         return $this->response->setJSON($response)->setStatusCode(200);
         // // Ambil nilai Authorization header
         // $authHeader = $this->request->getHeader('Authorization');
@@ -121,6 +150,7 @@ class Auth extends BaseController
         //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
         // }
     }
+
 
     public function index()
     {

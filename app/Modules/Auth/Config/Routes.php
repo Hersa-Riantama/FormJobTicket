@@ -13,8 +13,9 @@ $routes->group(
     function ($routes) {
         $routes->get('login', 'Auth::login');
         $routes->post('login', 'Auth::Flogin');
-        $routes->post('daftar','Auth::regis');
+        $routes->post('daftar', 'Auth::regis');
         $routes->get('daftar', 'Auth::daftar');
+        $routes->get('user', 'Auth::getUserById');
     }
 );
 $routes->group(
