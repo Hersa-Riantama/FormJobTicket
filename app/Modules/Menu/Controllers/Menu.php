@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Modules\Buku\Models\BukuModel;
 use CodeIgniter\API\ResponseTrait;
 use Modules\Form\Models\FormModel;
+use Modules\Kategori\Models\KategoriModel;
 use Modules\User\Models\UserModel;
 
 class Menu extends BaseController
@@ -17,13 +18,15 @@ class Menu extends BaseController
     public function index()
     {
         $user = new UserModel();
-        $form = new FormModel();
+        $kategori = new KategoriModel();
         $buku = new BukuModel();
+        $form = new FormModel();
         $data = [
             'judul' => 'Dashboard',
             'user' => $user->countAllResults(),
-            'form' => $form->countAllResults(),
+            'kategori' => $kategori->countAllResults(),
             'buku' => $buku->countAllResults(),
+            'form' => $form->countAllResults(),
         ];
         return view($this->folder_directory . 'index', $data);
     }

@@ -248,7 +248,7 @@
                                             <label class="form-check-label text-primary" for="kategori21"> Penyerahan Tahap 3 </label>
                                         </div>
                                         <p class="text mt-3 mb-0" style="font-size:x-small;">
-                                            *Penyerahan konten <i>QR Code</i> harus dilengkapi maksimal satu
+                                            *Konten <i>QR Code</i> harus dilengkapi maksimal satu
                                             bulan setelah buku terbit. Penyerahan konten
                                             dapat dilakukan sekaligus atau melalui tiga tahap.
                                         </p>

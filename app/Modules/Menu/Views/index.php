@@ -25,9 +25,8 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Kategori</span>
-                            <h3 class="card-title text-center fs-1 my-3">0<? //= $kategori; 
-                                                                            ?></h3>
-                            <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/api/ketegori">Selengkapnya</a>
+                            <h3 class="card-title text-center fs-1 my-3"><?= $kategori; ?></h3>
+                            <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/api/kategori">Selengkapnya</a>
                         </div>
                     </div>
                 </div>
