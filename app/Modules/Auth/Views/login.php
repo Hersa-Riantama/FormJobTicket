@@ -169,6 +169,11 @@
                                 <span>Daftar</span>
                             </a>
                         </p>
+                        <p class="text-center">
+                            <a href="http://localhost:8080/api/beranda">
+                                <span>Beranda</span>
+                            </a>
+                        </p>
                     </div>
                 </div>
                 <!-- /Register -->

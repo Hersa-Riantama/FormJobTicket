@@ -94,7 +94,7 @@
 
                             <div class="mb-3">
                                 <label for="jk" class="form-label">Jenis Jelamin</label>
-                                <select class="form-select" name="jk" aria-label="Default select example"required>
+                                <select class="form-select" name="jk" aria-label="Default select example" required>
                                     <option selected disabled>Pilih Jenis Kelamin</option>
                                     <option value="Laki-Laki">Laki-Laki</option>
                                     <option value="Perempuan">Perempuan</option>
@@ -103,7 +103,7 @@
 
                             <div class="mb-3">
                                 <label for="level_user" class="form-label">Level User</label>
-                                <select class="form-select"  name= "level_user" aria-label="Default select example" required>
+                                <select class="form-select" name="level_user" aria-label="Default select example" required>
                                     <option selected disabled>Pilih Level User</option>
                                     <option value="1">Admin Sistem</option>
                                     <option value="2">Admin Multimedia</option>
@@ -144,6 +144,11 @@
                             <span>Sudah punya akun?</span>
                             <a href="http://localhost:8080/api/login">
                                 <span>Login</span>
+                            </a>
+                        </p>
+                        <p class="text-center">
+                            <a href="http://localhost:8080/api/beranda">
+                                <span>Beranda</span>
                             </a>
                         </p>
 
@@ -194,27 +199,28 @@
 </body>
 <script>
     $(document).ready(function() {
-    $('#formAuthentication').submit(function(event) {
-        event.preventDefault();
-        var formData = $(this).serialize();
-        $.ajax({
-            type: 'POST',
-            url: '<?php echo base_url('daftar'); ?>',
-            data: formData,
-            dataType: 'json',
-            success: function(response) {
-                if (response.Status === 'success') {
-                    alert(response.Pesan);
-                    window.location.href = '<?php echo base_url('login'); ?>';
-                } else {
-                    alert(response.Pesan);
+        $('#formAuthentication').submit(function(event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('daftar'); ?>',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.Status === 'success') {
+                        alert(response.Pesan);
+                        window.location.href = '<?php echo base_url('login'); ?>';
+                    } else {
+                        alert(response.Pesan);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
                 }
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
-            }
+            });
         });
     });
-});
 </script>
+
 </html>

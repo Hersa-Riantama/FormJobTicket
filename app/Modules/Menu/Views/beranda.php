@@ -473,7 +473,7 @@
           </button>
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link fw-medium active" aria-current="page" href="http://localhost:8080/api/beranda">Home</a>
+              <a class="nav-link fw-medium active" aria-current="page" href="http://localhost:8080/api/beranda">Beranda</a>
             </li>
             <!-- <li class=" nav-item">
               <a class="nav-link fw-medium" href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/front-pages/landing-page.html#landingFeatures">Features</a>
@@ -694,7 +694,7 @@
 
           <!-- navbar button: Start -->
           <li>
-            <a href="http://localhost:8080/api/login" class="btn btn-primary" target="_blank"><span class="tf-icons bx bx-log-in-circle scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">Login/Register</span></a>
+            <a href="http://localhost:8080/api/login" class="btn btn-primary"><span class=" tf-icons bx bx-log-in-circle scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">Login/Register</span></a>
           </li>
           <!-- navbar button: End -->
         </ul>
