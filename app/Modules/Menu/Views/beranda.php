@@ -711,7 +711,7 @@
   <div data-bs-spy="scroll" class="scrollspy-example">
     <!-- Hero: Start -->
     <section id="hero-animation">
-      <div id="landingHero" class="section-py landing-hero position-relative min-vh-100">
+      <div id="landingHero" class="section-py landing-hero position-relative vh-100">
         <img src="../../assets/img/front-pages/backgrounds/hero-bg.png" alt="hero background" class="position-absolute top-0 start-50 translate-middle-x object-fit-cover w-100 h-100" data-speed="1">
         <div class="container">
           <div class="hero-text-box text-center position-relative">
@@ -722,9 +722,7 @@
               Suspendisse condimentum quam diam, sed posuere purus pulvinar ac.
               Vestibulum sollicitudin tempor ex sed tincidunt. Maecenas dignissim
               condimentum feugiat. Nunc nec turpis orci. Proin gravida tellus sit amet
-              suscipit viverra. Nam dapibus purus vitae urna finibus, nec porta dolor luctus.
-              Morbi tellus dolor, semper vitae lacus sit amet, venenatis mollis lorem. Etiam id
-              eros nisi. Cras ut massa dui.
+              suscipit viverra.
               <!-- Production-ready &amp; easy to use Admin Template<br class="d-none d-lg-block">
               for Reliability and Customizability. -->
             </h2>
