@@ -425,7 +425,7 @@
             <i class="tf-icons bx bx-menu bx-lg align-middle text-heading fw-medium"></i>
           </button>
           <!-- Mobile menu toggle: End-->
-          <a href="https://localhost:8080/api/beranda" class="app-brand-link">
+          <a href="http://localhost:8080/api/beranda" class="app-brand-link">
             <span class="app-brand-logo demo">
 
               <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
