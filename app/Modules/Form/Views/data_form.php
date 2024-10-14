@@ -70,7 +70,6 @@
             url: 'http://localhost:8080/api/listform',
             dataType: 'json',
             success: function(data) {
-                console.log(data);
                 // Call API to get categories and books
                 $.when(
                     $.ajax({ url: 'http://localhost:8080/api/kategori', dataType: 'json' }),
@@ -79,8 +78,12 @@
                     var kategoriMap = {};
                     var bukuMap = {};
 
+                    // Access the arrays inside kategoriResponse and bukuResponse using their keys
+                    var kategoriData = kategoriResponse[0].kategori || []; // Access the 'kategori' array
+                    var bukuData = bukuResponse[0].buku || []; // Access the 'buku' array
+
                     // Map kategori by id
-                    $.each(kategoriResponse[0], function(key, kategori) {
+                    $.each(kategoriData, function(key, kategori) {
                         if (kategori.id_kategori && kategori.nama_kategori) {
                             kategoriMap[kategori.id_kategori] = kategori.nama_kategori;
                         } else {
@@ -89,9 +92,7 @@
                     });
 
                     // Map buku by id
-                    $.each(bukuResponse[0], function(key, buku) {
-                        console.log('kategori item',kategori);
-                        // Check if id_buku and judul_buku exist in the response
+                    $.each(bukuData, function(key, buku) {
                         if (buku.id_buku && buku.judul_buku) {
                             bukuMap[buku.id_buku] = buku.judul_buku;
                         } else {
@@ -101,8 +102,13 @@
 
                     var formData = '';
                     $.each(data.tiket, function(key, value) {
+                        // Try to find the matching kategori and buku
                         var nama_kategori = kategoriMap[value.id_kategori] || 'Unknown Kategori';
                         var judul_buku = bukuMap[value.id_buku] || 'Unknown Buku';
+
+                        // Log the id_kategori and id_buku to check mapping
+                        console.log('Mapping kategori:', value.id_kategori, '->', nama_kategori);
+                        console.log('Mapping buku:', value.id_buku, '->', judul_buku);
 
                         formData += '<tr>';
                         formData += '<td>' + value.kode_form + '</td>';
@@ -126,6 +132,8 @@
                     });
 
                     $('#formData').html(formData);
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error fetching kategori or buku:', textStatus, errorThrown);
                 });
             },
             error: function(xhr, status, error) {
@@ -133,6 +141,7 @@
                 alert('Failed to fetch data from API.');
             }
         });
+
     }
 
  </script>
