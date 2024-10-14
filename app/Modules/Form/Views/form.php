@@ -59,14 +59,14 @@
                                             <div class="col mt-4">
                                                 <div class="row">
                                                     <div class="form-check my-0" style="font-size:0.6rem;">
-                                                        <input class="form-check-input" type="checkbox" value="22" name="id_kategori[]" id="kategori22" style="border: 1px solid pink;" />
-                                                        <label class="form-check-label text-primary" for="kategori22"> <i>DUMMY</i> </label>
+                                                        <input class="form-check-input" type="checkbox" value="12" name="id_kategori[]" id="kategori12" style="border: 1px solid pink;" />
+                                                        <label class="form-check-label text-primary" for="kategori12"> <i>DUMMY</i> </label>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-check my-0" style="font-size:0.6rem;">
-                                                        <input class="form-check-input" type="checkbox" value="23" name="id_kategori[]" id="kategori23" style="border: 1px solid pink;" />
-                                                        <label class="form-check-label text-primary" for="kategori23"> KONTEN TERSEDIA </label>
+                                                        <input class="form-check-input" type="checkbox" value="13" name="id_kategori[]" id="kategori13" style="border: 1px solid pink;" />
+                                                        <label class="form-check-label text-primary" for="kategori13"> KONTEN TERSEDIA </label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -254,15 +254,15 @@
 
                                         <h6 class="text-left text-primary mt-4 mb-0" style="font-weight: bold;">Kelengkapan file konten*</h6>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="Penyerahan Tahap 1" name="stats_kelengkapan[]" id="stats_kelengkapan1" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Tahap 1" name="stats_kelengkapan[]" id="stats_kelengkapan1" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="stats_kelengkapan1"> Penyerahan Tahap 1 </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="Penyerahan Tahap 2" name="stats_kelengkapan[]" id="stats_kelengkapan2" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Tahap 2" name="stats_kelengkapan[]" id="stats_kelengkapan2" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="stats_kelengkapan2"> Penyerahan Tahap 2 </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="Penyerahan Tahap 3" name="stats_kelengkapan[]" id="stats_kelengkapan3" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Tahap 3" name="stats_kelengkapan[]" id="stats_kelengkapan3" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="stats_kelengkapan3"> Penyerahan Tahap 3 </label>
                                         </div>
                                         <p class="text mt-3 mb-0" style="font-size:x-small;">
