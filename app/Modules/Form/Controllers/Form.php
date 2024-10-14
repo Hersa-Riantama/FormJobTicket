@@ -129,20 +129,23 @@ class Form extends BaseController
 
     public function form()
     {
-        $authModel = new AuthModel();
-
+        $AuthModel = new AuthModel();
         // Ambil data user berdasarkan ID dari sesi
         $userId = session()->get('id_user');
-        $userData = $authModel->find($userId);
+        $userData = $AuthModel->find($userId);
         $data = [
             'judul' => 'Form QR Code',
-            'user' => $userData,
+            'userData' => $userData,
         ];
         return view($this->folder_directory . 'form', $data);
     }
     public function data_form()
     {
         $model = new FormModel();
+        $AuthModel = new AuthModel();
+        // Ambil data user berdasarkan ID dari sesi
+        $userId = session()->get('id_user');
+        $userData = $AuthModel->find($userId);
         $data = $model->getTiket();
         if ($this->request->isAJAX()) {
             return $this->response->setJSON(['tiket' => $data]);
@@ -150,6 +153,7 @@ class Form extends BaseController
         $Tdata = [
             'tiket' => $data,
             'judul' => 'Kelola Tiket',
+            'userData' => $userData,
         ];
         return view($this->folder_directory . 'data_form', $Tdata);
     }

@@ -253,8 +253,8 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <span class="fw-medium d-block">John Doe</span>
-                                                <small class="text-muted">Admin</small>
+                                                <span class="fw-medium d-block"><?= esc($userData['nama']) ?></span>
+                                                <small class="text-muted"><?= esc($userData['level_user']) ?></small>
                                             </div>
                                         </div>
                                     </a>

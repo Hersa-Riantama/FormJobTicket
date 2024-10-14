@@ -108,7 +108,7 @@
                                 <div class="mb-3 row">
                                     <label for="pemesan" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">PEMESAN</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" type="text" value="<?= esc($user['nama']) ?>" id="id_user" name="id_user" placeholder="Masukkan Pemesan" style="border: 1px solid black;" />
+                                        <input class="form-control" type="text" value="<?= esc($userData['nama']) ?>" id="id_user" name="id_user" placeholder="Masukkan Pemesan" style="border: 1px solid black;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -152,7 +152,7 @@
                                 <div class="mb-3 row">
                                     <label for="email" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">Email</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" type="email" value="<?= esc($user['email']) ?>" id="email" name="email" placeholder="Masukkan Email" style="border: 1px solid black;" />
+                                        <input class="form-control" type="email" value="<?= esc($userData['email']) ?>" id="email" name="email" placeholder="Masukkan Email" style="border: 1px solid black;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
