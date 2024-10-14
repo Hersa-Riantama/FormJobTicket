@@ -90,7 +90,7 @@
                                             <label class="form-check-label text-primary" for="kategori10"> <i>Game</i> Edukasi </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="9" name="id_kategori[]" id="kategori11" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="11" name="id_kategori[]" id="kategori11" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori11"> Lainnya </label>
                                         </div>
                                     </div>
@@ -200,33 +200,33 @@
                                     <div class="col-md px-3">
                                         <!-- <small class="text-light fw-medium">Checkboxes</small> -->
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="12" name="id_kategori[]" id="kategori12" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="12" name="kelengkapan[]" id="kategori12" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori12"> Sudah diperiksa <i>pemesan</i> </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="13" name="id_kategori[]" id="kategori13" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="13" name="kelengkapan[]" id="kategori13" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori13"> Sudah di-<i>approve </i>atasan </label>
                                         </div>
 
                                         <h6 class="text-left text-primary mt-4 mb-0" style="font-weight: bold;">Kelengkapan file yang di-<i>upload</i>*</h6>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="14" name="id_kategori[]" id="kategori14" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="14" name="kelengkapan[]" id="kategori14" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori14"> Video Mp4 </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="15" name="id_kategori[]" id="kategori15" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="15" name="kelengkapan[]" id="kategori15" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori15"> Audio Mp3 </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="16" name="id_kategori[]" id="kategori16" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="16" name="kelengkapan[]" id="kategori16" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori16"> PDF/RAR </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="17" name="id_kategori[]" id="kategori17" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="17" name="kelengkapan[]" id="kategori17" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori17"> Fla/xfl (APK) </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="18" name="id_kategori[]" id="kategori18" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="18" name="kelengkapan[]" id="kategori18" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori18"> Gambar/Foto/Ilustrasi </label>
                                         </div>
                                         <p class="text mt-3 mb-0" style="font-size:x-small;">
@@ -236,16 +236,16 @@
 
                                         <h6 class="text-left text-primary mt-4 mb-0" style="font-weight: bold;">Kelengkapan file konten*</h6>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="19" name="id_kategori[]" id="kategori19" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary" for="kategori19"> Penyerahan Tahap 1 </label>
+                                            <input class="form-check-input" type="checkbox" value="stats_kelengkapan1" name="stats_kelengkapan[]" id="stats_kelengkapan1" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary" for="stats_kelengkapan1"> Penyerahan Tahap 1 </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="20" name="id_kategori[]" id="kategori20" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary" for="kategori20"> Penyerahan Tahap 2 </label>
+                                            <input class="form-check-input" type="checkbox" value="stats_kelengkapan2" name="stats_kelengkapan[]" id="stats_kelengkapan2" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary" for="stats_kelengkapan2"> Penyerahan Tahap 2 </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="21" name="id_kategori[]" id="kategori21" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary" for="kategori21"> Penyerahan Tahap 3 </label>
+                                            <input class="form-check-input" type="checkbox" value="stats_kelengkapan3" name="stats_kelengkapan[]" id="stats_kelengkapan3" style="border: 1px solid pink;" />
+                                            <label class="form-check-label text-primary" for="stats_kelengkapan3"> Penyerahan Tahap 3 </label>
                                         </div>
                                         <p class="text mt-3 mb-0" style="font-size:x-small;">
                                             *Konten <i>QR Code</i> harus dilengkapi maksimal satu
@@ -485,6 +485,9 @@
                 selectedKategoris.push($(this).val());
             });
             // Add the selected kelengkapan to FormData
+            $("input[name='kelengkapan[]']:checked").each(function() {
+                selectedkelengkapans.push($(this).val());
+            });
             $("input[name='kelengkapan[]']:checked").each(function() {
                 selectedkelengkapans.push($(this).val());
             });
