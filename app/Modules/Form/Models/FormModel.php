@@ -10,8 +10,8 @@ class FormModel extends Model
     protected $primaryKey       = 'id_tiket';
     protected $useAutoIncrement = true;
     protected $allowedFields    = ['kode_form','id_kategori',
-                                    'tgl_order','id_user',
-                                    'nomor_job','id_buku'];
+                                    'tgl_selesai','id_user',
+                                    'nomor_job','id_buku','jml_qrcode'];
 
     // protected bool $allowEmptyInserts = false;
     // protected bool $updateOnlyChanged = true;
@@ -30,10 +30,10 @@ class FormModel extends Model
     {
         return [
             'id_kategori' =>  'required',
-            'tgl_order' =>  'required',
             'id_user' =>  'required',
             'nomor_job' =>  'required',
             'id_buku' =>  'required',
+            'jml_qrcode' =>  'required',
         ];
     }
 

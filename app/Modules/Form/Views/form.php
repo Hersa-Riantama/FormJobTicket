@@ -164,7 +164,7 @@
                                 <div class="mb-3 row">
                                     <label for="jml_qr" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">Jumlah <i>QR Code</i></label>
                                     <div class="col-md-9">
-                                        <input class="form-control" type="text" value="" id="jml_qr" name="jml_qr" placeholder="Masukkan Jumlah QR Code" style="border: 1px solid black;" />
+                                        <input class="form-control" type="text" value="" id="jml_qrcode" name="jml_qrcode" placeholder="Masukkan Jumlah QR Code" style="border: 1px solid black;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -228,23 +228,23 @@
 
                                         <h6 class="text-left text-primary mt-4 mb-0" style="font-weight: bold;">Kelengkapan file yang di-<i>upload</i>*</h6>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="14" name="kelengkapan[]" id="kategori14" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Video Mp4" name="kelengkapan[]" id="kategori14" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori14"> Video Mp4 </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="15" name="kelengkapan[]" id="kategori15" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Audio Mp3" name="kelengkapan[]" id="kategori15" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori15"> Audio Mp3 </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="16" name="kelengkapan[]" id="kategori16" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="PDF/RAR" name="kelengkapan[]" id="kategori16" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori16"> PDF/RAR </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="17" name="kelengkapan[]" id="kategori17" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Fla/xfl (APK)" name="kelengkapan[]" id="kategori17" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori17"> Fla/xfl (APK) </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="18" name="kelengkapan[]" id="kategori18" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Gambar/Foto/Ilustrasi" name="kelengkapan[]" id="kategori18" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori18"> Gambar/Foto/Ilustrasi </label>
                                         </div>
                                         <p class="text mt-3 mb-0" style="font-size:x-small;">
@@ -499,6 +499,8 @@
             // Collect selected checkboxes for kategori
             var selectedKategoris = [];
             var selectedkelengkapans = [];
+            var selectedStatsKelengkapan = [];
+
             $('input[type="checkbox"]:checked').each(function() {
                 selectedKategoris.push($(this).val());
             });
@@ -506,11 +508,11 @@
             $("input[name='kelengkapan[]']:checked").each(function() {
                 selectedkelengkapans.push($(this).val());
             });
-            $("input[name='kelengkapan[]']:checked").each(function() {
-                selectedkelengkapans.push($(this).val());
+            $("input[name='stats_kelengkapan[]']:checked").each(function() {
+                selectedStatsKelengkapan.push($(this).val());
             });
 
-            var formData = $(this).serialize() + selectedkelengkapans.join(',') + selectedKategoris.join(',');
+            var formData = $(this).serialize()+ selectedStatsKelengkapan.join(',') + selectedkelengkapans.join(',') + selectedKategoris.join(',');
             var formUrl = 'http://localhost:8080/api/form'; // Ganti '/form' dengan URL endpoint yang sesuai
 
             $.ajax({

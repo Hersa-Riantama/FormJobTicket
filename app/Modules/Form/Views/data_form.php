@@ -16,7 +16,6 @@
                         <tr>
                             <th>Kode Form</th>
                             <th>Kategori</th>
-                            <th>Tanggal Order</th>
                             <th>User</th>
                             <th>Nomor Job</th>
                             <th>Buku</th>
@@ -113,7 +112,6 @@
                         formData += '<tr>';
                         formData += '<td>' + value.kode_form + '</td>';
                         formData += '<td>' + nama_kategori + '</td>';
-                        formData += '<td>' + value.tgl_order + '</td>';
                         formData += '<td>' + value.id_user + '</td>';
                         formData += '<td>' + value.nomor_job + '</td>';
                         formData += '<td>' + judul_buku + '</td>';

@@ -67,11 +67,11 @@ class Form extends BaseController
                 return $this->response->setJSON(['pesan' => 'Invalid id_kategori value']);
             }
         }
-        $tgl_order = date('y-m-d', strtotime($this->request->getVar('tgl_order')));
+        // $tgl_order = date('y-m-d', strtotime($this->request->getVar('tgl_selesai')));
         $this->model->insert([
             'id_kategori' => esc($id_kategori),
             'id_buku' => esc($id_buku),
-            'tgl_order' => esc($tgl_order),
+            'jml_qrcode' => esc($this->request->getVar('jml_qrcode')),
             'id_user' => esc($this->request->getVar('id_user')),
             'nomor_job' => esc($this->request->getVar('nomor_job')),
 
