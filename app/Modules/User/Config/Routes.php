@@ -18,7 +18,7 @@ $routes->group(
 );
 
 $routes->group(
-    '',
+    'api',
     ['namespace' => '\Modules\User\Controllers'],
     function ($routes) {
         $routes->get('user', 'User::tampil');
