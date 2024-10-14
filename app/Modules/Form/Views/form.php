@@ -254,15 +254,15 @@
 
                                         <h6 class="text-left text-primary mt-4 mb-0" style="font-weight: bold;">Kelengkapan file konten*</h6>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="stats_kelengkapan1" name="stats_kelengkapan[]" id="stats_kelengkapan1" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Penyerahan Tahap 1" name="stats_kelengkapan[]" id="stats_kelengkapan1" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="stats_kelengkapan1"> Penyerahan Tahap 1 </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="stats_kelengkapan2" name="stats_kelengkapan[]" id="stats_kelengkapan2" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Penyerahan Tahap 2" name="stats_kelengkapan[]" id="stats_kelengkapan2" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="stats_kelengkapan2"> Penyerahan Tahap 2 </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="stats_kelengkapan3" name="stats_kelengkapan[]" id="stats_kelengkapan3" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Penyerahan Tahap 3" name="stats_kelengkapan[]" id="stats_kelengkapan3" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="stats_kelengkapan3"> Penyerahan Tahap 3 </label>
                                         </div>
                                         <p class="text mt-3 mb-0" style="font-size:x-small;">
@@ -496,29 +496,32 @@
         $('#formTiket').submit(function(event) {
             event.preventDefault();
 
+            // Create a new FormData object to handle the form submission
+            var formData = new FormData(this);
+
             // Collect selected checkboxes for kategori
-            var selectedKategoris = [];
-            var selectedkelengkapans = [];
-            var selectedStatsKelengkapan = [];
-
-            $('input[type="checkbox"]:checked').each(function() {
-                selectedKategoris.push($(this).val());
-            });
-            // Add the selected kelengkapan to FormData
-            $("input[name='kelengkapan[]']:checked").each(function() {
-                selectedkelengkapans.push($(this).val());
-            });
-            $("input[name='stats_kelengkapan[]']:checked").each(function() {
-                selectedStatsKelengkapan.push($(this).val());
+            $('input[name="id_kategori[]"]:checked').each(function() {
+                formData.append('id_kategori[]', $(this).val());
             });
 
-            var formData = $(this).serialize()+ selectedStatsKelengkapan.join(',') + selectedkelengkapans.join(',') + selectedKategoris.join(',');
+            // Collect selected checkboxes for kelengkapan
+            $('input[name="kelengkapan[]"]:checked').each(function() {
+                formData.append('kelengkapan[]', $(this).val());
+            });
+
+            // Collect selected checkboxes for stats_kelengkapan
+            $('input[name="stats_kelengkapan[]"]:checked').each(function() {
+                formData.append('stats_kelengkapan[]', $(this).val());
+            });
+
             var formUrl = 'http://localhost:8080/api/form'; // Ganti '/form' dengan URL endpoint yang sesuai
 
             $.ajax({
                 type: 'POST',
                 url: formUrl, // Tidak lagi menggunakan PHP echo di sini
                 data: formData,
+                processData: false,
+                contentType: false,
                 dataType: 'json',
                 success: function(response) {
                     console.log('Respons dari Server:', response); // Debugging
