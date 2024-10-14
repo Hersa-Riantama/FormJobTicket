@@ -8,25 +8,25 @@
 
             <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
                 <h4 class="py-3 mb-4"><span class="text-muted fw-light">Form /</span> Form QR Code</h4>
-                <div class="row">
-                    <div class="col-xl-9 mb-5">
+                <div class="row justify-content-between">
+                    <div class="col-xl-5 mb-5">
                         <h1 class="card-header mb-2 display-1">FORM <br>QR CODE</h1>
                         <!-- <img src="<//?= base_url('upload/' . $file_name) ?>" alt=""> -->
                     </div>
                     <div class="col-xl-3 mb-5">
-                        <h3 class="card-header text-center mb-2">Platform Digital</h3>
+                        <h4 class="card-header text-center mb-2">PLATFORM DIGITAL</h4>
                         <div class="card border border-dark mx-4">
                             <div class="card-body p-2">
-                                <div class="row">
-                                    <div class="col-xl">
+                                <div class="row justify-content-between">
+                                    <div class="col-xl-7">
                                         <div class="card border" style="background-color:pink;">
                                             <h3 class="text-center rounded mb-0 p-2" style="background-color:lightpink;"><i>Form</i></h3>
                                             <div class="card-body m-0 p-2">
-                                                <h1 class="text-center mb-0 display-1">C</h1>
+                                                <h1 class="text-center mb-0 display-1" style="font-size: 4rem;">C</h1>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xl">
+                                    <div class="col-xl-5">
                                         <h1 class="text-center display-1 mb-0 mt-1" style="font-size: 7rem;">1</h1>
                                     </div>
                                 </div>
@@ -49,11 +49,29 @@
                                 <div class="row">
                                     <div class="col-md px-3">
                                         <!-- <small class="text-light fw-medium">Checkboxes</small> -->
-                                        <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="1" name="id_kategori[]" id="kategori1" style="border: 1px solid pink;" />
-                                            <label class="form-check-label text-primary" for="kategori1"> <i>QR CODE</i> </label>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-check mt-4">
+                                                    <input class="form-check-input" type="checkbox" value="1" name="id_kategori[]" id="kategori1" style="border: 1px solid pink;" />
+                                                    <label class="form-check-label text-primary" for="kategori1"> <i>QR CODE</i> </label>
+                                                </div>
+                                            </div>
+                                            <div class="col mt-4">
+                                                <div class="row">
+                                                    <div class="form-check my-0" style="font-size:0.6rem;">
+                                                        <input class="form-check-input" type="checkbox" value="22" name="id_kategori[]" id="kategori22" style="border: 1px solid pink;" />
+                                                        <label class="form-check-label text-primary" for="kategori22"> <i>DUMMY</i> </label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-check my-0" style="font-size:0.6rem;">
+                                                        <input class="form-check-input" type="checkbox" value="23" name="id_kategori[]" id="kategori23" style="border: 1px solid pink;" />
+                                                        <label class="form-check-label text-primary" for="kategori23"> KONTEN TERSEDIA </label>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-check mt-4">
+                                        <div class="form-check mt-0">
                                             <input class="form-check-input" type="checkbox" value="2" name="id_kategori[]" id="kategori2" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori2"> <i>Link QR Code</i> </label>
                                         </div>
