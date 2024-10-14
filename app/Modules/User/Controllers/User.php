@@ -4,6 +4,7 @@ namespace Modules\User\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
+use Modules\Auth\Models\AuthModel;
 use Modules\User\Models\UserModel;
 
 class User extends BaseController
@@ -11,11 +12,13 @@ class User extends BaseController
     use ResponseTrait;
     protected $folder_directory = "Modules\\User\\Views\\";
     protected $model;
+    protected $AuthModel;
 
     public function __construct()
     {
         // Load PegawaiModel untuk digunakan dalam method controller
         $this->model = new UserModel();
+        $this->AuthModel = new AuthModel();
     }
 
     public function index()
@@ -24,6 +27,10 @@ class User extends BaseController
     }
     public function tampil()
     {
+        $AuthModel = new AuthModel();
+        // Ambil data user berdasarkan ID dari sesi
+        $userId = session()->get('id_user');
+        $userData = $AuthModel->find($userId);
         $model = new UserModel();
         $data = $model->getUser();
         if ($this->request->isAJAX()) {
@@ -32,6 +39,7 @@ class User extends BaseController
         $Udata = [
             'user' => $data,
             'judul' => 'Kelola User',
+            'userData' => $userData,
         ];
         return view($this->folder_directory . 'data_user', $Udata);
     }

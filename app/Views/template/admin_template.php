@@ -253,8 +253,8 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <span class="fw-medium d-block">John Doe</span>
-                                                <small class="text-muted">Admin</small>
+                                                <span class="fw-medium d-block"><?= esc($userData['nama']) ?></span>
+                                                <small class="text-muted"><?= esc($userData['level_user']) ?></small>
                                             </div>
                                         </div>
                                     </a>
@@ -287,7 +287,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="javascript:void(0);">
+                                    <a class="dropdown-item" href="<?= base_url('/logout'); ?>">
                                         <i class="bx bx-power-off me-2"></i>
                                         <span class="align-middle">Log Out</span>
                                     </a>

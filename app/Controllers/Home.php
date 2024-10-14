@@ -10,4 +10,11 @@ class Home extends BaseController
     {
         return view('index', $this->data);
     }
+
+    public function logout()
+    {
+        $session = session();
+        $session->destroy();
+        return redirect()->to('/');
+    }
 }

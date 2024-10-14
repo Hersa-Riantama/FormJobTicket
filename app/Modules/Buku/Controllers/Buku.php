@@ -6,17 +6,20 @@ use App\Modules\Buku\Models\BukuModel;
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\CLI\Console;
+use Modules\Auth\Models\AuthModel;
 
 class Buku extends BaseController
 {
     use ResponseTrait;
     protected $folder_directory = "Modules\\Buku\\Views\\";
     protected $model;
+    protected $AuthModel;
 
     public function __construct()
     {
         // Load PegawaiModel untuk digunakan dalam method controller
-        $this->model = new BukuModel;
+        $this->model = new BukuModel();
+        $this->AuthModel = new AuthModel();
     }
     public function show($id_buku = null)
     {
@@ -38,7 +41,11 @@ class Buku extends BaseController
         //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
         // }
         $model = new BukuModel();
+        $AuthModel = new AuthModel();
         $data = $model->getBuku();
+        // Ambil data user berdasarkan ID dari sesi
+        $userId = session()->get('id_user');
+        $userData = $AuthModel->find($userId);
         if ($this->request->isAJAX()) {
             // Respond with JSON for AJAX requests (e.g., for your DataTables or API use)
             return $this->respond(['buku' => $data]);
@@ -46,6 +53,7 @@ class Buku extends BaseController
         $Vdata = [
             'buku' => $data,
             'judul' => 'Kelola Buku',
+            'userData' => $userData,
         ];
         return view($this->folder_directory . 'data_buku', $Vdata);
     }
@@ -126,8 +134,13 @@ class Buku extends BaseController
     }
     public function data_buku()
     {
+        $AuthModel = new AuthModel();
+        // Ambil data user berdasarkan ID dari sesi
+        $userId = session()->get('id_user');
+        $userData = $AuthModel->find($userId);
         $data = [
             'judul' => 'Kelola Buku',
+            'userData' => $userData,
         ];
         return view($this->folder_directory . 'data_buku', $data);
     }
