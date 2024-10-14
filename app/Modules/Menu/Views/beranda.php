@@ -473,9 +473,9 @@
           </button>
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link fw-medium active" aria-current="page" href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/front-pages/landing-page.html#landingHero">Home</a>
+              <a class="nav-link fw-medium active" aria-current="page" href="http://localhost:8080/api/beranda">Home</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class=" nav-item">
               <a class="nav-link fw-medium" href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/front-pages/landing-page.html#landingFeatures">Features</a>
             </li>
             <li class="nav-item">
@@ -659,7 +659,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link fw-medium" href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/index.html" target="_blank">Admin</a>
-            </li>
+            </li> -->
           </ul>
         </div>
         <div class="landing-menu-overlay d-lg-none"></div>
@@ -668,7 +668,7 @@
         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
           <!-- Style Switcher -->
-          <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-1">
+          <!-- <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-1">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
               <i class="bx bx-lg bx-sun"></i>
             </a>
@@ -689,7 +689,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <!-- / Style Switcher-->
 
           <!-- navbar button: Start -->
@@ -715,33 +715,41 @@
         <img src="../../assets/img/front-pages/backgrounds/hero-bg.png" alt="hero background" class="position-absolute top-0 start-50 translate-middle-x object-fit-cover w-100 h-100" data-speed="1">
         <div class="container">
           <div class="hero-text-box text-center position-relative">
-            <h1 class="text-primary hero-title display-6 fw-extrabold">One dashboard to manage all your businesses</h1>
+            <h1 class="text-primary hero-title display-6 fw-extrabold">Form QR Code</h1>
             <h2 class="hero-sub-title h6 mb-6">
-              Production-ready &amp; easy to use Admin Template<br class="d-none d-lg-block">
-              for Reliability and Customizability.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ullamcorper
+              odio commodo mollis aliquet. Quisque porttitor placerat est, non congue ante.
+              Suspendisse condimentum quam diam, sed posuere purus pulvinar ac.
+              Vestibulum sollicitudin tempor ex sed tincidunt. Maecenas dignissim
+              condimentum feugiat. Nunc nec turpis orci. Proin gravida tellus sit amet
+              suscipit viverra. Nam dapibus purus vitae urna finibus, nec porta dolor luctus.
+              Morbi tellus dolor, semper vitae lacus sit amet, venenatis mollis lorem. Etiam id
+              eros nisi. Cras ut massa dui.
+              <!-- Production-ready &amp; easy to use Admin Template<br class="d-none d-lg-block">
+              for Reliability and Customizability. -->
             </h2>
-            <div class="landing-hero-btn d-inline-block position-relative">
+            <!-- <div class="landing-hero-btn d-inline-block position-relative">
               <span class="hero-btn-item position-absolute d-none d-md-flex fw-medium">Join community
                 <img src="../../assets/img/front-pages/icons/Join-community-arrow.png" alt="Join community arrow" class="scaleX-n1-rtl"></span>
               <a href="#landingPricing" class="btn btn-primary btn-lg">Get early access</a>
-            </div>
+            </div> -->
           </div>
-          <div id="heroDashboardAnimation" class="hero-animation-img">
+          <!-- <div id="heroDashboardAnimation" class="hero-animation-img">
             <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-ecommerce-dashboard.html" target="_blank">
               <div id="heroAnimationImg" class="position-relative hero-dashboard-img" style="transform: perspective(1200px) rotateX(-0.03deg) rotateY(-0.82deg) scale3d(1, 1, 1);">
                 <img src="../../assets/img/front-pages/landing-page/hero-dashboard-light.png" alt="hero dashboard" class="animation-img" data-app-light-img="front-pages/landing-page/hero-dashboard-light.png" data-app-dark-img="front-pages/landing-page/hero-dashboard-dark.png">
                 <img src="../../assets/img/front-pages/landing-page/hero-elements-light.png" alt="hero elements" class="position-absolute hero-elements-img animation-img top-0 start-0" data-app-light-img="front-pages/landing-page/hero-elements-light.png" data-app-dark-img="front-pages/landing-page/hero-elements-dark.png" style="transform: translateZ(1rem);">
               </div>
             </a>
-          </div>
+          </div> -->
         </div>
       </div>
-      <div class="landing-hero-blank"></div>
+      <!-- <div class="landing-hero-blank"></div> -->
     </section>
     <!-- Hero: End -->
 
     <!-- Useful features: Start -->
-    <section id="landingFeatures" class="section-py landing-features">
+    <!-- <section id="landingFeatures" class="section-py landing-features">
       <div class="container">
         <div class="text-center mb-4">
           <span class="badge bg-label-primary">Useful Features</span>
@@ -798,13 +806,13 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <!-- Useful features: End -->
 
     <!-- Real customers reviews: Start -->
-    <section id="landingReviews" class="section-py bg-body landing-reviews pb-0">
-      <!-- What people say slider: Start -->
-      <div class="container">
+    <!-- <section id="landingReviews" class="section-py bg-body landing-reviews pb-0"> -->
+    <!-- What people say slider: Start -->
+    <!-- <div class="container">
         <div class="row align-items-center gx-0 gy-4 g-lg-5 mb-5 pb-md-5">
           <div class="col-md-6 col-lg-5 col-xl-3">
             <div class="mb-4">
@@ -1015,11 +1023,11 @@
             </div>
           </div>
         </div>
-      </div>
-      <!-- What people say slider: End -->
-      <hr class="m-0 mt-6 mt-md-12">
-      <!-- Logo slider: Start -->
-      <div class="container">
+      </div> -->
+    <!-- What people say slider: End -->
+    <!-- <hr class="m-0 mt-6 mt-md-12"> -->
+    <!-- Logo slider: Start -->
+    <!-- <div class="container">
         <div class="swiper-logo-carousel pt-8">
           <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden" id="swiper-clients-logos">
             <div class="swiper-wrapper" id="swiper-wrapper-c3319e4db27de5b9" aria-live="off">
@@ -1042,13 +1050,13 @@
             <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
           </div>
         </div>
-      </div>
-      <!-- Logo slider: End -->
-    </section>
+      </div> -->
+    <!-- Logo slider: End -->
+    <!-- </section> -->
     <!-- Real customers reviews: End -->
 
     <!-- Our great team: Start -->
-    <section id="landingTeam" class="section-py landing-team">
+    <!-- <section id="landingTeam" class="section-py landing-team">
       <div class="container">
         <div class="text-center mb-4">
           <span class="badge bg-label-primary">Our Great Team</span>
@@ -1107,11 +1115,11 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <!-- Our great team: End -->
 
     <!-- Pricing plans: Start -->
-    <section id="landingPricing" class="section-py bg-body landing-pricing">
+    <!-- <section id="landingPricing" class="section-py bg-body landing-pricing">
       <div class="container">
         <div class="text-center mb-4">
           <span class="badge bg-label-primary">Pricing Plans</span>
@@ -1139,10 +1147,10 @@
               <span class="fw-medium mt-2 ms-1"> Save 25%</span>
             </div>
           </div>
-        </div>
-        <div class="row g-6 pt-lg-5">
-          <!-- Basic Plan: Start -->
-          <div class="col-xl-4 col-lg-6">
+        </div> -->
+    <!-- <div class="row g-6 pt-lg-5"> -->
+    <!-- Basic Plan: Start -->
+    <!-- <div class="col-xl-4 col-lg-6">
             <div class="card">
               <div class="card-header">
                 <div class="text-center">
@@ -1208,11 +1216,11 @@
                 </div>
               </div>
             </div>
-          </div>
-          <!-- Basic Plan: End -->
+          </div> -->
+    <!-- Basic Plan: End -->
 
-          <!-- Favourite Plan: Start -->
-          <div class="col-xl-4 col-lg-6">
+    <!-- Favourite Plan: Start -->
+    <!-- <div class="col-xl-4 col-lg-6">
             <div class="card border border-primary shadow-xl">
               <div class="card-header">
                 <div class="text-center">
@@ -1278,11 +1286,11 @@
                 </div>
               </div>
             </div>
-          </div>
-          <!-- Favourite Plan: End -->
+          </div> -->
+    <!-- Favourite Plan: End -->
 
-          <!-- Standard Plan: Start -->
-          <div class="col-xl-4 col-lg-6">
+    <!-- Standard Plan: Start -->
+    <!-- <div class="col-xl-4 col-lg-6">
             <div class="card">
               <div class="card-header">
                 <div class="text-center">
@@ -1348,15 +1356,15 @@
                 </div>
               </div>
             </div>
-          </div>
-          <!-- Standard Plan: End -->
-        </div>
-      </div>
-    </section>
+          </div> -->
+    <!-- Standard Plan: End -->
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- </section> -->
     <!-- Pricing plans: End -->
 
     <!-- Fun facts: Start -->
-    <section id="landingFunFacts" class="section-py landing-fun-facts">
+    <!-- <section id="landingFunFacts" class="section-py landing-fun-facts">
       <div class="container">
         <div class="row gy-6">
           <div class="col-sm-6 col-lg-3">
@@ -1409,11 +1417,11 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <!-- Fun facts: End -->
 
     <!-- FAQ: Start -->
-    <section id="landingFAQ" class="section-py bg-body landing-faq">
+    <!-- <section id="landingFAQ" class="section-py bg-body landing-faq">
       <div class="container">
         <div class="text-center mb-4">
           <span class="badge bg-label-primary">FAQ</span>
@@ -1510,11 +1518,11 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <!-- FAQ: End -->
 
     <!-- CTA: Start -->
-    <section id="landingCTA" class="section-py landing-cta position-relative p-lg-0 pb-0">
+    <!-- <section id="landingCTA" class="section-py landing-cta position-relative p-lg-0 pb-0">
       <img src="../../assets/img/front-pages/backgrounds/cta-bg-light.png" class="position-absolute bottom-0 end-0 scaleX-n1-rtl h-100 w-100 z-n1" alt="cta image" data-app-light-img="front-pages/backgrounds/cta-bg-light.png" data-app-dark-img="front-pages/backgrounds/cta-bg-dark.png">
       <div class="container">
         <div class="row align-items-center gy-12">
@@ -1528,11 +1536,11 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <!-- CTA: End -->
 
     <!-- Contact Us: Start -->
-    <section id="landingContact" class="section-py bg-body landing-contact">
+    <!-- <section id="landingContact" class="section-py bg-body landing-contact">
       <div class="container">
         <div class="text-center mb-4">
           <span class="badge bg-label-primary">Contact US</span>
@@ -1605,7 +1613,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <!-- Contact Us: End -->
   </div>
 
@@ -1614,7 +1622,7 @@
 
 
   <!-- Footer: Start -->
-  <footer class="landing-footer bg-body footer-text">
+  <!-- <footer class="landing-footer bg-body footer-text">
     <div class="footer-top position-relative overflow-hidden z-1">
       <img src="../../assets/img/front-pages/backgrounds/footer-bg.png" alt="footer bg" class="footer-bg banner-bg-img z-n1">
       <div class="container">
@@ -1747,6 +1755,18 @@
         </div>
       </div>
     </div>
+  </footer> -->
+  <footer class="content-footer footer bg-footer-theme">
+    <div class="container-xxl d-flex flex-wrap justify-content-center py-2 flex-md-row flex-column">
+      <div class="mb-2 mb-md-0">
+        ©
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        , made with ❤️ by
+        <a href="https://erlanggaonline.com/" target="_blank" class="footer-link fw-medium">ErlanggaOnline</a>
+      </div>
+    </div>
   </footer>
   <!-- Footer: End -->
 
@@ -1784,7 +1804,7 @@
   <script src="../../assets/js/front-page-landing.js"></script>
 
 
-  <div id="template-customizer" class="bg-card" style="visibility: visible"> <a href="javascript:void(0)" class="template-customizer-open-btn" tabindex="-1"></a>
+  <!-- <div id="template-customizer" class="bg-card" style="visibility: visible"> <a href="javascript:void(0)" class="template-customizer-open-btn" tabindex="-1"></a>
     <div class="p-6 m-0 lh-1 border-bottom template-customizer-header position-relative py-4">
       <h6 class="template-customizer-t-panel_header mb-1">Template Customizer</h6>
       <p class="template-customizer-t-panel_sub_header mb-0 small">Customize and preview in real time</p>
@@ -1862,7 +1882,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <div id="om-nnbrj9dz830tkbesskc9-holder"></div>
 </body>
 

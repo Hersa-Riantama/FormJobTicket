@@ -15,7 +15,6 @@ $routes->group(
         $routes->post('login', 'Auth::Flogin');
         $routes->post('daftar', 'Auth::regis');
         $routes->get('daftar', 'Auth::daftar');
-        $routes->get('user', 'Auth::getUserById');
         $routes->get('logout', 'Auth::logout');
     }
 );
