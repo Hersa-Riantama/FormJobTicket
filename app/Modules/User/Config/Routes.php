@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+// $routes->get('/', 'Home::index');
 
 $routes->group(
     'index',
@@ -18,7 +18,7 @@ $routes->group(
 );
 
 $routes->group(
-    'api',
+    '',
     ['namespace' => '\Modules\User\Controllers'],
     function ($routes) {
         $routes->get('user', 'User::tampil');

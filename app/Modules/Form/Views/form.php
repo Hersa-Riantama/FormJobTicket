@@ -292,8 +292,8 @@
 
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-5" style="border: 1px solid pink;">
-                                                            <div class="card-body p-1 d-flex justify-content-left" id="CurentDate">
-                                                                <p class="text-start text-primary display-inl" style="font-size:xx-small;">tanggal: </p>
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate">
+                                                                <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
                                                             <p class="text-center mb-0 px-1" style="font-size:x-small;">nama</p>
@@ -302,8 +302,8 @@
                                                     </div>
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-5" style="border: 1px solid pink;">
-                                                            <div class="card-body p-1 d-flex justify-content-left" id="CurentDate">
-                                                                <p class="text-start text-primary display-inl" style="font-size:xx-small;">tanggal: </p>
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate">
+                                                                <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
                                                             <p class="text-center mb-0 px-1" style="font-size:x-small;">nama</p>
@@ -341,8 +341,8 @@
 
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-5" style="border: 1px solid pink;">
-                                                            <div class="card-body p-1 d-flex justify-content-left" id="CurentDate">
-                                                                <p class="text-start text-primary display-inl" style="font-size:xx-small;">tanggal: </p>
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate">
+                                                                <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
                                                             <p class="text-center mb-0 px-1" style="font-size:x-small;">nama</p>
@@ -399,8 +399,8 @@
                                                 <div class="row mt-4 mx-0">
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-5" style="border: 1px solid pink;">
-                                                            <div class="card-body p-1 d-flex justify-content-left" id="CurentDate">
-                                                                <p class="text-start text-primary display-inl" style="font-size:xx-small;">tanggal: </p>
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate">
+                                                                <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
                                                             <p class="text-center mb-0 px-1" style="font-size:x-small;">nama</p>
@@ -409,8 +409,8 @@
                                                     </div>
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-5" style="border: 1px solid pink;">
-                                                            <div class="card-body p-1 d-flex justify-content-left" id="CurentDate">
-                                                                <p class="text-start text-primary display-inl" style="font-size:xx-small;">tanggal: </p>
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate">
+                                                                <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
                                                             <p class="text-center mb-0 px-1" style="font-size:x-small;">nama</p>
@@ -428,8 +428,8 @@
                                                 <div class="row mt-4 mx-0">
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-5" style="border: 1px solid pink;">
-                                                            <div class="card-body p-1 d-flex justify-content-left" id="CurentDate">
-                                                                <p class="text-start text-primary display-inl" style="font-size:xx-small;">tanggal: </p>
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate">
+                                                                <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
                                                             <p class="text-center mb-0 px-1" style="font-size:x-small;">nama</p>
