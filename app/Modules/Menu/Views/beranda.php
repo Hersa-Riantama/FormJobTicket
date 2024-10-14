@@ -694,7 +694,7 @@
 
           <!-- navbar button: Start -->
           <li>
-            <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/auth-login-cover.html" class="btn btn-primary" target="_blank"><span class="tf-icons bx bx-log-in-circle scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">Login/Register</span></a>
+            <a href="http://localhost:8080/api/login" class="btn btn-primary" target="_blank"><span class="tf-icons bx bx-log-in-circle scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">Login/Register</span></a>
           </li>
           <!-- navbar button: End -->
         </ul>
@@ -1708,7 +1708,7 @@
                 <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/front-pages/help-center-landing.html" class="footer-link">Help Center</a>
               </li>
               <li>
-                <a href="http://localhost:8008/api/login" target="_blank" class="footer-link">Login/Register</a>
+                <a href="http://localhost:8080/api/login" target="_blank" class="footer-link">Login/Register</a>
               </li>
             </ul>
           </div>
