@@ -254,15 +254,15 @@
 
                                         <h6 class="text-left text-primary mt-4 mb-0" style="font-weight: bold;">Kelengkapan file konten*</h6>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="Tahap 1" name="stats_kelengkapan[]" id="stats_kelengkapan1" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="1" name="stats_kelengkapan[]" id="stats_kelengkapan1" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="stats_kelengkapan1"> Penyerahan Tahap 1 </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="Tahap 2" name="stats_kelengkapan[]" id="stats_kelengkapan2" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="2" name="stats_kelengkapan[]" id="stats_kelengkapan2" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="stats_kelengkapan2"> Penyerahan Tahap 2 </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="Tahap 3" name="stats_kelengkapan[]" id="stats_kelengkapan3" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="3" name="stats_kelengkapan[]" id="stats_kelengkapan3" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="stats_kelengkapan3"> Penyerahan Tahap 3 </label>
                                         </div>
                                         <p class="text mt-3 mb-0" style="font-size:x-small;">

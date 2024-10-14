@@ -72,6 +72,11 @@ class Form extends BaseController
         if (empty($kelengkapans) || !is_array($kelengkapans)) {
             return $this->response->setJSON(['pesan' => 'kelengkapan is required']);
         }
+        foreach ($kelengkapans as $kelengkapan) {
+            if (!is_array($kelengkapan)) {
+                return $this->response->setJSON(['pesan' =>  'Invalid Kelengkapan value'. $kelengkapan]);
+            }
+        }
 
         // Array of status_kelengkapan
         // $tgl_order = date('y-m-d', strtotime($this->request->getVar('tgl_selesai')));
@@ -98,7 +103,6 @@ class Form extends BaseController
         // Insert into tbl_status_kelengkapan (if status is provided)
         $statusKelengkapanModel = new \Modules\Status_Kelengkapan\Models\StatusKelengkapanModel();
         $tahap_kelengkapan = esc($this->request->getVar('tahap_kelengkapan'));
-        // Get selected status_kelengkapan from checkboxes
         $status_kelengkapan_array = $this->request->getVar('status_kelengkapan');
 
         // Insert tahap_kelengkapan and status_kelengkapan if available
@@ -108,7 +112,6 @@ class Form extends BaseController
                 if (!is_numeric($status_kelengkapan)) {
                     continue; // Skip invalid values
                 }
-                
                 // Insert into tbl_status_kelengkapan
                 $statusKelengkapanModel->insert([
                     'id_tiket' => $id_tiket,
