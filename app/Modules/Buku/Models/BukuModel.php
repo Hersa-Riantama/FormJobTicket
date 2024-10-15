@@ -31,7 +31,7 @@ class BukuModel extends Model
     public function validationRules()
     {
         return [
-            'kode_buku' => 'required|min_length[3]',
+            'kode_buku' => 'required|min_length[3]|is_unique[tbl_buku.kode_buku]',
             'judul_buku' => 'required', 
             'pengarang' => 'required',
             'target_terbit' => 'required',
