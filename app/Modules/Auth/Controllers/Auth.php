@@ -155,7 +155,7 @@ class Auth extends BaseController
     {
         $session = session();
         $session->destroy();
-        return redirect()->to('/beranda');
+        return redirect()->to('/');
     }
 
     public function index()

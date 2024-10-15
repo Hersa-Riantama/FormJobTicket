@@ -425,7 +425,7 @@
             <i class="tf-icons bx bx-menu bx-lg align-middle text-heading fw-medium"></i>
           </button>
           <!-- Mobile menu toggle: End-->
-          <a href="http://localhost:8080/beranda" class="app-brand-link">
+          <a href="http://localhost:8080/" class="app-brand-link">
             <span class="app-brand-logo demo">
 
               <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
@@ -473,7 +473,7 @@
           </button>
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link fw-medium active" aria-current="page" href="http://localhost:8080/beranda">Beranda</a>
+              <a class="nav-link fw-medium active" aria-current="page" href="http://localhost:8080/">Beranda</a>
             </li>
             <!-- <li class=" nav-item">
               <a class="nav-link fw-medium" href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/front-pages/landing-page.html#landingFeatures">Features</a>
