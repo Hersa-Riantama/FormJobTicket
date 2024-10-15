@@ -57,7 +57,11 @@ class Form extends BaseController
         $id_user = session()->get('id_user');
 
         $id_kategori_array = $this->request->getVar('id_kategori');
-        $id_kategori_json = json_encode($id_kategori_array);
+        // Hapus duplikasi dari array id_kategori
+        $id_kategori_unique = array_unique($id_kategori_array);
+
+        // Konversi array unik menjadi JSON
+        $id_kategori_json = json_encode($id_kategori_unique);
         if (json_last_error() === JSON_ERROR_NONE) {
             // JSON valid, lanjutkan insert ke database
             $this->model->insert([

@@ -113,19 +113,41 @@
 
                     var formData = '';
                     $.each(data.tiket, function(key, value) {
-                        // Try to find the matching kategori and buku
-                        var nama_kategori = kategoriMap[value.id_kategori] || 'Unknown Kategori';
+                        // Parse JSON for id_kategori
+                        var id_kategori_array = value.id_kategori; // Ambil data id_kategori
+
+                        // Pastikan data sudah dalam bentuk array
+                        if (typeof id_kategori_array === 'string') {
+                            try {
+                                id_kategori_array = JSON.parse(id_kategori_array); // Parse string menjadi array
+                            } catch (e) {
+                                console.error('Error parsing id_kategori_array:', e);
+                                id_kategori_array = []; // Set default kosong jika parsing gagal
+                            }
+                        }
+
+                        //Sekarang cek apakah id_kategori_array adalah array
+                        if (Array.isArray(id_kategori_array)) {
+                            var kategori_names = id_kategori_array.map(function(id_kategori) {
+                                return kategoriMap[id_kategori] || 'Unknown Kategori';
+                            }).join(', ');
+                        } else {
+                            console.error('id_kategori_array is not an array:', id_kategori_array);
+                            var kategori_names = 'Unknown Kategori';
+                        }
+
+                        // var nama_kategori = kategoriMap[value.id_kategori] || 'Unknown Kategori';
                         var judul_buku = bukuMap[value.id_buku] || 'Unknown Buku';
                         var nama =userMap[value.id_user] || 'Unknown User';
 
                         // Log the id_kategori and id_buku to check mapping
-                        console.log('Mapping kategori:', value.id_kategori, '->', nama_kategori);
+                        console.log('Mapping kategori:', value.id_kategori, '->', kategori_names);
                         console.log('Mapping buku:', value.id_buku, '->', judul_buku);
                         console.log('Mapping user:', value.id_user, '->', nama);
 
                         formData += '<tr>';
                         formData += '<td>' + value.kode_form + '</td>';
-                        formData += '<td>' + nama_kategori + '</td>';
+                        formData += '<td>' + kategori_names + '</td>';
                         formData += '<td>' + nama + '</td>';
                         formData += '<td>' + value.nomor_job + '</td>';
                         formData += '<td>' + judul_buku + '</td>';
