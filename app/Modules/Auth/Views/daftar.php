@@ -147,7 +147,7 @@
                             </a>
                         </p>
                         <p class="text-center">
-                            <a href="http://localhost:8080/beranda">
+                            <a href="http://localhost:8080/">
                                 <span>Beranda</span>
                             </a>
                         </p>

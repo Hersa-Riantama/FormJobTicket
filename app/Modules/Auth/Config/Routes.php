@@ -23,6 +23,6 @@ $routes->group(
     ['namespace' => '\Modules\Menu\Controllers'],
     function ($routes) {
         $routes->get('dashboard', 'Menu::index');
-        $routes->get('beranda', 'Menu::beranda');
+        $routes->get('/', 'Menu::beranda');
     }
 );
