@@ -72,14 +72,17 @@
                 // Call API to get categories and books
                 $.when(
                     $.ajax({ url: 'http://localhost:8080/kategori', dataType: 'json' }),
-                    $.ajax({ url: 'http://localhost:8080/buku', dataType: 'json' })
-                ).done(function(kategoriResponse, bukuResponse) {
+                    $.ajax({ url: 'http://localhost:8080/buku', dataType: 'json' }),
+                    $.ajax({ url: 'http://localhost:8080/user', dataType: 'json' })
+                ).done(function(kategoriResponse, bukuResponse, userResponse) {
                     var kategoriMap = {};
                     var bukuMap = {};
+                    var userMap = {};
 
                     // Access the arrays inside kategoriResponse and bukuResponse using their keys
                     var kategoriData = kategoriResponse[0].kategori || []; // Access the 'kategori' array
                     var bukuData = bukuResponse[0].buku || []; // Access the 'buku' array
+                    var userData = userResponse[0].user || []; // Access the 'user' array
 
                     // Map kategori by id
                     $.each(kategoriData, function(key, kategori) {
@@ -99,20 +102,31 @@
                         }
                     });
 
+                    // Map user by id
+                    $.each(userData, function(key, user) {
+                        if (user.id_user && user.nama) {
+                            userMap[user.id_user] = user.nama;
+                        } else {
+                            console.log('User missing fields:', nama);
+                        }
+                    });
+
                     var formData = '';
                     $.each(data.tiket, function(key, value) {
                         // Try to find the matching kategori and buku
                         var nama_kategori = kategoriMap[value.id_kategori] || 'Unknown Kategori';
                         var judul_buku = bukuMap[value.id_buku] || 'Unknown Buku';
+                        var nama =userMap[value.id_user] || 'Unknown User';
 
                         // Log the id_kategori and id_buku to check mapping
                         console.log('Mapping kategori:', value.id_kategori, '->', nama_kategori);
                         console.log('Mapping buku:', value.id_buku, '->', judul_buku);
+                        console.log('Mapping user:', value.id_user, '->', nama);
 
                         formData += '<tr>';
                         formData += '<td>' + value.kode_form + '</td>';
                         formData += '<td>' + nama_kategori + '</td>';
-                        formData += '<td>' + value.id_user + '</td>';
+                        formData += '<td>' + nama + '</td>';
                         formData += '<td>' + value.nomor_job + '</td>';
                         formData += '<td>' + judul_buku + '</td>';
                         formData += '<td>';
