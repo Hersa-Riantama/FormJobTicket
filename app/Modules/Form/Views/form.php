@@ -124,57 +124,57 @@
                             <div class="card-body pb-0">
 
                                 <div class="mb-3 row">
-                                    <label for="pemesan" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">PEMESAN</label>
-                                    <div class="col-md-9">
+                                    <label for="pemesan" class="col-md-4 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">PEMESAN</label>
+                                    <div class="col-md-8">
                                         <input class="form-control" type="text" value="<?= esc($userData['nama']) ?>" id="id_user" name="id_user" placeholder="Masukkan Pemesan" style="border: 1px solid black;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="kode_buku" class="form-label col-md-3 text-primary" style="font-size: var(--bs-body-font-size)">Kode Buku</label>
-                                    <div class="col-md-9">
+                                    <label for="kode_buku" class="form-label col-md-4 text-primary" style="font-size: var(--bs-body-font-size)">Kode Buku</label>
+                                    <div class="col-md-8">
                                         <select id="kode_buku" class="form-select" name="id_buku" style="border: 1px solid black;">
                                             <!-- ajax -->
                                         </select>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="nomor_job" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">NOMOR JOB</label>
-                                    <div class="col-md-9">
+                                    <label for="nomor_job" class="col-md-4 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">NOMOR JOB</label>
+                                    <div class="col-md-8">
                                         <input class="form-control" type="text" value="" id="nomor_job" name="nomor_job" placeholder="Masukkan Nomor Job" style="border: 1px solid black;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="judul_buku" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">JUDUL BUKU</label>
-                                    <div class="col-md-9">
+                                    <label for="judul_buku" class="col-md-4 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">JUDUL BUKU</label>
+                                    <div class="col-md-8">
                                         <textarea class="form-control" value="" id="judul_buku" name="judul_buku" row="2" placeholder="Masukkan Judul Buku" style="border: 1px solid black;"></textarea>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="pengarang" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">PENULIS</label>
-                                    <div class="col-md-9">
+                                    <label for="pengarang" class="col-md-4 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">PENULIS</label>
+                                    <div class="col-md-8">
                                         <input class="form-control" type="text" value="" id="pengarang" name="pengarang" placeholder="Masukkan Penulis" style="border: 1px solid black;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="target_terbit" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">TARGET TERBIT</label>
-                                    <div class="col-md-9">
+                                    <label for="target_terbit" class="col-md-4 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">TARGET TERBIT</label>
+                                    <div class="col-md-8">
                                         <input class="form-control" type="year" value="" id="target_terbit" name="target_terbit" placeholder="Masukkan Target Terbit" style="border: 1px solid black;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="jml_qr" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">Jumlah <i>QR Code</i></label>
-                                    <div class="col-md-9">
+                                    <label for="jml_qr" class="col-md-4 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">Jumlah <i>QR Code</i></label>
+                                    <div class="col-md-8">
                                         <input class="form-control" type="text" value="" id="jml_qrcode" name="jml_qrcode" placeholder="Masukkan Jumlah QR Code" style="border: 1px solid black;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="email" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">Email</label>
-                                    <div class="col-md-9">
+                                    <label for="email" class="col-md-4 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">Email</label>
+                                    <div class="col-md-8">
                                         <input class="form-control" type="email" value="<?= esc($userData['email']) ?>" id="email" name="email" placeholder="Masukkan Email" style="border: 1px solid black;" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="warna" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">WARNA</label>
+                                    <label for="warna" class="col-md-4 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">WARNA</label>
                                     <div class="col-md">
                                         <div class="form-check form-check-inline rounded p-2 mb-2" style="border: 1px solid black;">
                                             <input class="form-check-input mx-1" type="radio" id="inlineRadio1" name="inlineRadioOption" value="BW" style="border: 1px solid pink;" />
@@ -218,11 +218,11 @@
                                     <div class="col-md px-3">
                                         <!-- <small class="text-light fw-medium">Checkboxes</small> -->
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="12" name="kelengkapan[]" id="kategori12" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Y" name="kelengkapan[]" id="kategori12" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori12"> Sudah diperiksa <i>pemesan</i> </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="13" name="kelengkapan[]" id="kategori13" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Y" name="kelengkapan[]" id="kategori13" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kategori13"> Sudah di-<i>approve </i>atasan </label>
                                         </div>
 
