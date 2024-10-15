@@ -98,6 +98,7 @@ class Auth extends BaseController
         // Set session
         $this->session->set([
             'id_user' => $user['id_user'],
+            'level_user' => $user['level_user'],
             'logged_in' => true
         ]);
         return $this->response->setJSON($response)->setStatusCode(200);

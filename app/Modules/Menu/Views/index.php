@@ -9,15 +9,17 @@
             <div class="row">
 
                 <!-- Column 1 -->
-                <div class="col-lg-auto col-md-auto col-auto mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah User</span>
-                            <h3 class="card-title text-center fs-1 my-3"><?= $user; ?></h3>
-                            <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/user">Selengkapnya</a>
+                <?php if (session()->get('level_user') === 'Admin Sistem'): ?>
+                    <div class="col-lg-auto col-md-auto col-auto mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah User</span>
+                                <h3 class="card-title text-center fs-1 my-3"><?= $user; ?></h3>
+                                <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/user">Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
                 <!-- / Column 1 -->
 
                 <!-- Column 2 -->
@@ -45,15 +47,17 @@
                 <!-- / Column 3 -->
 
                 <!-- Column 4 -->
-                <div class="col-lg-auto col-md-auto col-auto mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Tiket</span>
-                            <h3 class="card-title text-center fs-1 my-3"><?= $form; ?></h3>
-                            <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/listform">Selengkapnya</a>
+                <?php if (session()->get('level_user') === 'Admin Sistem'): ?>
+                    <div class="col-lg-auto col-md-auto col-auto mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Tiket</span>
+                                <h3 class="card-title text-center fs-1 my-3"><?= $form; ?></h3>
+                                <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/listform">Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
                 <!-- / Column 4 -->
 
             </div>
