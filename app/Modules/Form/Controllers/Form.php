@@ -54,6 +54,8 @@ class Form extends BaseController
         }
         $id_buku = $buku['id_buku'];
 
+        $id_user = session()->get('id_user');
+
         // Get selected id_kategori from checkboxes
         $id_kategoris = $this->request->getVar('id_kategori'); // This should be an array
         // Check if id_kategori is provided
@@ -67,64 +69,50 @@ class Form extends BaseController
                 return $this->response->setJSON(['pesan' => 'Invalid id_kategori value' . $id_kategori]);
             }
         }
-        // Get selected kelengkapan from checkboxes
-        $kelengkapans = $this->request->getVar('kelengkapan'); // This should be an array
-        if (empty($kelengkapans) || !is_array($kelengkapans)) {
-            return $this->response->setJSON(['pesan' => 'kelengkapan is required']);
-        }
-        foreach ($kelengkapans as $kelengkapan) {
-            if (!is_array($kelengkapan)) {
-                return $this->response->setJSON(['pesan' =>  'Invalid Kelengkapan value'. $kelengkapan]);
-            }
-        }
-
-        // Array of status_kelengkapan
-        // $tgl_order = date('y-m-d', strtotime($this->request->getVar('tgl_selesai')));
         $this->model->insert([
             'id_kategori' => esc($id_kategori),
             'id_buku' => esc($id_buku),
             'jml_qrcode' => esc($this->request->getVar('jml_qrcode')),
-            'id_user' => esc($this->request->getVar('id_user')),
+            'id_user' => $id_user,
             'nomor_job' => esc($this->request->getVar('nomor_job')),
 
         ]);
         $id_tiket = $this->model->getInsertID();
-        // Insert into tbl_kelengkapan (without status_kelengkapan)
+
+        // Insert kelengkapan into tbl_kelengkapan
         $kelengkapanModel = new \Modules\Kelengkapan\Models\KelengkapanModel();
+        $kelengkapans = $this->request->getVar('kelengkapan');
         if (is_array($kelengkapans) && count($kelengkapans) > 0) {
             foreach ($kelengkapans as $kelengkapan) {
-                $kelengkapanModel->insert([
-                    'id_tiket' => $id_tiket,
-                    'nama_kelengkapan' => esc($kelengkapan), // Only insert kelengkapan name
-                ]);
+                if (!empty($kelengkapan)) {
+                    $kelengkapanModel->insert([
+                        'id_tiket' => $id_tiket,
+                        'nama_kelengkapan' => esc($kelengkapan)
+                    ]);
+                }
             }
         }
 
-        // Insert into tbl_status_kelengkapan (if status is provided)
+        // Insert status kelengkapan into tbl_status_kelengkapan
         $statusKelengkapanModel = new \Modules\Status_Kelengkapan\Models\StatusKelengkapanModel();
-        $tahap_kelengkapan = esc($this->request->getVar('tahap_kelengkapan'));
-        $status_kelengkapan_array = $this->request->getVar('status_kelengkapan');
+        $tahap_kelengkapan_array = $this->request->getVar('tahap_kelengkapan'); // Match the form name
 
-        // Insert tahap_kelengkapan and status_kelengkapan if available
-        if (!empty($status_kelengkapan_array) && is_array($status_kelengkapan_array)) {
-            foreach ($status_kelengkapan_array as $index => $status_kelengkapan) {
-                // Make sure status_kelengkapan is a valid value
-                if (!is_numeric($status_kelengkapan)) {
-                    continue; // Skip invalid values
-                }
+        // Ensure tahap_kelengkapan is correctly inserted
+        if (!empty($tahap_kelengkapan_array) && is_array($tahap_kelengkapan_array)) {
+            foreach ($tahap_kelengkapan_array as $tahap_kelengkapan) {
                 // Insert into tbl_status_kelengkapan
                 $statusKelengkapanModel->insert([
                     'id_tiket' => $id_tiket,
-                    'tahap_kelengkapan' => !empty($tahap_kelengkapan) ? $tahap_kelengkapan : 'N',
-                    'status_kelengkapan' => esc($status_kelengkapan), // Use the selected status_kelengkapan
+                    'tahap_kelengkapan' => esc($tahap_kelengkapan), // Directly insert tahap_kelengkapan
+                    'status_kelengkapan' => 'Y' // Set status_kelengkapan as 'Y' to indicate it's completed
                 ]);
             }
         } else {
-            // If no tahap_kelengkapan or status_kelengkapan provided, insert default values
+            // Insert default values if no status_kelengkapan is provided
             $statusKelengkapanModel->insert([
-                'id_tiket'           => $id_tiket,
-                'tahap_kelengkapan'  => 'N', // Default tahap to 'N'
-                'status_kelengkapan' => 'N'  // Default status to 'N'
+                'id_tiket' => $id_tiket,
+                'tahap_kelengkapan' => 'N', // Default to 'N' if no checkbox is selected
+                'status_kelengkapan' => 'N'
             ]);
         }
         $response = [

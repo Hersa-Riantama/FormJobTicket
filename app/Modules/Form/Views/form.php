@@ -254,15 +254,15 @@
 
                                         <h6 class="text-left text-primary mt-4 mb-0" style="font-weight: bold;">Kelengkapan file konten*</h6>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="1" name="stats_kelengkapan[]" id="stats_kelengkapan1" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Tahap 1" name="tahap_kelengkapan[]" id="stats_kelengkapan1" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="stats_kelengkapan1"> Penyerahan Tahap 1 </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="2" name="stats_kelengkapan[]" id="stats_kelengkapan2" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Tahap 2" name="tahap_kelengkapan[]" id="stats_kelengkapan2" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="stats_kelengkapan2"> Penyerahan Tahap 2 </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="3" name="stats_kelengkapan[]" id="stats_kelengkapan3" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Tahap 3" name="tahap_kelengkapan[]" id="stats_kelengkapan3" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="stats_kelengkapan3"> Penyerahan Tahap 3 </label>
                                         </div>
                                         <p class="text mt-3 mb-0" style="font-size:x-small;">
@@ -510,8 +510,8 @@
             });
 
             // Collect selected checkboxes for stats_kelengkapan
-            $('input[name="stats_kelengkapan[]"]:checked').each(function() {
-                formData.append('stats_kelengkapan[]', $(this).val());
+            $('input[name="tahap_kelengkapan[]"]:checked').each(function() {
+                formData.append('tahap_kelengkapan[]', $(this).val());
             });
 
             var formUrl = 'http://localhost:8080/form'; // Ganti '/form' dengan URL endpoint yang sesuai
