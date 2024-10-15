@@ -133,7 +133,7 @@
                         <ul class="menu-sub">
                             <li class="menu-item">
                                 <a
-                                    href="http://localhost:8080/api/user"
+                                    href="http://localhost:8080/user"
                                     class="menu-link">
                                     <div data-i18n="CRM">Kelola User</div>
                                 </a>
@@ -149,7 +149,7 @@
                         <ul class="menu-sub">
                             <li class="menu-item">
                                 <a
-                                    href="http://localhost:8080/api/kategori"
+                                    href="http://localhost:8080/kategori"
                                     class="menu-link">
                                     <div data-i18n="CRM">Kelola Kategori</div>
                                 </a>
@@ -165,7 +165,7 @@
                         <ul class="menu-sub">
                             <li class="menu-item">
                                 <a
-                                    href="http://localhost:8080/api/buku"
+                                    href="http://localhost:8080/buku"
                                     class="menu-link">
                                     <div data-i18n="CRM">Kelola Buku</div>
                                 </a>
@@ -181,14 +181,14 @@
                         <ul class="menu-sub">
                             <li class="menu-item">
                                 <a
-                                    href="http://localhost:8080/api/form"
+                                    href="http://localhost:8080/form"
                                     class="menu-link">
                                     <div data-i18n="CRM">Form QR Code</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a
-                                    href="http://localhost:8080/api/listform"
+                                    href="http://localhost:8080/listform"
                                     class="menu-link">
                                     <div data-i18n="eCommerce">Kelola Tiket</div>
                                 </a>

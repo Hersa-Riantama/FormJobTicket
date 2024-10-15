@@ -142,12 +142,12 @@
 
                         <p class="text-center">
                             <span>Sudah punya akun?</span>
-                            <a href="http://localhost:8080/api/login">
+                            <a href="http://localhost:8080/login">
                                 <span>Login</span>
                             </a>
                         </p>
                         <p class="text-center">
-                            <a href="http://localhost:8080/api/beranda">
+                            <a href="http://localhost:8080/beranda">
                                 <span>Beranda</span>
                             </a>
                         </p>

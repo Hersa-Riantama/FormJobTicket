@@ -514,7 +514,7 @@
                 formData.append('stats_kelengkapan[]', $(this).val());
             });
 
-            var formUrl = 'http://localhost:8080/api/form'; // Ganti '/form' dengan URL endpoint yang sesuai
+            var formUrl = 'http://localhost:8080/form'; // Ganti '/form' dengan URL endpoint yang sesuai
 
             $.ajax({
                 type: 'POST',
@@ -541,7 +541,7 @@
             });
         });
         $.ajax({
-            url: 'http://localhost:8080/api/tampilbuku',
+            url: 'http://localhost:8080/tampilbuku',
             type: 'GET',
             dataType: 'json',
             success: function(data) {
@@ -555,7 +555,7 @@
             var kode_buku = $(this).val();
             if (kode_buku) {
                 $.ajax({
-                    url: 'http://localhost:8080/api/tampilbuku/' + kode_buku, // Replace with your endpoint
+                    url: 'http://localhost:8080/tampilbuku/' + kode_buku, // Replace with your endpoint
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {

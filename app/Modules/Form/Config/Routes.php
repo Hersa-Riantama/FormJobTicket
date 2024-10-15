@@ -18,7 +18,7 @@ $routes->group(
 );
 
 $routes->group(
-    'api',
+    '',
     ['namespace' => '\Modules\Form\Controllers'],
     function ($routes) {
         $routes->get('form', 'Form::form');
@@ -28,10 +28,10 @@ $routes->group(
     }
 );
 $routes->post('/get-email', '\Modules\User\Controllers\User::getEmail');
-$routes->post('api/kategori', '\Modules\Kategori\Controllers\Kategori::getKategori');
+$routes->post('/kategori', '\Modules\Kategori\Controllers\Kategori::getKategori');
 
 $routes->group(
-    'api',
+    '',
     ['namespace' => '\Modules\Form\Controllers'],
     function ($routes) {
         $routes->get('listform', 'Form::data_form');

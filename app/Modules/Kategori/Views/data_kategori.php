@@ -67,7 +67,7 @@
     function loadData() {
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:8080/api/kategori',
+            url: 'http://localhost:8080/kategori',
             dataType: 'json',
             success: function(data) {
                 var kategoriData = '';

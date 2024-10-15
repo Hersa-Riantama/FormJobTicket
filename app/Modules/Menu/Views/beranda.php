@@ -425,7 +425,7 @@
             <i class="tf-icons bx bx-menu bx-lg align-middle text-heading fw-medium"></i>
           </button>
           <!-- Mobile menu toggle: End-->
-          <a href="http://localhost:8080/api/beranda" class="app-brand-link">
+          <a href="http://localhost:8080/beranda" class="app-brand-link">
             <span class="app-brand-logo demo">
 
               <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
@@ -473,7 +473,7 @@
           </button>
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link fw-medium active" aria-current="page" href="http://localhost:8080/api/beranda">Beranda</a>
+              <a class="nav-link fw-medium active" aria-current="page" href="http://localhost:8080/beranda">Beranda</a>
             </li>
             <!-- <li class=" nav-item">
               <a class="nav-link fw-medium" href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/front-pages/landing-page.html#landingFeatures">Features</a>
@@ -694,7 +694,7 @@
 
           <!-- navbar button: Start -->
           <li>
-            <a href="http://localhost:8080/api/login" class="btn btn-primary"><span class=" tf-icons bx bx-log-in-circle scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">Login/Register</span></a>
+            <a href="http://localhost:8080/login" class="btn btn-primary"><span class=" tf-icons bx bx-log-in-circle scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">Login/Register</span></a>
           </li>
           <!-- navbar button: End -->
         </ul>
@@ -1714,7 +1714,7 @@
                 <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/front-pages/help-center-landing.html" class="footer-link">Help Center</a>
               </li>
               <li>
-                <a href="http://localhost:8080/api/login" target="_blank" class="footer-link">Login/Register</a>
+                <a href="http://localhost:8080/login" target="_blank" class="footer-link">Login/Register</a>
               </li>
             </ul>
           </div>

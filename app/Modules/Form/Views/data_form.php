@@ -66,13 +66,13 @@
     function loadData() {
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:8080/api/listform',
+            url: 'http://localhost:8080/listform',
             dataType: 'json',
             success: function(data) {
                 // Call API to get categories and books
                 $.when(
-                    $.ajax({ url: 'http://localhost:8080/api/kategori', dataType: 'json' }),
-                    $.ajax({ url: 'http://localhost:8080/api/buku', dataType: 'json' })
+                    $.ajax({ url: 'http://localhost:8080/kategori', dataType: 'json' }),
+                    $.ajax({ url: 'http://localhost:8080/buku', dataType: 'json' })
                 ).done(function(kategoriResponse, bukuResponse) {
                     var kategoriMap = {};
                     var bukuMap = {};

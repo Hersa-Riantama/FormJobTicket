@@ -8,7 +8,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->group(
-    'api',
+    '',
     ['namespace' => '\Modules\Auth\Controllers'],
     function ($routes) {
         $routes->get('login', 'Auth::login');
@@ -19,7 +19,7 @@ $routes->group(
     }
 );
 $routes->group(
-    'api',
+    '',
     ['namespace' => '\Modules\Menu\Controllers'],
     function ($routes) {
         $routes->get('dashboard', 'Menu::index');

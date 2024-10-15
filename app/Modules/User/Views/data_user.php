@@ -68,7 +68,7 @@
     function loadData() {
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:8080/api/user',
+            url: 'http://localhost:8080/user',
             dataType: 'json',
             success: function(data) {
                 var UserData = '';
@@ -110,7 +110,7 @@
         console.log(id_user);
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080/api/verify_user/' + id_user,
+            url: 'http://localhost:8080/verify_user/' + id_user,
             data: {
                 id_user: id_user
             },

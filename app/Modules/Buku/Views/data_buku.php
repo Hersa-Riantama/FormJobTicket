@@ -178,7 +178,7 @@
     function loadData() {
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:8080/api/buku',
+            url: 'http://localhost:8080/buku',
             dataType: 'json',
             success: function(data) {
                 var bukuData = '';
@@ -219,7 +219,7 @@
 
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:8080/api/buku/' + id_buku,
+            url: 'http://localhost:8080/buku/' + id_buku,
             dataType: 'json',
             success: function(response) {
                 console.log('Respons API:', response); // Lihat respons API
@@ -254,7 +254,7 @@
         var id_buku = $(this).data('id_buku');
         $.ajax({
             type: 'DELETE',
-            url: 'http://localhost:8080/api/buku/' + id_buku,
+            url: 'http://localhost:8080/buku/' + id_buku,
             success: function() {
                 loadData();
             }
@@ -279,7 +279,7 @@
             $('#editModal').modal('show');
             $.ajax({
                 type: 'PUT',
-                url: 'http://localhost:8080/api/buku/' + id_buku,
+                url: 'http://localhost:8080/buku/' + id_buku,
                 data: JSON.stringify({
                     kode_buku: kode_buku,
                     judul_buku: judul_buku,
@@ -324,7 +324,7 @@
 
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080/api/buku',
+            url: 'http://localhost:8080/buku',
             data: $(this).serialize(), // Serialize form data
             success: function(response) {
                 console.log(response); // Menampilkan respon sukses
