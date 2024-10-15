@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-  <title>Beranda</title>
+  <title><?= $judul ?></title>
 
 
   <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!">
@@ -717,12 +717,7 @@
           <div class="hero-text-box text-center position-relative">
             <h1 class="text-primary hero-title display-6 fw-extrabold">Form QR Code</h1>
             <h2 class="hero-sub-title h6 mb-6">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ullamcorper
-              odio commodo mollis aliquet. Quisque porttitor placerat est, non congue ante.
-              Suspendisse condimentum quam diam, sed posuere purus pulvinar ac.
-              Vestibulum sollicitudin tempor ex sed tincidunt. Maecenas dignissim
-              condimentum feugiat. Nunc nec turpis orci. Proin gravida tellus sit amet
-              suscipit viverra.
+              Form QR Code Merupakan Website Untuk Melakukan <br>Pengisian Form QR Code.
               <!-- Production-ready &amp; easy to use Admin Template<br class="d-none d-lg-block">
               for Reliability and Customizability. -->
             </h2>
