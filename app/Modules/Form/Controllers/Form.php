@@ -56,27 +56,35 @@ class Form extends BaseController
 
         $id_user = session()->get('id_user');
 
-        // Get selected id_kategori from checkboxes
-        $id_kategoris = $this->request->getVar('id_kategori'); // This should be an array
-        // Check if id_kategori is provided
-        if (empty($id_kategoris) || !is_array($id_kategoris)) {
-            return $this->response->setJSON(['pesan' => 'id_kategori is required']);
+        $id_kategori_array = $this->request->getVar('id_kategori');
+        $id_kategori_json = json_encode($id_kategori_array);
+        if (json_last_error() === JSON_ERROR_NONE) {
+            // JSON valid, lanjutkan insert ke database
+            $this->model->insert([
+                'id_kategori' => $id_kategori_json,
+                'id_buku' => esc($id_buku),
+                'jml_qrcode' => esc($this->request->getVar('jml_qrcode')),
+                'id_user' => $id_user,
+                'nomor_job' => esc($this->request->getVar('nomor_job')),
+            ]);
+        } else {
+            // JSON tidak valid, tangani kesalahan
+            echo 'Invalid JSON format';
         }
-        // Loop through the selected id_kategori and insert them into tbl_tiket
-        foreach ($id_kategoris as $id_kategori) {
-            // Make sure id_kategori is a number or valid value
-            if (!is_numeric($id_kategori)) {
-                return $this->response->setJSON(['pesan' => 'Invalid id_kategori value' . $id_kategori]);
-            }
-        }
-        $this->model->insert([
-            'id_kategori' => esc($id_kategori),
-            'id_buku' => esc($id_buku),
-            'jml_qrcode' => esc($this->request->getVar('jml_qrcode')),
-            'id_user' => $id_user,
-            'nomor_job' => esc($this->request->getVar('nomor_job')),
-
-        ]);
+        // // Get selected id_kategori from checkboxes
+        // $id_kategoris = $this->request->getVar('id_kategori'); // This should be an array
+        // // Check if id_kategori is provided
+        // if (empty($id_kategoris) || !is_array($id_kategoris)) {
+        //     return $this->response->setJSON(['pesan' => 'id_kategori is required']);
+        // }
+        // // Loop through the selected id_kategori and insert them into tbl_tiket
+        // foreach ($id_kategoris as $id_kategori) {
+        //     // Make sure id_kategori is a number or valid value
+        //     if (!is_numeric($id_kategori)) {
+        //         return $this->response->setJSON(['pesan' => 'Invalid id_kategori value' . $id_kategori]);
+        //     }
+        // }
+        
         $id_tiket = $this->model->getInsertID();
 
         // Insert kelengkapan into tbl_kelengkapan
