@@ -85,10 +85,18 @@ class Form extends BaseController
         if (is_array($kelengkapans) && count($kelengkapans) > 0) {
             foreach ($kelengkapans as $kelengkapan) {
                 if (!empty($kelengkapan)) {
-                    $kelengkapanModel->insert([
+                    // Periksa apakah data sudah ada di database
+                    $existing = $kelengkapanModel->where([
                         'id_tiket' => $id_tiket,
                         'nama_kelengkapan' => esc($kelengkapan)
-                    ]);
+                    ])->first();
+
+                    if (!$existing) {
+                        $kelengkapanModel->insert([
+                            'id_tiket' => $id_tiket,
+                            'nama_kelengkapan' => esc($kelengkapan)
+                        ]);
+                    }
                 }
             }
         }
@@ -100,12 +108,19 @@ class Form extends BaseController
         // Ensure tahap_kelengkapan is correctly inserted
         if (!empty($tahap_kelengkapan_array) && is_array($tahap_kelengkapan_array)) {
             foreach ($tahap_kelengkapan_array as $tahap_kelengkapan) {
-                // Insert into tbl_status_kelengkapan
-                $statusKelengkapanModel->insert([
+                // Cek jika data sudah ada
+                $existing = $statusKelengkapanModel->where([
                     'id_tiket' => $id_tiket,
-                    'tahap_kelengkapan' => esc($tahap_kelengkapan), // Directly insert tahap_kelengkapan
-                    'status_kelengkapan' => 'Y' // Set status_kelengkapan as 'Y' to indicate it's completed
-                ]);
+                    'tahap_kelengkapan' => esc($tahap_kelengkapan)
+                ])->first();
+
+                if (!$existing) {
+                    $statusKelengkapanModel->insert([
+                        'id_tiket' => $id_tiket,
+                        'tahap_kelengkapan' => esc($tahap_kelengkapan),
+                        'status_kelengkapan' => 'Y'
+                    ]);
+                }
             }
         } else {
             // Insert default values if no status_kelengkapan is provided

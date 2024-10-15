@@ -59,14 +59,14 @@
                                             <div class="col mt-4">
                                                 <div class="row">
                                                     <div class="form-check my-0" style="font-size:0.6rem;">
-                                                        <input class="form-check-input" type="checkbox" value="12" name="id_kategori[]" id="kategori12" style="border: 1px solid pink;" />
-                                                        <label class="form-check-label text-primary" for="kategori12"> <i>DUMMY</i> </label>
+                                                        <input class="form-check-input" type="checkbox" value="19" name="id_kategori[]" id="kategori19" style="border: 1px solid pink;" />
+                                                        <label class="form-check-label text-primary" for="kategori19"> <i>DUMMY</i> </label>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-check my-0" style="font-size:0.6rem;">
-                                                        <input class="form-check-input" type="checkbox" value="13" name="id_kategori[]" id="kategori13" style="border: 1px solid pink;" />
-                                                        <label class="form-check-label text-primary" for="kategori13"> KONTEN TERSEDIA </label>
+                                                        <input class="form-check-input" type="checkbox" value="20" name="id_kategori[]" id="kategori20" style="border: 1px solid pink;" />
+                                                        <label class="form-check-label text-primary" for="kategori20"> KONTEN TERSEDIA </label>
                                                     </div>
                                                 </div>
                                             </div>

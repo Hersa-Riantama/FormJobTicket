@@ -717,7 +717,8 @@
           <div class="hero-text-box text-center position-relative">
             <h1 class="text-primary hero-title display-6 fw-extrabold">Form QR Code</h1>
             <h2 class="hero-sub-title h6 mb-6">
-              Form QR Code Merupakan Website <br>Untuk Melakukan Pengisian <br>Form QR Code.
+              Website Untuk Mengelola Form Tiket, <br>Mengelola Buku, Mengelola Kategori <br>dan Mengelola User.
+              <!-- Form QR Code Merupakan Website <br>Untuk Melakukan Pengisian <br>Form QR Code. -->
               <!-- Production-ready &amp; easy to use Admin Template<br class="d-none d-lg-block">
               for Reliability and Customizability. -->
             </h2>
