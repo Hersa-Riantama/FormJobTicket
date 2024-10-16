@@ -126,13 +126,14 @@
                                 <div class="mb-3 row">
                                     <label for="pemesan" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">PEMESAN</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" type="text" value="<?= esc($userData['nama']) ?>" id="id_user" name="id_user" placeholder="Masukkan Pemesan" style="border: 1px solid black;" />
+                                        <input class="form-control" type="text" value="<?= esc($userData['nama']) ?>" id="id_user" name="id_user" placeholder="Masukkan Pemesan" style="border: 1px solid black;" readonly />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="kode_buku" class="form-label col-md-3 text-primary" style="font-size: var(--bs-body-font-size)">Kode Buku</label>
                                     <div class="col-md-9">
                                         <select id="kode_buku" class="form-select" name="id_buku" style="border: 1px solid black;">
+                                            <option value="" disabled selected>Pilih Kode Buku</option>
                                             <!-- ajax -->
                                         </select>
                                     </div>
@@ -146,19 +147,19 @@
                                 <div class="mb-3 row">
                                     <label for="judul_buku" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">JUDUL BUKU</label>
                                     <div class="col-md-9">
-                                        <textarea class="form-control" value="" id="judul_buku" name="judul_buku" row="2" placeholder="Masukkan Judul Buku" style="border: 1px solid black;"></textarea>
+                                        <textarea class="form-control" value="" id="judul_buku" name="judul_buku" row="2" placeholder="Masukkan Judul Buku" style="border: 1px solid black;" readonly></textarea>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="pengarang" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">PENULIS</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" type="text" value="" id="pengarang" name="pengarang" placeholder="Masukkan Penulis" style="border: 1px solid black;" />
+                                        <input class="form-control" type="text" value="" id="pengarang" name="pengarang" placeholder="Masukkan Penulis" style="border: 1px solid black;" readonly />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="target_terbit" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">TARGET TERBIT</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" type="year" value="" id="target_terbit" name="target_terbit" placeholder="Masukkan Target Terbit" style="border: 1px solid black;" />
+                                        <input class="form-control" type="year" value="" id="target_terbit" name="target_terbit" placeholder="Masukkan Target Terbit" style="border: 1px solid black;" readonly />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -170,7 +171,7 @@
                                 <div class="mb-3 row">
                                     <label for="email" class="col-md-3 col-form-label text-primary" style="font-size: var(--bs-body-font-size)">Email</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" type="email" value="<?= esc($userData['email']) ?>" id="email" name="email" placeholder="Masukkan Email" style="border: 1px solid black;" />
+                                        <input class="form-control" type="email" value="<?= esc($userData['email']) ?>" id="email" name="email" placeholder="Masukkan Email" style="border: 1px solid black;" readonly />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
