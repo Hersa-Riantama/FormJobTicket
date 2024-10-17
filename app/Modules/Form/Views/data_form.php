@@ -85,6 +85,9 @@
                             dataType: 'json'
                         })
                     ).done(function(kategoriResponse, bukuResponse, userResponse) {
+                        // console.log('Kategori Response:', kategoriResponse);
+                        // console.log('Buku Response:', bukuResponse);
+                        // console.log('User Response:', userResponse);
                         var kategoriMap = {};
                         var bukuMap = {};
                         var userMap = {};
@@ -180,6 +183,7 @@
                     })
                     .fail(function(jqXHR, textStatus, errorThrown) {
                         console.error('Error fetching kategori or buku:', textStatus, errorThrown);
+                        // console.log('Response Text:', jqXHR.responseText); // Lihat respons dari server
                     });
             },
             error: function(xhr, status, error) {
