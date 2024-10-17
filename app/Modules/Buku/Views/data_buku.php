@@ -1,6 +1,7 @@
 <?= $this->extend('template/admin_template');
 
 use Modules\Auth\Models\AuthModel; ?>
+
 <?= $this->section('content'); ?>
 <!-- Content wrapper -->
 <div class="content-wrapper">

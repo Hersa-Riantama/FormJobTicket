@@ -1,4 +1,7 @@
-<?= $this->extend('template/admin_template'); ?>
+<?= $this->extend('template/admin_template');
+
+use Modules\Auth\Models\AuthModel; ?>
+
 <?= $this->section('content'); ?>
 <!-- Content wrapper -->
 <div class="content-wrapper">
@@ -7,9 +10,31 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-3 mb-4"><span class="text-muted fw-light">Kategori /</span> Kelola Kategori</h4>
         <div class="row justify-content-end">
-            <div class="col-xl-auto mb-4 justify-content-end">
-                <button class="btn btn-primary d-grid" id="btn-add">Tambah Kategori</button>
-            </div>
+            <?php
+            // Ambil data user dari sesi
+            $AuthModel = new AuthModel();
+            $userId = session()->get('id_user');
+
+            if (!empty($userId)) {
+                // Ambil data user dari database
+                $userData = $AuthModel->find($userId);
+
+                if ($userData && isset($userData['level_user'])) {
+                    $allowUser = ['Editor', 'Koord Editor'];
+                    if (in_array($userData['level_user'], $allowUser)) {
+            ?>
+                        <div class="col-xl-auto mb-4 justify-content-end">
+                            <button class="btn btn-primary d-grid" id="btn-add">Tambah Kategori</button>
+                        </div>
+            <?php
+                    }
+                } else {
+                    echo '<script>alert("Level user tidak ditemukan."); history.back();</script>';
+                }
+            } else {
+                echo '<script>alert("User tidak ditemukan atau sesi tidak valid."); history.back();</script>';
+            }
+            ?>
         </div>
 
         <!-- Basic Bootstrap Table -->
@@ -64,6 +89,7 @@
     $(document).ready(function() {
         loadData();
     });
+
     function loadData() {
         $.ajax({
             type: 'GET',
