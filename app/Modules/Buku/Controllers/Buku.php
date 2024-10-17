@@ -72,8 +72,8 @@ class Buku extends BaseController
             // Ambil data user dari database berdasarkan id_user
             $userData = $AuthModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
-                $allowUser = ['Editor','Koord Editor'];
-                if (!in_array($userData['level_user'],$allowUser)) {
+                $allowUser = ['Editor', 'Koord Editor'];
+                if (!in_array($userData['level_user'], $allowUser)) {
                     echo '<script>alert("Access Denied!!"); history.back();</script>';
                     return;
                 }
@@ -161,8 +161,8 @@ class Buku extends BaseController
             // Ambil data user dari database berdasarkan id_user
             $userData = $AuthModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
-                $allowUser = ['Editor','Admin Sistem','Koord Editor'];
-                if (!in_array($userData['level_user'],$allowUser)) {
+                $allowUser = ['Admin Sistem', 'Admin Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
+                if (!in_array($userData['level_user'], $allowUser)) {
                     echo '<script>alert("Access Denied!!"); history.back();</script>';
                     return;
                 }

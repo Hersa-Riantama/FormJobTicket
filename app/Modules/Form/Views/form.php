@@ -452,6 +452,7 @@
                     <div class="row justify-content-center my-3">
                         <div class="col-xl-6">
                             <button class="btn btn-primary d-grid w-100" id="btnsimpan">Simpan</button>
+                            <p id="errorMessage" class="text-danger" style="display:none;"></p>
                         </div>
                     </div>
                 </div>
@@ -552,20 +553,47 @@
                 });
             }
         });
+        // $('#kode_buku').change(function() {
+        //     var kode_buku = $(this).val();
+        //     if (kode_buku) {
+        //         $.ajax({
+        //             url: 'http://localhost:8080/tampilbuku/' + kode_buku, // Ganti dengan endpoint Anda
+        //             type: 'GET',
+        //             dataType: 'json',
+        //             success: function(data) {
+        //                 console.log('Response data:', data);
+        //                 // Update fields berdasarkan kode_buku yang dipilih
+        //                 $('#judul_buku').val(data.judul_buku);
+        //                 $('#pengarang').val(data.pengarang);
+        //                 $('#target_terbit').val(data.target_terbit);
+        //                 $('input[name="inlineRadioOption"][value="' + data.warna + '"]').prop('checked', true);
+        //             }
+        //         });
+        //     }
+        // });
+
         $('#kode_buku').change(function() {
             var kode_buku = $(this).val();
             if (kode_buku) {
                 $.ajax({
-                    url: 'http://localhost:8080/tampilbuku/' + kode_buku, // Replace with your endpoint
+                    url: 'http://localhost:8080/tampilbuku/' + kode_buku, // Ganti dengan endpoint Anda
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
                         console.log('Response data:', data);
-                        // Update the fields based on the selected kode_buku
+                        // Update fields berdasarkan kode_buku yang dipilih
                         $('#judul_buku').val(data.judul_buku);
                         $('#pengarang').val(data.pengarang);
                         $('#target_terbit').val(data.target_terbit);
                         $('input[name="inlineRadioOption"][value="' + data.warna + '"]').prop('checked', true);
+
+                        // Mencegah perubahan pilihan radio
+                        $('input[name="inlineRadioOption"]').on('click', function(event) {
+                            if ($(this).is(':checked')) {
+                                // Mencegah pengguna untuk mengubah pilihan yang sudah tercentang
+                                event.preventDefault();
+                            }
+                        });
                     }
                 });
             }
@@ -590,5 +618,25 @@
         }
 
     });
+
+    // $(document).ready(function() {
+    //     $('#btnsimpan').click(function(e) {
+    //         // Cegah form dari submit jika error ada
+    //         let qrCodeChecked = $('#kategori1').is(':checked');
+    //         let dummyChecked = $('#kategori19').is(':checked');
+    //         let kontenChecked = $('#kategori20').is(':checked');
+
+    //         // Kosongkan pesan error
+    //         $('#errorMessage').hide().text('');
+
+    //         if (qrCodeChecked) {
+    //             if (!dummyChecked && !kontenChecked) {
+    //                 // Jika QR CODE dicentang dan tidak ada DUMMY atau KONTEN TERSEDIA yang dicentang
+    //                 e.preventDefault(); // Mencegah form submit
+    //                 $('#errorMessage').text(' Pada QR CODE Harap pilih salah satu: DUMMY atau KONTEN TERSEDIA.').show();
+    //             }
+    //         }
+    //     });
+    // });
 </script>
 <?= $this->endSection(); ?>

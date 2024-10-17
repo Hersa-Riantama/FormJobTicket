@@ -1,5 +1,6 @@
-<?= $this->extend('template/admin_template'); 
-use Modules\Auth\Models\AuthModel;?>
+<?= $this->extend('template/admin_template');
+
+use Modules\Auth\Models\AuthModel; ?>
 <?= $this->section('content'); ?>
 <!-- Content wrapper -->
 <div class="content-wrapper">
@@ -8,7 +9,7 @@ use Modules\Auth\Models\AuthModel;?>
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-3 mb-4"><span class="text-muted fw-light">Buku /</span> Kelola Buku</h4>
         <div class="row justify-content-end">
-        <?php
+            <?php
             // Ambil data user dari sesi
             $AuthModel = new AuthModel();
             $userId = session()->get('id_user');
@@ -20,11 +21,11 @@ use Modules\Auth\Models\AuthModel;?>
                 if ($userData && isset($userData['level_user'])) {
                     $allowUser = ['Editor', 'Koord Editor'];
                     if (in_array($userData['level_user'], $allowUser)) {
-        ?>
-                <div class="col-xl-auto mb-4 justify-content-end">
-                    <button class="btn btn-primary d-grid" id="btn-add">Tambah Buku</button>
-                </div>
-        <?php
+            ?>
+                        <div class="col-xl-auto mb-4 justify-content-end">
+                            <button class="btn btn-primary d-grid" id="btn-add">Tambah Buku</button>
+                        </div>
+            <?php
                     }
                 } else {
                     echo '<script>alert("Level user tidak ditemukan."); history.back();</script>';
@@ -32,7 +33,7 @@ use Modules\Auth\Models\AuthModel;?>
             } else {
                 echo '<script>alert("User tidak ditemukan atau sesi tidak valid."); history.back();</script>';
             }
-        ?>
+            ?>
 
         </div>
 

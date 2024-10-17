@@ -124,24 +124,22 @@
                             <div data-i18n="Basic">Dashboard</div>
                         </a>
                     </li>
-                    <?php if (session()->get('level_user') === 'Admin Sistem'): ?>
-                        <li class="menu-item">
-                            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                <i class="menu-icon tf-icons bx bx-user"></i>
-                                <div data-i18n="Dashboards">User</div>
-                                <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
-                            </a>
-                            <ul class="menu-sub">
-                                <li class="menu-item">
-                                    <a
-                                        href="http://localhost:8080/user"
-                                        class="menu-link">
-                                        <div data-i18n="CRM">Kelola User</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    <?php endif; ?>
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="Dashboards">User</div>
+                            <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a
+                                    href="http://localhost:8080/user"
+                                    class="menu-link">
+                                    <div data-i18n="CRM">Kelola User</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-category"></i>
@@ -188,15 +186,13 @@
                                     <div data-i18n="CRM">Form QR Code</div>
                                 </a>
                             </li>
-                            <?php if (session()->get('level_user') === 'Admin Sistem'): ?>
-                                <li class="menu-item">
-                                    <a
-                                        href="http://localhost:8080/listform"
-                                        class="menu-link">
-                                        <div data-i18n="eCommerce">Kelola Tiket</div>
-                                    </a>
-                                </li>
-                            <?php endif; ?>
+                            <li class="menu-item">
+                                <a
+                                    href="http://localhost:8080/listform"
+                                    class="menu-link">
+                                    <div data-i18n="eCommerce">Kelola Tiket</div>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

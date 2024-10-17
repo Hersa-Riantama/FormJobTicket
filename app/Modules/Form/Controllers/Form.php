@@ -88,7 +88,7 @@ class Form extends BaseController
         //         return $this->response->setJSON(['pesan' => 'Invalid id_kategori value' . $id_kategori]);
         //     }
         // }
-        
+
         $id_tiket = $this->model->getInsertID();
 
         // Insert kelengkapan into tbl_kelengkapan
@@ -169,13 +169,13 @@ class Form extends BaseController
         $AuthModel = new AuthModel();
         // Ambil data user berdasarkan ID dari sesi
         $userId = session()->get('id_user');
-        
+
         if (!empty($userId)) {
             // Ambil data user dari database berdasarkan id_user
             $userData = $AuthModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
-                $allowUser = ['Editor','Admin Sistem','Koord Editor'];
-                if (!in_array($userData['level_user'],$allowUser)) {
+                $allowUser = ['Admin Sistem', 'Editor', 'Koord Editor'];
+                if (!in_array($userData['level_user'], $allowUser)) {
                     echo '<script>alert("Access Denied!!"); history.back();</script>';
                     return;
                 }
@@ -203,8 +203,8 @@ class Form extends BaseController
             // Ambil data user dari database berdasarkan id_user
             $userData = $AuthModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
-                $allowUser = ['Editor','Admin Sistem','Admin Multimedia','Koord Editor'];
-                if (!in_array($userData['level_user'],$allowUser)) {
+                $allowUser = ['Admin Sistem', 'Admin Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
+                if (!in_array($userData['level_user'], $allowUser)) {
                     return $this->response->setJSON([
                         'error' => 'Access Denied'
                     ], 403);

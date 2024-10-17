@@ -59,10 +59,11 @@
 </div>
 <!-- / Layout wrapper -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- <script>
+<script>
     $(document).ready(function() {
         loadData();
     });
+
     function loadData() {
         $.ajax({
             type: 'GET',
@@ -71,105 +72,115 @@
             success: function(data) {
                 // Call API to get categories and books
                 $.when(
-                    $.ajax({ url: 'http://localhost:8080/kategori', dataType: 'json' }),
-                    $.ajax({ url: 'http://localhost:8080/buku', dataType: 'json' }),
-                    $.ajax({ url: 'http://localhost:8080/user', dataType: 'json' })
-                ).done(function(kategoriResponse, bukuResponse, userResponse) {
-                    var kategoriMap = {};
-                    var bukuMap = {};
-                    var userMap = {};
+                        $.ajax({
+                            url: 'http://localhost:8080/kategori',
+                            dataType: 'json'
+                        }),
+                        $.ajax({
+                            url: 'http://localhost:8080/buku',
+                            dataType: 'json'
+                        }),
+                        $.ajax({
+                            url: 'http://localhost:8080/user',
+                            dataType: 'json'
+                        })
+                    ).done(function(kategoriResponse, bukuResponse, userResponse) {
+                        var kategoriMap = {};
+                        var bukuMap = {};
+                        var userMap = {};
 
-                    // Access the arrays inside kategoriResponse and bukuResponse using their keys
-                    var kategoriData = kategoriResponse[0].kategori || []; // Access the 'kategori' array
-                    var bukuData = bukuResponse[0].buku || []; // Access the 'buku' array
-                    var userData = userResponse[0].user || []; // Access the 'user' array
+                        // Access the arrays inside kategoriResponse and bukuResponse using their keys
+                        var kategoriData = kategoriResponse[0].kategori || []; // Access the 'kategori' array
+                        var bukuData = bukuResponse[0].buku || []; // Access the 'buku' array
+                        var userData = userResponse[0].user || []; // Access the 'user' array
 
-                    // Map kategori by id
-                    $.each(kategoriData, function(key, kategori) {
-                        if (kategori.id_kategori && kategori.nama_kategori) {
-                            kategoriMap[kategori.id_kategori] = kategori.nama_kategori;
-                        } else {
-                            console.log('Kategori missing fields:', kategori);
-                        }
-                    });
-
-                    // Map buku by id
-                    $.each(bukuData, function(key, buku) {
-                        if (buku.id_buku && buku.judul_buku) {
-                            bukuMap[buku.id_buku] = buku.judul_buku;
-                        } else {
-                            console.log('Buku missing fields:', buku);
-                        }
-                    });
-
-                    // Map user by id
-                    $.each(userData, function(key, user) {
-                        if (user.id_user && user.nama) {
-                            userMap[user.id_user] = user.nama;
-                        } else {
-                            console.log('User missing fields:', nama);
-                        }
-                    });
-
-                    var formData = '';
-                    $.each(data.tiket, function(key, value) {
-                        // Parse JSON for id_kategori
-                        var id_kategori_array = value.id_kategori; // Ambil data id_kategori
-
-                        // Pastikan data sudah dalam bentuk array
-                        if (typeof id_kategori_array === 'string') {
-                            try {
-                                id_kategori_array = JSON.parse(id_kategori_array); // Parse string menjadi array
-                            } catch (e) {
-                                console.error('Error parsing id_kategori_array:', e);
-                                id_kategori_array = []; // Set default kosong jika parsing gagal
+                        // Map kategori by id
+                        $.each(kategoriData, function(key, kategori) {
+                            if (kategori.id_kategori && kategori.nama_kategori) {
+                                kategoriMap[kategori.id_kategori] = kategori.nama_kategori;
+                            } else {
+                                console.log('Kategori missing fields:', kategori);
                             }
-                        }
+                        });
 
-                        var kategori_names = '';
-                        //Sekarang cek apakah id_kategori_array adalah array
-                        if (Array.isArray(id_kategori_array)) {
-                            var kategori_names = id_kategori_array.map(function(id_kategori) {
-                                return kategoriMap[id_kategori] || 'Unknown Kategori';
-                            }).join(', ');
-                        } else {
-                            console.error('id_kategori_array is not an array:', id_kategori_array);
-                            var kategori_names = 'Unknown Kategori';
-                        }
+                        // Map buku by id
+                        $.each(bukuData, function(key, buku) {
+                            if (buku.id_buku && buku.judul_buku) {
+                                bukuMap[buku.id_buku] = buku.judul_buku;
+                            } else {
+                                console.log('Buku missing fields:', buku);
+                            }
+                        });
 
-                        // var nama_kategori = kategoriMap[value.id_kategori] || 'Unknown Kategori';
-                        var judul_buku = bukuMap[value.id_buku] || 'Unknown Buku';
-                        var nama =userMap[value.id_user] || 'Unknown User';
+                        // Map user by id
+                        $.each(userData, function(key, user) {
+                            if (user.id_user && user.nama) {
+                                userMap[user.id_user] = user.nama;
+                            } else {
+                                console.log('User missing fields:', nama);
+                            }
+                        });
 
-                        // Log the id_kategori and id_buku to check mapping
-                        console.log('Mapping kategori:', value.id_kategori, '->', kategori_names);
-                        console.log('Mapping buku:', value.id_buku, '->', judul_buku);
-                        console.log('Mapping user:', value.id_user, '->', nama);
+                        var formData = '';
+                        $.each(data.tiket, function(key, value) {
+                            // Parse JSON for id_kategori
+                            var id_kategori_array = value.id_kategori; // Ambil data id_kategori
 
-                        formData += '<tr>';
-                        formData += '<td>' + value.kode_form + '</td>';
-                        formData += '<td>' + kategori_names + '</td>';
-                        formData += '<td>' + nama + '</td>';
-                        formData += '<td>' + value.nomor_job + '</td>';
-                        formData += '<td>' + judul_buku + '</td>';
-                        formData += '<td>';
-                        formData += '<div class="dropdown">';
-                        formData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
-                        formData += '<i class="bx bx-dots-horizontal-rounded"></i>';
-                        formData += '</button>';
-                        formData += '<div class="dropdown-menu">';
-                        formData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
-                        formData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '"><i class="bx bx-trash me-2"></i> Delete</a>';
-                        formData += '</div>';
-                        formData += '</div>';
-                        formData += '</td>';
-                        formData += '</tr>';
+                            // Pastikan data sudah dalam bentuk array
+                            if (typeof id_kategori_array === 'string') {
+                                try {
+                                    id_kategori_array = JSON.parse(id_kategori_array); // Parse string menjadi array
+                                } catch (e) {
+                                    console.error('Error parsing id_kategori_array:', e);
+                                    id_kategori_array = []; // Set default kosong jika parsing gagal
+                                }
+                            }
+
+                            var kategori_names = '';
+                            //Sekarang cek apakah id_kategori_array adalah array
+                            if (Array.isArray(id_kategori_array)) {
+                                var kategori_names = id_kategori_array.map(function(id_kategori) {
+                                    return kategoriMap[id_kategori] || 'Unknown Kategori';
+                                }).join(', ');
+                            } else {
+                                console.error('id_kategori_array is not an array:', id_kategori_array);
+                                var kategori_names = 'Unknown Kategori';
+                            }
+
+                            // var nama_kategori = kategoriMap[value.id_kategori] || 'Unknown Kategori';
+                            var judul_buku = bukuMap[value.id_buku] || 'Unknown Buku';
+                            var nama = userMap[value.id_user] || 'Unknown User';
+
+                            // Log the id_kategori and id_buku to check mapping
+                            console.log('Mapping kategori:', value.id_kategori, '->', kategori_names);
+                            console.log('Mapping buku:', value.id_buku, '->', judul_buku);
+                            console.log('Mapping user:', value.id_user, '->', nama);
+
+                            formData += '<tr>';
+                            formData += '<td>' + value.kode_form + '</td>';
+                            formData += '<td>' + kategori_names + '</td>';
+                            formData += '<td>' + nama + '</td>';
+                            formData += '<td>' + value.nomor_job + '</td>';
+                            formData += '<td>' + judul_buku + '</td>';
+                            formData += '<td>';
+                            formData += '<div class="dropdown">';
+                            formData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
+                            formData += '<i class="bx bx-dots-horizontal-rounded"></i>';
+                            formData += '</button>';
+                            formData += '<div class="dropdown-menu">';
+                            formData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
+                            formData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '"><i class="bx bx-trash me-2"></i> Delete</a>';
+                            formData += '</div>';
+                            formData += '</div>';
+                            formData += '</td>';
+                            formData += '</tr>';
+                        });
+
+                        $('#formData').html(formData);
+                    })
+                    .fail(function(jqXHR, textStatus, errorThrown) {
+                        console.error('Error fetching kategori or buku:', textStatus, errorThrown);
                     });
-
-                    $('#formData').html(formData);
-                }).fail(function(jqXHR, textStatus, errorThrown) {
-                    console.error('Error fetching kategori or buku:', textStatus, errorThrown);
-                });
             },
             error: function(xhr, status, error) {
                 console.error('Error fetching List Form:', error);
@@ -178,6 +189,5 @@
         });
 
     }
-
- </script>
+</script>
 <?= $this->endSection(); ?>

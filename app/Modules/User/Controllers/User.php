@@ -30,16 +30,13 @@ class User extends BaseController
         $AuthModel = new AuthModel();
         // Ambil data user berdasarkan ID dari sesi
         $userId = session()->get('id_user');
-        $AuthModel = new AuthModel();
-        // Ambil data user berdasarkan ID dari sesi
-        $userId = session()->get('id_user');
-        
+
         if (!empty($userId)) {
             // Ambil data user dari database berdasarkan id_user
             $userData = $AuthModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
-                $allowUser = ['Editor','Admin Sistem','Koord Editor'];
-                if (!in_array($userData['level_user'],$allowUser)) {
+                $allowUser = ['Admin Sistem', 'Admin Multimedia', 'editor', 'Koord Editor', 'Manager Platform'];
+                if (!in_array($userData['level_user'], $allowUser)) {
                     echo '<script>alert("Access Denied!!"); history.back();</script>';
                     return;
                 }
