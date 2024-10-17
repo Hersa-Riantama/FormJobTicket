@@ -169,7 +169,24 @@ class Form extends BaseController
         $AuthModel = new AuthModel();
         // Ambil data user berdasarkan ID dari sesi
         $userId = session()->get('id_user');
-        $userData = $AuthModel->find($userId);
+        
+        if (!empty($userId)) {
+            // Ambil data user dari database berdasarkan id_user
+            $userData = $AuthModel->find($userId);
+            if ($userData && isset($userData['level_user'])) {
+                $allowUser = ['Editor','Admin Sistem','Koord Editor'];
+                if (!in_array($userData['level_user'],$allowUser)) {
+                    echo '<script>alert("Access Denied!!"); history.back();</script>';
+                    return;
+                }
+            } else {
+                echo '<script>alert("Level user tidak ditemukan."); history.back();</script>';
+                return;
+            }
+        } else {
+            echo '<script>alert("User not found or session invalid."); history.back();</script>';
+            return;
+        }
         $data = [
             'judul' => 'Form QR Code',
             'userData' => $userData,
