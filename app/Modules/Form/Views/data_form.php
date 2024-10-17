@@ -70,7 +70,7 @@
             url: 'http://localhost:8080/listform',
             dataType: 'json',
             success: function(data) {
-                // Call API to get categories and books
+                // Call API to get categories, books and user 
                 $.when(
                         $.ajax({
                             url: 'http://localhost:8080/kategori',
