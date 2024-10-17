@@ -203,7 +203,7 @@ class Form extends BaseController
             // Ambil data user dari database berdasarkan id_user
             $userData = $AuthModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
-                $allowUser = ['Editor','Admin Sistem','Admin Multimedia','Koord Editor'];
+                $allowUser = ['Editor','Admin Sistem','Admin Multimedia','Manager Platform','Koord Editor'];
                 if (!in_array($userData['level_user'],$allowUser)) {
                     return $this->response->setJSON([
                         'error' => 'Access Denied'
