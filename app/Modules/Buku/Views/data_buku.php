@@ -18,15 +18,12 @@ use Modules\Auth\Models\AuthModel;?>
                 $userData = $AuthModel->find($userId);
 
                 if ($userData && isset($userData['level_user'])) {
-                    // Define allowed roles for the "Tambah Buku" button
                     $allowUser = ['Editor', 'Koord Editor'];
-                    
-                    // Kondisi untuk menampilkan tombol tambah buku hanya untuk Editor dan Koor Editor
                     if (in_array($userData['level_user'], $allowUser)) {
         ?>
-                        <div class="col-xl-auto mb-4 justify-content-end">
-                            <button class="btn btn-primary d-grid" id="btn-add">Tambah Buku</button>
-                        </div>
+                <div class="col-xl-auto mb-4 justify-content-end">
+                    <button class="btn btn-primary d-grid" id="btn-add">Tambah Buku</button>
+                </div>
         <?php
                     }
                 } else {
