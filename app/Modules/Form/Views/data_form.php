@@ -126,6 +126,7 @@
                             }
                         }
 
+                        var kategori_names = '';
                         //Sekarang cek apakah id_kategori_array adalah array
                         if (Array.isArray(id_kategori_array)) {
                             var kategori_names = id_kategori_array.map(function(id_kategori) {

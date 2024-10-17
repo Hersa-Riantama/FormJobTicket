@@ -203,18 +203,21 @@ class Form extends BaseController
             // Ambil data user dari database berdasarkan id_user
             $userData = $AuthModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
-                $allowUser = ['Editor','Admin Sistem','Koord Editor'];
+                $allowUser = ['Editor','Admin Sistem','Admin Multimedia','Koord Editor'];
                 if (!in_array($userData['level_user'],$allowUser)) {
-                    echo '<script>alert("Access Denied!!"); history.back();</script>';
-                    return;
+                    return $this->response->setJSON([
+                        'error' => 'Access Denied'
+                    ], 403);
                 }
             } else {
-                echo '<script>alert("Level user tidak ditemukan."); history.back();</script>';
-                return;
+                return $this->response->setJSON([
+                    'error' => 'Level user tidak ditemukan.'
+                ], 400);
             }
         } else {
-            echo '<script>alert("User not found or session invalid."); history.back();</script>';
-            return;
+            return $this->response->setJSON([
+                'error' => 'User not found or session invalid.'
+            ], 400);
         }
         $data = $model->getTiket();
         if ($this->request->isAJAX()) {
