@@ -197,39 +197,54 @@ class Form extends BaseController
     {
         $model = new FormModel();
         $AuthModel = new AuthModel();
+        
         // Ambil data user berdasarkan ID dari sesi
         $userId = session()->get('id_user');
-        if (!empty($userId)) {
-            // Ambil data user dari database berdasarkan id_user
-            $userData = $AuthModel->find($userId);
-            if ($userData && isset($userData['level_user'])) {
-                $allowUser = ['Admin Sistem', 'Admin Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
-                if (!in_array($userData['level_user'], $allowUser)) {
-                    return $this->response->setJSON([
-                        'error' => 'Access Denied'
-                    ], 403);
-                }
-            } else {
-                return $this->response->setJSON([
-                    'error' => 'Level user tidak ditemukan.'
-                ], 400);
-            }
-        } else {
+        if (empty($userId)) {
+            // Kembalikan JSON error jika session tidak valid
             return $this->response->setJSON([
                 'error' => 'User not found or session invalid.'
             ], 400);
         }
-        $data = $model->getTiket();
-        if ($this->request->isAJAX()) {
-            return $this->response->setJSON(['tiket' => $data]);
+        
+        // Ambil data user dari database berdasarkan id_user
+        $userData = $AuthModel->find($userId);
+        if (!$userData || !isset($userData['level_user'])) {
+            // Kembalikan error JSON jika level user tidak ditemukan
+            return $this->response->setJSON([
+                'error' => 'Level user tidak ditemukan.'
+            ], 400);
         }
+        
+        // Cek apakah level user diizinkan
+        $allowUser = ['Admin Sistem', 'Admin Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
+        if (!in_array($userData['level_user'], $allowUser)) {
+            // Kembalikan error JSON jika akses ditolak
+            return $this->response->setJSON([
+                'error' => 'Access Denied'
+            ], 403);
+        }
+
+        // Ambil data tiket dari model
+        $data = $model->getTiket();
+
+        // Jika permintaan adalah AJAX, kembalikan data dalam bentuk JSON
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON([
+                'tiket' => $data
+            ]);
+        }
+
+        // Jika bukan AJAX request, tampilkan halaman view
         $Tdata = [
             'tiket' => $data,
             'judul' => 'Kelola Tiket',
             'userData' => $userData,
         ];
+
         return view($this->folder_directory . 'data_form', $Tdata);
     }
+
     public function listTiket()
     {
         $tiketModel = new FormModel();

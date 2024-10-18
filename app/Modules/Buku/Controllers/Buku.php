@@ -30,7 +30,7 @@ class Buku extends BaseController
         if ($data['data_buku'] == null) {
             return $this->failNotFound('Data Buku Tidak ditemukan');
         }
-        return $this->respond($data, 200);
+        return $this->response->setJSON($data, 200);
     }
     public function index()
     {
@@ -47,8 +47,7 @@ class Buku extends BaseController
         $userId = session()->get('id_user');
         $userData = $AuthModel->find($userId);
         if ($this->request->isAJAX()) {
-            // Respond with JSON for AJAX requests (e.g., for your DataTables or API use)
-            return $this->respond(['buku' => $data]);
+            return $this->response->setJSON(['buku' => $data]);
         }
         $Vdata = [
             'buku' => $data,

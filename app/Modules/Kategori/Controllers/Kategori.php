@@ -37,7 +37,7 @@ class Kategori extends BaseController
         $data = $kategorimodel->getKategori();
         if ($this->request->isAJAX()) {
             // Respond with JSON for AJAX requests (e.g., for your DataTables or API use)
-            return $this->respond(['kategori' => $data]);
+            return $this->response->setJSON(['kategori' => $data]);
         }
         $Vdata = [
             'kategori' => $data,

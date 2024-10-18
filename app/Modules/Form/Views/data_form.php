@@ -70,6 +70,7 @@
             url: 'http://localhost:8080/listform',
             dataType: 'json',
             success: function(data) {
+                console.log('Data retrieved:', data);
                 // Call API to get categories, books and user 
                 $.when(
                         $.ajax({
@@ -85,9 +86,6 @@
                             dataType: 'json'
                         })
                     ).done(function(kategoriResponse, bukuResponse, userResponse) {
-                        // console.log('Kategori Response:', kategoriResponse);
-                        // console.log('Buku Response:', bukuResponse);
-                        // console.log('User Response:', userResponse);
                         var kategoriMap = {};
                         var bukuMap = {};
                         var userMap = {};
@@ -183,11 +181,12 @@
                     })
                     .fail(function(jqXHR, textStatus, errorThrown) {
                         console.error('Error fetching kategori or buku:', textStatus, errorThrown);
-                        // console.log('Response Text:', jqXHR.responseText); // Lihat respons dari server
+                        console.log('Response Text:', jqXHR.responseText); // Lihat respons dari server
                     });
             },
             error: function(xhr, status, error) {
                 console.error('Error fetching List Form:', error);
+                console.error('Response text:', xhr.responseText); // Log isi response
                 alert('Failed to fetch data from API.');
             }
         });
