@@ -32,24 +32,20 @@ class User extends BaseController
         $userId = session()->get('id_user');
 
         if (!empty($userId)) {
-            // Ambil data user dari database berdasarkan id_user
             $userData = $AuthModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
                 $allowUser = ['Admin Sistem'];
                 if (!in_array($userData['level_user'], $allowUser)) {
-                    return $this->response->setJSON([
-                        'error' => 'Access Denied'
-                    ], 403);
+                    echo '<script>alert("Access Denied!!"); history.back();</script>';
+                    return;
                 }
             } else {
-                return $this->response->setJSON([
-                    'error' => 'Level User Tidak ditemukan'
-                ], 403);
+                echo '<script>alert("Level user tidak ditemukan."); history.back();</script>';
+                return;
             }
         } else {
-            return $this->response->setJSON([
-                'error' => 'User not found or session invalid.'
-            ], 403);
+            echo '<script>alert("User not found or session invalid."); history.back();</script>';
+            return;
         }
         $model = new UserModel();
         $data = $model->getUser();

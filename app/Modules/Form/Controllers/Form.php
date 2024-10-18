@@ -211,13 +211,16 @@ class Form extends BaseController
             if ($userData && isset($userData['level_user'])) {
                 $allowUser = ['Admin Sistem', 'Admin Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
                 if (!in_array($userData['level_user'], $allowUser)) {
-                    return $this->response->setJSON(['error' => 'Access Denied'], 403);
+                    echo '<script>alert("Access Denied!!"); history.back();</script>';
+                    return;
                 }
             } else {
-                return $this->response->setJSON(['error' => 'Level user tidak ditemukan.'], 400);
+                echo '<script>alert("Level user tidak ditemukan."); history.back();</script>';
+                return;
             }
         } else {
-            return $this->response->setJSON(['error' => 'User not found or session invalid.'], 400);
+            echo '<script>alert("User not found or session invalid."); history.back();</script>';
+            return;
         }
 
         // Ambil data tiket, kategori, buku, dan user dari database
