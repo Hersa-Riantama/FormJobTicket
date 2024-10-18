@@ -7,17 +7,20 @@ use App\Modules\Buku\Models\BukuModel;
 use Modules\Auth\Models\AuthModel;
 use Modules\Form\Models\FormModel;
 use Modules\Kategori\Models\KategoriModel;
+use Modules\User\Models\UserModel;
 
 class Form extends BaseController
 {
     protected $model;
     protected $AuthModel;
+    protected $UserModel;
     protected $folder_directory = "Modules\\Form\\Views\\";
 
     public function __construct()
     {
         $this->model = new FormModel(); // Inisialisasi model
         $this->AuthModel = new AuthModel();
+        $this->UserModel = new UserModel();
         $this->session = session();
     }
 
@@ -193,49 +196,45 @@ class Form extends BaseController
         ];
         return view($this->folder_directory . 'form', $data);
     }
+
     public function data_form()
     {
         $model = new FormModel();
         $AuthModel = new AuthModel();
-        
-        // Ambil data user berdasarkan ID dari sesi
+        $KategoriModel = new KategoriModel();
+        $BukuModel = new BukuModel();
+        $UserModel = new UserModel();
+
         $userId = session()->get('id_user');
-        if (empty($userId)) {
-            // Kembalikan JSON error jika session tidak valid
-            return $this->response->setJSON([
-                'error' => 'User not found or session invalid.'
-            ], 400);
-        }
-        
-        // Ambil data user dari database berdasarkan id_user
-        $userData = $AuthModel->find($userId);
-        if (!$userData || !isset($userData['level_user'])) {
-            // Kembalikan error JSON jika level user tidak ditemukan
-            return $this->response->setJSON([
-                'error' => 'Level user tidak ditemukan.'
-            ], 400);
-        }
-        
-        // Cek apakah level user diizinkan
-        $allowUser = ['Admin Sistem', 'Admin Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
-        if (!in_array($userData['level_user'], $allowUser)) {
-            // Kembalikan error JSON jika akses ditolak
-            return $this->response->setJSON([
-                'error' => 'Access Denied'
-            ], 403);
+        if (!empty($userId)) {
+            $userData = $AuthModel->find($userId);
+            if ($userData && isset($userData['level_user'])) {
+                $allowUser = ['Admin Sistem', 'Admin Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
+                if (!in_array($userData['level_user'], $allowUser)) {
+                    return $this->response->setJSON(['error' => 'Access Denied'], 403);
+                }
+            } else {
+                return $this->response->setJSON(['error' => 'Level user tidak ditemukan.'], 400);
+            }
+        } else {
+            return $this->response->setJSON(['error' => 'User not found or session invalid.'], 400);
         }
 
-        // Ambil data tiket dari model
+        // Ambil data tiket, kategori, buku, dan user dari database
         $data = $model->getTiket();
+        $kategoriData = $KategoriModel->findAll();
+        $bukuData = $BukuModel->findAll();
+        $userDataList = $UserModel->findAll();
 
-        // Jika permintaan adalah AJAX, kembalikan data dalam bentuk JSON
         if ($this->request->isAJAX()) {
             return $this->response->setJSON([
-                'tiket' => $data
+                'tiket' => $data,
+                'kategori' => $kategoriData,
+                'buku' => $bukuData,
+                'user' => $userDataList
             ]);
         }
 
-        // Jika bukan AJAX request, tampilkan halaman view
         $Tdata = [
             'tiket' => $data,
             'judul' => 'Kelola Tiket',
@@ -253,4 +252,43 @@ class Form extends BaseController
         // Debug output
         return $this->response->setJSON($tiket);
     }
+
+    // data_form() Lama
+    // public function data_form()
+    // {
+    //     $model = new FormModel();
+    //     $AuthModel = new AuthModel();
+    //     // Ambil data user berdasarkan ID dari sesi
+    //     $userId = session()->get('id_user');
+    //     if (!empty($userId)) {
+    //         // Ambil data user dari database berdasarkan id_user
+    //         $userData = $AuthModel->find($userId);
+    //         if ($userData && isset($userData['level_user'])) {
+    //             $allowUser = ['Admin Sistem', 'Admin Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
+    //             if (!in_array($userData['level_user'], $allowUser)) {
+    //                 return $this->response->setJSON([
+    //                     'error' => 'Access Denied'
+    //                 ], 403);
+    //             }
+    //         } else {
+    //             return $this->response->setJSON([
+    //                 'error' => 'Level user tidak ditemukan.'
+    //             ], 400);
+    //         }
+    //     } else {
+    //         return $this->response->setJSON([
+    //             'error' => 'User not found or session invalid.'
+    //         ], 400);
+    //     }
+    //     $data = $model->getTiket();
+    //     if ($this->request->isAJAX()) {
+    //         return $this->response->setJSON(['tiket' => $data]);
+    //     }
+    //     $Tdata = [
+    //         'tiket' => $data,
+    //         'judul' => 'Kelola Tiket',
+    //         'userData' => $userData,
+    //     ];
+    //     return view($this->folder_directory . 'data_form', $Tdata);
+    // }
 }
