@@ -433,7 +433,7 @@
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
-                                                            <p class="text-center mb-0 px-1" style="font-size:x-small;">nama</p>
+                                                            <p class="text-center mb-0 px-1" style="font-size:x-small;">Andini</p>
                                                             <p class="text-center text-primary rounded-bottom mb-0" style="font-size:x-small;background-color:pink; padding: 0.725rem 0 0.725rem;">Admin</p>
                                                         </div>
                                                     </div>
