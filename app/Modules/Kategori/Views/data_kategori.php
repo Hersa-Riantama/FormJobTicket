@@ -10,31 +10,9 @@ use Modules\Auth\Models\AuthModel; ?>
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-3 mb-4"><span class="text-muted fw-light">Kategori /</span> Kelola Kategori</h4>
         <div class="row justify-content-end">
-            <?php
-            // Ambil data user dari sesi
-            $AuthModel = new AuthModel();
-            $userId = session()->get('id_user');
-
-            if (!empty($userId)) {
-                // Ambil data user dari database
-                $userData = $AuthModel->find($userId);
-
-                if ($userData && isset($userData['level_user'])) {
-                    $allowUser = ['Editor', 'Koord Editor'];
-                    if (in_array($userData['level_user'], $allowUser)) {
-            ?>
-                        <div class="col-xl-auto mb-4 justify-content-end">
-                            <button class="btn btn-primary d-grid" id="btn-add">Tambah Kategori</button>
-                        </div>
-            <?php
-                    }
-                } else {
-                    echo '<script>alert("Level user tidak ditemukan."); history.back();</script>';
-                }
-            } else {
-                echo '<script>alert("User tidak ditemukan atau sesi tidak valid."); history.back();</script>';
-            }
-            ?>
+            <!-- <div class="col-xl-auto mb-4 justify-content-end">
+                <button class="btn btn-primary d-grid" id="btn-add">Tambah Kategori</button>
+            </div> -->
         </div>
 
         <!-- Basic Bootstrap Table -->
@@ -54,6 +32,28 @@ use Modules\Auth\Models\AuthModel; ?>
             </div>
         </div>
         <!--/ Basic Bootstrap Table -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="editForm" action="javascript:void(0);" method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Edit Kategori</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="nama_kategori" class="form-label">Nama Kategori</label>
+                                <input type="text" class="form-control" id="nama_kategori" name="nama_kategori" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" id="btn-update" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     </div>
     <!-- / Content -->
@@ -117,5 +117,72 @@ use Modules\Auth\Models\AuthModel; ?>
             }
         });
     }
+    $(document).on('click','.dropdown-item-edit',function(){
+        var id_kategori = $(this).data('id_kategori');
+        if (!id_kategori) {
+            console.log('ID Kategori :',id_kategori);
+            return;
+        }
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/kategori/' + id_kategori,
+            dataType: 'json',
+            success: function(response){
+                if (response.data_kategori) {
+                    $('#nama_kategori').val(response.data_kategori.nama_kategori);
+                    $('#btn-update').data('id_kategori', response.data_kategori.id_kategori);
+                } else{
+                    console.log('Data kategori tidak ditemukan');
+                }
+                $('#editModal').modal('show');
+            },
+            error: function(xhr, status, error) {
+                console.log('Error:', xhr.responseText); // Log jika terjadi error
+            }
+        });
+    });
+    // Fungsi untuk update data
+    $(document).on('click', '#btn-update', function() {
+        var id_kategori = $(this).data('id_kategori');
+        console.log(id_kategori);
+        if (!id_kategori) {
+            console.log('ID Kategori tidak ditemukan!'); // Log jika ID tidak ada
+            return; // Hentikan eksekusi jika ID tidak valid
+        }
+        if (id_kategori) {
+            var nama_kategori = $('#nama_kategori').val();
+
+            $('#editModal').modal('show');
+            $.ajax({
+                type: 'PUT',
+                url: 'http://localhost:8080/kategori/' + id_kategori,
+                data: JSON.stringify({
+                    nama_kategori: nama_kategori,
+                }),
+                contentType: 'application/json',
+                success: function(response) {
+                    console.log('Response:', response);
+                    loadData();
+                    $('#editModal').modal('hide');
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error:', xhr.responseText);
+                }
+            });
+        } else {
+            console.log('ID Kategori tidak ditemukan pada tombol');
+        }
+    });
+    // Fungsi untuk delete data
+    $(document).on('click', '.dropdown-item-delete', function() {
+        var id_kategori = $(this).data('id_kategori');
+        $.ajax({
+            type: 'DELETE',
+            url: 'http://localhost:8080/kategori/' + id_kategori,
+            success: function() {
+                loadData();
+            }
+        });
+    });
 </script>
 <?= $this->endSection(); ?>

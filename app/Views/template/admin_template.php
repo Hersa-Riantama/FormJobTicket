@@ -48,8 +48,8 @@
     <script src="../assets/js/config.js"></script>
 
     <!-- Datatables -->
-    <link rel="stylesheet" href="//cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css" />
-    <script src="//cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+    <!-- <link rel="stylesheet" href="//cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css" /> -->
+    <!-- <script src="//cdn.datatables.net/2.1.8/js/dataTables.min.js"></script> -->
 </head>
 
 <body>

@@ -16,6 +16,7 @@ class Kategori extends BaseController
 
     public function __construct()
     {
+        $this->model = new KategoriModel();
         $this->AuthModel = new AuthModel();
     }
 
@@ -25,6 +26,18 @@ class Kategori extends BaseController
             'judul' => 'Kelola Kategori',
         ];
         return view($this->folder_directory . 'index', $data);
+    }
+
+    public function show($id_kategori = null)
+    {
+        $data = [
+            'pesan' => 'Berhasil Mendapatkan Data Kategori',
+            'data_kategori' => $this->model->find($id_kategori)
+        ];
+        if ($data['data_kategori'] == null) {
+            return $this->failNotFound('Data Kategori Tidak ditemukan');
+        }
+        return $this->response->setJSON($data, 200);
     }
 
     public function data_kategori()
@@ -62,5 +75,48 @@ class Kategori extends BaseController
             'userData' => $userData,
         ];
         return view($this->folder_directory . 'data_kategori', $Vdata);
+    }
+    public function update($id_kategori = null)
+    {
+        // $authHeader = $this->request->getHeader('Authorization');
+        // // Mengecek apakah Authorization header valid
+        // if ($authHeader && $authHeader->getValue() === $this->value) {
+
+        // } else {
+        //     // Jika Authorization header tidak valid
+        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
+        // }
+        $kategori = $this->model->find($id_kategori);
+        if ($kategori == null) {
+            return $this->failNotFound('Data kategori dengan ID tersebut tidak ditemukan');
+        }
+        log_message('debug', 'ID kategori yang diterima: ' . $id_kategori);
+        $kategori = [
+            'nama_kategori' => esc($this->request->getVar('nama_kategori')),
+        ];
+        $this->model->update($id_kategori, $kategori);
+        return $this->respondUpdated([
+            'pesan' => 'Data Kategori Berhasil di update',
+            'data_kategori' => $kategori
+        ]);
+    }
+    public function delete($id_kategori = null)
+    {
+        // $authHeader = $this->request->getHeader('Authorization');
+        // // Mengecek apakah Authorization header valid
+        // if ($authHeader && $authHeader->getValue() === $this->value) {
+        // } else {
+        //     // Jika Authorization header tidak valid
+        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
+        // }
+        $kategori = $this->model->find($id_kategori);
+        if (!$kategori) {
+            return $this->failNotFound('Data kategori tidak ditemukan');
+        }
+        $this->model->delete($id_kategori);
+        $response = [
+            'pesan' => 'Data kategori berhasil dihapus'
+        ];
+        return $this->respondDeleted($response, 200);
     }
 }
