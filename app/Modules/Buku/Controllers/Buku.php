@@ -160,7 +160,7 @@ class Buku extends BaseController
             // Ambil data user dari database berdasarkan id_user
             $userData = $AuthModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
-                $allowUser = ['Admin Sistem', 'Admin Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
+                $allowUser = ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
                 if (!in_array($userData['level_user'], $allowUser)) {
                     echo '<script>alert("Access Denied!!"); history.back();</script>';
                     return;

@@ -209,7 +209,7 @@ class Form extends BaseController
         if (!empty($userId)) {
             $userData = $AuthModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
-                $allowUser = ['Admin Sistem', 'Admin Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
+                $allowUser = ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
                 if (!in_array($userData['level_user'], $allowUser)) {
                     echo '<script>alert("Access Denied!!"); history.back();</script>';
                     return;
@@ -255,43 +255,4 @@ class Form extends BaseController
         // Debug output
         return $this->response->setJSON($tiket);
     }
-
-    // data_form() Lama
-    // public function data_form()
-    // {
-    //     $model = new FormModel();
-    //     $AuthModel = new AuthModel();
-    //     // Ambil data user berdasarkan ID dari sesi
-    //     $userId = session()->get('id_user');
-    //     if (!empty($userId)) {
-    //         // Ambil data user dari database berdasarkan id_user
-    //         $userData = $AuthModel->find($userId);
-    //         if ($userData && isset($userData['level_user'])) {
-    //             $allowUser = ['Admin Sistem', 'Admin Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
-    //             if (!in_array($userData['level_user'], $allowUser)) {
-    //                 return $this->response->setJSON([
-    //                     'error' => 'Access Denied'
-    //                 ], 403);
-    //             }
-    //         } else {
-    //             return $this->response->setJSON([
-    //                 'error' => 'Level user tidak ditemukan.'
-    //             ], 400);
-    //         }
-    //     } else {
-    //         return $this->response->setJSON([
-    //             'error' => 'User not found or session invalid.'
-    //         ], 400);
-    //     }
-    //     $data = $model->getTiket();
-    //     if ($this->request->isAJAX()) {
-    //         return $this->response->setJSON(['tiket' => $data]);
-    //     }
-    //     $Tdata = [
-    //         'tiket' => $data,
-    //         'judul' => 'Kelola Tiket',
-    //         'userData' => $userData,
-    //     ];
-    //     return view($this->folder_directory . 'data_form', $Tdata);
-    // }
 }

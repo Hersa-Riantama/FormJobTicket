@@ -106,7 +106,7 @@
                                 <select class="form-select" name="level_user" aria-label="Default select example" required>
                                     <option selected disabled>Pilih Level User</option>
                                     <option value="1">Admin Sistem</option>
-                                    <option value="2">Admin Multimedia</option>
+                                    <option value="2">Tim Multimedia</option>
                                     <option value="3">Editor</option>
                                     <option value="4">Koord. Editor</option>
                                     <option value="5">Manager Platform</option>
