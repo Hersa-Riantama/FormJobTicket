@@ -45,6 +45,23 @@ class Buku extends BaseController
         $data = $model->getBuku();
         // Ambil data user berdasarkan ID dari sesi
         $userId = session()->get('id_user');
+        if (!empty($userId)) {
+            // Ambil data user dari database berdasarkan id_user
+            $userData = $AuthModel->find($userId);
+            if ($userData && isset($userData['level_user'])) {
+                $allowUser = ['Admin Sistem', 'Editor', 'Koord Editor'];
+                if (!in_array($userData['level_user'], $allowUser)) {
+                    echo '<script>alert("Access Denied!!"); history.back();</script>';
+                    return;
+                }
+            } else {
+                echo '<script>alert("Level user tidak ditemukan."); history.back();</script>';
+                return;
+            }
+        } else {
+            echo '<script>alert("User not found or session invalid."); history.back();</script>';
+            return;
+        }
         $userData = $AuthModel->find($userId);
         if ($this->request->isAJAX()) {
             return $this->response->setJSON(['buku' => $data]);
@@ -71,7 +88,7 @@ class Buku extends BaseController
             // Ambil data user dari database berdasarkan id_user
             $userData = $AuthModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
-                $allowUser = ['Editor', 'Koord Editor'];
+                $allowUser = ['Admin Sistem', 'Editor', 'Koord Editor'];
                 if (!in_array($userData['level_user'], $allowUser)) {
                     echo '<script>alert("Access Denied!!"); history.back();</script>';
                     return;
@@ -160,7 +177,7 @@ class Buku extends BaseController
             // Ambil data user dari database berdasarkan id_user
             $userData = $AuthModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
-                $allowUser = ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
+                $allowUser = ['Admin Sistem', 'Editor', 'Koord Editor'];
                 if (!in_array($userData['level_user'], $allowUser)) {
                     echo '<script>alert("Access Denied!!"); history.back();</script>';
                     return;
