@@ -78,19 +78,6 @@ class Form extends BaseController
             // JSON tidak valid, tangani kesalahan
             echo 'Invalid JSON format';
         }
-        // // Get selected id_kategori from checkboxes
-        // $id_kategoris = $this->request->getVar('id_kategori'); // This should be an array
-        // // Check if id_kategori is provided
-        // if (empty($id_kategoris) || !is_array($id_kategoris)) {
-        //     return $this->response->setJSON(['pesan' => 'id_kategori is required']);
-        // }
-        // // Loop through the selected id_kategori and insert them into tbl_tiket
-        // foreach ($id_kategoris as $id_kategori) {
-        //     // Make sure id_kategori is a number or valid value
-        //     if (!is_numeric($id_kategori)) {
-        //         return $this->response->setJSON(['pesan' => 'Invalid id_kategori value' . $id_kategori]);
-        //     }
-        // }
 
         $id_tiket = $this->model->getInsertID();
 
