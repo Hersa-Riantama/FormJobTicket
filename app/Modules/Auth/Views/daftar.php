@@ -129,7 +129,7 @@
 
                             <div class="mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
+                                    <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" required />
                                     <label class="form-check-label" for="terms-conditions">
                                         Saya setuju dengan
                                         <a href="javascript:void(0);">kebijakan privasi & ketentuan</a>
