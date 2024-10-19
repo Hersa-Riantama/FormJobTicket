@@ -32,6 +32,7 @@ class User extends BaseController
         $userId = session()->get('id_user');
 
         if (!empty($userId)) {
+            // Ambil data user dari database berdasarkan id_user
             $userData = $AuthModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
                 $allowUser = ['Admin Sistem'];
