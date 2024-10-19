@@ -9,7 +9,7 @@
             <div class="row">
 
                 <!-- Column 1 -->
-                <?php if (session()->get('level_user') === 'Admin Sistem'): ?>
+                <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Admin Sistem'])) : ?>
                     <div class="col-lg-auto col-md-auto col-auto mb-4">
                         <div class="card h-100">
                             <div class="card-body">
@@ -19,35 +19,37 @@
                             </div>
                         </div>
                     </div>
-                <?php endif; ?>
-                <!-- / Column 1 -->
+                    <!-- / Column 1 -->
 
-                <!-- Column 2 -->
-                <div class="col-lg-auto col-md-auto col-auto mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Kategori</span>
-                            <h3 class="card-title text-center fs-1 my-3"><?= $kategori; ?></h3>
-                            <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/kategori">Selengkapnya</a>
+                    <!-- Column 2 -->
+                    <div class="col-lg-auto col-md-auto col-auto mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Kategori</span>
+                                <h3 class="card-title text-center fs-1 my-3"><?= $kategori; ?></h3>
+                                <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/kategori">Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
                 <!-- / Column 2 -->
 
                 <!-- Column 3 -->
-                <div class="col-lg-auto col-md-auto col-auto mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Buku</span>
-                            <h3 class="card-title text-center fs-1 my-3"><?= $buku; ?></h3>
-                            <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/buku">Selengkapnya</a>
+                <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Admin Sistem', 'Editor', 'Koord Editor'])) : ?>
+                    <div class="col-lg-auto col-md-auto col-auto mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Buku</span>
+                                <h3 class="card-title text-center fs-1 my-3"><?= $buku; ?></h3>
+                                <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/buku">Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
                 <!-- / Column 3 -->
 
                 <!-- Column 4 -->
-                <?php if (session()->get('level_user') === 'Admin Sistem'): ?>
+                <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'])) : ?>
                     <div class="col-lg-auto col-md-auto col-auto mb-4">
                         <div class="card h-100">
                             <div class="card-body">
