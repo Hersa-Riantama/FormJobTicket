@@ -14,13 +14,13 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>Status User</th>
                             <th>Nama</th>
                             <th>Nomer Induk</th>
                             <th>Email</th>
                             <th>No.Telepon</th>
                             <th>Jenis Kelamin</th>
                             <th>Level User</th>
-                            <th>Status User</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -74,19 +74,18 @@
                 var UserData = '';
                 $.each(data.user, function(key, value) {
                     UserData += '<tr>';
-                    UserData += '<td>' + value.nama + '</td>';
-                    UserData += '<td>' + value.nomor_induk + '</td>';
-                    UserData += '<td>' + value.email + '</td>';
-                    UserData += '<td>' + value.no_tlp + '</td>';
-                    UserData += '<td>' + value.jk + '</td>';
-                    UserData += '<td>' + value.level_user + '</td>';
-
                     // Tombol Verifikasi (Hanya muncul jika user belum diverifikasi)
                     if (value.verifikasi === 'N') { // Jika user belum diverifikasi
                         UserData += '<td><button class="badge btn btn-danger btn-verify" data-id_user="' + value.id_user + '">Verifikasi</button></td>';
                     } else {
                         UserData += '<td><span class="badge bg-success">Terverifikasi</span></td>';
                     }
+                    UserData += '<td>' + value.nama + '</td>';
+                    UserData += '<td>' + value.nomor_induk + '</td>';
+                    UserData += '<td>' + value.email + '</td>';
+                    UserData += '<td>' + value.no_tlp + '</td>';
+                    UserData += '<td>' + value.jk + '</td>';
+                    UserData += '<td>' + value.level_user + '</td>';
 
                     UserData += '<td>';
                     UserData += '<div class="dropdown">';
