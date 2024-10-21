@@ -65,11 +65,33 @@
             </div>
             <!-- / Row 1 -->
 
+            <!-- Modal untuk memilih data -->
+            <div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="dataModalLabel">Pilih Koord. Editor</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" hidden>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <select id="dataSelect" class="form-control">
+                                <!-- Pilihan akan diisi dengan data dari database -->
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="saveDataBtn" class="btn btn-primary">Simpan Pilihan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <!-- / Content -->
 
         <!-- Footer -->
-        <footer class="content-footer footer bg-footer-theme">
+        <footer class=" content-footer footer bg-footer-theme">
             <div class="container-xxl d-flex flex-wrap justify-content-center py-2 flex-md-row flex-column">
                 <div class="mb-2 mb-md-0">
                     ©
@@ -94,4 +116,104 @@
     <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const idUser = <?= $userData['id_user'] ?>; // Mengambil id_user dari session
+            const dataModal = new bootstrap.Modal(document.getElementById('dataModal'));
+
+            // Panggil API untuk mendapatkan status pengguna
+            fetch(`/check-user-status`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.statusText);
+                    }
+                    return response.json(); // Ambil respons sebagai JSON
+                })
+                .then(data => {
+                    console.log(data);
+                    if (data.showModal) {
+                        dataModal.show(); // Tampilkan modal jika perlu
+                        // Cek apakah modal bisa ditutup
+                        if (!data.canCloseModal) {
+                            // Cegah penutupan modal
+                            $('#dataModal').on('hide.bs.modal', function(e) {
+                                e.preventDefault(); // Cegah penutupan
+                            });
+                        }
+                    }
+                })
+                .catch(error => console.error('Error fetching user status:', error));
+
+            const saveButton = document.getElementById('saveDataBtn');
+            const selectInput = document.getElementById('dataSelect');
+
+            selectInput.addEventListener('change', function() {
+                saveButton.disabled = !selectInput.value; // Aktifkan tombol jika ada pilihan
+            });
+
+            saveButton.addEventListener('click', function() {
+                const idKoord = selectInput.value;
+
+                // Kirim pilihan pengguna ke API untuk disimpan
+                fetch('/register-selection', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id_user: idUser,
+                        id_koord: idKoord
+                    })
+                }).then(response => {
+                    if (response.ok) {
+                        dataModal.hide(); // Tutup modal setelah berhasil menyimpan
+                        alert('Pilihan berhasil disimpan!');
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            // Fungsi untuk mengambil data koordinator dari API dan menampilkan di modal
+            function loadKoordinators() {
+                $.ajax({
+                    url: '/koord', // URL endpoint API
+                    method: 'GET',
+                    success: function(data) {
+                        let dataSelect = $('#dataSelect');
+                        dataSelect.empty(); // Kosongkan pilihan sebelumnya
+                        dataSelect.append('<option value="" disabled selected>Pilih Koord. Editor</option>'); // Tambahkan opsi default
+
+                        // Tambahkan opsi berdasarkan data dari database
+                        data.forEach(function(koord) {
+                            dataSelect.append(`<option value="${koord.id_user}">${koord.nama}</option>`); // Pastikan nama field sesuai
+                        });
+                    },
+                    error: function(xhr) {
+                        console.error('Error fetching coordinators:', xhr);
+                    }
+                });
+            }
+
+            // Panggil fungsi untuk memuat koordinator saat modal ditampilkan
+            $('#dataModal').on('show.bs.modal', function() {
+                loadKoordinators();
+            });
+
+            // Simpan pilihan ketika tombol "Simpan Pilihan" ditekan
+            $('#saveDataBtn').click(function() {
+                const selectedKoord = $('#dataSelect').val();
+                if (selectedKoord) {
+                    // Lakukan penyimpanan pilihan di sini
+                    console.log('Selected Koord ID:', selectedKoord);
+                    // Tambahkan AJAX untuk menyimpan pilihan jika diperlukan
+                } else {
+                    alert('Silakan pilih koord. editor.');
+                }
+            });
+        });
+    </script>
     <?= $this->endSection(); ?>

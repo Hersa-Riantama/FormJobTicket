@@ -9,7 +9,7 @@ class GrupModel extends Model
     protected $table            = 'tbl_grup';
     protected $primaryKey       = 'id_grup';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['id_koord','id_editor'];
+    protected $allowedFields    = ['id_koord', 'id_editor'];
 
     // protected bool $allowEmptyInserts = false;
     // protected bool $updateOnlyChanged = true;
@@ -27,8 +27,8 @@ class GrupModel extends Model
     public function validationRules()
     {
         return [
-            'id_koord' => 'required|min_length[3]',
-            'id_editor' => 'required|min_length[3]',
+            'id_koord' => 'required',
+            'id_editor' => 'required',
         ];
     }
 
