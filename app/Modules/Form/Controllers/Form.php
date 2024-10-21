@@ -242,6 +242,22 @@ class Form extends BaseController
         // Debug output
         return $this->response->setJSON($tiket);
     }
+    public function detailForm($id_tiket = null){
+        $AuthModel = new AuthModel();
+        $tiketModel = new FormModel();
+        $userId = session()->get('id_user');
+        $userData = $AuthModel->find($userId);
+        $tiket = $tiketModel->find($id_tiket);
+        if (!$tiket) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Tiket not found");
+        }
+        $data = [
+            'tiket' => $tiket,
+            'judul' => 'Detail Tiket',
+            'userData' => $userData,
+        ];
+        return view($this->folder_directory . 'detailForm', $data);
+    }
 
     // data_form() Lama
     // public function data_form()
