@@ -93,4 +93,12 @@ class User extends BaseController
             'Status' => 'success'
         ]);
     }
+
+    public function getKoord()
+    {
+        $userModel = new UserModel();
+        $koord = $userModel->where('level_user', 'Koord Editor')->findAll(); // Ambil semua data grup
+
+        return $this->respond($koord); // Kembalikan data dalam format JSON
+    }
 }
