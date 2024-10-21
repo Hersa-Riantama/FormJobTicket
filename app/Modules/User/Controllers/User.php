@@ -93,4 +93,15 @@ class User extends BaseController
             'Status' => 'success'
         ]);
     }
+    public function suspendUser($id_user){
+        $userModel = new UserModel();
+        $userModel->update($id_user,[
+            'status_user' => 'nonaktif',
+            'verifikasi' => 'N'
+        ]);
+        return $this->response->setJSON([
+            'status' => 'sukses',
+            'pesan' => 'User sudah Non Aktif',
+        ]);
+    }
 }

@@ -95,7 +95,7 @@
                     UserData += '</button>';
                     UserData += '<div class="dropdown-menu">';
                     UserData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_user="' + value.id_user + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
-                    UserData += '<a class="dropdown-item dropdown-item-delete" style="color: orangered;" href="javascript:void(0);" data-id_user="' + value.id_user + '"><i class="bx bx-user-x me-2"></i> Suspend</a>';
+                    UserData += '<a class="dropdown-item dropdown-item-delete suspend-user" style="color: orangered;" href="javascript:void(0);" data-id_user="' + value.id_user + '"><i class="bx bx-user-x me-2"></i> Suspend</a>';
                     UserData += '</div>';
                     UserData += '</div>';
                     UserData += '</td>';
@@ -132,6 +132,31 @@
             verifikasiUser(id_user);
         }
     });
+    $(document).on('click', '.suspend-user', function() {
+    var id_user = $(this).data('id_user');
+    console.log(id_user);
+    if (confirm('Are you sure you want to suspend this user?')) {
+        $.ajax({
+            url: 'http://localhost:8080/suspend/' + id_user,  // Replace with your actual endpoint
+            type: 'PUT',  // Assuming it's a PUT request to update the user's status
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    alert('User Sudah Suspend');
+                    // Optionally refresh the user list or update the UI
+                    location.reload(); // Reload the page or refresh the user list
+                } else {
+                    alert('Error: ' + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log('AJAX Error:', xhr.responseText);
+                alert('Terjadi Kesalahan saat Suspend user.');
+            }
+        });
+    }
+});
+
 </script>
 <!-- / Layout wrapper -->
 <?= $this->endSection(); ?>
