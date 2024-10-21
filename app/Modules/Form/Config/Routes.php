@@ -26,6 +26,7 @@ $routes->group(
         $routes->get('tampilbuku/(:segment)', 'Form::getBukuDetails/$1');
         $routes->post('form', 'Form::createForm');
         $routes->get('detail/(:segment)', 'Form::detailForm/$1');
+        $routes->delete('delete/(:segment)', 'Form::delete/$1');
     }
 );
 $routes->post('/get-email', '\Modules\User\Controllers\User::getEmail');

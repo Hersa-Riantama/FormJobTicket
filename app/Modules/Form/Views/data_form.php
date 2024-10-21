@@ -155,5 +155,16 @@
     var id_tiket = $(this).data('id_tiket');
     window.location.href = '/detail/' + id_tiket; // Redirect to the detail page
     });
+    // Fungsi untuk delete data
+    $(document).on('click', '.dropdown-item-delete', function() {
+        var id_tiket = $(this).data('id_tiket');
+        $.ajax({
+            type: 'DELETE',
+            url: 'http://localhost:8080/delete/' + id_buku,
+            success: function() {
+                loadData();
+            }
+        });
+    });
 </script>
 <?= $this->endSection(); ?>

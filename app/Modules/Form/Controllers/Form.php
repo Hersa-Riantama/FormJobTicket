@@ -258,6 +258,17 @@ class Form extends BaseController
         ];
         return view($this->folder_directory . 'detailForm', $data);
     }
+    public function delete($id_tiket = null){
+        $tiket = $this->model->find($id_tiket);
+        if (!$tiket) {
+            return $this->failNotFound('Data kategori tidak ditemukan');
+        }
+        $this->model->delete($id_tiket);
+        $response = [
+            'pesan' => 'Data Kategori Berhasil di Hapus'
+        ];
+        return $this->respondDeleted($response,200);
+    }
 
     // data_form() Lama
     // public function data_form()
