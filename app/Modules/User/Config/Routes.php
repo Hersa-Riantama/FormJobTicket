@@ -23,5 +23,6 @@ $routes->group(
     function ($routes) {
         $routes->get('user', 'User::tampil');
         $routes->post('verify_user/(:segment)', 'User::verifyUser/$1');
+        $routes->put('suspend/(:segment)', 'User::suspendUser/$1');
     }
 );
