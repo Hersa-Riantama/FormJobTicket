@@ -94,7 +94,7 @@
                     UserData += '<i class="bx bx-dots-horizontal-rounded"></i>';
                     UserData += '</button>';
                     UserData += '<div class="dropdown-menu">';
-                    UserData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_user="' + value.id_user + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
+                    // UserData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_user="' + value.id_user + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
                     UserData += '<a class="dropdown-item dropdown-item-delete suspend-user" style="color: orangered;" href="javascript:void(0);" data-id_user="' + value.id_user + '"><i class="bx bx-user-x me-2"></i> Suspend</a>';
                     UserData += '</div>';
                     UserData += '</div>';
