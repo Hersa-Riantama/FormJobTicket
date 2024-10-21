@@ -93,7 +93,6 @@ class User extends BaseController
             'Status' => 'success'
         ]);
     }
-<<<<<<< HEAD
 
     public function getKoord()
     {
@@ -101,10 +100,12 @@ class User extends BaseController
         $koord = $userModel->where('level_user', 'Koord Editor')->findAll(); // Ambil semua data grup
 
         return $this->respond($koord); // Kembalikan data dalam format JSON
-=======
-    public function suspendUser($id_user){
+    }
+
+    public function suspendUser($id_user)
+    {
         $userModel = new UserModel();
-        $userModel->update($id_user,[
+        $userModel->update($id_user, [
             'status_user' => 'nonaktif',
             'verifikasi' => 'N'
         ]);
@@ -112,6 +113,5 @@ class User extends BaseController
             'status' => 'sukses',
             'pesan' => 'User sudah Non Aktif',
         ]);
->>>>>>> aff134046d16aa408fabcc59b2c744a44e1ee67f
     }
 }
