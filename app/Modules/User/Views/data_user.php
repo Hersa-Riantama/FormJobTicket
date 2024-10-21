@@ -134,7 +134,6 @@
     });
     $(document).on('click', '.suspend-user', function() {
     var id_user = $(this).data('id_user');
-    console.log(id_user);
     if (confirm('Are you sure you want to suspend this user?')) {
         $.ajax({
             url: 'http://localhost:8080/suspend/' + id_user,  // Replace with your actual endpoint
