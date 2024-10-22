@@ -28,7 +28,6 @@ class Menu extends BaseController
     }
     public function index()
     {
-        $AuthModel = new AuthModel();
         $user = new UserModel();
         $kategori = new KategoriModel();
         $buku = new BukuModel();
@@ -39,7 +38,7 @@ class Menu extends BaseController
 
         if (!empty($userId)) {
             // Ambil data user dari database berdasarkan id_user
-            $userData = $AuthModel->find($userId);
+            $userData = $user->find($userId);
             if ($userData && isset($userData['level_user'])) {
                 $allowUser = ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
                 if (!in_array($userData['level_user'], $allowUser)) {

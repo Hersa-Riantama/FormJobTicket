@@ -56,7 +56,6 @@ class Form extends BaseController
         $kode_buku = esc($this->request->getVar('id_buku'));
         $bukuModel = new BukuModel();
         $AuthModel = new AuthModel();
-        $UserModel = new UserModel();
         $GrupModel = new GrupModel();
         $buku = $bukuModel->where('kode_buku', $kode_buku)->first();
         if (!$buku) {
@@ -174,7 +173,6 @@ class Form extends BaseController
 
     public function form()
     {
-        $AuthModel = new AuthModel();
         $GrupModel = new GrupModel();
         $UserModel = new UserModel();
         // Ambil data user berdasarkan ID dari sesi
@@ -182,7 +180,7 @@ class Form extends BaseController
 
         if (!empty($userId)) {
             // Ambil data user dari database berdasarkan id_user
-            $userData = $AuthModel->find($userId);
+            $userData = $UserModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
                 $allowUser = ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
                 if (!in_array($userData['level_user'], $allowUser)) {
@@ -206,8 +204,7 @@ class Form extends BaseController
             $namaKoord = $koord['nama'];
             $namaMultimedia = '';
         } else if ($userData['level_user'] == 'Koord Editor') {
-            $koord = $UserModel->find($userId);
-            $namaKoord = $koord['nama'];
+            $namaKoord = $userData['nama'];
             $namaEditor = '';
             $namaMultimedia = '';
         } else if ($userData['level_user'] == 'Tim Multimedia') {

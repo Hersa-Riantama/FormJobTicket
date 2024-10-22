@@ -11,12 +11,6 @@ class UserModel extends Model
     protected $useAutoIncrement = true;
     protected $allowedFields    = ['nama', 'nomor_induk', 'email', 'no_tlp', 'jk', 'password', 'avatar', 'verifikasi', 'status_user', 'level_user'];
 
-    // protected bool $allowEmptyInserts = false;
-    // protected bool $updateOnlyChanged = true;
-
-    // protected array $casts = [];
-    // protected array $castHandlers = [];
-
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
@@ -41,12 +35,5 @@ class UserModel extends Model
     public function getUser()
     {
         return $this->findAll();
-    }
-
-    public function getUserWithKoord($idUser)
-    {
-        return $this->select('id_user, level_user') // Pilih kolom yang diperlukan
-            ->where('id_user', $idUser)
-            ->first();
     }
 }
