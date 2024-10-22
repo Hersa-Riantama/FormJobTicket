@@ -34,12 +34,6 @@ class Buku extends BaseController
     }
     public function index()
     {
-        // $authHeader = $this->request->getHeader('Authorization');
-        // if ($authHeader && $authHeader->getValue() === $this->value) {
-
-        // }else {
-        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
-        // }
         $model = new BukuModel();
         $AuthModel = new AuthModel();
         $data = $model->getBuku();
@@ -75,12 +69,6 @@ class Buku extends BaseController
     }
     public function create()
     {
-        // $authHeader = $this->request->getHeader('Authorization');
-        // if ($authHeader && $authHeader->getValue() === $this->value) {
-        // }else {
-        //     // Jika header Authorization tidak valid
-        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
-        // }
         $AuthModel = new AuthModel();
         // Ambil data user berdasarkan ID dari sesi
         $userId = session()->get('id_user');
@@ -123,14 +111,6 @@ class Buku extends BaseController
     }
     public function update($id_buku = null)
     {
-        // $authHeader = $this->request->getHeader('Authorization');
-        // // Mengecek apakah Authorization header valid
-        // if ($authHeader && $authHeader->getValue() === $this->value) {
-
-        // } else {
-        //     // Jika Authorization header tidak valid
-        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
-        // }
         $buku = $this->model->find($id_buku);
         if ($buku == null) {
             return $this->failNotFound('Data Buku dengan ID tersebut tidak ditemukan');
@@ -151,13 +131,6 @@ class Buku extends BaseController
     }
     public function delete($id_buku = null)
     {
-        // $authHeader = $this->request->getHeader('Authorization');
-        // // Mengecek apakah Authorization header valid
-        // if ($authHeader && $authHeader->getValue() === $this->value) {
-        // } else {
-        //     // Jika Authorization header tidak valid
-        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
-        // }
         $buku = $this->model->find($id_buku);
         if (!$buku) {
             return $this->failNotFound('Data Buku tidak ditemukan');

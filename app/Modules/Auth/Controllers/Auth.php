@@ -102,14 +102,6 @@ class Auth extends BaseController
             'logged_in' => true
         ]);
         return $this->response->setJSON($response)->setStatusCode(200);
-        // // Ambil nilai Authorization header
-        // $authHeader = $this->request->getHeader('Authorization');
-        // // Cek apakah header Authorization ada dan nilai key cocok
-        // if ($authHeader && $authHeader->getValue() === $this->value) {
-        // } else {
-        //     // Jika header Authorization tidak valid
-        //     return $this->failUnauthorized('Anda tidak memiliki kunci akses');
-        // }
     }
 
     public function regis()
@@ -141,15 +133,6 @@ class Auth extends BaseController
             'Status' => 'success',
         ];
         return $this->response->setJSON($response)->setStatusCode(200);
-        // // Ambil nilai Authorization header
-        // $authHeader = $this->request->getHeader('Authorization');
-
-        // // Cek apakah header Authorization ada dan nilai key cocok
-        // if ($authHeader && $authHeader->getValue() === $this->value) {
-        // } else {
-        //     // Jika header Authorization tidak valid
-        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
-        // }
     }
 
     public function logout()
