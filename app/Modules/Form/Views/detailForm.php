@@ -313,7 +313,6 @@
                                                     </div>
                                                 </div>
                                                 <p class="text mt-2 mb-0" style="font-size:x-small;">
-                                                    *Tulis tanggal dan nama
                                                 </p>
                                             </div>
 
@@ -352,7 +351,6 @@
                                                     </div>
                                                 </div>
                                                 <p class="text mt-2 mb-0" style="font-size:x-small;">
-                                                    *Diisi oleh tim multimedia
                                                 </p>
                                             </div>
 
@@ -420,7 +418,6 @@
                                                     </div>
                                                 </div>
                                                 <p class="text mt-2 mb-0" style="font-size:x-small;">
-                                                    *Tulis tanggal dan nama
                                                 </p>
                                             </div>
 
@@ -451,7 +448,7 @@
                     <!-- Row 3 -->
                     <div class="row justify-content-center my-3">
                         <div class="col-xl-6">
-                            <button class="btn btn-primary d-grid w-100" id="btnsimpan">Simpan</button>
+                            <button class="btn btn-primary d-grid w-100" id="btnsimpanPerubahan">Simpan Perubahan</button>
                             <p id="errorMessage" class="text-danger" style="display:none;"></p>
                         </div>
                     </div>
