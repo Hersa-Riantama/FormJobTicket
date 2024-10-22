@@ -169,11 +169,17 @@
                     })
                 }).then(response => {
                     if (response.ok) {
+                        // Menghapus event handler yang mencegah modal ditutup
+                        $('#dataModal').off('hide.bs.modal');
+
+                        // Tutup modal setelah menyimpan
+                        $('#dataModal').modal('hide');
                         dataModal.hide(); // Tutup modal setelah berhasil menyimpan
-                        alert('Pilihan berhasil disimpan!');
+                        // alert('Pilihan berhasil disimpan!');
                     }
                 });
             });
+
         });
 
         $(document).ready(function() {
