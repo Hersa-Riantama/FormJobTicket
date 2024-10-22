@@ -160,7 +160,7 @@
         var id_tiket = $(this).data('id_tiket');
         $.ajax({
             type: 'DELETE',
-            url: 'http://localhost:8080/delete/' + id_buku,
+            url: 'http://localhost:8080/delete/' + id_tiket,
             success: function() {
                 loadData();
             }
