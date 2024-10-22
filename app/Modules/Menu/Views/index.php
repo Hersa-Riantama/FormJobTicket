@@ -79,7 +79,7 @@
                             <select id="dataSelect" class="form-control">
                                 <!-- Pilihan akan diisi dengan data dari database -->
                             </select>
-                            <p class="text-bold mt-2 mb-0" style="font-size:x-small;">*Jika Tidak Terdapat Nama Pada Koord. Editor, Mohon Hubungi Koord. Editor Untuk Membuat Akun Terlebih Dahulu</p>
+                            <p class="text-bold mt-2 mb-0" style="font-size:x-small;">*Jika Tidak Terdapat Nama Koord. Editor, Mohon Hubungi Koord. Editor Untuk Membuat Akun Terlebih Dahulu.</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" id="saveDataBtn" class="btn btn-primary">Simpan</button>
