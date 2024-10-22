@@ -16,7 +16,10 @@ class FormModel extends Model
         'id_user',
         'nomor_job',
         'id_buku',
-        'jml_qrcode'
+        'jml_qrcode',
+        'id_editor',
+        'id_koord',
+        'id_multimedia',
     ];
 
     // protected bool $allowEmptyInserts = false;
