@@ -447,15 +447,17 @@
                     </div>
                 </div>
 
-                <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
-                    <!-- Row 3 -->
-                    <div class="row justify-content-center my-3">
-                        <div class="col-xl-6">
-                            <button class="btn btn-primary d-grid w-100" id="btnsimpan">Simpan</button>
-                            <p id="errorMessage" class="text-danger" style="display:none;"></p>
+                <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Editor', 'Tim Multimedia'])) : ?>
+                    <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
+                        <!-- Row 3 -->
+                        <div class="row justify-content-center my-3">
+                            <div class="col-xl-6">
+                                <button class="btn btn-primary d-grid w-100" id="btnsimpan">Simpan</button>
+                                <p id="errorMessage" class="text-danger" style="display:none;"></p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
 
             </div>
     </form>
