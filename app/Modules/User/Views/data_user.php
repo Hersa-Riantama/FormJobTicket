@@ -146,7 +146,6 @@
             success: function(response) {
                 alert(response.Pesan);
                 loadData();
-                
             },
             error: function(xhr, status, error) {
                 console.log('AJAX Error:', xhr.responseText);
