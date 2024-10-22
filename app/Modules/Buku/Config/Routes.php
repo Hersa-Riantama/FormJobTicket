@@ -7,15 +7,7 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-// $routes->get('/', 'Home::index');
 
-// $routes->group(
-//     'data-buku',
-//     ['namespace' => '\Modules\Buku\Controllers'],
-//     function ($routes) {
-//         $routes->get('/', 'Buku::data_buku');
-//     }
-// );
 $routes->group('', ['namespace' => '\Modules\Buku\Controllers'], function ($routes) {
     $routes->get('buku', 'Buku::index');
     $routes->get('buku/(:segment)', 'Buku::show/$1');

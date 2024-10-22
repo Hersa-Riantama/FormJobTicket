@@ -9,17 +9,7 @@ class BukuModel extends Model
     protected $table            = 'tbl_buku';
     protected $primaryKey       = 'id_buku';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['kode_buku', 
-                                    'judul_buku', 
-                                    'pengarang',
-                                    'target_terbit',
-                                    'warna'];
-
-    // protected bool $allowEmptyInserts = false;
-    // protected bool $updateOnlyChanged = true;
-
-    // protected array $casts = [];
-    // protected array $castHandlers = [];
+    protected $allowedFields    = ['kode_buku', 'judul_buku', 'pengarang', 'target_terbit', 'warna'];
 
     // Dates
     protected $useTimestamps = true;
@@ -32,7 +22,7 @@ class BukuModel extends Model
     {
         return [
             'kode_buku' => 'required|min_length[3]|is_unique[tbl_buku.kode_buku]',
-            'judul_buku' => 'required', 
+            'judul_buku' => 'required',
             'pengarang' => 'required',
             'target_terbit' => 'required',
             'warna' => 'required',

@@ -4,13 +4,17 @@ namespace Modules\Form\Controllers;
 
 use App\Controllers\BaseController;
 use App\Modules\Buku\Models\BukuModel;
+use CodeIgniter\API\ResponseTrait;
+use Modules\Auth\Controllers\Auth;
 use Modules\Auth\Models\AuthModel;
 use Modules\Form\Models\FormModel;
+use Modules\Grup\Models\GrupModel;
 use Modules\Kategori\Models\KategoriModel;
 use Modules\User\Models\UserModel;
 
 class Form extends BaseController
 {
+    use ResponseTrait;
     protected $model;
     protected $AuthModel;
     protected $UserModel;
@@ -51,6 +55,8 @@ class Form extends BaseController
         }
         $kode_buku = esc($this->request->getVar('id_buku'));
         $bukuModel = new BukuModel();
+        $AuthModel = new AuthModel();
+        $GrupModel = new GrupModel();
         $buku = $bukuModel->where('kode_buku', $kode_buku)->first();
         if (!$buku) {
             return $this->response->setJSON(['pesan' => 'Buku tidak ditemukan']);
@@ -58,6 +64,18 @@ class Form extends BaseController
         $id_buku = $buku['id_buku'];
 
         $id_user = session()->get('id_user');
+        $userData = $AuthModel->find($id_user);
+
+        if ($userData['level_user'] == 'Editor') {
+            $editorId = $GrupModel->where('id_editor', $id_user)->first();
+            $id_editor = $editorId['id_editor'];
+            $id_koord = $editorId['id_koord'];
+            $id_multimedia = 0;
+        } else if ($userData['level_user'] == 'Tim Multimedia') {
+            $id_editor = 0;
+            $id_koord = 0;
+            $id_multimedia = session()->get('id_user');
+        }
 
         $id_kategori_array = $this->request->getVar('id_kategori');
         // Hapus duplikasi dari array id_kategori
@@ -73,6 +91,9 @@ class Form extends BaseController
                 'jml_qrcode' => esc($this->request->getVar('jml_qrcode')),
                 'id_user' => $id_user,
                 'nomor_job' => esc($this->request->getVar('nomor_job')),
+                'id_editor' => $id_editor,
+                'id_koord' => $id_koord,
+                'id_multimedia' => $id_multimedia,
             ]);
         } else {
             // JSON tidak valid, tangani kesalahan
@@ -137,11 +158,7 @@ class Form extends BaseController
         ];
         return $this->response->setJSON($response);
     }
-    // $authHeader = $this->request->getHeader('Authorization');
-    // if ($authHeader && $authHeader->getValue() === $this->value) {
-    // }else {
-    //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
-    // }
+
     public function getKategori()
     {
         $kategoriModel = new KategoriModel();  // Pastikan KategoriModel sudah di-load
@@ -156,13 +173,14 @@ class Form extends BaseController
 
     public function form()
     {
-        $AuthModel = new AuthModel();
+        $GrupModel = new GrupModel();
+        $UserModel = new UserModel();
         // Ambil data user berdasarkan ID dari sesi
         $userId = session()->get('id_user');
 
         if (!empty($userId)) {
             // Ambil data user dari database berdasarkan id_user
-            $userData = $AuthModel->find($userId);
+            $userData = $UserModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
                 $allowUser = ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
                 if (!in_array($userData['level_user'], $allowUser)) {
@@ -177,9 +195,33 @@ class Form extends BaseController
             echo '<script>alert("User not found or session invalid."); history.back();</script>';
             return;
         }
+        if ($userData['level_user'] == 'Editor') {
+            $editorId = $GrupModel->where('id_editor', $userId)->first();
+            $koordId = $editorId['id_koord'];
+            $editor = $UserModel->find($userId);
+            $koord = $UserModel->find($koordId);
+            $namaEditor = $editor['nama'];
+            $namaKoord = $koord['nama'];
+            $namaMultimedia = '';
+        } else if ($userData['level_user'] == 'Koord Editor') {
+            $namaKoord = $userData['nama'];
+            $namaEditor = '';
+            $namaMultimedia = '';
+        } else if ($userData['level_user'] == 'Tim Multimedia') {
+            $namaKoord = '';
+            $namaEditor = '';
+            $namaMultimedia = $userData['nama'];
+        } else {
+            $namaKoord = '';
+            $namaEditor = '';
+            $namaMultimedia = '';
+        }
         $data = [
             'judul' => 'Form QR Code',
             'userData' => $userData,
+            'namaKoord' => $namaKoord,
+            'namaEditor' => $namaEditor,
+            'namaMultimedia' => $namaMultimedia,
         ];
         return view($this->folder_directory . 'form', $data);
     }
@@ -242,7 +284,8 @@ class Form extends BaseController
         // Debug output
         return $this->response->setJSON($tiket);
     }
-    public function detailForm($id_tiket = null){
+    public function detailForm($id_tiket = null)
+    {
         $AuthModel = new AuthModel();
         $tiketModel = new FormModel();
         $userId = session()->get('id_user');
@@ -258,7 +301,8 @@ class Form extends BaseController
         ];
         return view($this->folder_directory . 'detailForm', $data);
     }
-    public function delete($id_tiket = null){
+    public function delete($id_tiket = null)
+    {
         $tiket = $this->model->find($id_tiket);
         if (!$tiket) {
             return $this->failNotFound('Data kategori tidak ditemukan');
@@ -267,45 +311,6 @@ class Form extends BaseController
         $response = [
             'pesan' => 'Data Kategori Berhasil di Hapus'
         ];
-        return $this->respondDeleted($response,200);
+        return $this->respondDeleted($response, 200);
     }
-
-    // data_form() Lama
-    // public function data_form()
-    // {
-    //     $model = new FormModel();
-    //     $AuthModel = new AuthModel();
-    //     // Ambil data user berdasarkan ID dari sesi
-    //     $userId = session()->get('id_user');
-    //     if (!empty($userId)) {
-    //         // Ambil data user dari database berdasarkan id_user
-    //         $userData = $AuthModel->find($userId);
-    //         if ($userData && isset($userData['level_user'])) {
-    //             $allowUser = ['Admin Sistem', 'Admin Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
-    //             if (!in_array($userData['level_user'], $allowUser)) {
-    //                 return $this->response->setJSON([
-    //                     'error' => 'Access Denied'
-    //                 ], 403);
-    //             }
-    //         } else {
-    //             return $this->response->setJSON([
-    //                 'error' => 'Level user tidak ditemukan.'
-    //             ], 400);
-    //         }
-    //     } else {
-    //         return $this->response->setJSON([
-    //             'error' => 'User not found or session invalid.'
-    //         ], 400);
-    //     }
-    //     $data = $model->getTiket();
-    //     if ($this->request->isAJAX()) {
-    //         return $this->response->setJSON(['tiket' => $data]);
-    //     }
-    //     $Tdata = [
-    //         'tiket' => $data,
-    //         'judul' => 'Kelola Tiket',
-    //         'userData' => $userData,
-    //     ];
-    //     return view($this->folder_directory . 'data_form', $Tdata);
-    // }
 }

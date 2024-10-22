@@ -9,21 +9,7 @@ class FormModel extends Model
     protected $table            = 'tbl_tiket';
     protected $primaryKey       = 'id_tiket';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = [
-        'kode_form',
-        'id_kategori',
-        'tgl_selesai',
-        'id_user',
-        'nomor_job',
-        'id_buku',
-        'jml_qrcode'
-    ];
-
-    // protected bool $allowEmptyInserts = false;
-    // protected bool $updateOnlyChanged = true;
-
-    // protected array $casts = [];
-    // protected array $castHandlers = [];
+    protected $allowedFields    = ['kode_form', 'id_kategori', 'tgl_selesai', 'id_user', 'nomor_job', 'id_buku', 'jml_qrcode', 'id_editor', 'id_koord', 'id_multimedia',];
 
     // Dates
     protected $useTimestamps = true;
