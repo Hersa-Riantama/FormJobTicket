@@ -159,11 +159,7 @@ class Form extends BaseController
         ];
         return $this->response->setJSON($response);
     }
-    // $authHeader = $this->request->getHeader('Authorization');
-    // if ($authHeader && $authHeader->getValue() === $this->value) {
-    // }else {
-    //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
-    // }
+
     public function getKategori()
     {
         $kategoriModel = new KategoriModel();  // Pastikan KategoriModel sudah di-load

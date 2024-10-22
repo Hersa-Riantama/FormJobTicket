@@ -32,6 +32,7 @@ use Modules\Auth\Models\AuthModel; ?>
             </div>
         </div>
         <!--/ Basic Bootstrap Table -->
+        <!-- Modal -->
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -117,21 +118,21 @@ use Modules\Auth\Models\AuthModel; ?>
             }
         });
     }
-    $(document).on('click','.dropdown-item-edit',function(){
+    $(document).on('click', '.dropdown-item-edit', function() {
         var id_kategori = $(this).data('id_kategori');
         if (!id_kategori) {
-            console.log('ID Kategori :',id_kategori);
+            console.log('ID Kategori :', id_kategori);
             return;
         }
         $.ajax({
             type: 'GET',
             url: 'http://localhost:8080/kategori/' + id_kategori,
             dataType: 'json',
-            success: function(response){
+            success: function(response) {
                 if (response.data_kategori) {
                     $('#nama_kategori').val(response.data_kategori.nama_kategori);
                     $('#btn-update').data('id_kategori', response.data_kategori.id_kategori);
-                } else{
+                } else {
                     console.log('Data kategori tidak ditemukan');
                 }
                 $('#editModal').modal('show');
@@ -176,18 +177,18 @@ use Modules\Auth\Models\AuthModel; ?>
     // Fungsi untuk delete data
     $(document).on('click', '.dropdown-item-delete', function() {
         var id_kategori = $(this).data('id_kategori');
-        var konfirmasi =confirm("Apakah Anda yakin hapus kategori ini?");
+        var konfirmasi = confirm("Apakah Anda yakin hapus kategori ini?");
         if (konfirmasi) {
             $.ajax({
-            type: 'DELETE',
-            url: 'http://localhost:8080/kategori/' + id_kategori,
-            success: function() {
-                loadData();
-            },
-            error: function(xhr, status, error) {
-                alert("Gagal menghapus kategori: " + xhr.responseText); // Error handling
-            }
-        });
+                type: 'DELETE',
+                url: 'http://localhost:8080/kategori/' + id_kategori,
+                success: function() {
+                    loadData();
+                },
+                error: function(xhr, status, error) {
+                    alert("Gagal menghapus kategori: " + xhr.responseText); // Error handling
+                }
+            });
         }
     });
 </script>
