@@ -278,13 +278,19 @@ use Modules\Auth\Models\AuthModel; ?>
     // Fungsi untuk delete data
     $(document).on('click', '.dropdown-item-delete', function() {
         var id_buku = $(this).data('id_buku');
-        $.ajax({
+        var konfirmasi = confirm("Apakah Anda yakin hapus buku ini? ");
+        if (konfirmasi) {
+            $.ajax({
             type: 'DELETE',
             url: 'http://localhost:8080/buku/' + id_buku,
             success: function() {
                 loadData();
+            },
+            error: function(xhr, status, error) {
+                alert("Gagal menghapus buku: " + xhr.responseText); // Error handling
             }
         });
+        }
     });
 
     // Fungsi untuk update data

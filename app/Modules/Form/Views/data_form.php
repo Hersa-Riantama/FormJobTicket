@@ -158,7 +158,7 @@
     // Fungsi untuk delete data
     $(document).on('click', '.dropdown-item-delete', function() {
         var id_tiket = $(this).data('id_tiket');
-        var konfirmasi = confirm("Apakah anda yakin hapus buku ini? ");
+        var konfirmasi = confirm("Apakah anda yakin hapus tiket ini? ");
         if (konfirmasi) {
             $.ajax({
             type: 'DELETE',

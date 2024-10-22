@@ -176,13 +176,19 @@ use Modules\Auth\Models\AuthModel; ?>
     // Fungsi untuk delete data
     $(document).on('click', '.dropdown-item-delete', function() {
         var id_kategori = $(this).data('id_kategori');
-        $.ajax({
+        var konfirmasi =confirm("Apakah Anda yakin hapus kategori ini?");
+        if (konfirmasi) {
+            $.ajax({
             type: 'DELETE',
             url: 'http://localhost:8080/kategori/' + id_kategori,
             success: function() {
                 loadData();
+            },
+            error: function(xhr, status, error) {
+                alert("Gagal menghapus kategori: " + xhr.responseText); // Error handling
             }
         });
+        }
     });
 </script>
 <?= $this->endSection(); ?>
