@@ -104,14 +104,29 @@ class User extends BaseController
 
     public function suspendUser($id_user)
     {
-        $userModel = new UserModel();
-        $userModel->update($id_user, [
-            'status_user' => 'nonaktif',
-            'verifikasi' => 'N'
-        ]);
+        log_message('info', 'Suspend user dengan ID: ' . $id_user);
+        $model = new UserModel();
+
+        // Cari user berdasarkan ID
+        $user = $model->find($id_user);
+
+        // Jika user tidak ditemukan
+        if (!$user) {
+            return $this->response->setJSON([
+                'Pesan' => 'User tidak ditemukan',
+                'Status' => 'error'
+            ], 404);
+        }
+
+        // Ubah status verifikasi user menjadi 'N' (unverified)
+        $user['verifikasi'] = 'N';
+        $user['status_user'] = 'nonaktif';
+        $model->update($id_user, $user);
+
+        // Response sukses
         return $this->response->setJSON([
-            'status' => 'sukses',
-            'pesan' => 'User sudah Non Aktif',
+            'Pesan' => 'User berhasil disuspend',
+            'Status' => 'success'
         ]);
     }
 }
