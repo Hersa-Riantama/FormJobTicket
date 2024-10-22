@@ -70,18 +70,19 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="dataModalLabel">Pilih Koord. Editor</h5>
+                            <h5 class="modal-title" id="dataModalLabel">Koord. Editor</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" hidden>
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" style="padding-bottom:0.25rem">
                             <select id="dataSelect" class="form-control">
                                 <!-- Pilihan akan diisi dengan data dari database -->
                             </select>
+                            <p class="text-bold mt-2 mb-0" style="font-size:x-small;">*Jika Tidak Terdapat Nama Pada Koord. Editor, Mohon Hubungi Koord. Editor Untuk Membuat Akun Terlebih Dahulu</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" id="saveDataBtn" class="btn btn-primary">Simpan Pilihan</button>
+                            <button type="button" id="saveDataBtn" class="btn btn-primary">Simpan</button>
                         </div>
                     </div>
                 </div>
@@ -171,7 +172,6 @@
                     if (response.ok) {
                         // Menghapus event handler yang mencegah modal ditutup
                         $('#dataModal').off('hide.bs.modal');
-
                         // Tutup modal setelah menyimpan
                         $('#dataModal').modal('hide');
                         dataModal.hide(); // Tutup modal setelah berhasil menyimpan
