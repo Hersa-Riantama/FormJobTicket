@@ -152,25 +152,8 @@
         });
     }
     $(document).on('click', '.dropdown-item-detail', function() {
-    var id_tiket = $(this).data('id_tiket');
-    window.location.href = '/detail/' + id_tiket; // Redirect to the detail page
-    });
-    // Fungsi untuk delete data
-    $(document).on('click', '.dropdown-item-delete', function() {
         var id_tiket = $(this).data('id_tiket');
-        var konfirmasi = confirm("Apakah anda yakin hapus tiket ini? ");
-        if (konfirmasi) {
-            $.ajax({
-            type: 'DELETE',
-            url: 'http://localhost:8080/delete/' + id_tiket,
-            success: function() {
-                loadData();
-            },
-            error: function(xhr, status, error) {
-                alert("Gagal menghapus tiket: " + xhr.responseText); // Error handling
-            }
-        });
-        }
+        window.location.href = '/detail/' + id_tiket; // Redirect to the detail page
     });
 </script>
 <?= $this->endSection(); ?>

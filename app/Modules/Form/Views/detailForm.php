@@ -3,9 +3,8 @@
 <!-- Content wrapper -->
 <div class="content-wrapper">
     <!-- Content -->
-    <form id="formTiket" action="javascript:void(0);" method="post">
+    <form id="detailTiket" action="javascript:void(0);" method="get">
         <div class="form-group">
-
             <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
                 <h4 class="py-3 mb-4"><span class="text-muted fw-light">Form /</span> Form QR Code</h4>
                 <div class="row justify-content-between">

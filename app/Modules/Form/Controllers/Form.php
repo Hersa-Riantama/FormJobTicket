@@ -10,6 +10,8 @@ use Modules\Auth\Models\AuthModel;
 use Modules\Form\Models\FormModel;
 use Modules\Grup\Models\GrupModel;
 use Modules\Kategori\Models\KategoriModel;
+use Modules\Kelengkapan\Models\KelengkapanModel;
+use Modules\Status_Kelengkapan\Models\StatusKelengkapanModel;
 use Modules\User\Models\UserModel;
 
 class Form extends BaseController
@@ -284,23 +286,37 @@ class Form extends BaseController
         // Debug output
         return $this->response->setJSON($tiket);
     }
-    public function detailForm($id_tiket = null)
-    {
+    public function detailForm($id_tiket) {
+        $db = \Config\Database::connect();
+
+        // Ambil data tiket dan buku berdasarkan id_tiket
+        $builder = $db->table('tbl_tiket');
+        $builder->select('tbl_tiket.*, tbl_buku.judul_buku, tbl_buku.pengarang, tbl_buku.target_terbit, tbl_buku.warna');
+        $builder->join('tbl_buku', 'tbl_tiket.id_buku = tbl_buku.id_buku');
+        $builder->where('tbl_tiket.id_tiket', $id_tiket);
+        
+        $query = $builder->get();
+        $tiketData = $query->getRowArray();
+
+        // Jika data tidak ditemukan
+        if (!$tiketData) {
+            return $this->response->setJSON(['error' => 'Data tidak ditemukan'], 404);
+        }
         $AuthModel = new AuthModel();
-        $tiketModel = new FormModel();
         $userId = session()->get('id_user');
         $userData = $AuthModel->find($userId);
-        $tiket = $tiketModel->find($id_tiket);
-        if (!$tiket) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Tiket not found");
-        }
+
+        // Data yang akan diteruskan ke view
         $data = [
-            'tiket' => $tiket,
             'judul' => 'Detail Tiket',
             'userData' => $userData,
+            'tiketData' => $tiketData
         ];
+
+        // Tampilkan view detailForm
         return view($this->folder_directory . 'detailForm', $data);
     }
+    
     public function delete($id_tiket = null)
     {
         $tiket = $this->model->find($id_tiket);

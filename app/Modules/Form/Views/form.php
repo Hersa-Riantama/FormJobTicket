@@ -522,7 +522,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: formUrl, // Tidak lagi menggunakan PHP echo di sini
+                url: formUrl, 
                 data: formData,
                 processData: false,
                 contentType: false,
