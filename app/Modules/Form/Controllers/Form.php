@@ -291,8 +291,10 @@ class Form extends BaseController
 
         // Ambil data tiket dan buku berdasarkan id_tiket
         $builder = $db->table('tbl_tiket');
-        $builder->select('tbl_tiket.*, tbl_buku.judul_buku, tbl_buku.pengarang, tbl_buku.target_terbit, tbl_buku.warna');
+        $builder->select('tbl_tiket.*, tbl_buku.judul_buku, tbl_buku.pengarang, tbl_buku.target_terbit, tbl_buku.warna, tbl_kelengkapan.nama_kelengkapan, tbl_user.nama as user_nama, tbl_user.email as user_email');
+        $builder->join('tbl_kelengkapan', 'tbl_tiket.id_tiket = tbl_kelengkapan.id_tiket');
         $builder->join('tbl_buku', 'tbl_tiket.id_buku = tbl_buku.id_buku');
+        $builder->join('tbl_user', 'tbl_tiket.id_user = tbl_user.id_user');
         $builder->where('tbl_tiket.id_tiket', $id_tiket);
         
         $query = $builder->get();
@@ -302,19 +304,21 @@ class Form extends BaseController
         if (!$tiketData) {
             return $this->response->setJSON(['error' => 'Data tidak ditemukan'], 404);
         }
-        $AuthModel = new AuthModel();
-        $userId = session()->get('id_user');
-        $userData = $AuthModel->find($userId);
 
-        // Data yang akan diteruskan ke view
-        $data = [
-            'judul' => 'Detail Tiket',
-            'userData' => $userData,
-            'tiketData' => $tiketData
-        ];
+        return $this->response->setJSON($query->getRowArray());
+        // $AuthModel = new AuthModel();
+        // $userId = session()->get('id_user');
+        // $userData = $AuthModel->find($userId);
 
-        // Tampilkan view detailForm
-        return view($this->folder_directory . 'detailForm', $data);
+        // // Data yang akan diteruskan ke view
+        // $data = [
+        //     'judul' => 'Detail Tiket',
+        //     'userData' => $userData,
+        //     'tiketData' => $tiketData
+        // ];
+
+        // // Tampilkan view detailForm
+        // return view($this->folder_directory . 'detailForm', $data);
     }
     
     public function delete($id_tiket = null)
