@@ -291,7 +291,8 @@ class Form extends BaseController
 
         // Ambil data tiket dan buku berdasarkan id_tiket
         $builder = $db->table('tbl_tiket');
-        $builder->select('tbl_tiket.*, tbl_buku.judul_buku, tbl_buku.pengarang, tbl_buku.target_terbit, tbl_buku.warna, tbl_kelengkapan.nama_kelengkapan, tbl_user.nama as user_nama, tbl_user.email as user_email');
+        $builder->select('tbl_tiket.*, tbl_buku.judul_buku, tbl_buku.pengarang, tbl_buku.target_terbit, tbl_buku.warna, 
+                        tbl_kelengkapan.nama_kelengkapan, tbl_user.nama as user_nama, tbl_user.email as user_email');
         $builder->join('tbl_kelengkapan', 'tbl_tiket.id_tiket = tbl_kelengkapan.id_tiket');
         $builder->join('tbl_buku', 'tbl_tiket.id_buku = tbl_buku.id_buku');
         $builder->join('tbl_user', 'tbl_tiket.id_user = tbl_user.id_user');
