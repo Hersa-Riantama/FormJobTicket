@@ -123,6 +123,10 @@
                     var judul_buku = bukuMap[value.id_buku] || 'Unknown Buku';
                     var nama = userMap[value.id_user] || 'Unknown User';
 
+                    function encodeBase64Id(id) {
+                        return btoa(id); // 'btoa' is used to encode to Base64
+                    }
+
                     // Generate HTML untuk tabel
                     formData += '<tr>';
                     formData += '<td>' + value.kode_form + '</td>';
@@ -136,8 +140,8 @@
                     formData += '<i class="bx bx-dots-horizontal-rounded"></i>';
                     formData += '</button>';
                     formData += '<div class="dropdown-menu">';
-                    formData += '<a class="dropdown-item dropdown-item-detail" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '"><i class="bx bx-edit-alt me-2"></i>Detail</a>';
-                    formData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '"><i class="bx bx-trash me-2"></i> Delete</a>';
+                    formData += '<a class="dropdown-item dropdown-item-detail" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '"><i class="bx bx-edit-alt me-2"></i>Detail</a>';
+                    formData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '"><i class="bx bx-trash me-2"></i> Delete</a>';
                     formData += '</div>';
                     formData += '</div>';
                     formData += '</td>';

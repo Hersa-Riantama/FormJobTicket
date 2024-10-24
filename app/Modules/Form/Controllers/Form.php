@@ -290,8 +290,9 @@ class Form extends BaseController
 
     public function detailForm($id_tiket)
     {
+        $decodedId = base64_decode($id_tiket);
         // Validate id_tiket (example: ensure it's an integer)
-        if (!is_numeric($id_tiket) || $id_tiket <= 0) {
+        if (!is_numeric($decodedId) || $decodedId <= 0) {
             return $this->response->setJSON(['error' => 'ID Tiket tidak valid'], 400);
         }
 
@@ -308,7 +309,7 @@ class Form extends BaseController
         $builder->join('tbl_user as editor', 'tbl_tiket.id_editor = editor.id_user', 'left');
         $builder->join('tbl_user as koord', 'tbl_tiket.id_koord = koord.id_user', 'left');
         $builder->join('tbl_user as multimedia', 'tbl_tiket.id_multimedia = multimedia.id_user', 'left');
-        $builder->where('tbl_tiket.id_tiket', $id_tiket);
+        $builder->where('tbl_tiket.id_tiket', $decodedId);
 
         $query = $builder->get();
         $tiketData1 = $query->getRow();
