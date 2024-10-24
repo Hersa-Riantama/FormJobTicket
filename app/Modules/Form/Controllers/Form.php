@@ -344,11 +344,11 @@ class Form extends BaseController
     {
         $tiket = $this->model->find($id_tiket);
         if (!$tiket) {
-            return $this->failNotFound('Data kategori tidak ditemukan');
+            return $this->failNotFound('Data tiket tidak ditemukan');
         }
         $this->model->delete($id_tiket);
         $response = [
-            'pesan' => 'Data Kategori Berhasil di Hapus'
+            'pesan' => 'Data tiket Berhasil di Hapus'
         ];
         return $this->respondDeleted($response, 200);
     }
