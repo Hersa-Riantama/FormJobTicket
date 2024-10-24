@@ -18,8 +18,7 @@ class CreateTableKelengkapan extends Migration
                 'type' => 'INT',
             ],
             'nama_kelengkapan' => [
-                'type' => 'VARCHAR',
-                'constraint' => '255',
+                'type' => 'LONGTEXT',
             ],
             'created_at' => [
                 'type' => 'TIMESTAMP',

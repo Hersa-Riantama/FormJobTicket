@@ -20,7 +20,7 @@ class CreateTableTiket extends Migration
                 'default' => 'C1',
             ],
             'id_kategori' => [
-                'type' => 'INT',
+                'type' => 'LONGTEXT',
             ],
             'tgl_order' => [
                 'type' => 'DATE',
