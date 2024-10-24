@@ -13,6 +13,7 @@ use Modules\Kategori\Models\KategoriModel;
 use Modules\Kelengkapan\Models\KelengkapanModel;
 use Modules\Status_Kelengkapan\Models\StatusKelengkapanModel;
 use Modules\User\Models\UserModel;
+use PhpParser\JsonDecoder;
 
 class Form extends BaseController
 {
@@ -104,7 +105,7 @@ class Form extends BaseController
 
         $id_tiket = $this->model->getInsertID();
 
-        // Insert kelengkapan into tbl_kelengkapan
+        // Insert kelengkapan into tbl_kelengkapan Lama
         // $kelengkapanModel = new \Modules\Kelengkapan\Models\KelengkapanModel();
         // $kelengkapans = $this->request->getVar('kelengkapan');
         // if (is_array($kelengkapans) && count($kelengkapans) > 0) {
@@ -126,7 +127,6 @@ class Form extends BaseController
         //     }
         // }
 
-        // $kelengkapanModel = new \Modules\Kelengkapan\Models\KelengkapanModel();
         $kelengkapanModel = new KelengkapanModel();
         $kelengkapans = $this->request->getVar('kelengkapan');
 
@@ -144,11 +144,6 @@ class Form extends BaseController
                 // Jika belum ada, insert data baru
                 $kelengkapanModel->insert([
                     'id_tiket' => $id_tiket,
-                    'nama_kelengkapan' => $jsonKelengkapan
-                ]);
-            } else {
-                // Jika sudah ada, update data yang ada
-                $kelengkapanModel->update($existing['id_kelengkapan'], [
                     'nama_kelengkapan' => $jsonKelengkapan
                 ]);
             }
@@ -317,40 +312,54 @@ class Form extends BaseController
 
     public function detailForm($id_tiket)
     {
+        // Validate id_tiket (example: ensure it's an integer)
+        if (!is_numeric($id_tiket) || $id_tiket <= 0) {
+            return $this->response->setJSON(['error' => 'ID Tiket tidak valid'], 400);
+        }
+
         $db = \Config\Database::connect();
 
         // Ambil data tiket dan buku berdasarkan id_tiket
         $builder = $db->table('tbl_tiket');
-        $builder->select('tbl_tiket.*, tbl_buku.judul_buku, tbl_buku.pengarang, tbl_buku.target_terbit, tbl_buku.warna, 
-                        tbl_kelengkapan.nama_kelengkapan, tbl_user.nama as user_nama, tbl_user.email as user_email');
-        $builder->join('tbl_kelengkapan', 'tbl_tiket.id_tiket = tbl_kelengkapan.id_tiket');
-        $builder->join('tbl_buku', 'tbl_tiket.id_buku = tbl_buku.id_buku');
-        $builder->join('tbl_user', 'tbl_tiket.id_user = tbl_user.id_user');
+        $builder->select('tbl_tiket.*, tbl_buku.kode_buku, tbl_buku.judul_buku, tbl_buku.pengarang, tbl_buku.target_terbit, 
+                        tbl_buku.warna, tbl_kelengkapan.nama_kelengkapan, tbl_user.nama as user_nama, tbl_user.email as user_email, 
+                        editor.nama as editor_nama, koord.nama as koord_nama, multimedia.nama as multimedia_nama');
+        $builder->join('tbl_kelengkapan', 'tbl_tiket.id_tiket = tbl_kelengkapan.id_tiket', 'left');
+        $builder->join('tbl_buku', 'tbl_tiket.id_buku = tbl_buku.id_buku', 'left');
+        $builder->join('tbl_user', 'tbl_tiket.id_user = tbl_user.id_user', 'left');
+        $builder->join('tbl_user as editor', 'tbl_tiket.id_editor = editor.id_user', 'left');
+        $builder->join('tbl_user as koord', 'tbl_tiket.id_koord = koord.id_user', 'left');
+        $builder->join('tbl_user as multimedia', 'tbl_tiket.id_multimedia = multimedia.id_user', 'left');
         $builder->where('tbl_tiket.id_tiket', $id_tiket);
 
         $query = $builder->get();
-        $tiketData = $query->getRowArray();
+        $tiketData1 = $query->getRow();
+        $tiketData = (array) $tiketData1;
+        $kategori = json_decode($tiketData['id_kategori'], true);
+        $kelengkapan = json_decode($tiketData['nama_kelengkapan'], true);
 
         // Jika data tidak ditemukan
         if (!$tiketData) {
             return $this->response->setJSON(['error' => 'Data tidak ditemukan'], 404);
         }
+        // return $this->response->setJSON($tiketData);
+        $AuthModel = new AuthModel();
+        $userId = session()->get('id_user');
+        $userData = $AuthModel->find($userId);
 
-        return $this->response->setJSON($query->getRowArray());
-        // $AuthModel = new AuthModel();
-        // $userId = session()->get('id_user');
-        // $userData = $AuthModel->find($userId);
+        // Data yang akan diteruskan ke view
+        $data = [
+            'judul' => 'Detail Tiket',
+            'userData' => $userData,
+            'tiketData' => $tiketData,
+            'kategori' => $kategori,
+            'kelengkapan' => $kelengkapan,
+        ];
 
-        // // Data yang akan diteruskan ke view
-        // $data = [
-        //     'judul' => 'Detail Tiket',
-        //     'userData' => $userData,
-        //     'tiketData' => $tiketData,
-        // ];
-
-        // // Tampilkan view detailForm
-        // return view($this->folder_directory . 'detailForm', $data);
+        // Tampilkan view detailForm
+        return view($this->folder_directory . 'detailForm', $data);
     }
+
 
     public function delete($id_tiket = null)
     {
