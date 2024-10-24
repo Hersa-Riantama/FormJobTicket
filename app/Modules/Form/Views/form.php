@@ -245,7 +245,7 @@
                                             <label class="form-check-label text-primary" for="kelengkapan4"> Fla/xfl (APK) </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="Gambar/Foto/Ilustrasi" name="kelengkapan[]" id="kelengkapan6" style="border: 1px solid pink;" />
+                                            <input class="form-check-input" type="checkbox" value="Gambar/Foto/Ilustrasi" name="kelengkapan[]" id="kelengkapan5" style="border: 1px solid pink;" />
                                             <label class="form-check-label text-primary" for="kelengkapan5"> Gambar/Foto/Ilustrasi </label>
                                         </div>
                                         <p class="text mt-3 mb-0" style="font-size:x-small;">
