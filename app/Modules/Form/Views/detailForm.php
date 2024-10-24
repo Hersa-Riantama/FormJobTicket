@@ -490,5 +490,29 @@
     dates.forEach(date => {
         date.textContent = formattedDate;
     });
+
+    // Set the selected radio button for 'warna'
+    const radioOptions = document.getElementsByName("inlineRadioOption");
+    radioOptions.forEach(radio => {
+        if (radio.value === data.warna) {
+            radio.checked = true;
+        }
+    });
+
+    // Check the checkboxes based on `id_kategori` values
+    data.id_kategori.forEach(id => {
+        const checkbox = document.getElementById("kategori" + id);
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+    });
+
+    // Populate dropdown for kode_buku (you may need to add options dynamically)
+    const kodeBukuSelect = document.getElementById("kode_buku");
+    const option = document.createElement("option");
+    option.value = data.id_buku;
+    option.textContent = `Kode Buku ${data.id_buku}`;
+    option.selected = true;
+    kodeBukuSelect.appendChild(option);
 </script>
 <?= $this->endSection(); ?>

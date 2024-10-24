@@ -522,7 +522,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: formUrl, 
+                url: formUrl,
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -540,7 +540,7 @@
                     console.log('Error:', error); // Debugging error
                     console.log('Status:', status); // Status error
                     console.log('xhr:', xhr); // XHR object untuk melihat lebih detail
-                    alert('Terjadi kesalahan saat menyimpan data.'); // Bisa juga menampilkan alert di sini
+                    alert('Terjadi kesalahan saat menyimpan data.');
                 }
             });
         });

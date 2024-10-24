@@ -105,24 +105,52 @@ class Form extends BaseController
         $id_tiket = $this->model->getInsertID();
 
         // Insert kelengkapan into tbl_kelengkapan
-        $kelengkapanModel = new \Modules\Kelengkapan\Models\KelengkapanModel();
-        $kelengkapans = $this->request->getVar('kelengkapan');
-        if (is_array($kelengkapans) && count($kelengkapans) > 0) {
-            foreach ($kelengkapans as $kelengkapan) {
-                if (!empty($kelengkapan)) {
-                    // Periksa apakah data sudah ada di database
-                    $existing = $kelengkapanModel->where([
-                        'id_tiket' => $id_tiket,
-                        'nama_kelengkapan' => esc($kelengkapan)
-                    ])->first();
+        // $kelengkapanModel = new \Modules\Kelengkapan\Models\KelengkapanModel();
+        // $kelengkapans = $this->request->getVar('kelengkapan');
+        // if (is_array($kelengkapans) && count($kelengkapans) > 0) {
+        //     foreach ($kelengkapans as $kelengkapan) {
+        //         if (!empty($kelengkapan)) {
+        //             // Periksa apakah data sudah ada di database
+        //             $existing = $kelengkapanModel->where([
+        //                 'id_tiket' => $id_tiket,
+        //                 'nama_kelengkapan' => esc($kelengkapan)
+        //             ])->first();
 
-                    if (!$existing) {
-                        $kelengkapanModel->insert([
-                            'id_tiket' => $id_tiket,
-                            'nama_kelengkapan' => esc($kelengkapan)
-                        ]);
-                    }
-                }
+        //             if (!$existing) {
+        //                 $kelengkapanModel->insert([
+        //                     'id_tiket' => $id_tiket,
+        //                     'nama_kelengkapan' => esc($kelengkapan)
+        //                 ]);
+        //             }
+        //         }
+        //     }
+        // }
+
+        // $kelengkapanModel = new \Modules\Kelengkapan\Models\KelengkapanModel();
+        $kelengkapanModel = new KelengkapanModel();
+        $kelengkapans = $this->request->getVar('kelengkapan');
+
+        if (is_array($kelengkapans) && count($kelengkapans) > 0) {
+            // Hapus duplikat dari array
+            $uniqueKelengkapans = array_unique($kelengkapans);
+
+            // Ubah ke JSON
+            $jsonKelengkapan = json_encode($uniqueKelengkapans);
+
+            // Periksa apakah data sudah ada di database berdasarkan id_tiket
+            $existing = $kelengkapanModel->where(['id_tiket' => $id_tiket])->first();
+
+            if (!$existing) {
+                // Jika belum ada, insert data baru
+                $kelengkapanModel->insert([
+                    'id_tiket' => $id_tiket,
+                    'nama_kelengkapan' => $jsonKelengkapan
+                ]);
+            } else {
+                // Jika sudah ada, update data yang ada
+                $kelengkapanModel->update($existing['id_kelengkapan'], [
+                    'nama_kelengkapan' => $jsonKelengkapan
+                ]);
             }
         }
 
@@ -286,7 +314,9 @@ class Form extends BaseController
         // Debug output
         return $this->response->setJSON($tiket);
     }
-    public function detailForm($id_tiket) {
+
+    public function detailForm($id_tiket)
+    {
         $db = \Config\Database::connect();
 
         // Ambil data tiket dan buku berdasarkan id_tiket
@@ -297,7 +327,7 @@ class Form extends BaseController
         $builder->join('tbl_buku', 'tbl_tiket.id_buku = tbl_buku.id_buku');
         $builder->join('tbl_user', 'tbl_tiket.id_user = tbl_user.id_user');
         $builder->where('tbl_tiket.id_tiket', $id_tiket);
-        
+
         $query = $builder->get();
         $tiketData = $query->getRowArray();
 
@@ -315,13 +345,13 @@ class Form extends BaseController
         // $data = [
         //     'judul' => 'Detail Tiket',
         //     'userData' => $userData,
-        //     'tiketData' => $tiketData
+        //     'tiketData' => $tiketData,
         // ];
 
         // // Tampilkan view detailForm
         // return view($this->folder_directory . 'detailForm', $data);
     }
-    
+
     public function delete($id_tiket = null)
     {
         $tiket = $this->model->find($id_tiket);
