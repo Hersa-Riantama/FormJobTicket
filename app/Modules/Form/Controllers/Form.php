@@ -105,28 +105,6 @@ class Form extends BaseController
 
         $id_tiket = $this->model->getInsertID();
 
-        // Insert kelengkapan into tbl_kelengkapan Lama
-        // $kelengkapanModel = new \Modules\Kelengkapan\Models\KelengkapanModel();
-        // $kelengkapans = $this->request->getVar('kelengkapan');
-        // if (is_array($kelengkapans) && count($kelengkapans) > 0) {
-        //     foreach ($kelengkapans as $kelengkapan) {
-        //         if (!empty($kelengkapan)) {
-        //             // Periksa apakah data sudah ada di database
-        //             $existing = $kelengkapanModel->where([
-        //                 'id_tiket' => $id_tiket,
-        //                 'nama_kelengkapan' => esc($kelengkapan)
-        //             ])->first();
-
-        //             if (!$existing) {
-        //                 $kelengkapanModel->insert([
-        //                     'id_tiket' => $id_tiket,
-        //                     'nama_kelengkapan' => esc($kelengkapan)
-        //                 ]);
-        //             }
-        //         }
-        //     }
-        // }
-
         $kelengkapanModel = new KelengkapanModel();
         $kelengkapans = $this->request->getVar('kelengkapan');
 
