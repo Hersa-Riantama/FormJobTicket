@@ -356,7 +356,7 @@
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-3" style="border: 1px solid pink;">
                                                             <div class="card-body p-1">
-                                                                <div class="row mb-3 px-2">
+                                                                <div class="row mt-2 mb-3 px-2">
                                                                     <label for="tgl_selesai" class="col-md-6 col-form-label text-primary">Tgl selesai pengerjaan</label>
                                                                     <div class="col-md-6">
                                                                         <input class="form-control" type="date" value="<?= esc($tiketData['tgl_order']) ?>" id="tgl_selesai" name="tgl_selesai" style="border: 1px solid black;" />
