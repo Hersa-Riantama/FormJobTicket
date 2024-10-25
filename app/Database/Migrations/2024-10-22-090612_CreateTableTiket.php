@@ -22,7 +22,7 @@ class CreateTableTiket extends Migration
             'id_kategori' => [
                 'type' => 'LONGTEXT',
             ],
-            'tgl_order' => [
+            'tgl_selesai' => [
                 'type' => 'DATE',
             ],
             'tgl_upload' => [

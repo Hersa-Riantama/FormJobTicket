@@ -149,7 +149,7 @@ class Form extends BaseController
                     'status_kelengkapan' => 'Y'
                 ]);
             }
-        }else {
+        } else {
             // Insert default values if no status_kelengkapan is provided
             $statusKelengkapanModel->insert([
                 'id_tiket' => $id_tiket,
@@ -322,8 +322,9 @@ class Form extends BaseController
         $builder = $db->table('tbl_tiket');
         $builder->select('tbl_tiket.*, tbl_buku.kode_buku, tbl_buku.judul_buku, tbl_buku.pengarang, tbl_buku.target_terbit, 
                         tbl_buku.warna, tbl_kelengkapan.nama_kelengkapan, tbl_user.nama as user_nama, tbl_user.email as user_email, 
-                        editor.nama as editor_nama, koord.nama as koord_nama, multimedia.nama as multimedia_nama');
+                        editor.nama as editor_nama, koord.nama as koord_nama, multimedia.nama as multimedia_nama, tbl_status_kelengkapan.tahap_kelengkapan');
         $builder->join('tbl_kelengkapan', 'tbl_tiket.id_tiket = tbl_kelengkapan.id_tiket', 'left');
+        $builder->join('tbl_status_kelengkapan', 'tbl_tiket.id_tiket = tbl_status_kelengkapan.id_tiket', 'left');
         $builder->join('tbl_buku', 'tbl_tiket.id_buku = tbl_buku.id_buku', 'left');
         $builder->join('tbl_user', 'tbl_tiket.id_user = tbl_user.id_user', 'left');
         $builder->join('tbl_user as editor', 'tbl_tiket.id_editor = editor.id_user', 'left');
@@ -336,6 +337,8 @@ class Form extends BaseController
         $tiketData = (array) $tiketData1;
         $kategori = json_decode($tiketData['id_kategori'], true);
         $kelengkapan = json_decode($tiketData['nama_kelengkapan'], true);
+        $tahap = json_decode($tiketData['tahap_kelengkapan'], true);
+
 
         // Jika data tidak ditemukan
         if (!$tiketData) {
@@ -353,6 +356,7 @@ class Form extends BaseController
             'tiketData' => $tiketData,
             'kategori' => $kategori,
             'kelengkapan' => $kelengkapan,
+            'tahap' => $tahap,
         ];
 
         // Tampilkan view detailForm

@@ -18,9 +18,7 @@ class CreateTableStatusKelengkapan extends Migration
                 'type' => 'INT',
             ],
             'tahap_kelengkapan' => [
-                'type' => 'ENUM',
-                'constraint' => ['N', 'Tahap 1', 'Tahap 2', 'Tahap 3'],
-                'default' => 'N',
+                'type' => 'LONGTEXT',
             ],
             'status_kelengkapan' => [
                 'type' => 'ENUM',
