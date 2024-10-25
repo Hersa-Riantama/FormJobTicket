@@ -131,24 +131,25 @@ class Form extends BaseController
         $statusKelengkapanModel = new StatusKelengkapanModel();
         $tahap_kelengkapan_array = $this->request->getVar('tahap_kelengkapan');
 
-        // Ensure tahap_kelengkapan is correctly inserted
-        if (!empty($tahap_kelengkapan_array) && is_array($tahap_kelengkapan_array)) {
-            foreach ($tahap_kelengkapan_array as $tahap_kelengkapan) {
-                // Cek jika data sudah ada
-                $existing = $statusKelengkapanModel->where([
-                    'id_tiket' => $id_tiket,
-                    'tahap_kelengkapan' => esc($tahap_kelengkapan)
-                ])->first();
+        if (is_array($tahap_kelengkapan_array) && count($tahap_kelengkapan_array) > 0) {
+            // Hapus duplikat dari array
+            $uniqueTahapKelengkapans = array_unique($tahap_kelengkapan_array);
 
-                if (!$existing) {
-                    $statusKelengkapanModel->insert([
-                        'id_tiket' => $id_tiket,
-                        'tahap_kelengkapan' => esc($tahap_kelengkapan),
-                        'status_kelengkapan' => 'Y'
-                    ]);
-                }
+            // Ubah ke JSON
+            $jsonTahapKelengkapan = json_encode($uniqueTahapKelengkapans);
+
+            // Periksa apakah data sudah ada di database berdasarkan id_tiket
+            $existing = $statusKelengkapanModel->where(['id_tiket' => $id_tiket])->first();
+
+            if (!$existing) {
+                // Jika belum ada, insert data baru
+                $kelengkapanModel->insert([
+                    'id_tiket' => $id_tiket,
+                    'tahap_kelengkapan' => $jsonTahapKelengkapan,
+                    'status_kelengkapan' => 'Y'
+                ]);
             }
-        } else {
+        }else {
             // Insert default values if no status_kelengkapan is provided
             $statusKelengkapanModel->insert([
                 'id_tiket' => $id_tiket,
@@ -156,6 +157,25 @@ class Form extends BaseController
                 'status_kelengkapan' => 'N'
             ]);
         }
+
+        // // Ensure tahap_kelengkapan is correctly inserted
+        // if (!empty($tahap_kelengkapan_array) && is_array($tahap_kelengkapan_array)) {
+        //     foreach ($tahap_kelengkapan_array as $tahap_kelengkapan) {
+        //         // Cek jika data sudah ada
+        //         $existing = $statusKelengkapanModel->where([
+        //             'id_tiket' => $id_tiket,
+        //             'tahap_kelengkapan' => esc($tahap_kelengkapan)
+        //         ])->first();
+
+        //         if (!$existing) {
+        //             $statusKelengkapanModel->insert([
+        //                 'id_tiket' => $id_tiket,
+        //                 'tahap_kelengkapan' => esc($tahap_kelengkapan),
+        //                 'status_kelengkapan' => 'Y'
+        //             ]);
+        //         }
+        //     }
+        // } 
         $response = [
             'Pesan' => 'Tiket Berhasil ditambahkan'
         ];
