@@ -308,7 +308,9 @@
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
-                                                            <?php if ($tiketData['approved_order_koord'] === 'Y'): ?>
+                                                            <?php if ($tiketData['approved_order_koord'] !== 'Y'): ?>
+                                                                <button class="btn btn-success w-100 mt-2" id="approveButton" onclick="approveKoord(<?= $tiketData['id_tiket'] ?>)">Approve</button>
+                                                            <?php else: ?>
                                                                 <div class="approved-status">
                                                                     <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="60" height="60" alt="Approved" /></>
                                                                 </div>
@@ -351,7 +353,9 @@
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
-                                                            <?php if ($tiketData['approved_order_koord'] === 'Y'): ?>
+                                                            <?php if ($tiketData['approved_order_koord'] !== 'Y'): ?>
+                                                                <button class="btn btn-success w-100 mt-2" id="approveButton" onclick="approveKoord(<?= $tiketData['id_tiket'] ?>)">Approve</button>
+                                                            <?php else: ?>
                                                                 <div class="approved-status">
                                                                     <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="60" height="60" alt="Approved" /></>
                                                                 </div>
@@ -412,9 +416,11 @@
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
-                                                            <?php if ($tiketData['approved_order_koord'] === 'Y'): ?>
+                                                            <?php if ($tiketData['approved_order_koord'] !== 'Y'): ?>
+                                                                <button class="btn btn-success w-100 mt-2" id="approveButton" onclick="approveKoord(<?= $tiketData['id_tiket'] ?>)">Approve</button>
+                                                            <?php else: ?>
                                                                 <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="70" height="70" alt="Approved" /></>
+                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="60" height="60" alt="Approved" /></>
                                                                 </div>
                                                             <?php endif; ?>
                                                             <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= esc($tiketData['koord_nama'] ?? '     ') ?></p>
@@ -427,9 +433,11 @@
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
-                                                            <?php if ($tiketData['approved_order_koord'] === 'Y'): ?>
+                                                            <?php if ($tiketData['approved_order_koord'] !== 'Y'): ?>
+                                                                <button class="btn btn-success w-100 mt-2" id="approveButton" onclick="approveKoord(<?= $tiketData['id_tiket'] ?>)">Approve</button>
+                                                            <?php else: ?>
                                                                 <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="70" height="70" alt="Approved" /></>
+                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="60" height="60" alt="Approved" /></>
                                                                 </div>
                                                             <?php endif; ?>
                                                             <p class="text-start mb-0 px-1" style="font-size:x-small;">Suksma</p>
@@ -450,9 +458,11 @@
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
-                                                            <?php if ($tiketData['approved_order_koord'] === 'Y'): ?>
+                                                            <?php if ($tiketData['approved_order_koord'] !== 'Y'): ?>
+                                                                <button class="btn btn-success w-100 mt-2" id="approveButton" onclick="approveKoord(<?= $tiketData['id_tiket'] ?>)">Approve</button>
+                                                            <?php else: ?>
                                                                 <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="70" height="70" alt="Approved" /></>
+                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="60" height="60" alt="Approved" /></>
                                                                 </div>
                                                             <?php endif; ?>
                                                             <p class="text-center mb-0 px-1" style="font-size:x-small;">Andini</p>
@@ -525,5 +535,23 @@
             event.preventDefault();
         }
     });
+    function approveKoord(id_tiket) {
+    $.ajax({
+        url: '<?= base_url('approved') ?>', // Route to the controller function
+        method: 'POST',
+        data: { id_tiket: id_tiket },
+        success: function(response) {
+            if (response.success) {
+                // Hide the approve button and show the approved image
+                $('#approveButton').replaceWith('<img src="/assets/img/icons/approved.png" alt="Approved" class="img-fluid w-50 mx-auto d-block my-2">');
+            } else {
+                alert('Gagal approve');
+            }
+        },
+        error: function() {
+            alert('Terjadi Kesalahan Approved Tiket');
+        }
+    });
+}
 </script>
 <?= $this->endSection(); ?>

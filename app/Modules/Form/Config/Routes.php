@@ -24,6 +24,7 @@ $routes->group(
         $routes->get('tampilbuku', 'Form::getBukuOptions');
         $routes->get('tampilbuku/(:segment)', 'Form::getBukuDetails/$1');
         $routes->post('form', 'Form::createForm');
+        $routes->post('approved', 'Form::createForm');
         $routes->get('detail/(:segment)', 'Form::detailForm/$1');
         $routes->delete('delete/(:segment)', 'Form::delete/$1');
     }
