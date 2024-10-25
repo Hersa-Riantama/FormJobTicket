@@ -297,7 +297,7 @@
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
-                                                            <p class="text-Start mb-0 px-1 nama-editor" style="font-size:x-small;"><?= $namaEditor ?></p>
+                                                            <p class="text-Start mb-0 px-1 nama-editor" style="font-size:x-small;"><?= $namaEditor ?: '     '; ?></p>
                                                             <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Editor</p>
                                                         </div>
                                                     </div>
@@ -307,7 +307,7 @@
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
-                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= $namaKoord; ?></p>
+                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= $namaKoord ?: '     '; ?></p>
                                                             <p class="text-center text-primary rounded-bottom mb-0 py-1 nama-koord" style="font-size:x-small;background-color:pink;">Koord. Editor</p>
                                                         </div>
                                                     </div>
@@ -346,7 +346,7 @@
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
-                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= $namaMultimedia; ?></p>
+                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= $namaMultimedia ?: '     '; ?></p>
                                                             <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Tim Multimedia</p>
                                                         </div>
                                                     </div>
@@ -384,8 +384,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
 
                         <!-- Row 2-3 -->
@@ -404,7 +402,7 @@
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
-                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= $namaKoord; ?></p>
+                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= $namaKoord ?: '     '; ?></p>
                                                             <p class="text-center text-primary rounded-bottom mb-0" style="font-size:x-small;background-color:pink; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
                                                         </div>
                                                     </div>

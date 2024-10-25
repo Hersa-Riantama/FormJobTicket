@@ -293,7 +293,7 @@
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
-                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= esc($tiketData['editor_nama']) ?></p>
+                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= esc($tiketData['editor_nama'] ?? '     ') ?></p>
                                                             <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Editor</p>
                                                         </div>
                                                     </div>
@@ -303,7 +303,7 @@
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
-                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= esc($tiketData['koord_nama']) ?></p>
+                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= esc($tiketData['koord_nama'] ?? '     ') ?></p>
                                                             <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Koord. Editor</p>
                                                         </div>
                                                     </div>
@@ -341,7 +341,7 @@
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
-                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= esc($tiketData['multimedia_nama']) ?></p>
+                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"> <?= esc($tiketData['multimedia_nama'] ?? '     '); ?></p>
                                                             <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Tim Multimedia</p>
                                                         </div>
                                                     </div>
@@ -397,7 +397,7 @@
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
-                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= esc($tiketData['koord_nama']) ?></p>
+                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= esc($tiketData['koord_nama'] ?? '     ') ?></p>
                                                             <p class="text-center text-primary rounded-bottom mb-0" style="font-size:x-small;background-color:pink; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
                                                         </div>
                                                     </div>
