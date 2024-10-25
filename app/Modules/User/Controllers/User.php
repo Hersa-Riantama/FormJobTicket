@@ -45,8 +45,7 @@ class User extends BaseController
                 return;
             }
         } else {
-            echo '<script>alert("User not found or session invalid."); history.back();</script>';
-            return;
+            return redirect()->to('/login');
         }
         $model = new UserModel();
         $data = $model->getUser();
