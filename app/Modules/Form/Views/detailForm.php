@@ -292,13 +292,13 @@
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate">
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
-                                                            </div>
-                                                            <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
-                                                                <div class="approved-status">
+                                                                <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
+                                                                <div class="approved-status justify-content-between align-items-center">
                                                                     <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="80" height="80" alt="Approved" /></>
                                                                     <!-- <span class="text-success">Approved</span> -->
                                                                 </div>
-                                                            <?php endif; ?>
+                                                                <?php endif; ?>
+                                                            </div>
                                                             <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= esc($tiketData['editor_nama'] ?? '     ') ?></p>
                                                             <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Editor</p>
                                                         </div>
