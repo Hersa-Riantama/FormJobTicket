@@ -128,8 +128,8 @@ class Form extends BaseController
         }
 
         // Insert status kelengkapan into tbl_status_kelengkapan
-        $statusKelengkapanModel = new \Modules\Status_Kelengkapan\Models\StatusKelengkapanModel();
-        $tahap_kelengkapan_array = $this->request->getVar('tahap_kelengkapan'); // Match the form name
+        $statusKelengkapanModel = new StatusKelengkapanModel();
+        $tahap_kelengkapan_array = $this->request->getVar('tahap_kelengkapan');
 
         // Ensure tahap_kelengkapan is correctly inserted
         if (!empty($tahap_kelengkapan_array) && is_array($tahap_kelengkapan_array)) {
