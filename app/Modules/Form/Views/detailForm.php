@@ -292,105 +292,43 @@
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height: 25px;">
                                                                 <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
                                                                 <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
-                                                            </div>
-                                                            <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
-                                                                <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="60" height="60" alt="Approved" /></>
-                                                                </div>
-                                                            <?php else: ?>
-                                                                <div style="width: 50px; height: 50px; background-color: var(--bs-card-color);"></div> <!-- Ruangan kosong -->
-                                                            <?php endif; ?>
-                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= esc($tiketData['editor_nama'] ?? '     ') ?></p>
-                                                            <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Editor</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl mb-2 px-0">
-                                                        <div class="card h-100 <?= $tiketData['approved_order_editor'] === 'Y' ? 'mb-2' : 'mb-5'; ?>" style="border: 1px solid pink;">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height: 25px;">
-                                                                <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
-                                                                <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
-                                                            </div>
-                                                            <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
-                                                                <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="60" height="60" alt="Approved" /></>
-                                                                </div>
-                                                            <?php else: ?>
-                                                                <div style="width: 50px; height: 50px; background-color: var(--bs-card-color);"></div> <!-- Ruangan kosong -->
-                                                            <?php endif; ?>
-                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= esc($tiketData['koord_nama'] ?? '     ') ?></p>
-                                                            <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Koord. Editor</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p class="text mt-2 mb-0" style="font-size:x-small;">
-                                                </p>
-                                            </div>
-
-                                            <div class="col-xl-7 mb-2">
-                                                <h6 class="text-center rounded py-2" style="background-color:pink;">Catatan</h6>
-                                                <div class="row mt-4 mx-1">
-                                                    <textarea class="form-control" id="Textarea1" name="Textarea1" rows="5" style="border: 1px solid pink;"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Row 2-2 -->
-                        <div class="row">
-                            <div class="col-xl mb-2">
-                                <div class="card h-100 border border-dark">
-                                    <div class="card-body pb-0">
-                                        <div class="row mb-0">
-
-                                            <div class="col-xl-3 mb-3">
-                                                <h6 class="text-center rounded py-2" style="background-color:pink;">Memeriksa</h6>
-                                                <div class="row mt-4 mx-0">
-
-                                                    <div class="col-xl mb-2 px-0">
-                                                        <div class="card h-100 <?= $tiketData['approved_order_editor'] === 'Y' ? 'mb-2' : 'mb-5'; ?>" style="border: 1px solid pink;">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height: 25px;">
-                                                                <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
-                                                                <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
-                                                            </div>
-                                                            <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
-                                                                <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="60" height="60" alt="Approved" /></>
-                                                                </div>
-                                                            <?php else: ?>
-                                                                <div style="width: 50px; height: 50px; background-color: var(--bs-card-color);"></div> <!-- Ruangan kosong -->
-                                                            <?php endif; ?>
-                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"> <?= esc($tiketData['multimedia_nama'] ?? '     '); ?></p>
-                                                            <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Tim Multimedia</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p class="text mt-2 mb-0" style="font-size:x-small;">
-                                                </p>
-                                            </div>
-
-                                            <div class="col-xl-9">
-                                                <h6 class="text-center rounded py-2" style="background-color:pink;">Keterangan Tanggal</h6>
-                                                <div class="row mt-4 mx-1">
-                                                    <div class="col-xl mb-2 px-0">
-                                                        <div class="card h-100 mb-3" style="border: 1px solid pink;">
-                                                            <div class="card-body p-1">
-                                                                <div class="row mt-2 mb-3 px-2">
-                                                                    <label for="tgl_selesai" class="col-md-6 col-form-label text-primary">Tgl selesai pengerjaan</label>
-                                                                    <div class="col-md-6">
-                                                                        <input class="form-control" type="date" value="<?= esc($tiketData['tgl_selesai']) ?>" id="tgl_selesai" name="tgl_selesai" style="border: 1px solid black;" />
+                                                                <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
+                                                                    <div class="approved-status justify-content-between align-items-center">
+                                                                        <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="60" height="60" alt="Approved" /></>
                                                                     </div>
-                                                                </div>
-                                                                <div class="row mb-2 px-2">
-                                                                    <label for="tgl_upload" class="col-md-6 col-form-label text-primary">Tgl <i>upload</i> konten <i>QR Code</i></label>
-                                                                    <div class="col-md-6">
-                                                                        <input class="form-control" type="date" value="<?= esc($tiketData['tgl_upload']) ?>" id="tgl_upload" name="tgl_upload" style="border: 1px solid black;" />
-                                                                    </div>
-                                                                </div>
+                                                                <?php else: ?>
+                                                                    <div style="width: 50px; height: 50px; background-color: var(--bs-card-color);"></div> <!-- Ruangan kosong -->
+                                                                <?php endif; ?>
+                                                                <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= esc($tiketData['editor_nama'] ?? '     ') ?></p>
+                                                                <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Editor</p>
                                                             </div>
                                                         </div>
+                                                        <div class="col-xl mb-2 px-0">
+                                                            <div class="card h-100 <?= $tiketData['approved_order_editor'] === 'Y' ? 'mb-2' : 'mb-5'; ?>" style="border: 1px solid pink;">
+                                                                <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height: 25px;">
+                                                                    <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
+                                                                    <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
+                                                                </div>
+                                                                <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
+                                                                    <div class="approved-status">
+                                                                        <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="60" height="60" alt="Approved" /></>
+                                                                    </div>
+                                                                <?php else: ?>
+                                                                    <div style="width: 50px; height: 50px; background-color: var(--bs-card-color);"></div> <!-- Ruangan kosong -->
+                                                                <?php endif; ?>
+                                                                <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= esc($tiketData['koord_nama'] ?? '     ') ?></p>
+                                                                <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Koord. Editor</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <p class="text mt-2 mb-0" style="font-size:x-small;">
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-xl-7 mb-2">
+                                                    <h6 class="text-center rounded py-2" style="background-color:pink;">Catatan</h6>
+                                                    <div class="row mt-4 mx-1">
+                                                        <textarea class="form-control" id="Textarea1" name="Textarea1" rows="5" style="border: 1px solid pink;"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -399,76 +337,138 @@
                                 </div>
                             </div>
 
+                            <!-- Row 2-2 -->
+                            <div class="row">
+                                <div class="col-xl mb-2">
+                                    <div class="card h-100 border border-dark">
+                                        <div class="card-body pb-0">
+                                            <div class="row mb-0">
 
-                        </div>
+                                                <div class="col-xl-3 mb-3">
+                                                    <h6 class="text-center rounded py-2" style="background-color:pink;">Memeriksa</h6>
+                                                    <div class="row mt-4 mx-0">
 
-                        <!-- Row 2-3 -->
-                        <div class="row">
-                            <div class="col-xl mb-2">
-                                <div class="card h-100 border border-dark">
-                                    <div class="card-body pb-0">
-                                        <div class="row mb-0">
-
-                                            <div class="col-xl-7 mb-3">
-                                                <h6 class="text-center rounded py-2" style="background-color:pink;"><i>Approval</i></h6>
-                                                <div class="row mt-4 mx-0">
-                                                    <div class="col-xl mb-2 px-0">
-                                                        <div class="card h-100 <?= $tiketData['approved_order_editor'] === 'Y' ? 'mb-2' : 'mb-5'; ?>" style="border: 1px solid pink;">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height: 25px;">
-                                                                <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
-                                                                <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
-                                                            </div>
-                                                            <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
-                                                                <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="70" height="70" alt="Approved" /></>
+                                                        <div class="col-xl mb-2 px-0">
+                                                            <div class="card h-100 <?= $tiketData['approved_order_editor'] === 'Y' ? 'mb-2' : 'mb-5'; ?>" style="border: 1px solid pink;">
+                                                                <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height: 25px;">
+                                                                    <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
+                                                                    <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                                 </div>
-                                                            <?php else: ?>
-                                                                <div style="width: 50px; height: 50px; background-color: var(--bs-card-color);"></div> <!-- Ruangan kosong -->
-                                                            <?php endif; ?>
-                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= esc($tiketData['koord_nama'] ?? '     ') ?></p>
-                                                            <p class="text-center text-primary rounded-bottom mb-0" style="font-size:x-small;background-color:pink; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
+                                                                <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
+                                                                    <div class="approved-status">
+                                                                        <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="60" height="60" alt="Approved" /></>
+                                                                    </div>
+                                                                <?php else: ?>
+                                                                    <div style="width: 50px; height: 50px; background-color: var(--bs-card-color);"></div> <!-- Ruangan kosong -->
+                                                                <?php endif; ?>
+                                                                <p class="text-start mb-0 px-1" style="font-size:x-small;"> <?= esc($tiketData['multimedia_nama'] ?? '     '); ?></p>
+                                                                <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Tim Multimedia</p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xl mb-2 px-0">
-                                                        <div class="card h-100 <?= $tiketData['approved_order_editor'] === 'Y' ? 'mb-2' : 'mb-5'; ?>" style="border: 1px solid pink;">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height: 25px;">
-                                                                <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
-                                                                <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
-                                                            </div>
-                                                            <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
-                                                                <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="70" height="70" alt="Approved" /></>
+                                                    <p class="text mt-2 mb-0" style="font-size:x-small;">
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-xl-9">
+                                                    <h6 class="text-center rounded py-2" style="background-color:pink;">Keterangan Tanggal</h6>
+                                                    <div class="row mt-4 mx-1">
+                                                        <div class="col-xl mb-2 px-0">
+                                                            <div class="card h-100 mb-3" style="border: 1px solid pink;">
+                                                                <div class="card-body p-1">
+                                                                    <div class="row mt-2 mb-3 px-2">
+                                                                        <label for="tgl_selesai" class="col-md-6 col-form-label text-primary">Tgl selesai pengerjaan</label>
+                                                                        <div class="col-md-6">
+                                                                            <input class="form-control" type="date" value="<?= esc($tiketData['tgl_selesai']) ?>" id="tgl_selesai" name="tgl_selesai" style="border: 1px solid black;" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mb-2 px-2">
+                                                                        <label for="tgl_upload" class="col-md-6 col-form-label text-primary">Tgl <i>upload</i> konten <i>QR Code</i></label>
+                                                                        <div class="col-md-6">
+                                                                            <input class="form-control" type="date" value="<?= esc($tiketData['tgl_upload']) ?>" id="tgl_upload" name="tgl_upload" style="border: 1px solid black;" />
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            <?php else: ?>
-                                                                <div style="width: 50px; height: 50px; background-color: var(--bs-card-color);"></div> <!-- Ruangan kosong -->
-                                                            <?php endif; ?>
-                                                            <p class="text-start mb-0 px-1" style="font-size:x-small;">Suksma</p>
-                                                            <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Manager</br>Platform Digital</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <p class="text mt-2 mb-0" style="font-size:x-small;">
-                                                </p>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                            <div class="col-xl-4" style="margin-left: auto;">
-                                                <h6 class="text-center rounded py-2" style="background-color:pink;">Arsip</h6>
-                                                <div class="row mt-4 mx-0">
-                                                    <div class="col-xl mb-2 px-0">
-                                                        <div class="card h-100 <?= $tiketData['approved_order_editor'] === 'Y' ? 'mb-2' : 'mb-5'; ?>" style="border: 1px solid pink;">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height: 25px;">
-                                                                <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
-                                                                <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
-                                                            </div>
-                                                            <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
-                                                                <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="70" height="70" alt="Approved" /></>
+
+                            </div>
+
+                            <!-- Row 2-3 -->
+                            <div class="row">
+                                <div class="col-xl mb-2">
+                                    <div class="card h-100 border border-dark">
+                                        <div class="card-body pb-0">
+                                            <div class="row mb-0">
+
+                                                <div class="col-xl-7 mb-3">
+                                                    <h6 class="text-center rounded py-2" style="background-color:pink;"><i>Approval</i></h6>
+                                                    <div class="row mt-4 mx-0">
+                                                        <div class="col-xl mb-2 px-0">
+                                                            <div class="card h-100 <?= $tiketData['approved_order_editor'] === 'Y' ? 'mb-2' : 'mb-5'; ?>" style="border: 1px solid pink;">
+                                                                <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height: 25px;">
+                                                                    <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
+                                                                    <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                                 </div>
-                                                            <?php else: ?>
-                                                                <div style="width: 50px; height: 50px; background-color: var(--bs-card-color);"></div> <!-- Ruangan kosong -->
-                                                            <?php endif; ?>
-                                                            <p class="text-center mb-0 px-1" style="font-size:x-small;">Andini</p>
-                                                            <p class="text-center text-primary rounded-bottom mb-0" style="font-size:x-small;background-color:pink; padding: 0.725rem 0 0.725rem;">Admin</p>
+                                                                <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
+                                                                    <div class="approved-status">
+                                                                        <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="70" height="70" alt="Approved" /></>
+                                                                    </div>
+                                                                <?php else: ?>
+                                                                    <div style="width: 50px; height: 50px; background-color: var(--bs-card-color);"></div> <!-- Ruangan kosong -->
+                                                                <?php endif; ?>
+                                                                <p class="text-start mb-0 px-1" style="font-size:x-small;"><?= esc($tiketData['koord_nama'] ?? '     ') ?></p>
+                                                                <p class="text-center text-primary rounded-bottom mb-0" style="font-size:x-small;background-color:pink; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl mb-2 px-0">
+                                                            <div class="card h-100 <?= $tiketData['approved_order_editor'] === 'Y' ? 'mb-2' : 'mb-5'; ?>" style="border: 1px solid pink;">
+                                                                <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height: 25px;">
+                                                                    <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
+                                                                    <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
+                                                                </div>
+                                                                <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
+                                                                    <div class="approved-status">
+                                                                        <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="70" height="70" alt="Approved" /></>
+                                                                    </div>
+                                                                <?php else: ?>
+                                                                    <div style="width: 50px; height: 50px; background-color: var(--bs-card-color);"></div> <!-- Ruangan kosong -->
+                                                                <?php endif; ?>
+                                                                <p class="text-start mb-0 px-1" style="font-size:x-small;">Suksma</p>
+                                                                <p class="text-center text-primary rounded-bottom mb-0 py-1" style="font-size:x-small;background-color:pink;">Manager</br>Platform Digital</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <p class="text mt-2 mb-0" style="font-size:x-small;">
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-xl-4" style="margin-left: auto;">
+                                                    <h6 class="text-center rounded py-2" style="background-color:pink;">Arsip</h6>
+                                                    <div class="row mt-4 mx-0">
+                                                        <div class="col-xl mb-2 px-0">
+                                                            <div class="card h-100 <?= $tiketData['approved_order_editor'] === 'Y' ? 'mb-2' : 'mb-5'; ?>" style="border: 1px solid pink;">
+                                                                <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height: 25px;">
+                                                                    <p class="text-start text-primary" style="font-size:xx-small;">tanggal: </p>
+                                                                    <p class="text-end" style="font-size:xx-small;">dd/mm/yyyy</p>
+                                                                </div>
+                                                                <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
+                                                                    <div class="approved-status">
+                                                                        <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="70" height="70" alt="Approved" /></>
+                                                                    </div>
+                                                                <?php else: ?>
+                                                                    <div style="width: 50px; height: 50px; background-color: var(--bs-card-color);"></div> <!-- Ruangan kosong -->
+                                                                <?php endif; ?>
+                                                                <p class="text-center mb-0 px-1" style="font-size:x-small;">Andini</p>
+                                                                <p class="text-center text-primary rounded-bottom mb-0" style="font-size:x-small;background-color:pink; padding: 0.725rem 0 0.725rem;">Admin</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -479,20 +479,19 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
-                    <!-- Row 3 -->
-                    <div class="row justify-content-center my-3">
-                        <div class="col-xl-6">
-                            <button class="btn btn-primary d-grid w-100" id="btnsimpanPerubahan">Simpan Perubahan</button>
-                            <p id="errorMessage" class="text-danger" style="display:none;"></p>
+                    <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
+                        <!-- Row 3 -->
+                        <div class="row justify-content-center my-3">
+                            <div class="col-xl-6">
+                                <button class="btn btn-primary d-grid w-100" id="btnsimpanPerubahan">Simpan Perubahan</button>
+                                <p id="errorMessage" class="text-danger" style="display:none;"></p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
     </form>
     <!-- / Content -->
 
