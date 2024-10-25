@@ -143,7 +143,7 @@ class Form extends BaseController
 
             if (!$existing) {
                 // Jika belum ada, insert data baru
-                $kelengkapanModel->insert([
+                $statusKelengkapanModel->insert([
                     'id_tiket' => $id_tiket,
                     'tahap_kelengkapan' => $jsonTahapKelengkapan,
                     'status_kelengkapan' => 'Y'
