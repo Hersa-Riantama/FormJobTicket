@@ -157,25 +157,7 @@ class Form extends BaseController
                 'status_kelengkapan' => 'N'
             ]);
         }
-
-        // // Ensure tahap_kelengkapan is correctly inserted
-        // if (!empty($tahap_kelengkapan_array) && is_array($tahap_kelengkapan_array)) {
-        //     foreach ($tahap_kelengkapan_array as $tahap_kelengkapan) {
-        //         // Cek jika data sudah ada
-        //         $existing = $statusKelengkapanModel->where([
-        //             'id_tiket' => $id_tiket,
-        //             'tahap_kelengkapan' => esc($tahap_kelengkapan)
-        //         ])->first();
-
-        //         if (!$existing) {
-        //             $statusKelengkapanModel->insert([
-        //                 'id_tiket' => $id_tiket,
-        //                 'tahap_kelengkapan' => esc($tahap_kelengkapan),
-        //                 'status_kelengkapan' => 'Y'
-        //             ]);
-        //         }
-        //     }
-        // } 
+        $this->model->update($id_tiket, ['approved_order_editor' => 'Y']);
         $response = [
             'Pesan' => 'Tiket Berhasil ditambahkan'
         ];
