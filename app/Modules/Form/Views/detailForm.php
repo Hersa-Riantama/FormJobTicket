@@ -295,7 +295,7 @@
                                                             </div>
                                                             <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
                                                                 <div class="approved-status">
-                                                                    <center><img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="80" height="80" alt="Approved" /></center>
+                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="80" height="80" alt="Approved" /></>
                                                                     <!-- <span class="text-success">Approved</span> -->
                                                                 </div>
                                                             <?php endif; ?>
