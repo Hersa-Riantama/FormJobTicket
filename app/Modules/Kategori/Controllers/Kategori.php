@@ -60,8 +60,7 @@ class Kategori extends BaseController
                 return;
             }
         } else {
-            echo '<script>alert("User not found or session invalid."); history.back();</script>';
-            return;
+            return redirect()->to('/login');
         }
         $userData = $AuthModel->find($userId);
         $data = $kategorimodel->getKategori();

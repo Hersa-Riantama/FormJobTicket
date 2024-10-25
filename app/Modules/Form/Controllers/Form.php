@@ -215,8 +215,7 @@ class Form extends BaseController
                 return;
             }
         } else {
-            echo '<script>alert("User not found or session invalid."); history.back();</script>';
-            return;
+            return redirect()->to('/login');
         }
         if ($userData['level_user'] == 'Editor') {
             $editorId = $GrupModel->where('id_editor', $userId)->first();
@@ -271,8 +270,7 @@ class Form extends BaseController
                 return;
             }
         } else {
-            echo '<script>alert("User not found or session invalid."); history.back();</script>';
-            return;
+            return redirect()->to('/login');
         }
 
         // Ambil data tiket, kategori, buku, dan user dari database
