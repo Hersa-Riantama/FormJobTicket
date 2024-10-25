@@ -50,7 +50,7 @@
   background-color: #ffffff;
   border-radius: 8px;
   padding-bottom: 10px;
-  height: 80px;
+  height: auto;
 }
 
 .demo-blocks > * {
