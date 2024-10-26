@@ -75,7 +75,7 @@
                                             <label class="form-check-label text-primary" for="kategori4"> <i>Link QR Code</i> </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input" type="checkbox" value="3" name="id_kategori[]" id="kategori5" style="border: 1px solid pink;" <?php echo in_array(5, $kategori) ? 'checked' : ''; ?> />
+                                            <input class="form-check-input" type="checkbox" value="5" name="id_kategori[]" id="kategori5" style="border: 1px solid pink;" <?php echo in_array(5, $kategori) ? 'checked' : ''; ?> />
                                             <label class="form-check-label text-primary" for="kategori5"> CBT/Aplikasi </label>
                                         </div>
                                         <div class="form-check mt-4">

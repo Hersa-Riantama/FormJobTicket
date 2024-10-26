@@ -184,6 +184,8 @@ class Form extends BaseController
         }
         $id_tiket = $this->request->getVar('id_tiket');
         $id_kategori_array = $this->request->getVar('id_kategori');
+        log_message('info', 'id_tiket: ' . $id_tiket);
+        log_message('info', 'id_kategori: ' . print_r($id_kategori_array, true));
         if (is_array($id_kategori_array) && count($id_kategori_array) > 0) {
             // Hapus duplikasi dari array id_kategori
             $id_kategori_unique = array_unique($id_kategori_array);
@@ -191,17 +193,23 @@ class Form extends BaseController
             // Konversi array unik menjadi JSON
             $id_kategori_json = json_encode($id_kategori_unique);
             if (json_last_error() === JSON_ERROR_NONE) {
-                // JSON valid, lanjutkan insert ke database
-                $this->model->update($id_tiket,[
+                $cobaupdate = [
                     'id_kategori' => $id_kategori_json,
                     'id_editor' => $id_editor,
                     'id_koord' => $id_koord,
                     'id_multimedia' => $id_multimedia
-                ]);
+                ];
+                if ($this->model->update($id_tiket, $cobaupdate) === false) {
+                    log_message('error', 'Failed to update id_kategori for id_tiket: ' . $id_tiket);
+                    return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update categories.']);
+                }
             } else {
-                // JSON tidak valid, tangani kesalahan
-                echo 'Invalid JSON format';
+                log_message('error', 'Invalid JSON format for id_kategori: ' . json_last_error_msg());
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid JSON format.']);
             }
+        }else {
+            log_message('warning', 'No categories provided for id_tiket: ' . $id_tiket);
+            return $this->response->setJSON(['status' => 'error', 'message' => 'No categories provided.']);
         }
         $id_tiket = $this->model->getInsertID();
         $id_tiket = $this->request->getVar('id_tiket');
