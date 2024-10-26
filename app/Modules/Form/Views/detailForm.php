@@ -495,7 +495,7 @@
                     <!-- Row 3 -->
                     <div class="row justify-content-center my-3">
                         <div class="col-xl-6">
-                            <button class="btn btn-primary d-grid w-100" id="btnsimpanPerubahan">Simpan Perubahan</button>
+                            <button class="btn btn-primary d-grid w-100" id="btnsimpanPerubahan" onclick="updateForm()">Simpan Perubahan</button>
                             <p id="errorMessage" class="text-danger" style="display:none;"></p>
                         </div>
                     </div>
@@ -569,6 +569,46 @@
             },
             error: function(xhr, status, error) {
                 console.error("Error during approval:", error);
+            }
+        });
+    }
+    function updateForm(){
+        const id_kategori = [];
+        $('input[name="id_kategori[]"]:checked').each(function(){
+            id_kategori.push($(this).val());
+        });
+        const kelengkapan = [];
+        $('input[name="kelengkapan[]"]:checked').each(function(){
+            kelengkapan.push($(this).val());
+        });
+        const tahap_kelengkapan = [];
+        $('input[name="tahap_kelengkapan[]"]:checked').each(function(){
+            tahap_kelengkapan.push($(this).val());
+        });
+        const id_tiket = <?= $tiketData['id_tiket'] ?>;
+        $.ajax({
+            url: 'http://localhost:8080/updateForm/' + id_tiket,
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                id_tiket: id_tiket,
+                id_kategori: id_kategori.length ? id_kategori : [''],
+                kelengkapan: kelengkapan.length ? kelengkapan : [''],
+                tahap_kelengkapan: tahap_kelengkapan.length ?tahap_kelengkapan : [''],
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    $('#btnsimpanPerubahan').hide();
+                    alert('Data berhasil diperbarui.');
+                    // Update tampilan sesuai kebutuhan
+                    $('#status_message').text(response.message); 
+                } else {
+                    alert('Gagal memperbarui data: ' + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                alert('Terjadi kesalahan saat memperbarui data.');
             }
         });
     }

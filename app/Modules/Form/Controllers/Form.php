@@ -164,6 +164,109 @@ class Form extends BaseController
         return $this->response->setJSON($response);
     }
 
+    public function updateForm($id_tiket = null)
+    {
+        $AuthModel = new AuthModel();
+        $GrupModel = new GrupModel();
+
+        $id_user = session()->get('id_user');
+        $userData = $AuthModel->find($id_user);
+
+        if ($userData['level_user'] == 'Editor') {
+            $editorId = $GrupModel->where('id_editor', $id_user)->first();
+            $id_editor = $editorId['id_editor'];
+            $id_koord = $editorId['id_koord'];
+            $id_multimedia = 0;
+        } else if ($userData['level_user'] == 'Tim Multimedia') {
+            $id_editor = 0;
+            $id_koord = 0;
+            $id_multimedia = session()->get('id_user');
+        }
+        $id_tiket = $this->request->getVar('id_tiket');
+        $id_kategori_array = $this->request->getVar('id_kategori');
+        if (is_array($id_kategori_array) && count($id_kategori_array) > 0) {
+            // Hapus duplikasi dari array id_kategori
+            $id_kategori_unique = array_unique($id_kategori_array);
+
+            // Konversi array unik menjadi JSON
+            $id_kategori_json = json_encode($id_kategori_unique);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                // JSON valid, lanjutkan insert ke database
+                $this->model->update($id_tiket,[
+                    'id_kategori' => $id_kategori_json,
+                    'id_editor' => $id_editor,
+                    'id_koord' => $id_koord,
+                    'id_multimedia' => $id_multimedia
+                ]);
+            } else {
+                // JSON tidak valid, tangani kesalahan
+                echo 'Invalid JSON format';
+            }
+        }
+        $id_tiket = $this->model->getInsertID();
+        $id_tiket = $this->request->getVar('id_tiket');
+
+        $kelengkapanModel = new KelengkapanModel();
+        $kelengkapans = $this->request->getVar('kelengkapan');
+
+        if (is_array($kelengkapans) && count($kelengkapans) > 0) {
+            // Hapus duplikat dari array
+            $uniqueKelengkapans = array_unique($kelengkapans);
+
+            // Ubah ke JSON
+            $jsonKelengkapan = json_encode($uniqueKelengkapans);
+
+            // Periksa apakah data sudah ada di database berdasarkan id_tiket
+            $existing = $kelengkapanModel->where(['id_tiket' => $id_tiket])->first();
+
+            if ($existing) {
+                // Jika belum ada, insert data baru
+                $kelengkapanModel->update($existing['id_kelengkapan'],[
+                    'nama_kelengkapan' => $jsonKelengkapan
+                ]);
+            }else {
+                $kelengkapanModel->insert([
+                    'id_tiket' => $id_tiket,
+                    'nama_kelengkapan' => $jsonKelengkapan
+                ]);
+            }
+        }
+
+        // Insert status kelengkapan into tbl_status_kelengkapan
+        $statusKelengkapanModel = new StatusKelengkapanModel();
+        $tahap_kelengkapan_array = $this->request->getVar('tahap_kelengkapan');
+
+        if (is_array($tahap_kelengkapan_array) && count($tahap_kelengkapan_array) > 0) {
+            // Hapus duplikat dari array
+            $uniqueTahapKelengkapans = array_unique($tahap_kelengkapan_array);
+
+            // Ubah ke JSON
+            $jsonTahapKelengkapan = json_encode($uniqueTahapKelengkapans);
+
+            // Periksa apakah data sudah ada di database berdasarkan id_tiket
+            $existing = $statusKelengkapanModel->where(['id_tiket' => $id_tiket])->first();
+
+            if ($existing) {
+                // Jika belum ada, insert data baru
+                $statusKelengkapanModel->update($existing['id_status_kelengkapan'],[
+                    'tahap_kelengkapan' => $jsonTahapKelengkapan,
+                ]);
+            }
+        } else {
+            // Insert default values if no status_kelengkapan is provided
+            $statusKelengkapanModel->insert([
+                'id_tiket' => $id_tiket,
+                'tahap_kelengkapan' => 'N', // Default to 'N' if no checkbox is selected
+                'status_kelengkapan' => 'N'
+            ]);
+        }
+        $response = [
+            'status' => 'success', 
+            'Pesan' => 'Tiket Berhasil diupdate'
+        ];
+        return $this->response->setJSON($response);
+    }
+
     public function getKategori()
     {
         $kategoriModel = new KategoriModel();  // Pastikan KategoriModel sudah di-load
