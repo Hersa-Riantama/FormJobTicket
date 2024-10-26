@@ -42,6 +42,47 @@
 * Content
 ******************************************************************************/
 
+.warna-text{
+  background-color: #2558cf;
+}
+
+.warna-pink{
+  background-color: #f5e3ef;
+}
+
+.warna-darkpink{
+  background-color: #ddbcd4;
+}
+
+.warna-border{
+  border: 1.5px solid #e0b3d3;
+}
+
+.border-atas{
+  border-top: 1.5px solid #e0b3d3;
+}
+
+.text-biru{
+  color: #255c8f;
+}
+
+.text-hitam{
+  color: black;
+}
+
+.border-hitam{
+  border: 1.5px solid #1c2939 !important;
+}
+
+.oval{
+  border-radius:1rem !important;
+}
+
+.oval-atas{
+  border-top-left-radius: 1rem !important;
+  border-top-right-radius: 1rem !important;
+}
+
 .approved-status {
   display: flex;
   flex-direction: column;
