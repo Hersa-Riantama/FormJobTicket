@@ -501,14 +501,9 @@ class Form extends BaseController
         if (!$tiket) {
             return $this->failNotFound('Data tiket tidak ditemukan');
         }
-
-        // Hapus data dari tbl_kelengkapan berdasarkan id_tiket
         $kelengkapanDeleted = $modelKelengkapan->where('id_tiket', $id_tiket)->delete();
-
-        // Hapus data dari tbl_status_kelengkapan berdasarkan id_tiket
         $statusKelengkapanDeleted = $modelStatsKelengkapan->where('id_tiket', $id_tiket)->delete();
 
-        // Hapus tiket
         $this->model->delete($id_tiket);
         $response = [
             'pesan' => 'Data tiket berhasil dihapus',
