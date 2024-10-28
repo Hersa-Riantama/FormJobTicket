@@ -388,46 +388,22 @@
                                                 </p>
                                             </div>
 
-                                            <!-- <div class="col-xl-9">
-                                                <h6 class="text-center rounded py-2 warna-pink text-hitam">Keterangan Tanggal</h6>
-                                                <div class="row mt-4 mx-1">
-                                                    <div class="col-xl mb-2 px-0">
-                                                        <div class="card h-100 mb-3 warna-border">
-                                                            <div class="card-body p-1" style="height:6.5rem;">
-                                                                <div class="row mt-2 mb-3 px-2">
-                                                                    <label for="tgl_selesai" class="col-md-6 col-form-label text-biru">Tgl selesai pengerjaan</label>
-                                                                    <div class="col-md-6">
-                                                                        <input class="form-control text-hitam border-hitam" type="date" value="<?= esc($tiketData['tgl_selesai']) ?>" id="tgl_selesai" name="tgl_selesai" style="border: 1px solid black;" />
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mb-2 px-2">
-                                                                    <label for="tgl_upload" class="col-md-6 col-form-label text-biru">Tgl <i>upload</i> konten <i>QR Code</i></label>
-                                                                    <div class="col-md-6">
-                                                                        <input class="form-control text-hitam border-hitam" type="date" value="<?= esc($tiketData['tgl_upload']) ?>" id="tgl_upload" name="tgl_upload" style="border: 1px solid black;" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> -->
-
                                             <div class="col-xl-9">
                                                 <h6 class="text-center rounded py-2 warna-pink text-hitam">Keterangan Tanggal</h6>
                                                 <div class="row mt-4 mx-1">
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-3 warna-border">
-                                                            <div class="card-body p-1">
+                                                            <div class="card-body p-0">
                                                                 <div class="row mt-2 mb-3 px-2">
                                                                     <label for="tgl_selesai" class="col-12 col-md-6 col-form-label text-biru">Tgl selesai pengerjaan</label>
                                                                     <div class="col-12 col-md-6">
-                                                                        <input class="form-control text-hitam border-hitam w-100" type="date" value="<?= esc($tiketData['tgl_selesai']) ?>" id="tgl_selesai" name="tgl_selesai" style="border: 1px solid black;" />
+                                                                        <input class="form-control text-hitam border-hitam w-100" type="date" value="<?= esc($tiketData['tgl_selesai']) ?>" id="tgl_selesai" name="tgl_selesai" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="row mb-2 px-2">
                                                                     <label for="tgl_upload" class="col-12 col-md-6 col-form-label text-biru">Tgl <i>upload</i> konten <i>QR Code</i></label>
                                                                     <div class="col-12 col-md-6">
-                                                                        <input class="form-control text-hitam border-hitam w-100" type="date" value="<?= esc($tiketData['tgl_upload']) ?>" id="tgl_upload" name="tgl_upload" style="border: 1px solid black;" />
+                                                                        <input class="form-control text-hitam border-hitam w-100" type="date" value="<?= esc($tiketData['tgl_upload']) ?>" id="tgl_upload" name="tgl_upload" />
                                                                     </div>
                                                                 </div>
                                                             </div>

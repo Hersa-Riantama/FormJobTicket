@@ -14,26 +14,7 @@
                             style="width: 100%; max-width: 100%; max-height: 14rem; object-fit: cover;"
                             alt="Logo" />
                     </div>
-                    <!-- <div class="col-xl-3 mb-5">
-                        <h4 class="card-header text-center mb-2 text-hitam">PLATFORM DIGITAL</h4>
-                        <div class="card border border-hitam mx-4" style="height: auto; max-height: 14rem;">
-                            <div class="card-body p-2">
-                                <div class="row justify-content-between">
-                                    <div class="col-xl-7">
-                                        <div class="card warna-pink oval-atas">
-                                            <h3 class="text-center oval mb-0 p-2 warna-darkpink text-hitam"><i>Form</i></h3>
-                                            <div class="card-body m-0 p-2">
-                                                <h1 class="text-center mb-0 display-1 text-hitam" style="font-size: 4rem;">C</h1>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-5" style="padding-left:0;">
-                                        <h1 class="text-center display-1 mb-0 mt-1 text-hitam" style="font-size: 7rem;">1</h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
+
                     <div class="col-xl-3 mb-5">
                         <h4 class="card-header text-center mb-2 text-hitam">PLATFORM DIGITAL</h4>
                         <div class="card border border-hitam mx-4" style="height: auto; max-height: 14rem; overflow: hidden;">
@@ -315,20 +296,22 @@
 
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-5 warna-border">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:2rem;">
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
                                                                 <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
+                                                            <div style="height: 1rem; background-color: transparent;"></div>
                                                             <p class="text-Start mb-0 px-1 nama-editor text-hitam" style="font-size:x-small;"><?= $namaEditor ?: '     '; ?></p>
                                                             <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas" style="font-size:x-small">Editor</p>
                                                         </div>
                                                     </div>
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-5 warna-border">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:2rem;">
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
                                                                 <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
+                                                            <div style="height: 1rem; background-color: transparent;"></div>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;"><?= $namaKoord ?: '     '; ?></p>
                                                             <p class="text-center text-biru rounded-bottom mb-0 py-1 nama-koord warna-pink border-atas" style="font-size:x-small;">Koord. Editor</p>
                                                         </div>
@@ -364,10 +347,11 @@
 
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-5 warna-border">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:2rem;">
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
                                                                 <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
+                                                            <div style="height: 1rem; background-color: transparent;"></div>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;"><?= $namaMultimedia ?: '     '; ?></p>
                                                             <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas" style="font-size:x-small;">Tim Multimedia</p>
                                                         </div>
@@ -383,25 +367,25 @@
                                                 <div class="row mt-4 mx-1">
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-3 warna-border">
-                                                            <div class="card-body p-1">
-                                                                <div class=" row mt-2 mb-3 px-2">
-                                                                    <label for="tgl_selesai" class="col-md-6 col-form-label text-biru">Tgl selesai pengerjaan</label>
-                                                                    <div class="col-md-6">
-                                                                        <input class="form-control border-hitam text-hitam" type="date" value="" id="tgl_selesai" name="tgl_selesai" />
+                                                            <div class="card-body p-0">
+                                                                <div class="row mt-2 mb-3 px-2">
+                                                                    <label for="tgl_selesai" class="col-12 col-md-6 col-form-label text-biru">Tgl selesai pengerjaan</label>
+                                                                    <div class="col-12 col-md-6">
+                                                                        <input class="form-control text-hitam border-hitam w-100" type="date" value="" id="tgl_selesai" name="tgl_selesai" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="row mb-2 px-2">
-                                                                    <label for="tgl_upload" class="col-md-6 col-form-label text-biru">Tgl <i>upload</i> konten <i>QR Code</i></label>
-                                                                    <div class="col-md-6">
-                                                                        <input class="form-control border-hitam text-hitam" type="date" value="" id="tgl_upload" name="tgl_upload" />
+                                                                    <label for="tgl_upload" class="col-12 col-md-6 col-form-label text-biru">Tgl <i>upload</i> konten <i>QR Code</i></label>
+                                                                    <div class="col-12 col-md-6">
+                                                                        <input class="form-control text-hitam border-hitam w-100" type="date" value="" id="tgl_upload" name="tgl_upload" />
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -420,20 +404,22 @@
                                                 <div class="row mt-4 mx-0">
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-5 warna-border">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:2rem;">
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
                                                                 <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
+                                                            <div style="height: 1rem; background-color: transparent;"></div>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;"><?= $namaKoord ?: '     '; ?></p>
                                                             <p class="text-center text-biru rounded-bottom mb-0 warna-pink border-atas" style="font-size:x-small; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
                                                         </div>
                                                     </div>
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-5 warna-border">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:2rem;">
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
                                                                 <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
+                                                            <div style="height: 1rem; background-color: transparent;"></div>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;">Suksma</p>
                                                             <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas" style="font-size:x-small;">Manager</br>Platform Digital</p>
                                                         </div>
@@ -449,10 +435,11 @@
                                                 <div class="row mt-4 mx-0">
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-5 warna-border">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:2rem;">
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
                                                                 <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
+                                                            <div style="height: 1rem; background-color: transparent;"></div>
                                                             <p class="text-center mb-0 px-1 text-hitam" style="font-size:x-small;">Andini</p>
                                                             <p class="text-center text-biru rounded-bottom mb-0 warna-pink border-atas" style="font-size:x-small; padding: 0.725rem 0 0.725rem;">Admin</p>
                                                         </div>
