@@ -42,10 +42,6 @@
 * Content
 ******************************************************************************/
 
-.warna-text{
-  background-color: #2558cf;
-}
-
 .warna-pink{
   background-color: #f5e3ef;
 }
@@ -83,6 +79,10 @@
   border-top-right-radius: 1rem !important;
 }
 
+.btn-approved{
+  height: 2rem;
+}
+
 .approved-status {
   display: flex;
   flex-direction: column;
@@ -90,7 +90,7 @@
   align-items: center;
   background-color: #ffffff;
   border-radius: 8px;
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
   height: auto;
 }
 
