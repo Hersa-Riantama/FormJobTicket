@@ -219,11 +219,11 @@
                                     <div class="col-md px-3">
                                         <!-- <small class="text-light fw-medium">Checkboxes</small> -->
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="14" name="kelengkapan[]" id="kategori14" />
+                                            <input class="form-check-input warna-border" type="checkbox" value="14" name="kelengkapan[]" id="kategori14" <?= ($tiketData['approved_order_koord'] === "Y") ? 'checked' : ''; ?> />
                                             <label class="form-check-label text-biru" for="kategori14"> Sudah diperiksa <i>pemesan</i> </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="15" name="kelengkapan[]" id="kategori15" />
+                                            <input class="form-check-input warna-border" type="checkbox" value="15" name="kelengkapan[]" id="kategori15" <?= ($tiketData['approved_acc_manager'] === "Y") ? 'checked' : ''; ?> />
                                             <label class="form-check-label text-biru" for="kategori15"> Sudah di-<i>approve </i>atasan </label>
                                         </div>
 
@@ -294,12 +294,12 @@
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_order_editor'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
-                                                            <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
-                                                            <?php if (!empty($tiketData['tgl_order_editor']) && $tiketData['tgl_order_editor'] !== '0000-00-00' && $tiketData['tgl_order_editor'] !== '-0001-11-30'): ?>
-                                                                <p class="text-start text-biru" style="font-size:xx-small;">
-                                                                    <?= date('d/m/Y', strtotime($tiketData['tgl_order_editor'])); ?>
-                                                                </p>
-                                                            <?php endif; ?>
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
+                                                                <?php if (!empty($tiketData['tgl_order_editor']) && $tiketData['tgl_order_editor'] !== '0000-00-00' && $tiketData['tgl_order_editor'] !== '-0001-11-30'): ?>
+                                                                    <p class="text-start text-biru" style="font-size:xx-small;">
+                                                                        <?= date('d/m/Y', strtotime($tiketData['tgl_order_editor'])); ?>
+                                                                    </p>
+                                                                <?php endif; ?>
                                                             </div>
                                                             <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
                                                                 <div class="approved-status">
@@ -317,12 +317,12 @@
                                                         <div class="card h-100 <?= $tiketData['approved_order_koord'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <?php $level_user = session()->get('level_user'); ?>
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Koord Editor' && $tiketData['approved_order_koord'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
-                                                            <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
-                                                            <?php if (!empty($tiketData['tgl_order_koord']) && $tiketData['tgl_order_koord'] !== '0000-00-00' && $tiketData['tgl_order_koord'] !== '-0001-11-30'): ?>
-                                                                <p class="text-start text-biru" style="font-size:xx-small;">
-                                                                    <?= date('d/m/Y', strtotime($tiketData['tgl_order_koord'])); ?>
-                                                                </p>
-                                                            <?php endif; ?>
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
+                                                                <?php if (!empty($tiketData['tgl_order_koord']) && $tiketData['tgl_order_koord'] !== '0000-00-00' && $tiketData['tgl_order_koord'] !== '-0001-11-30'): ?>
+                                                                    <p class="text-start text-biru" style="font-size:xx-small;">
+                                                                        <?= date('d/m/Y', strtotime($tiketData['tgl_order_koord'])); ?>
+                                                                    </p>
+                                                                <?php endif; ?>
                                                             </div>
                                                             <?php
                                                             if ($level_user === 'Koord Editor' && $tiketData['approved_order_koord'] !== 'Y'): ?>
@@ -371,12 +371,12 @@
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_multimedia'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <div class=" card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Tim Multimedia' && $tiketData['approved_multimedia'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
-                                                            <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
-                                                            <?php if (!empty($tiketData['tgl_acc_multimedia']) && $tiketData['tgl_acc_multimedia'] !== '0000-00-00' && $tiketData['tgl_acc_multimedia'] !== '-0001-11-30'): ?>
-                                                                <p class="text-start text-biru" style="font-size:xx-small;">
-                                                                    <?= date('d/m/Y', strtotime($tiketData['tgl_acc_multimedia'])); ?>
-                                                                </p>
-                                                            <?php endif; ?>
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
+                                                                <?php if (!empty($tiketData['tgl_acc_multimedia']) && $tiketData['tgl_acc_multimedia'] !== '0000-00-00' && $tiketData['tgl_acc_multimedia'] !== '-0001-11-30'): ?>
+                                                                    <p class="text-start text-biru" style="font-size:xx-small;">
+                                                                        <?= date('d/m/Y', strtotime($tiketData['tgl_acc_multimedia'])); ?>
+                                                                    </p>
+                                                                <?php endif; ?>
                                                             </div>
                                                             <?php
                                                             $level_user = session()->get('level_user');
@@ -451,12 +451,12 @@
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_acc_koord'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Koord Editor' && $tiketData['approved_acc_koord'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
-                                                            <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
-                                                            <?php if (!empty($tiketData['tgl_acc_koord']) && $tiketData['tgl_acc_koord'] !== '0000-00-00' && $tiketData['tgl_acc_koord'] !== '-0001-11-30'): ?>
-                                                                <p class="text-start text-biru" style="font-size:xx-small;">
-                                                                    <?= date('d/m/Y', strtotime($tiketData['tgl_acc_koord'])); ?>
-                                                                </p>
-                                                            <?php endif; ?>
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
+                                                                <?php if (!empty($tiketData['tgl_acc_koord']) && $tiketData['tgl_acc_koord'] !== '0000-00-00' && $tiketData['tgl_acc_koord'] !== '-0001-11-30'): ?>
+                                                                    <p class="text-start text-biru" style="font-size:xx-small;">
+                                                                        <?= date('d/m/Y', strtotime($tiketData['tgl_acc_koord'])); ?>
+                                                                    </p>
+                                                                <?php endif; ?>
                                                             </div>
                                                             <?php
                                                             $level_user = session()->get('level_user');
@@ -477,12 +477,12 @@
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_acc_manager'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Manager Platform' && $tiketData['approved_acc_manager'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
-                                                            <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
-                                                            <?php if (!empty($tiketData['tgl_acc_manager']) && $tiketData['tgl_acc_manager'] !== '0000-00-00' && $tiketData['tgl_acc_manager'] !== '-0001-11-30'): ?>
-                                                                <p class="text-start text-biru" style="font-size:xx-small;">
-                                                                    <?= date('d/m/Y', strtotime($tiketData['tgl_acc_manager'])); ?>
-                                                                </p>
-                                                            <?php endif; ?>
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
+                                                                <?php if (!empty($tiketData['tgl_acc_manager']) && $tiketData['tgl_acc_manager'] !== '0000-00-00' && $tiketData['tgl_acc_manager'] !== '-0001-11-30'): ?>
+                                                                    <p class="text-start text-biru" style="font-size:xx-small;">
+                                                                        <?= date('d/m/Y', strtotime($tiketData['tgl_acc_manager'])); ?>
+                                                                    </p>
+                                                                <?php endif; ?>
                                                             </div>
                                                             <?php
                                                             $level_user = session()->get('level_user');
@@ -512,12 +512,12 @@
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_order_admin'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Admin Sistem' && $tiketData['approved_order_admin'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
-                                                            <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
-                                                            <?php if (!empty($tiketData['tgl_acc_admin']) && $tiketData['tgl_acc_admin'] !== '0000-00-00' && $tiketData['tgl_acc_admin'] !== '-0001-11-30'): ?>
-                                                                <p class="text-start text-biru" style="font-size:xx-small;">
-                                                                    <?= date('d/m/Y', strtotime($tiketData['tgl_acc_admin'])); ?>
-                                                                </p>
-                                                            <?php endif; ?>
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
+                                                                <?php if (!empty($tiketData['tgl_acc_admin']) && $tiketData['tgl_acc_admin'] !== '0000-00-00' && $tiketData['tgl_acc_admin'] !== '-0001-11-30'): ?>
+                                                                    <p class="text-start text-biru" style="font-size:xx-small;">
+                                                                        <?= date('d/m/Y', strtotime($tiketData['tgl_acc_admin'])); ?>
+                                                                    </p>
+                                                                <?php endif; ?>
                                                             </div>
                                                             <?php
                                                             $level_user = session()->get('level_user');

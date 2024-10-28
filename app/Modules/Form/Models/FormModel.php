@@ -9,9 +9,31 @@ class FormModel extends Model
     protected $table            = 'tbl_tiket';
     protected $primaryKey       = 'id_tiket';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['kode_form', 'id_kategori', 'tgl_selesai', 'id_user', 'nomor_job', 'id_buku', 'jml_qrcode', 'id_editor', 'id_koord', 'id_multimedia',
-                                'approved_multimedia','approved_order_koord','approved_order_admin','approved_acc_koord','approved_acc_manager','tgl_selesai','tgl_upload',
-                                'tgl_order_editor','tgl_order_koord','tgl_acc_multimedia','tgl_acc_koord','tgl_acc_manager','tgl_acc_admin'];
+    protected $allowedFields    = [
+        'kode_form',
+        'id_kategori',
+        'tgl_selesai',
+        'id_user',
+        'nomor_job',
+        'id_buku',
+        'jml_qrcode',
+        'id_editor',
+        'id_koord',
+        'id_multimedia',
+        'approved_multimedia',
+        'approved_order_koord',
+        'approved_order_admin',
+        'approved_acc_koord',
+        'approved_acc_manager',
+        'tgl_selesai',
+        'tgl_upload',
+        'tgl_order_editor',
+        'tgl_order_koord',
+        'tgl_acc_multimedia',
+        'tgl_acc_koord',
+        'tgl_acc_manager',
+        'tgl_acc_admin'
+    ];
 
     // Dates
     protected $useTimestamps = true;
@@ -28,6 +50,8 @@ class FormModel extends Model
             'nomor_job' =>  'required',
             'id_buku' =>  'required',
             'jml_qrcode' =>  'required',
+            'tgl_selesai' => 'permit_empty|valid_date',
+            'tgl_upload' => 'permit_empty|valid_date',
         ];
     }
 

@@ -79,8 +79,8 @@ class Form extends BaseController
             $id_koord = 0;
             $id_multimedia = session()->get('id_user');
         }
-        $tgl_selesai = esc(date('Y-m-d', strtotime($this->request->getVar('tgl_selesai'))));
-        $tgl_upload = esc(date('Y-m-d', strtotime($this->request->getVar('tgl_upload'))));
+        $tgl_selesai_input = $this->request->getVar('tgl_selesai');
+        $tgl_upload_input = $this->request->getVar('tgl_upload');
 
         $id_kategori_array = $this->request->getVar('id_kategori');
         // Hapus duplikasi dari array id_kategori
@@ -90,18 +90,38 @@ class Form extends BaseController
         $id_kategori_json = json_encode($id_kategori_unique);
         if (json_last_error() === JSON_ERROR_NONE) {
             // JSON valid, lanjutkan insert ke database
-            $this->model->insert([
+            if (!empty($tgl_selesai_input)) {
+                $tgl_selesai = esc(date('Y-m-d', strtotime($tgl_selesai_input)));
+            } else {
+                $tgl_selesai = null; // Atau bisa juga tidak mengatur variabel ini
+            }
+
+            // Cek apakah input tgl_upload tidak kosong
+            if (!empty($tgl_upload_input)) {
+                $tgl_upload = esc(date('Y-m-d', strtotime($tgl_upload_input)));
+            } else {
+                $tgl_upload = null; // Atau bisa juga tidak mengatur variabel ini
+            }
+            $data = [
                 'id_kategori' => $id_kategori_json,
                 'id_buku' => esc($id_buku),
                 'jml_qrcode' => esc($this->request->getVar('jml_qrcode')),
                 'id_user' => $id_user,
                 'nomor_job' => esc($this->request->getVar('nomor_job')),
-                'tgl_selesai' => $tgl_selesai,
-                'tgl_upload' => $tgl_upload,
                 'id_editor' => $id_editor,
                 'id_koord' => $id_koord,
                 'id_multimedia' => $id_multimedia,
-            ]);
+            ];
+
+            // Hanya masukkan tgl_selesai dan tgl_upload jika tidak null
+            if ($tgl_selesai !== null) {
+                $data['tgl_selesai'] = $tgl_selesai;
+            }
+            if ($tgl_upload !== null) {
+                $data['tgl_upload'] = $tgl_upload;
+            }
+
+            $this->model->insert($data);
         } else {
             // JSON tidak valid, tangani kesalahan
             echo 'Invalid JSON format';
@@ -491,7 +511,7 @@ class Form extends BaseController
         // Tentukan kolom mana yang perlu di-update berdasarkan tipe approval
         if ($approval_type === 'Koord Editor') {
             $builder->set('approved_order_koord', 'Y');
-            $builder->set('tgl_order_koord',$approvalDate);
+            $builder->set('tgl_order_koord', $approvalDate);
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
