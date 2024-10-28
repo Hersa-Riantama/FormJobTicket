@@ -12,6 +12,7 @@ use Modules\Form\Models\FormModel;
 use Modules\Grup\Models\GrupModel;
 use Modules\Kategori\Models\KategoriModel;
 use Modules\Kelengkapan\Models\KelengkapanModel;
+use Modules\Status_Kelengkapan\Controllers\StatusKelengkapan;
 use Modules\Status_Kelengkapan\Models\StatusKelengkapanModel;
 use Modules\User\Models\UserModel;
 use PhpParser\JsonDecoder;
@@ -488,6 +489,28 @@ class Form extends BaseController
     }
 
 
+    // public function delete($id_tiket = null)
+    // {
+    //     $tiket = $this->model->find($id_tiket);
+    //     if (!$tiket) {
+    //         return $this->failNotFound('Data tiket tidak ditemukan');
+    //     }
+    //     $this->model->delete($id_tiket);
+    //     $kelengkapanModel = new KelengkapanModel();
+    //     $cekKelengkapan = $this->$kelengkapanModel->where('id_tiket', $id_tiket)->findAll;
+    //     if ($cekKelengkapan) {
+    //         $this->$cekKelengkapan->delete();
+    //     }
+    //     $statusKelengkapanModel = new StatusKelengkapan();
+    //     $cekStatus = $this->$statusKelengkapanModel->where('id_tiket', $id_tiket)->findAll;
+    //     if ($cekStatus) {
+    //         $this->$cekStatus->delete();
+    //     }
+    //     $response = [
+    //         'pesan' => 'Data tiket Berhasil di Hapus'
+    //     ];
+    //     return $this->respondDeleted($response, 200);
+    // }
     public function delete($id_tiket = null)
     {
         if ($id_tiket === null) {
@@ -510,6 +533,25 @@ class Form extends BaseController
 
         // Hapus tiket
         $this->model->delete($id_tiket);
+
+        // Cek dan hapus kelengkapan terkait
+        $kelengkapanModel = new KelengkapanModel();
+        $cekKelengkapan = $kelengkapanModel->where('id_tiket', $id_tiket)->findAll(); // Ambil semua kelengkapan terkait
+        if ($cekKelengkapan) {
+            foreach ($cekKelengkapan as $kelengkapan) {
+                $kelengkapanModel->delete($kelengkapan['id']); // Hapus berdasarkan ID
+            }
+        }
+
+        // Cek dan hapus status kelengkapan terkait
+        $statusKelengkapanModel = new StatusKelengkapanModel(); // Pastikan ini adalah model yang benar
+        $cekStatus = $statusKelengkapanModel->where('id_tiket', $id_tiket)->findAll(); // Ambil semua status terkait
+        if ($cekStatus) {
+            foreach ($cekStatus as $status) {
+                $statusKelengkapanModel->delete($status['id']); // Hapus berdasarkan ID
+            }
+        }
+
         $response = [
             'pesan' => 'Data tiket berhasil dihapus',
             'kelengkapan_deleted' => $kelengkapanDeleted,
