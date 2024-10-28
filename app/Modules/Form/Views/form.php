@@ -10,8 +10,8 @@
                 <h4 class="py-3 mb-4"><span class="text-muted fw-light">Form /</span> Form QR Code</h4>
                 <div class="row justify-content-between">
                     <div class="col-xl-5 mb-5">
-                        <h1 class="card-header mb-2 display-1 text-hitam">FORM <br>QR CODE</h1>
-                        <!-- <img src="<//?= base_url('upload/' . $file_name) ?>" alt=""> -->
+                        <!-- <h1 class="card-header mb-2 display-1 text-hitam">FORM <br>QR CODE</h1> -->
+                        <img src="<?= base_url('/assets/img/icons/Form QR Code.jpg') ?>" style="height: 11rem;" alt="Logo" />
                     </div>
                     <div class="col-xl-3 mb-5">
                         <h4 class="card-header text-center mb-2 text-hitam">PLATFORM DIGITAL</h4>
