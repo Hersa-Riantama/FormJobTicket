@@ -518,10 +518,6 @@
                 isValid = false;
                 pesanAlert += 'Kelengkapan harus diisi.\n';
             }
-            if ($('input[name="tahap_kelengkapan[]"]:checked').length === 0) {
-                isValid = false;
-                pesanAlert += 'Tahap Kelengkapan harus diisi.\n';
-            }
             if ($('#kode_buku').val() === '' || $('#kode_buku').val() === null) {
                 isValid = false;
                 pesanAlert += 'Kode Buku harus diisi.\n';

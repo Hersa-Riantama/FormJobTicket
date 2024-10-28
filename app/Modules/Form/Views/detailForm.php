@@ -254,6 +254,10 @@
                                         </p>
 
                                         <h6 class="text-left text-biru mt-4 mb-0" style="font-weight: bold;">Kelengkapan file konten*</h6>
+                                        <?php
+                                        // Inisialisasi $tahap sebagai array jika belum di-set
+                                        $tahap = isset($tahap) ? $tahap : [];
+                                        ?>
                                         <div class="form-check mt-4">
                                             <input class="form-check-input warna-border" type="checkbox" value="Tahap 1" name="tahap_kelengkapan[]" id="stats_kelengkapan1" <?php echo in_array('Tahap 1', $tahap) ? 'checked' : ''; ?> />
                                             <label class="form-check-label text-biru" for="stats_kelengkapan1"> Penyerahan Tahap 1 </label>
