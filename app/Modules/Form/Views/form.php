@@ -566,9 +566,10 @@
                     console.log('Respons dari Server:', response); // Debugging
                     if (response.Status === 'success') {
                         alert(response.Pesan);
-                        location.reload()
                     } else {
                         alert(response.Pesan);
+                        $(this).trigger('reset');
+                        location.reload();
                     }
                 },
                 error: function(xhr, status, error) {
