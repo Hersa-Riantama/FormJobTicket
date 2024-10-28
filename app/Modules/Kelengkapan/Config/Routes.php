@@ -11,7 +11,7 @@ use CodeIgniter\Router\RouteCollection;
 
 $routes->group(
     'index',
-    ['namespace' => '\Modules\Kelengkapan\Controllers'],
+    ['namespace' => '\Modules\Kelengkapan\Controllers'],['filter' => 'sessionCheck'],
     function ($routes) {
         $routes->get('/', 'Kelengkapan::index');
     }

@@ -15,10 +15,10 @@ $routes->group(
         $routes->get('/', 'Form::index');
     }
 );
-
+// ['filter' => 'sessionCheck'],
 $routes->group(
     '',
-    ['namespace' => '\Modules\Form\Controllers'],
+    ['namespace' => '\Modules\Form\Controllers'], ['filter' => 'sessionCheck'],
     function ($routes) {
         $routes->get('form', 'Form::form');
         $routes->get('tampilbuku', 'Form::getBukuOptions');
@@ -35,7 +35,7 @@ $routes->post('/kategori', '\Modules\Kategori\Controllers\Kategori::getKategori'
 
 $routes->group(
     '',
-    ['namespace' => '\Modules\Form\Controllers'],
+    ['namespace' => '\Modules\Form\Controllers'], ['filter' => 'sessionCheck'],
     function ($routes) {
         $routes->get('listform', 'Form::data_form');
     }
