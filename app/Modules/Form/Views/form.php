@@ -529,7 +529,7 @@
                     console.log('Respons dari Server:', response); // Debugging
                     if (response.Status === 'success') {
                         alert(response.Pesan);
-                        window.location.href = '<?= base_url('form'); ?>'; // Redirect ke URL yang sesuai
+                        location.reload();
                     } else {
                         alert(response.Pesan);
                     }
