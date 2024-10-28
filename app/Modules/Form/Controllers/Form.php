@@ -79,6 +79,8 @@ class Form extends BaseController
             $id_koord = 0;
             $id_multimedia = session()->get('id_user');
         }
+        $tgl_selesai = esc(date('Y-m-d', strtotime($this->request->getVar('tgl_selesai'))));
+        $tgl_upload = esc(date('Y-m-d', strtotime($this->request->getVar('tgl_upload'))));
 
         $id_kategori_array = $this->request->getVar('id_kategori');
         // Hapus duplikasi dari array id_kategori
@@ -94,6 +96,8 @@ class Form extends BaseController
                 'jml_qrcode' => esc($this->request->getVar('jml_qrcode')),
                 'id_user' => $id_user,
                 'nomor_job' => esc($this->request->getVar('nomor_job')),
+                'tgl_selesai' => $tgl_selesai,
+                'tgl_upload' => $tgl_upload,
                 'id_editor' => $id_editor,
                 'id_koord' => $id_koord,
                 'id_multimedia' => $id_multimedia,
@@ -157,7 +161,6 @@ class Form extends BaseController
                 'status_kelengkapan' => 'N'
             ]);
         }
-        $this->model->update($id_tiket, ['approved_order_editor' => 'Y']);
         $response = [
             'Pesan' => 'Tiket Berhasil ditambahkan'
         ];

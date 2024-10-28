@@ -10,7 +10,7 @@ class FormModel extends Model
     protected $primaryKey       = 'id_tiket';
     protected $useAutoIncrement = true;
     protected $allowedFields    = ['kode_form', 'id_kategori', 'tgl_selesai', 'id_user', 'nomor_job', 'id_buku', 'jml_qrcode', 'id_editor', 'id_koord', 'id_multimedia',
-                                    'approved_multimedia','approved_order_koord','approved_order_admin','approved_acc_koord','approved_acc_manager'];
+                                    'approved_multimedia','approved_order_koord','approved_order_admin','approved_acc_koord','approved_acc_manager','tgl_selesai','tgl_upload'];
 
     // Dates
     protected $useTimestamps = true;
@@ -27,6 +27,8 @@ class FormModel extends Model
             'nomor_job' =>  'required',
             'id_buku' =>  'required',
             'jml_qrcode' =>  'required',
+            'tgl_selesai' => 'required',
+            'tgl_upload' => 'required',
         ];
     }
 
