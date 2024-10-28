@@ -454,7 +454,7 @@
                     </div>
                 </div>
 
-                <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Editor', 'Tim Multimedia'])) : ?>
+                <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Editor'])) : ?>
                     <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
                         <!-- Row 3 -->
                         <div class="row justify-content-center my-3">

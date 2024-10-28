@@ -70,7 +70,12 @@ class Form extends BaseController
 
         $id_user = session()->get('id_user');
         $userData = $AuthModel->find($id_user);
-
+        if ($userData['level_user'] !== 'Editor') {
+            $response = [
+                'Pesan' => 'Anda tidak memiliki izin untuk menambahkan tiket'
+            ];
+            return $this->response->setJSON($response);
+        }
         if ($userData['level_user'] == 'Editor') {
             $editorId = $GrupModel->where('id_editor', $id_user)->first();
             $id_editor = $editorId['id_editor'];
