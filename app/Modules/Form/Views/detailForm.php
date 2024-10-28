@@ -10,7 +10,7 @@
                 <div class="row justify-content-between">
                     <div class="col-xl-4 mb-5" style="display: flex; justify-content: center;">
                         <!-- <h1 class="card-header mb-2 display-1 text-hitam">FORM <br>QR CODE</h1> -->
-                        <img src="<?= base_url('/assets/img/icons/Form QR Code.jpg') ?>" style="max-width: 100%; height: auto;" alt="Logo" />
+                        <img src="<?= base_url('/assets/img/icons/Form QR Code.jpg') ?>" style="max-width: 100%; height: fit-content;" alt="Logo" />
                     </div>
                     <div class="col-xl-3 mb-5">
                         <h4 class="card-header text-center mb-2 text-hitam">PLATFORM DIGITAL</h4>
