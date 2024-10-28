@@ -529,7 +529,7 @@
                     console.log('Respons dari Server:', response); // Debugging
                     if (response.Status === 'success') {
                         alert(response.Pesan);
-                        location.reload();
+                        location.reload()
                     } else {
                         alert(response.Pesan);
                     }

@@ -27,8 +27,6 @@ class FormModel extends Model
             'nomor_job' =>  'required',
             'id_buku' =>  'required',
             'jml_qrcode' =>  'required',
-            'tgl_selesai' => 'required',
-            'tgl_upload' => 'required',
         ];
     }
 
