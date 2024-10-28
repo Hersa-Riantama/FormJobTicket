@@ -289,16 +289,17 @@
 
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_order_editor'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.40rem;">
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
                                                                 <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
                                                             <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
                                                                 <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="50" height="50" alt="Approved" /></>
+                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" style="height: 3.5rem;" alt="Approved" />
                                                                 </div>
                                                             <?php else: ?>
-                                                                <div style="width: 25px; height: 25px; background-color: var(--bs-card-color);"></div> <!-- Ruangan kosong -->
+                                                                <!-- Ruang Kosong -->
+                                                                <div style="height: 1rem; background-color: transparent;"></div>
                                                             <?php endif; ?>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;"><?= esc($tiketData['editor_nama'] ?? '     ') ?></p>
                                                             <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-hitam" style="font-size:x-small;">Editor</p>
@@ -306,18 +307,21 @@
                                                     </div>
                                                     <div class=" col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_order_koord'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.40rem;">
+                                                            <?php $level_user = session()->get('level_user'); ?>
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Koord Editor' && $tiketData['approved_order_koord'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
                                                                 <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
                                                             <?php
-                                                            $level_user = session()->get('level_user');
                                                             if ($level_user === 'Koord Editor' && $tiketData['approved_order_koord'] !== 'Y'): ?>
-                                                                <button class="btn btn-success w-100 mt-2 btn-approved" id="approveButton" onclick="approveTicket(<?= $tiketData['id_tiket'] ?>,'Koord Editor')">Approve</button>
+                                                                <center><button class="btn btn-success btn-approved" style="height:1.5rem; display: flex;" id="approveButton" onclick="approveTicket(<?= $tiketData['id_tiket'] ?>,'Koord Editor')">Approve</button></center>
                                                             <?php elseif ($tiketData['approved_order_koord'] === 'Y'): ?>
                                                                 <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="50" height="50" alt="Approved" /></>
+                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" style="height: 3.5rem;" alt="Approved" />
                                                                 </div>
+                                                            <?php else: ?>
+                                                                <!-- Ruang Kosong -->
+                                                                <div style="height: 1rem; background-color: transparent;"></div>
                                                             <?php endif; ?>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;"><?= esc($tiketData['koord_nama'] ?? '     ') ?></p>
                                                             <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-hitam" style="font-size:x-small;">Koord. Editor</p>
@@ -354,18 +358,21 @@
 
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_multimedia'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
-                                                            <div class=" card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.40rem;">
+                                                            <div class=" card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Tim Multimedia' && $tiketData['approved_multimedia'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
                                                                 <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
                                                             <?php
                                                             $level_user = session()->get('level_user');
                                                             if ($level_user === 'Tim Multimedia' && $tiketData['approved_multimedia'] !== 'Y'): ?>
-                                                                <button class="btn btn-success w-100 mt-2 btn-approved" id="approveButton" onclick="approveTicket(<?= $tiketData['id_tiket'] ?>,'Tim Multimedia')">Approve</button>
+                                                                <center><button class="btn btn-success btn-approved" style="height:1.5rem; display: flex;" onclick="approveTicket(<?= $tiketData['id_tiket'] ?>,'Tim Multimedia')">Approve</button></center>
                                                             <?php elseif ($tiketData['approved_multimedia'] === 'Y'): ?>
                                                                 <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="50" height="50" alt="Approved" /></>
+                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" style="height: 3.5rem;" alt="Approved" />
                                                                 </div>
+                                                            <?php else: ?>
+                                                                <!-- Ruang Kosong -->
+                                                                <div style="height: 1rem; background-color: transparent;"></div>
                                                             <?php endif; ?>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;"> <?= esc($tiketData['multimedia_nama'] ?? '     '); ?></p>
                                                             <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-hitam" style="font-size:x-small;">Tim Multimedia</p>
@@ -420,18 +427,21 @@
                                                 <div class="row mt-4 mx-0">
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_acc_koord'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.40rem;">
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Koord Editor' && $tiketData['approved_acc_koord'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
                                                                 <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
                                                             <?php
                                                             $level_user = session()->get('level_user');
                                                             if ($level_user === 'Koord Editor' && $tiketData['approved_acc_koord'] !== 'Y'): ?>
-                                                                <button class="btn btn-success w-100 mt-2 btn-approved" id="approveButton" onclick="approveTicket(<?= $tiketData['id_tiket'] ?>,'Acc Koord Editor')">Approve</button>
+                                                                <center><button class="btn btn-success btn-approved" style="height:1.5rem; display: flex;" onclick="approveTicket(<?= $tiketData['id_tiket'] ?>,'Acc Koord Editor')">Approve</button></center>
                                                             <?php elseif ($tiketData['approved_acc_koord'] === 'Y'): ?>
                                                                 <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="50" height="50" alt="Approved" /></>
+                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" style="height: 3.5rem;" alt="Approved" />
                                                                 </div>
+                                                            <?php else: ?>
+                                                                <!-- Ruang Kosong -->
+                                                                <div style="height: 1rem; background-color: transparent;"></div>
                                                             <?php endif; ?>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;"><?= esc($tiketData['koord_nama'] ?? '     ') ?></p>
                                                             <p class="text-center text-biru rounded-bottom mb-0 warna-pink border-atas text-hitam" style="font-size:x-small; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
@@ -439,18 +449,21 @@
                                                     </div>
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_acc_manager'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.40rem;">
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Manager Platform' && $tiketData['approved_acc_manager'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
                                                                 <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
                                                             <?php
                                                             $level_user = session()->get('level_user');
                                                             if ($level_user === 'Manager Platform' && $tiketData['approved_acc_manager'] !== 'Y'): ?>
-                                                                <button class="btn btn-success w-100 mt-2 btn-approved" id="approveButton" onclick="approveTicket(<?= $tiketData['id_tiket'] ?>,'Manager Platform')">Approve</button>
+                                                                <center><button class="btn btn-success btn-approved" style="height:1.5rem; display: flex;" onclick="approveTicket(<?= $tiketData['id_tiket'] ?>,'Manager Platform')">Approve</button></center>
                                                             <?php elseif ($tiketData['approved_acc_manager'] === 'Y'): ?>
                                                                 <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="50" height="50" alt="Approved" /></>
+                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" style="height: 3.5rem;" alt="Approved" />
                                                                 </div>
+                                                            <?php else: ?>
+                                                                <!-- Ruang Kosong -->
+                                                                <div style="height: 1rem; background-color: transparent;"></div>
                                                             <?php endif; ?>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;">Suksma</p>
                                                             <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-hitam" style="font-size:x-small;">Manager</br>Platform Digital</p>
@@ -467,21 +480,24 @@
                                                 <div class="row mt-4 mx-0">
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_order_admin'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
-                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.40rem;">
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Admin Sistem' && $tiketData['approved_order_admin'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
                                                                 <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
                                                             </div>
                                                             <?php
                                                             $level_user = session()->get('level_user');
                                                             if ($level_user === 'Admin Sistem' && $tiketData['approved_order_admin'] !== 'Y'): ?>
-                                                                <button class="btn btn-success w-100 mt-2 btn-approved" id="approveButton" onclick="approveTicket(<?= $tiketData['id_tiket'] ?>,'Admin Sistem')">Approve</button>
+                                                                <center><button class="btn btn-success btn-approved" style="height:1.5rem; display: flex;" onclick="approveTicket(<?= $tiketData['id_tiket'] ?>,'Admin Sistem')">Approve</button></center>
                                                             <?php elseif ($tiketData['approved_order_admin'] === 'Y'): ?>
                                                                 <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="50" height="50" alt="Approved" /></>
+                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" style="height: 3.5rem;" alt="Approved" />
                                                                 </div>
+                                                            <?php else: ?>
+                                                                <!-- Ruang Kosong -->
+                                                                <div style="height: 1rem; background-color: transparent;"></div>
                                                             <?php endif; ?>
                                                             <p class="text-center mb-0 px-1 text-hitam" style="font-size:x-small;">Andini</p>
-                                                            <p class="text-center text-biru rounded-bottom mb-0 warna-pink border-atas text-hitam" style="font-size:x-small; padding: 0.725rem 0 0.725rem;">Admin</p>
+                                                            <p class="text-center text-biru rounded-bottom mb-0 warna-pink border-atas text-hitam" style="font-size:x-small; padding: 0.728rem 0 0.728rem;">Admin</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -567,7 +583,7 @@
                 if (response.status === 'success') {
                     // Jika berhasil, sembunyikan tombol dan tampilkan gambar approved
                     $('#approveButton').hide();
-                    $('.approved-status').html('<img src="<?= base_url('/assets/img/icons/approved.png') ?>" width="50" height="50" alt="Approved" />');
+                    $('.approved-status').html('<img src="<?= base_url('/assets/img/icons/approved.png') ?>" style="height: 3.5rem;" alt="Approved" />');
                     location.reload()
                 }
             },
