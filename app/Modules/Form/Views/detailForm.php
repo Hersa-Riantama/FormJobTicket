@@ -310,7 +310,7 @@
                                                                 <div style="height: 1rem; background-color: transparent;"></div>
                                                             <?php endif; ?>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;"><?= esc($tiketData['editor_nama'] ?? '     ') ?></p>
-                                                            <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-hitam" style="font-size:x-small;">Editor</p>
+                                                            <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-biru" style="font-size:x-small;">Editor</p>
                                                         </div>
                                                     </div>
                                                     <div class=" col-xl mb-2 px-0">
@@ -336,7 +336,7 @@
                                                                 <div style="height: 1rem; background-color: transparent;"></div>
                                                             <?php endif; ?>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;"><?= esc($tiketData['koord_nama'] ?? '     ') ?></p>
-                                                            <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-hitam" style="font-size:x-small;">Koord. Editor</p>
+                                                            <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-biru" style="font-size:x-small;">Koord. Editor</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -390,8 +390,14 @@
                                                                 <!-- Ruang Kosong -->
                                                                 <div style="height: 1rem; background-color: transparent;"></div>
                                                             <?php endif; ?>
-                                                            <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;"> <?= esc($tiketData['multimedia_nama'] ?? '     '); ?></p>
-                                                            <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-hitam" style="font-size:x-small;">Tim Multimedia</p>
+                                                            <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;">
+                                                                <?php if ($userData['level_user'] === 'Tim Multimedia'): ?>
+                                                                    <?= esc($tiketData['multimedia_nama'] ?? $userData['nama']); ?>
+                                                                <?php else: ?>
+                                                                    <?= esc($tiketData['multimedia_nama'] ?? '     '); ?>
+                                                                <?php endif; ?>
+                                                            </p>
+                                                            <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-biru" style="font-size:x-small;">Tim Multimedia</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -465,7 +471,7 @@
                                                                 <div style="height: 1rem; background-color: transparent;"></div>
                                                             <?php endif; ?>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;"><?= esc($tiketData['koord_nama'] ?? '     ') ?></p>
-                                                            <p class="text-center text-biru rounded-bottom mb-0 warna-pink border-atas text-hitam" style="font-size:x-small; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
+                                                            <p class="text-center text-biru rounded-bottom mb-0 warna-pink border-atas text-biru" style="font-size:x-small; padding: 0.725rem 0 0.725rem;">Koord. Editor</p>
                                                         </div>
                                                     </div>
                                                     <div class="col-xl mb-2 px-0">
@@ -491,7 +497,7 @@
                                                                 <div style="height: 1rem; background-color: transparent;"></div>
                                                             <?php endif; ?>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;">Suksma</p>
-                                                            <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-hitam" style="font-size:x-small;">Manager</br>Platform Digital</p>
+                                                            <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-biru" style="font-size:x-small;">Manager</br>Platform Digital</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -526,7 +532,7 @@
                                                                 <div style="height: 1rem; background-color: transparent;"></div>
                                                             <?php endif; ?>
                                                             <p class="text-center mb-0 px-1 text-hitam" style="font-size:x-small;">Andini</p>
-                                                            <p class="text-center text-biru rounded-bottom mb-0 warna-pink border-atas text-hitam" style="font-size:x-small; padding: 0.728rem 0 0.728rem;">Admin</p>
+                                                            <p class="text-center text-biru rounded-bottom mb-0 warna-pink border-atas text-biru" style="font-size:x-small; padding: 0.728rem 0 0.728rem;">Admin</p>
                                                         </div>
                                                     </div>
                                                 </div>

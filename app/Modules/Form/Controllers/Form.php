@@ -179,10 +179,10 @@ class Form extends BaseController
             $editorId = $GrupModel->where('id_editor', $id_user)->first();
             $id_editor = $editorId['id_editor'];
             $id_koord = $editorId['id_koord'];
-            $id_multimedia = 0;
+            // $id_multimedia = 0;
         } else if ($userData['level_user'] == 'Tim Multimedia') {
-            $id_editor = 0;
-            $id_koord = 0;
+            // $id_editor = 0;
+            // $id_koord = 0;
             $id_multimedia = session()->get('id_user');
         }
         $id_tiket = $this->request->getVar('id_tiket');
@@ -198,10 +198,19 @@ class Form extends BaseController
             if (json_last_error() === JSON_ERROR_NONE) {
                 $cobaupdate = [
                     'id_kategori' => $id_kategori_json,
-                    'id_editor' => $id_editor,
-                    'id_koord' => $id_koord,
-                    'id_multimedia' => $id_multimedia
                 ];
+
+                // Tambahkan id_editor dan id_koord hanya jika level_user adalah 'Editor'
+                if ($userData['level_user'] == 'Editor') {
+                    $cobaupdate['id_editor'] = $id_editor;
+                    $cobaupdate['id_koord'] = $id_koord;
+                }
+
+                // Tambahkan id_multimedia hanya jika level_user adalah 'Tim Multimedia'
+                if ($userData['level_user'] == 'Tim Multimedia') {
+                    $cobaupdate['id_multimedia'] = $id_multimedia;
+                }
+
                 if ($this->model->update($id_tiket, $cobaupdate) === false) {
                     log_message('error', 'Failed to update id_kategori for id_tiket: ' . $id_tiket);
                     return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update categories.']);
@@ -313,27 +322,26 @@ class Form extends BaseController
         } else {
             return redirect()->to('/login');
         }
-        if ($userData['level_user'] == 'Editor') {
-            $editorId = $GrupModel->where('id_editor', $userId)->first();
-            $koordId = $editorId['id_koord'];
-            $editor = $UserModel->find($userId);
-            $koord = $UserModel->find($koordId);
-            $namaEditor = $editor['nama'];
-            $namaKoord = $koord['nama'];
-            $namaMultimedia = '';
-        } else if ($userData['level_user'] == 'Koord Editor') {
-            $namaKoord = $userData['nama'];
-            $namaEditor = '';
-            $namaMultimedia = '';
-        } else if ($userData['level_user'] == 'Tim Multimedia') {
-            $namaKoord = '';
-            $namaEditor = '';
-            $namaMultimedia = $userData['nama'];
-        } else {
-            $namaKoord = '';
-            $namaEditor = '';
-            $namaMultimedia = '';
+        // Set nilai default
+        $namaKoord = $namaEditor = $namaMultimedia = '';
+
+        // Tentukan nilai berdasarkan level user
+        switch ($userData['level_user']) {
+            case 'Editor':
+                $editorId = $GrupModel->where('id_editor', $userId)->first();
+                $koordId = $editorId['id_koord'];
+                $namaEditor = $UserModel->find($userId)['nama'];
+                $namaKoord = $UserModel->find($koordId)['nama'];
+                break;
+            case 'Koord Editor':
+                $namaKoord = $userData['nama'];
+                break;
+            case 'Tim Multimedia':
+                $namaMultimedia = $userData['nama'];
+                break;
         }
+
+        // Siapkan data untuk view
         $data = [
             'judul' => 'Form QR Code',
             'userData' => $userData,
@@ -341,6 +349,7 @@ class Form extends BaseController
             'namaEditor' => $namaEditor,
             'namaMultimedia' => $namaMultimedia,
         ];
+
         return view($this->folder_directory . 'form', $data);
     }
 
