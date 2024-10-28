@@ -210,7 +210,7 @@ class Form extends BaseController
                 log_message('error', 'Invalid JSON format for id_kategori: ' . json_last_error_msg());
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid JSON format.']);
             }
-        }else {
+        } else {
             log_message('warning', 'No categories provided for id_tiket: ' . $id_tiket);
             return $this->response->setJSON(['status' => 'error', 'message' => 'No categories provided.']);
         }
@@ -232,10 +232,10 @@ class Form extends BaseController
 
             if ($existing) {
                 // Jika belum ada, insert data baru
-                $kelengkapanModel->update($existing['id_kelengkapan'],[
+                $kelengkapanModel->update($existing['id_kelengkapan'], [
                     'nama_kelengkapan' => $jsonKelengkapan
                 ]);
-            }else {
+            } else {
                 $kelengkapanModel->insert([
                     'id_tiket' => $id_tiket,
                     'nama_kelengkapan' => $jsonKelengkapan
@@ -259,7 +259,7 @@ class Form extends BaseController
 
             if ($existing) {
                 // Jika belum ada, insert data baru
-                $statusKelengkapanModel->update($existing['id_status_kelengkapan'],[
+                $statusKelengkapanModel->update($existing['id_status_kelengkapan'], [
                     'tahap_kelengkapan' => $jsonTahapKelengkapan,
                 ]);
             }
@@ -272,7 +272,7 @@ class Form extends BaseController
             ]);
         }
         $response = [
-            'status' => 'success', 
+            'status' => 'success',
             'Pesan' => 'Tiket Berhasil diupdate'
         ];
         return $this->response->setJSON($response);
