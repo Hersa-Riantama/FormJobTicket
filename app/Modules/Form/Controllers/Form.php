@@ -5,6 +5,7 @@ namespace Modules\Form\Controllers;
 use App\Controllers\BaseController;
 use App\Modules\Buku\Models\BukuModel;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\Database\MySQLi\Builder;
 use Modules\Auth\Controllers\Auth;
 use Modules\Auth\Models\AuthModel;
 use Modules\Form\Models\FormModel;
@@ -489,16 +490,35 @@ class Form extends BaseController
 
     public function delete($id_tiket = null)
     {
+        if ($id_tiket === null) {
+            $id_tiket = $this->request->getVar('id_tiket');
+        }
+        $modelKelengkapan = new KelengkapanModel();
+        $modelStatsKelengkapan = new StatusKelengkapanModel();
+
+        // Cek apakah tiket ada
         $tiket = $this->model->find($id_tiket);
         if (!$tiket) {
             return $this->failNotFound('Data tiket tidak ditemukan');
         }
+
+        // Hapus data dari tbl_kelengkapan berdasarkan id_tiket
+        $kelengkapanDeleted = $modelKelengkapan->where('id_tiket', $id_tiket)->delete();
+
+        // Hapus data dari tbl_status_kelengkapan berdasarkan id_tiket
+        $statusKelengkapanDeleted = $modelStatsKelengkapan->where('id_tiket', $id_tiket)->delete();
+
+        // Hapus tiket
         $this->model->delete($id_tiket);
         $response = [
-            'pesan' => 'Data tiket Berhasil di Hapus'
+            'pesan' => 'Data tiket berhasil dihapus',
+            'kelengkapan_deleted' => $kelengkapanDeleted,
+            'status_kelengkapan_deleted' => $statusKelengkapanDeleted
         ];
-        return $this->respondDeleted($response, 200);
+
+        return $this->response->setJSON($response, 200);
     }
+
     public function approveTicket()
     {
         $id_tiket = $this->request->getVar('id_tiket');

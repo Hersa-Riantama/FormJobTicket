@@ -159,5 +159,20 @@
         var id_tiket = $(this).data('id_tiket');
         window.location.href = '/detail/' + id_tiket; // Redirect to the detail page
     });
+    
+    $(document).on('click', '.dropdown-item-delete', function() {
+        var id_tiket = $(this).data('id_tiket');
+        $.ajax({
+            type: 'DELETE',
+            url: 'http://localhost:8080/delete/' + id_tiket, // Redirect to the detail page
+            dataType: 'json',
+            success: function(response) {
+                location.reload()
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching List Form:', error);
+            }
+        });
+    })
 </script>
 <?= $this->endSection(); ?>
