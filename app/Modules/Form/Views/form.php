@@ -298,7 +298,7 @@
                                                         <div class="card h-100 mb-5 warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
-                                                                <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
+                                                                <p class="text-end text-hitam" style="font-size:xx-small;"></p>
                                                             </div>
                                                             <div style="height: 1rem; background-color: transparent;"></div>
                                                             <p class="text-Start mb-0 px-1 nama-editor text-hitam" style="font-size:x-small;"><?= $namaEditor ?: '     '; ?></p>
@@ -309,7 +309,7 @@
                                                         <div class="card h-100 mb-5 warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
-                                                                <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
+                                                                <p class="text-end text-hitam" style="font-size:xx-small;"></p>
                                                             </div>
                                                             <div style="height: 1rem; background-color: transparent;"></div>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;"><?= $namaKoord ?: '     '; ?></p>
@@ -349,7 +349,7 @@
                                                         <div class="card h-100 mb-5 warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
-                                                                <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
+                                                                <p class="text-end text-hitam" style="font-size:xx-small;"></p>
                                                             </div>
                                                             <div style="height: 1rem; background-color: transparent;"></div>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;"><?= $namaMultimedia ?: '     '; ?></p>
@@ -406,7 +406,7 @@
                                                         <div class="card h-100 mb-5 warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
-                                                                <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
+                                                                <p class="text-end text-hitam" style="font-size:xx-small;"></p>
                                                             </div>
                                                             <div style="height: 1rem; background-color: transparent;"></div>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;"><?= $namaKoord ?: '     '; ?></p>
@@ -417,7 +417,7 @@
                                                         <div class="card h-100 mb-5 warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
-                                                                <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
+                                                                <p class="text-end text-hitam" style="font-size:xx-small;"></p>
                                                             </div>
                                                             <div style="height: 1rem; background-color: transparent;"></div>
                                                             <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;">Suksma</p>
@@ -437,7 +437,7 @@
                                                         <div class="card h-100 mb-5 warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
-                                                                <p class="text-end text-hitam" style="font-size:xx-small;">dd/mm/yyyy</p>
+                                                                <p class="text-end text-hitam" style="font-size:xx-small;"></p>
                                                             </div>
                                                             <div style="height: 1rem; background-color: transparent;"></div>
                                                             <p class="text-center mb-0 px-1 text-hitam" style="font-size:x-small;">Andini</p>
