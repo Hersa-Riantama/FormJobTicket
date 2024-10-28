@@ -20,6 +20,7 @@ class FormModel extends Model
         'id_editor',
         'id_koord',
         'id_multimedia',
+        'id_admin',
         'approved_multimedia',
         'approved_order_koord',
         'approved_order_admin',

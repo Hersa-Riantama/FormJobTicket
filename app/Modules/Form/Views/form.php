@@ -440,7 +440,7 @@
                                                                 <p class="text-end text-hitam" style="font-size:xx-small;"></p>
                                                             </div>
                                                             <div style="height: 1rem; background-color: transparent;"></div>
-                                                            <p class="text-center mb-0 px-1 text-hitam" style="font-size:x-small;">Andini</p>
+                                                            <p class="text-center mb-0 px-1 text-hitam" style="font-size:x-small;"><?= $namaAdmin ?: '     '; ?></p>
                                                             <p class="text-center text-biru rounded-bottom mb-0 warna-pink border-atas" style="font-size:x-small; padding: 0.725rem 0 0.725rem;">Admin</p>
                                                         </div>
                                                     </div>

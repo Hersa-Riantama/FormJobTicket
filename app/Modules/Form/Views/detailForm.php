@@ -535,7 +535,13 @@
                                                                 <!-- Ruang Kosong -->
                                                                 <div style="height: 1rem; background-color: transparent;"></div>
                                                             <?php endif; ?>
-                                                            <p class="text-center mb-0 px-1 text-hitam" style="font-size:x-small;">Andini</p>
+                                                            <p class="text-center mb-0 px-1 text-hitam" style="font-size:x-small;">
+                                                                <?php if ($userData['level_user'] === 'Admin Sistem'): ?>
+                                                                    <?= esc($tiketData['admin_nama'] ?? $userData['nama']); ?>
+                                                                <?php else: ?>
+                                                                    <?= esc($tiketData['admin_nama'] ?? '     '); ?>
+                                                                <?php endif; ?>
+                                                            </p>
                                                             <p class="text-center text-biru rounded-bottom mb-0 warna-pink border-atas text-biru" style="font-size:x-small; padding: 0.728rem 0 0.728rem;">Admin</p>
                                                         </div>
                                                     </div>

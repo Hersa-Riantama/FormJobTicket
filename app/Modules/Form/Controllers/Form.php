@@ -366,6 +366,9 @@ class Form extends BaseController
             case 'Tim Multimedia':
                 $namaMultimedia = $userData['nama'];
                 break;
+            case 'Admin Sistem':
+                $namaAdmin = $userData['nama'];
+                break;
         }
 
         // Siapkan data untuk view
@@ -375,6 +378,7 @@ class Form extends BaseController
             'namaKoord' => $namaKoord,
             'namaEditor' => $namaEditor,
             'namaMultimedia' => $namaMultimedia,
+            'namaAdmin' => $namaAdmin,
         ];
 
         return view($this->folder_directory . 'form', $data);
@@ -452,7 +456,8 @@ class Form extends BaseController
         $builder = $db->table('tbl_tiket');
         $builder->select('tbl_tiket.*, tbl_buku.kode_buku, tbl_buku.judul_buku, tbl_buku.pengarang, tbl_buku.target_terbit, 
                         tbl_buku.warna, tbl_kelengkapan.nama_kelengkapan, tbl_user.nama as user_nama, tbl_user.email as user_email, 
-                        editor.nama as editor_nama, koord.nama as koord_nama, multimedia.nama as multimedia_nama, tbl_status_kelengkapan.tahap_kelengkapan');
+                        editor.nama as editor_nama, koord.nama as koord_nama, multimedia.nama as multimedia_nama, admin.nama as admin_nama,
+                        tbl_status_kelengkapan.tahap_kelengkapan');
         $builder->join('tbl_kelengkapan', 'tbl_tiket.id_tiket = tbl_kelengkapan.id_tiket', 'left');
         $builder->join('tbl_status_kelengkapan', 'tbl_tiket.id_tiket = tbl_status_kelengkapan.id_tiket', 'left');
         $builder->join('tbl_buku', 'tbl_tiket.id_buku = tbl_buku.id_buku', 'left');
@@ -460,6 +465,7 @@ class Form extends BaseController
         $builder->join('tbl_user as editor', 'tbl_tiket.id_editor = editor.id_user', 'left');
         $builder->join('tbl_user as koord', 'tbl_tiket.id_koord = koord.id_user', 'left');
         $builder->join('tbl_user as multimedia', 'tbl_tiket.id_multimedia = multimedia.id_user', 'left');
+        $builder->join('tbl_user as admin', 'tbl_tiket.id_admin = admin.id_user', 'left');
         $builder->where('tbl_tiket.id_tiket', $decodedId);
 
         $query = $builder->get();
