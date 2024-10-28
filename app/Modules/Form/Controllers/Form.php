@@ -474,6 +474,7 @@ class Form extends BaseController
     {
         $id_tiket = $this->request->getVar('id_tiket');
         $approval_type = $this->request->getVar('approval_type');
+        $approvalDate = date('Y-m-d');
 
         $db = \Config\Database::connect();
         $builder = $db->table('tbl_tiket');
@@ -481,6 +482,7 @@ class Form extends BaseController
         // Tentukan kolom mana yang perlu di-update berdasarkan tipe approval
         if ($approval_type === 'Koord Editor') {
             $builder->set('approved_order_koord', 'Y');
+            $builder->set('tgl_order_koord',$approvalDate);
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
@@ -490,6 +492,7 @@ class Form extends BaseController
             }
         } elseif ($approval_type === 'Acc Koord Editor') {
             $builder->set('approved_acc_koord', 'Y');
+            $builder->set('tgl_acc_koord', $approvalDate);
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
@@ -499,6 +502,7 @@ class Form extends BaseController
             }
         } elseif ($approval_type === 'Admin Sistem') {
             $builder->set('approved_order_admin', 'Y');
+            $builder->set('tgl_acc_admin', $approvalDate);
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
@@ -508,6 +512,7 @@ class Form extends BaseController
             }
         } elseif ($approval_type === 'Tim Multimedia') {
             $builder->set('approved_multimedia', 'Y');
+            $builder->set('tgl_acc_multimedia', $approvalDate);
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
@@ -517,6 +522,7 @@ class Form extends BaseController
             }
         } elseif ($approval_type === 'Manager Platform') {
             $builder->set('approved_acc_manager', 'Y');
+            $builder->set('tgl_acc_manager', $approvalDate);
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
