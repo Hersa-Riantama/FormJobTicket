@@ -350,7 +350,7 @@ class Form extends BaseController
             return redirect()->to('/login');
         }
         // Set nilai default
-        $namaKoord = $namaEditor = $namaMultimedia = '';
+        $namaKoord = $namaEditor = $namaMultimedia = $namaAdmin = '';
 
         // Tentukan nilai berdasarkan level user
         switch ($userData['level_user']) {
