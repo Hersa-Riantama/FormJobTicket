@@ -5,19 +5,22 @@
     <!-- Content -->
     <form id="detailTiket" action="javascript:void(0);" method="get">
         <div class="form-group">
+
             <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
                 <h4 class="py-3 mb-4"><span class="text-muted fw-light">Form /</span> Form QR Code</h4>
-                <div class="row justify-content-between">
-                    <div class="col-xl-4 mb-5" style="display: flex; justify-content: center;">
-                        <!-- <h1 class="card-header mb-2 display-1 text-hitam">FORM <br>QR CODE</h1> -->
-                        <img src="<?= base_url('/assets/img/icons/Form QR Code.jpg') ?>" style="max-width: 100%; height: fit-content;" alt="Logo" />
+                <div class="row justify-content-between align-items-start">
+                    <div class="col-xl-4 mb-5 d-flex justify-content-center">
+                        <img src="<?= base_url('/assets/img/icons/Form QR Code.jpg') ?>"
+                            style="width: 100%; max-width: 100%; max-height: 14rem; object-fit: cover;"
+                            alt="Logo" />
                     </div>
+
                     <div class="col-xl-3 mb-5">
                         <h4 class="card-header text-center mb-2 text-hitam">PLATFORM DIGITAL</h4>
-                        <div class="card border border-hitam mx-4">
+                        <div class="card border border-hitam mx-4" style="height: auto; max-height: 14rem; overflow: hidden;">
                             <div class="card-body p-2">
                                 <div class="row justify-content-between">
-                                    <div class="col-xl-7">
+                                    <div class="col-7">
                                         <div class="card warna-pink oval-atas">
                                             <h3 class="text-center oval mb-0 p-2 warna-darkpink text-hitam"><i>Form</i></h3>
                                             <div class="card-body m-0 p-2">
@@ -25,13 +28,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xl-5" style="padding-left:0;">
-                                        <h1 class="text-center display-1 mb-0 mt-1 text-hitam" style="font-size: 7rem;">1</h1>
+                                    <div class="col-5" style="padding-left:0;">
+                                        <h1 class="text-center display-1 mb-0 mt-1 text-hitam" style="font-size: 7rem; overflow: hidden;">1</h1>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -384,7 +388,7 @@
                                                 </p>
                                             </div>
 
-                                            <div class="col-xl-9">
+                                            <!-- <div class="col-xl-9">
                                                 <h6 class="text-center rounded py-2 warna-pink text-hitam">Keterangan Tanggal</h6>
                                                 <div class="row mt-4 mx-1">
                                                     <div class="col-xl mb-2 px-0">
@@ -406,7 +410,32 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div> -->
+
+                                            <div class="col-xl-9">
+                                                <h6 class="text-center rounded py-2 warna-pink text-hitam">Keterangan Tanggal</h6>
+                                                <div class="row mt-4 mx-1">
+                                                    <div class="col-xl mb-2 px-0">
+                                                        <div class="card h-100 mb-3 warna-border">
+                                                            <div class="card-body p-1">
+                                                                <div class="row mt-2 mb-3 px-2">
+                                                                    <label for="tgl_selesai" class="col-12 col-md-6 col-form-label text-biru">Tgl selesai pengerjaan</label>
+                                                                    <div class="col-12 col-md-6">
+                                                                        <input class="form-control text-hitam border-hitam w-100" type="date" value="<?= esc($tiketData['tgl_selesai']) ?>" id="tgl_selesai" name="tgl_selesai" style="border: 1px solid black;" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-2 px-2">
+                                                                    <label for="tgl_upload" class="col-12 col-md-6 col-form-label text-biru">Tgl <i>upload</i> konten <i>QR Code</i></label>
+                                                                    <div class="col-12 col-md-6">
+                                                                        <input class="form-control text-hitam border-hitam w-100" type="date" value="<?= esc($tiketData['tgl_upload']) ?>" id="tgl_upload" name="tgl_upload" style="border: 1px solid black;" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
