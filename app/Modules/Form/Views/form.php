@@ -9,7 +9,7 @@
             <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
                 <h4 class="py-3 mb-4"><span class="text-muted fw-light">Form /</span> Form QR Code</h4>
                 <div class="row justify-content-between">
-                    <div class="col-xl-5 mb-5" style="display: flex; justify-content: center;">
+                    <div class="col-xl-4 mb-5" style="display: flex; justify-content: center;">
                         <!-- <h1 class="card-header mb-2 display-1 text-hitam">FORM <br>QR CODE</h1> -->
                         <img src="<?= base_url('/assets/img/icons/Form QR Code.jpg') ?>" style="max-width: 100%; height: auto;" alt="Logo" />
                     </div>
