@@ -222,11 +222,11 @@
                                     <div class="col-md px-3">
                                         <!-- <small class="text-light fw-medium">Checkboxes</small> -->
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="14" name="kelengkapan[]" id="kategori14" />
+                                            <input class="form-check-input warna-border" type="checkbox" value="14" name="kelengkapan[]" id="kategori14" onclick="return false;" />
                                             <label class="form-check-label text-biru" for="kategori14"> Sudah diperiksa <i>pemesan</i> </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="15" name="kelengkapan[]" id="kategori15" />
+                                            <input class="form-check-input warna-border" type="checkbox" value="15" name="kelengkapan[]" id="kategori15" onclick="return false;" />
                                             <label class="form-check-label text-biru" for="kategori15"> Sudah di-<i>approve </i>atasan </label>
                                         </div>
 
@@ -371,13 +371,13 @@
                                                                 <div class="row mt-2 mb-3 px-2">
                                                                     <label for="tgl_selesai" class="col-12 col-md-6 col-form-label text-biru">Tgl selesai pengerjaan</label>
                                                                     <div class="col-12 col-md-6">
-                                                                        <input class="form-control text-hitam border-hitam w-100" type="date" value="" id="tgl_selesai" name="tgl_selesai" />
+                                                                        <input class="form-control text-hitam border-hitam w-100" type="date" value="" id="tgl_selesai" name="tgl_selesai" readonly />
                                                                     </div>
                                                                 </div>
                                                                 <div class="row mb-2 px-2">
                                                                     <label for="tgl_upload" class="col-12 col-md-6 col-form-label text-biru">Tgl <i>upload</i> konten <i>QR Code</i></label>
                                                                     <div class="col-12 col-md-6">
-                                                                        <input class="form-control text-hitam border-hitam w-100" type="date" value="" id="tgl_upload" name="tgl_upload" />
+                                                                        <input class="form-control text-hitam border-hitam w-100" type="date" value="" id="tgl_upload" name="tgl_upload" readonly />
                                                                     </div>
                                                                 </div>
                                                             </div>
