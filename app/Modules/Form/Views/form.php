@@ -507,7 +507,38 @@
     $(document).ready(function() {
         $('#formTiket').submit(function(event) {
             event.preventDefault();
+            var isValid = true;
+            var pesanAlert = '';
 
+            if ($('input[name="id_kategori[]"]:checked').length === 0) {
+                isValid = false;
+                pesanAlert += 'Kategori harus diisi.\n';
+            }
+            if ($('input[name="kelengkapan[]"]:checked').length === 0) {
+                isValid = false;
+                pesanAlert += 'Kelengkapan harus diisi.\n';
+            }
+            if ($('input[name="tahap_kelengkapan[]"]:checked').length === 0) {
+                isValid = false;
+                pesanAlert += 'Tahap Kelengkapan harus diisi.\n';
+            }
+            if ($('#kode_buku').val() === '' || $('#kode_buku').val() === null) {
+                isValid = false;
+                pesanAlert += 'Kode Buku harus diisi.\n';
+            }
+            if ($('#nomor_job').val().trim() === '') {
+                isValid = false;
+                pesanAlert += 'Nomor Job harus diisi.\n';
+            }
+            if ($('#jml_qrcode').val().trim() === '') {
+                isValid = false;
+                pesanAlert += 'Jumlah QR Code harus diisi.\n';
+            }
+
+            if (!isValid) {
+                alert(pesanAlert);
+                return; // Hentikan proses submit
+            }
             // Create a new FormData object to handle the form submission
             var formData = new FormData(this);
 
