@@ -415,7 +415,7 @@
                                                                 <div class="row mt-2 mb-3 px-2">
                                                                     <label for="tgl_selesai" class="col-12 col-md-6 col-form-label text-biru">Tgl selesai pengerjaan</label>
                                                                     <div class="col-12 col-md-6">
-                                                                        <input class="form-control text-hitam border-hitam w-100" type="date" value="<?= esc($tiketData['tgl_selesai']) ?>" id="tgl_selesai" name="tgl_selesai" />
+                                                                        <input class="form-control text-hitam border-hitam w-100" type="date" value="<?= esc($tiketData['tgl_selesai']) ?>" id="tgl_selesai" name="tgl_selesai"/>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row mb-2 px-2">
