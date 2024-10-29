@@ -47,11 +47,10 @@
 }
 
 .wrap-text {
-  max-width: 50%; /* Sesuaikan lebar maksimal sesuai kebutuhan */
+  max-width: 500px; /* Sesuaikan lebar maksimal sesuai kebutuhan */
   white-space: normal; /* Membungkus teks ke baris berikutnya */
   word-wrap: break-word; /* Memastikan kata-kata yang panjang juga terbungkus */
 }
-
 
 .warna-pink{
   background-color: #f5e3ef;
