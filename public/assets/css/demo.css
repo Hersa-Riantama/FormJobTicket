@@ -41,6 +41,16 @@
 /*
 * Content
 ******************************************************************************/
+.center-text {
+  text-align: center; /* Tengah secara horizontal */
+  vertical-align: middle; /* Tengah secara vertikal */
+}
+
+.wrap-text {
+  max-width: 50%; /* Sesuaikan lebar maksimal sesuai kebutuhan */
+  white-space: normal; /* Membungkus teks ke baris berikutnya */
+  word-wrap: break-word; /* Memastikan kata-kata yang panjang juga terbungkus */
+}
 
 
 .warna-pink{
