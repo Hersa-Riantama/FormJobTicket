@@ -219,11 +219,11 @@
                                     <div class="col-md px-3">
                                         <!-- <small class="text-light fw-medium">Checkboxes</small> -->
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="14" name="kelengkapan[]" id="kategori14" <?= ($tiketData['approved_order_koord'] === "Y") ? 'checked' : ''; ?> onclick="return false;" />
+                                            <input class="form-check-input warna-border" type="checkbox" value="pemesan" name="kelengkapan[]" id="kategori14" <?= ($tiketData['approved_order_koord'] === "Y") ? 'checked' : ''; ?> onclick="return false;" />
                                             <label class="form-check-label text-biru" for="kategori14"> Sudah diperiksa <i>pemesan</i> </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="15" name="kelengkapan[]" id="kategori15" <?= ($tiketData['approved_acc_manager'] === "Y") ? 'checked' : ''; ?> onclick="return false;" />
+                                            <input class="form-check-input warna-border" type="checkbox" value="atasan" name="kelengkapan[]" id="kategori15" <?= ($tiketData['approved_acc_manager'] === "Y") ? 'checked' : ''; ?> onclick="return false;" />
                                             <label class="form-check-label text-biru" for="kategori15"> Sudah di-<i>approve </i>atasan </label>
                                         </div>
 
@@ -555,15 +555,17 @@
                     </div>
                 </div>
 
-                <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
-                    <!-- Row 3 -->
-                    <div class="row justify-content-center my-3">
-                        <div class="col-xl-6">
-                            <button class="btn btn-primary d-grid w-100" id="btnsimpanPerubahan" onclick="updateForm()">Simpan Perubahan</button>
-                            <p id="errorMessage" class="text-danger" style="display:none;"></p>
+                <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Tim Multimedia'])) : ?>
+                    <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
+                        <!-- Row 3 -->
+                        <div class="row justify-content-center my-3">
+                            <div class="col-xl-6">
+                                <button class="btn btn-primary d-grid w-100" id="btnsimpanPerubahan" onclick="updateForm()">Simpan Perubahan</button>
+                                <p id="errorMessage" class="text-danger" style="display:none;"></p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
 
             </div>
         </div>
@@ -651,6 +653,9 @@
         $('input[name="tahap_kelengkapan[]"]:checked').each(function() {
             tahap_kelengkapan.push($(this).val());
         });
+        const tgl_selesai = document.getElementById('tgl_selesai').value;
+        const tgl_upload = document.getElementById('tgl_upload').value;
+
         const id_tiket = <?= $tiketData['id_tiket'] ?>;
         $.ajax({
             url: 'http://localhost:8080/updateForm/' + id_tiket,
@@ -661,6 +666,8 @@
                 id_kategori: id_kategori.length ? id_kategori : [''],
                 kelengkapan: kelengkapan.length ? kelengkapan : [''],
                 tahap_kelengkapan: tahap_kelengkapan.length ? tahap_kelengkapan : [''],
+                tgl_selesai: tgl_selesai ? tgl_selesai : null,
+                tgl_upload: tgl_upload ? tgl_upload : null
             },
             success: function(response) {
                 if (response.status === 'success') {

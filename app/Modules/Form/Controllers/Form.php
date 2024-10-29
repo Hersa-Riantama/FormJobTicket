@@ -222,6 +222,24 @@ class Form extends BaseController
 
             // Konversi array unik menjadi JSON
             $id_kategori_json = json_encode($id_kategori_unique);
+
+            $tgl_selesai_input = $this->request->getVar('tgl_selesai');
+            $tgl_upload_input = $this->request->getVar('tgl_upload');
+
+            if (!empty($tgl_selesai_input)) {
+                $tgl_selesai = esc(date('Y-m-d', strtotime($tgl_selesai_input)));
+            } else {
+                $tgl_selesai = null; // Atau bisa juga tidak mengatur variabel ini
+            }
+
+            // Cek apakah input tgl_upload tidak kosong
+            if (!empty($tgl_upload_input)) {
+                $tgl_upload = esc(date('Y-m-d', strtotime($tgl_upload_input)));
+            } else {
+                $tgl_upload = null; // Atau bisa juga tidak mengatur variabel ini
+            }
+
+
             if (json_last_error() === JSON_ERROR_NONE) {
                 $cobaupdate = [
                     'id_kategori' => $id_kategori_json,
@@ -236,6 +254,14 @@ class Form extends BaseController
                 // Tambahkan id_multimedia hanya jika level_user adalah 'Tim Multimedia'
                 if ($userData['level_user'] == 'Tim Multimedia') {
                     $cobaupdate['id_multimedia'] = $id_multimedia;
+                    // Hanya masukkan tgl_selesai dan tgl_upload jika tidak null
+                    if ($tgl_selesai !== null) {
+                        $cobaupdate['tgl_selesai'] = $tgl_selesai;
+                    }
+                    if ($tgl_upload !== null) {
+                        $cobaupdate['tgl_upload'] = $tgl_upload;
+                    }
+                    log_message('debug', 'Data update: ' . json_encode($cobaupdate));
                 }
 
                 if ($this->model->update($id_tiket, $cobaupdate) === false) {
@@ -307,6 +333,7 @@ class Form extends BaseController
                 'status_kelengkapan' => 'N'
             ]);
         }
+
         $response = [
             'status' => 'success',
             'Pesan' => 'Tiket Berhasil diupdate'
@@ -499,29 +526,6 @@ class Form extends BaseController
         return view($this->folder_directory . 'detailForm', $data);
     }
 
-
-    // public function delete($id_tiket = null)
-    // {
-    //     $tiket = $this->model->find($id_tiket);
-    //     if (!$tiket) {
-    //         return $this->failNotFound('Data tiket tidak ditemukan');
-    //     }
-    //     $this->model->delete($id_tiket);
-    //     $kelengkapanModel = new KelengkapanModel();
-    //     $cekKelengkapan = $this->$kelengkapanModel->where('id_tiket', $id_tiket)->findAll;
-    //     if ($cekKelengkapan) {
-    //         $this->$cekKelengkapan->delete();
-    //     }
-    //     $statusKelengkapanModel = new StatusKelengkapan();
-    //     $cekStatus = $this->$statusKelengkapanModel->where('id_tiket', $id_tiket)->findAll;
-    //     if ($cekStatus) {
-    //         $this->$cekStatus->delete();
-    //     }
-    //     $response = [
-    //         'pesan' => 'Data tiket Berhasil di Hapus'
-    //     ];
-    //     return $this->respondDeleted($response, 200);
-    // }
     public function delete($id_tiket = null)
     {
         if ($id_tiket === null) {

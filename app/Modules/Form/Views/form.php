@@ -222,11 +222,11 @@
                                     <div class="col-md px-3">
                                         <!-- <small class="text-light fw-medium">Checkboxes</small> -->
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="14" name="kelengkapan[]" id="kategori14" onclick="return false;" />
+                                            <input class="form-check-input warna-border" type="checkbox" value="pemesan" name="kelengkapan[]" id="kategori14" onclick="return false;" />
                                             <label class="form-check-label text-biru" for="kategori14"> Sudah diperiksa <i>pemesan</i> </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="15" name="kelengkapan[]" id="kategori15" onclick="return false;" />
+                                            <input class="form-check-input warna-border" type="checkbox" value="atasan" name="kelengkapan[]" id="kategori15" onclick="return false;" />
                                             <label class="form-check-label text-biru" for="kategori15"> Sudah di-<i>approve </i>atasan </label>
                                         </div>
 
@@ -514,10 +514,6 @@
                 isValid = false;
                 pesanAlert += 'Kategori harus diisi.\n';
             }
-            if ($('input[name="kelengkapan[]"]:checked').length === 0) {
-                isValid = false;
-                pesanAlert += 'Kelengkapan harus diisi.\n';
-            }
             if ($('#kode_buku').val() === '' || $('#kode_buku').val() === null) {
                 isValid = false;
                 pesanAlert += 'Kode Buku harus diisi.\n';
@@ -529,6 +525,10 @@
             if ($('#jml_qrcode').val().trim() === '') {
                 isValid = false;
                 pesanAlert += 'Jumlah QR Code harus diisi.\n';
+            }
+            if ($('input[name="kelengkapan[]"]:checked').length === 0) {
+                isValid = false;
+                pesanAlert += 'Kelengkapan harus diisi.\n';
             }
 
             if (!isValid) {
