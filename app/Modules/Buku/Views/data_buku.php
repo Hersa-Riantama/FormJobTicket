@@ -72,18 +72,22 @@ use Modules\Auth\Models\AuthModel; ?>
                             <div class="mb-3">
                                 <label for="kode_buku" class="form-label">Kode Buku</label>
                                 <input type="text" class="form-control" id="kode_buku" name="kode_buku" required>
+                                <span id="kode_bukuError" style="color:red; display:none;">Kode Buku Wajib diisi</span>
                             </div>
                             <div class="mb-3">
                                 <label for="judul_buku" class="form-label">Judul Buku</label>
                                 <input type="text" class="form-control" id="judul_buku" name="judul_buku" required>
+                                <span id="judul_bukuError" style="color:red; display:none;">Judul Buku Wajib diisi</span>
                             </div>
                             <div class="mb-3">
                                 <label for="pengarang" class="form-label">Pengarang</label>
                                 <input type="text" class="form-control" id="pengarang" name="pengarang" required>
+                                <span id="pengarangError" style="color:red; display:none;">Pengarang Wajib diisi</span>
                             </div>
                             <div class="mb-3">
                                 <label for="target_terbit" class="form-label">Target Terbit</label>
                                 <input type="year" class="form-control" id="target_terbit" name="target_terbit" required>
+                                <span id="target_terbitError" style="color:red; display:none;">Target Terbit Wajib diisi</span>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Warna</label><br>
@@ -107,7 +111,7 @@ use Modules\Auth\Models\AuthModel; ?>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            <button type="submit" id="btn-update" data-id_buku="" class="btn btn-primary">Simpan</button>
+                            <button type="submit" id="btn-update" data-id_buku="" onclick="validateSimpan()" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>
                 </div>

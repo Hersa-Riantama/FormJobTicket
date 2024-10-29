@@ -109,6 +109,13 @@ class Buku extends BaseController
     }
     public function update($id_buku = null)
     {
+        $rules = $this->model->validationRules();
+        if (!$this->validate($rules)) {
+            $response = [
+                'pesan' => $this->validator->getErrors()
+            ];
+            return $this->failValidationErrors($response);
+        }
         $buku = $this->model->find($id_buku);
         if ($buku == null) {
             return $this->failNotFound('Data Buku dengan ID tersebut tidak ditemukan');

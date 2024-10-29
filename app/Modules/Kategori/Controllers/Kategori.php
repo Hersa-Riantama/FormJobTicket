@@ -85,6 +85,13 @@ class Kategori extends BaseController
         //     // Jika Authorization header tidak valid
         //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
         // }
+        $rules = $this->model->validationRules();
+        if (!$this->validate($rules)) {
+            $response = [
+                'pesan' => $this->validator->getErrors()
+            ];
+            return $this->failValidationErrors($response);
+        }
         $kategori = $this->model->find($id_kategori);
         if ($kategori == null) {
             return $this->failNotFound('Data kategori dengan ID tersebut tidak ditemukan');
