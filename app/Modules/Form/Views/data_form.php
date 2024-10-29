@@ -141,7 +141,7 @@
                     formData += '</div>';
                     formData += '</td>';
                     formData += '<td>' + value.kode_form + '</td>';
-                    formData += '<td>' + kategoriNames + '</td>';
+                    formData += '<td class="wrap-text">' + kategoriNames + '</td>';
                     formData += '<td>' + nama + '</td>';
                     formData += '<td>' + value.nomor_job + '</td>';
                     formData += '<td>' + judul_buku + '</td>';
