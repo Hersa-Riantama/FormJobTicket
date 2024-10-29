@@ -65,42 +65,35 @@ class Auth extends BaseController
 
         // Cari user berdasarkan email di database
         $user = $this->model->where('email', $email)->first();
-        if (!$user) {
+        if (!$user || md5($password) !== $user['password']) {
             // Jika user tidak ditemukan di database
             $response = [
-                'Pesan' => 'User tidak ditemukan',
+                'Pesan' => 'Email atau password salah',
                 'Status' => 'error'
             ];
             return $this->response->setJSON($response)->setStatusCode(404);
         }
-        $passmd5 = md5($password);
-        // Verifikasi password dengan password yang ada di database
-        if ($passmd5 !== ($user['password'])) {
-            // Jika password tidak cocok
-            $response = [
-                'Pesan' => 'Password salah',
-                'Status' => 'error'
-            ];
-            return $this->response->setJSON($response)->setStatusCode(401);
-        }
-
         // Cek status verifikasi user di database
         if ($user['verifikasi'] == 'N') {
             // Jika user belum diverifikasi
-            return $this->fail('User belum diverifikasi');
+            $response = [
+                'Pesan' => 'User belum diverifikasi',
+                'Status' => 'error'
+            ];
+            return $this->response->setJSON($response)->setStatusCode(403);
         }
-        // Response berhasil
-        $response = [
-            'Pesan' => 'Berhasil Login',
-            'Status' => 'success'
-        ];
-
         // Set session
         $this->session->set([
             'id_user' => $user['id_user'],
             'level_user' => $user['level_user'],
             'logged_in' => true
         ]);
+
+        // Response berhasil
+        $response = [
+            'Pesan' => 'Berhasil Login',
+            'Status' => 'success'
+        ];
         return $this->response->setJSON($response)->setStatusCode(200);
     }
 
