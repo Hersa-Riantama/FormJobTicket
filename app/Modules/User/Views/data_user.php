@@ -21,7 +21,7 @@
                             <th>No.Telepon</th>
                             <th>Jenis Kelamin</th>
                             <th>Level User</th>
-                            <th>Action</th>
+                            <th>Kelola User</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0" id="UserData">
@@ -76,17 +76,16 @@
                     UserData += '<tr>';
                     // Tombol Verifikasi (Hanya muncul jika user belum diverifikasi)
                     if (value.verifikasi === 'N') { // Jika user belum diverifikasi
-                        UserData += '<td><button class="badge btn btn-danger btn-verify" data-id_user="' + value.id_user + '">Verifikasi</button></td>';
+                        UserData += '<td class="center-text"><button class="badge btn btn-danger btn-verify" data-id_user="' + value.id_user + '">Verifikasi</button></td>';
                     } else {
-                        UserData += '<td><span class="badge bg-success">Terverifikasi</span></td>';
+                        UserData += '<td class="center-text"><span class="badge bg-success">Terverifikasi</span></td>';
                     }
-                    UserData += '<td>' + value.nama + '</td>';
+                    UserData += '<td class="wrap-text">' + value.nama + '</td>';
                     UserData += '<td>' + value.nomor_induk + '</td>';
-                    UserData += '<td>' + value.email + '</td>';
+                    UserData += '<td class="wrap-text">' + value.email + '</td>';
                     UserData += '<td>' + value.no_tlp + '</td>';
                     UserData += '<td>' + value.jk + '</td>';
                     UserData += '<td>' + value.level_user + '</td>';
-
                     UserData += '<td>';
                     UserData += '<div class="dropdown">';
                     UserData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
@@ -132,29 +131,28 @@
         }
     });
     $(document).on('click', '.suspend-user', function() {
-    var id_user = $(this).data('id_user');
-    console.log("Selected User ID:", id_user);
-    if (!id_user) {
-        alert("ID user tidak ditemukan!"); // Tambahkan error handling jika id_user undefined
-        return;
-    }
-    if (confirm('Apakah kamu yakin untuk suspend user ini?')) {
-        $.ajax({
-            url: 'http://localhost:8080/suspend/' + id_user,  // Replace with your actual endpoint
-            type: 'PUT',  // Assuming it's a PUT request to update the user's status
-            dataType: 'json',
-            success: function(response) {
-                alert(response.Pesan);
-                loadData();
-            },
-            error: function(xhr, status, error) {
-                console.log('AJAX Error:', xhr.responseText);
-                alert('Terjadi Kesalahan saat Suspend user.');
-            }
-        });
-    }
-});
-
+        var id_user = $(this).data('id_user');
+        console.log("Selected User ID:", id_user);
+        if (!id_user) {
+            alert("ID user tidak ditemukan!"); // Tambahkan error handling jika id_user undefined
+            return;
+        }
+        if (confirm('Apakah kamu yakin untuk suspend user ini?')) {
+            $.ajax({
+                url: 'http://localhost:8080/suspend/' + id_user, // Replace with your actual endpoint
+                type: 'PUT', // Assuming it's a PUT request to update the user's status
+                dataType: 'json',
+                success: function(response) {
+                    alert(response.Pesan);
+                    loadData();
+                },
+                error: function(xhr, status, error) {
+                    console.log('AJAX Error:', xhr.responseText);
+                    alert('Terjadi Kesalahan saat Suspend user.');
+                }
+            });
+        }
+    });
 </script>
 <!-- / Layout wrapper -->
 <?= $this->endSection(); ?>

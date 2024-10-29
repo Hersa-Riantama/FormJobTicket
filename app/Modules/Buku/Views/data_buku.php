@@ -50,7 +50,7 @@ use Modules\Auth\Models\AuthModel; ?>
                             <th>Pengarang</th>
                             <th>Target Terbit</th>
                             <th>Warna</th>
-                            <th>Action</th>
+                            <th>Kelola Buku</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0" id="bukuData">
@@ -211,8 +211,8 @@ use Modules\Auth\Models\AuthModel; ?>
                 $.each(data.buku, function(key, value) {
                     bukuData += '<tr>';
                     bukuData += '<td>' + value.kode_buku + '</td>';
-                    bukuData += '<td>' + value.judul_buku + '</td>';
-                    bukuData += '<td>' + value.pengarang + '</td>';
+                    bukuData += '<td class="wrap-text">' + value.judul_buku + '</td>';
+                    bukuData += '<td class="wrap-text">' + value.pengarang + '</td>';
                     bukuData += '<td>' + value.target_terbit + '</td>';
                     bukuData += '<td>' + value.warna + '</td>';
                     bukuData += '<td>';
@@ -281,15 +281,15 @@ use Modules\Auth\Models\AuthModel; ?>
         var konfirmasi = confirm("Apakah Anda yakin hapus buku ini? ");
         if (konfirmasi) {
             $.ajax({
-            type: 'DELETE',
-            url: 'http://localhost:8080/buku/' + id_buku,
-            success: function() {
-                loadData();
-            },
-            error: function(xhr, status, error) {
-                alert("Gagal menghapus buku: " + xhr.responseText); // Error handling
-            }
-        });
+                type: 'DELETE',
+                url: 'http://localhost:8080/buku/' + id_buku,
+                success: function() {
+                    loadData();
+                },
+                error: function(xhr, status, error) {
+                    alert("Gagal menghapus buku: " + xhr.responseText); // Error handling
+                }
+            });
         }
     });
 

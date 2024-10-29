@@ -23,7 +23,7 @@ use Modules\Auth\Models\AuthModel; ?>
                     <thead>
                         <tr>
                             <th>Nama Kategori</th>
-                            <th>Action</th>
+                            <th>Kelola Kategori</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0" id="kategoriData">

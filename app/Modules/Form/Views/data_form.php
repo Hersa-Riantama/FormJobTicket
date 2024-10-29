@@ -14,12 +14,12 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Kelola Tiket</th>
                             <th>Kode Form</th>
                             <th>Kategori</th>
                             <th>User</th>
                             <th>Nomor Job</th>
                             <th>Buku</th>
+                            <th>Kelola Tiket</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0" id="formData">
@@ -129,6 +129,11 @@
 
                     // Generate HTML untuk tabel
                     formData += '<tr>';
+                    formData += '<td>' + value.kode_form + '</td>';
+                    formData += '<td class="wrap-text">' + kategoriNames + '</td>';
+                    formData += '<td class="wrap-text">' + nama + '</td>';
+                    formData += '<td>' + value.nomor_job + '</td>';
+                    formData += '<td class="wrap-text">' + judul_buku + '</td>';
                     formData += '<td>';
                     formData += '<div class="dropdown">';
                     formData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
@@ -140,11 +145,6 @@
                     formData += '</div>';
                     formData += '</div>';
                     formData += '</td>';
-                    formData += '<td>' + value.kode_form + '</td>';
-                    formData += '<td class="wrap-text">' + kategoriNames + '</td>';
-                    formData += '<td>' + nama + '</td>';
-                    formData += '<td>' + value.nomor_job + '</td>';
-                    formData += '<td>' + judul_buku + '</td>';
                     formData += '</tr>';
                 });
 
