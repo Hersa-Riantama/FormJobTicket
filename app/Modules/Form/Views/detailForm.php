@@ -675,6 +675,8 @@
                     alert('Data berhasil diperbarui.');
                     // Update tampilan sesuai kebutuhan
                     $('#status_message').text(response.message);
+                    $(this).trigger('reset');
+                    location.reload();
                 } else {
                     alert('Gagal memperbarui data: ' + response.message);
                 }
