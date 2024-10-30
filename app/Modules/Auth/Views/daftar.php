@@ -90,7 +90,7 @@
 
                             <div class="mb-3">
                                 <label for="no_tlp" class="form-label">No.Telepon</label>
-                                <input type="text" class="form-control" id="no_tlp" name="no_tlp" placeholder="Masukkan No.Telepon" required />
+                                <input type="text" class="form-control" id="no_tlp" name="no_tlp" placeholder="Masukkan No.Telepon" pattern="[0-9]+" required />
                             </div>
 
                             <div class="mb-3">
@@ -249,10 +249,10 @@
         event.target.setCustomValidity("Password Wajib Diisi!");
     };
 
-    document.getElementById("terms-condition").oninput = function(event) {
+    document.getElementById("terms-conditions").oninput = function(event) {
         event.target.setCustomValidity("");
     };
-    document.getElementById("terms-condition").oninvalid = function(event) {
+    document.getElementById("terms-conditions").oninvalid = function(event) {
         event.target.setCustomValidity("Ceklis Wajib Diisi!");
     };
     $(document).ready(function() {
