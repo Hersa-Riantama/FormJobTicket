@@ -109,7 +109,7 @@ class Buku extends BaseController
     }
     public function update($id_buku = null)
     {
-        $rules = $this->model->validationRules();
+        $rules = $this->model->validationRulesUpdate();
         if (!$this->validate($rules)) {
             $response = [
                 'pesan' => $this->validator->getErrors()

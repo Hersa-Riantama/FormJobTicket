@@ -28,6 +28,16 @@ class BukuModel extends Model
             'warna' => 'required',
         ];
     }
+    public function validationRulesUpdate()
+    {
+        return [
+            'kode_buku' => 'required|min_length[3]',
+            'judul_buku' => 'required',
+            'pengarang' => 'required',
+            'target_terbit' => 'required',
+            'warna' => 'required',
+        ];
+    }
 
     // (Opsional) Hash password sebelum disimpan
     public function getBuku()

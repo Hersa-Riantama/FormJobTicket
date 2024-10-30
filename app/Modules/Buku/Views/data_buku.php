@@ -72,22 +72,18 @@ use Modules\Auth\Models\AuthModel; ?>
                             <div class="mb-3">
                                 <label for="kode_buku" class="form-label">Kode Buku</label>
                                 <input type="text" class="form-control" id="kode_buku" name="kode_buku" required>
-                                <span id="kode_bukuError" style="color:red; display:none;">Kode Buku Wajib diisi</span>
                             </div>
                             <div class="mb-3">
                                 <label for="judul_buku" class="form-label">Judul Buku</label>
                                 <input type="text" class="form-control" id="judul_buku" name="judul_buku" required>
-                                <span id="judul_bukuError" style="color:red; display:none;">Judul Buku Wajib diisi</span>
                             </div>
                             <div class="mb-3">
                                 <label for="pengarang" class="form-label">Pengarang</label>
                                 <input type="text" class="form-control" id="pengarang" name="pengarang" required>
-                                <span id="pengarangError" style="color:red; display:none;">Pengarang Wajib diisi</span>
                             </div>
                             <div class="mb-3">
                                 <label for="target_terbit" class="form-label">Target Terbit</label>
                                 <input type="year" class="form-control" id="target_terbit" name="target_terbit" required>
-                                <span id="target_terbitError" style="color:red; display:none;">Target Terbit Wajib diisi</span>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Warna</label><br>
@@ -236,6 +232,59 @@ use Modules\Auth\Models\AuthModel; ?>
             }
         });
     }
+
+    // kode_buku
+    // document.getElementById("kode_buku_add").oninput = function(event) {
+    //     event.target.setCustomValidity("");
+    // };
+    // document.getElementById("kode_buku_add").oninvalid = function(event) {
+    //     event.target.setCustomValidity("Kode Buku Wajib Diisi!");
+    // };
+    document.getElementById("kode_buku").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("kode_buku").oninvalid = function(event) {
+        event.target.setCustomValidity("Kode Buku Wajib Diisi!");
+    };
+    // judul_buku
+    // document.getElementById("judul_buku_add").oninput = function(event) {
+    //     event.target.setCustomValidity("");
+    // };
+    // document.getElementById("judul_buku_add").oninvalid = function(event) {
+    //     event.target.setCustomValidity("Judul Buku Wajib Diisi!");
+    // };
+    document.getElementById("judul_buku").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("judul_buku").oninvalid = function(event) {
+        event.target.setCustomValidity("Judul Buku Wajib Diisi!");
+    };
+    // pengarang
+    // document.getElementById("pengarang_add").oninput = function(event) {
+    //     event.target.setCustomValidity("");
+    // };
+    // document.getElementById("pengarang_add").oninvalid = function(event) {
+    //     event.target.setCustomValidity("Pengarang Wajib Diisi!");
+    // };
+    document.getElementById("pengarang").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("pengarang").oninvalid = function(event) {
+        event.target.setCustomValidity("Pengarang Wajib Diisi!");
+    };
+    // target_terbit
+    // document.getElementById("target_terbit_add").oninput = function(event) {
+    //     event.target.setCustomValidity("");
+    // };
+    // document.getElementById("target_terbit_add").oninvalid = function(event) {
+    //     event.target.setCustomValidity("Target Terbit Wajib Diisi!");
+    // };
+    document.getElementById("target_terbit").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("target_terbit").oninvalid = function(event) {
+        event.target.setCustomValidity("Target Terbit Wajib Diisi!");
+    };
 
     // Fungsi untuk edit data
     $(document).on('click', '.dropdown-item-edit', function() {
