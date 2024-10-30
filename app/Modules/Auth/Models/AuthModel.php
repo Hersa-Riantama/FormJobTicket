@@ -22,7 +22,7 @@ class AuthModel extends Model
     {
         return [
             'nama' => 'required|min_length[3]',
-            'nomor_induk' => 'required|numeric|is_unique[tbl_user.nomor_induk]',
+            'nomor_induk' => 'required|is_unique[tbl_user.nomor_induk]',
             'email' => 'required|valid_email|is_unique[tbl_user.email]',
             'no_tlp' => 'required|numeric',
             'jk' => 'required|in_list[Laki-Laki,Perempuan]',

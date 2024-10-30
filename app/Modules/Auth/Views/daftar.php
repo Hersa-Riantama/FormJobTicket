@@ -198,13 +198,20 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 <script>
     document.getElementById("nama").oninput = function(event) {
         event.target.setCustomValidity("");
     };
     document.getElementById("nama").oninvalid = function(event) {
-        event.target.setCustomValidity("Nama Wajib Diisi!");
+        if (event.target.value.length < 3) {
+            event.target.setCustomValidity("Nama Wajib Minimal 3 Huruf!");
+            toastr.error("Nama harus lebih dari 3 karakter!", "Error");
+        }else {
+            event.target.setCustomValidity("Nomor Induk Wajib Diisi!");
+        }
     };
 
     document.getElementById("nomor_induk").oninput = function(event) {
@@ -269,7 +276,7 @@
                         alert(response.Pesan);
                         window.location.href = '<?php echo base_url('login'); ?>';
                     } else {
-                        alert(response.Pesan);
+                        toastr.error(response.Pesan, "Error");
                     }
                 },
                 error: function(xhr, status, error) {
