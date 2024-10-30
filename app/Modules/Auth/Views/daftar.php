@@ -74,28 +74,29 @@
                                     id="nama"
                                     name="nama"
                                     placeholder="Masukkan Nama"
-                                    autofocus />
+                                    autofocus 
+                                    required/>
                             </div>
 
                             <div class="mb-3">
                                 <label for="nomor_induk" class="form-label">Nomor Induk</label>
-                                <input type="text" class="form-control" id="nomor_induk" name="nomor_induk" placeholder="Masukkan Nomor Induk" />
+                                <input type="text" class="form-control" id="nomor_induk" name="nomor_induk" placeholder="Masukkan Nomor Induk" required/>
                             </div>
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email" />
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email" required/>
                             </div>
 
                             <div class="mb-3">
                                 <label for="no_tlp" class="form-label">No.Telepon</label>
-                                <input type="text" class="form-control" id="no_tlp" name="no_tlp" placeholder="Masukkan No.Telepon" />
+                                <input type="text" class="form-control" id="no_tlp" name="no_tlp" placeholder="Masukkan No.Telepon" required/>
                             </div>
 
                             <div class="mb-3">
                                 <label for="jk" class="form-label">Jenis Jelamin</label>
-                                <select class="form-select" name="jk" aria-label="Default select example" required>
-                                    <option selected disabled>Pilih Jenis Kelamin</option>
+                                <select class="form-select" name="jk" id="jk" aria-label="Default select example" required>
+                                    <option value="" selected disabled>Pilih Jenis Kelamin</option>
                                     <option value="Laki-Laki">Laki-Laki</option>
                                     <option value="Perempuan">Perempuan</option>
                                 </select>
@@ -103,8 +104,8 @@
 
                             <div class="mb-3">
                                 <label for="level_user" class="form-label">Level User</label>
-                                <select class="form-select" name="level_user" aria-label="Default select example" required>
-                                    <option selected disabled>Pilih Level User</option>
+                                <select class="form-select" name="level_user" id="level_user" aria-label="Default select example" required>
+                                    <option value="" selected disabled>Pilih Level User</option>
                                     <option value="1">Admin Sistem</option>
                                     <option value="2">Tim Multimedia</option>
                                     <option value="3">Editor</option>
@@ -122,7 +123,8 @@
                                         class="form-control"
                                         name="password"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                        aria-describedby="password" />
+                                        aria-describedby="password" 
+                                        required/>
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
                             </div>
@@ -198,6 +200,54 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 <script>
+    document.getElementById("nama").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("nama").oninvalid = function(event) {
+        event.target.setCustomValidity("Nama Wajib Diisi!");
+    };
+
+    document.getElementById("nomor_induk").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("nomor_induk").oninvalid = function(event) {
+        event.target.setCustomValidity("Nomor Induk Wajib Diisi!");
+    };
+
+    document.getElementById("email").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("email").oninvalid = function(event) {
+        event.target.setCustomValidity("Email Wajib Diisi!");
+    };
+
+    document.getElementById("no_tlp").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("no_tlp").oninvalid = function(event) {
+        event.target.setCustomValidity("No Tlp Wajib Diisi!");
+    };
+
+    document.getElementById("jk").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("jk").oninvalid = function(event) {
+        event.target.setCustomValidity("Pilih Jenis Kelamin Anda!");
+    };
+
+    document.getElementById("level_user").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("level_user").oninvalid = function(event) {
+        event.target.setCustomValidity("Pilih Level User Anda!");
+    };
+
+    document.getElementById("password").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("password").oninvalid = function(event) {
+        event.target.setCustomValidity("Password Wajib Diisi!");
+    };
     $(document).ready(function() {
         $('#formAuthentication').submit(function(event) {
             event.preventDefault();
