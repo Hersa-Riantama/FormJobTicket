@@ -52,24 +52,15 @@ class Auth extends BaseController
             'password' => 'required|min_length[6]'
         ]);
 
-        if (!$validation->run(compact('email', 'password'))) {
-            // Jika validasi gagal, kembalikan error
-            $errors = $validation->getErrors();
-            $response = [
-                'Pesan' => 'Validasi gagal',
-                'Status' => 'error',
-                'Errors' => $errors  // Menyertakan pesan error spesifik
-            ];
-            return $this->response->setJSON($response)->setStatusCode(400);
-        }
-
         // Cari user berdasarkan email di database
         $user = $this->model->where('email', $email)->first();
         if (!$user || md5($password) !== $user['password']) {
+            $errors = $validation->getErrors();
             // Jika user tidak ditemukan di database
             $response = [
                 'Pesan' => 'Email atau password salah',
-                'Status' => 'error'
+                'Status' => 'error',
+                'Errors' => $errors
             ];
             return $this->response->setJSON($response)->setStatusCode(404);
         }

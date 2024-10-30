@@ -286,7 +286,7 @@
                         alert(response.Pesan);
                         window.location.href = '<?php echo base_url('login'); ?>';
                     } else {
-                        toastr.error(response.Pesan, "Error");
+                        // toastr.error(response.Pesan, "Error");
                         for (const [field, message] of Object.entries(response.Errors)) {
                             const errorMessageContainer = $('#' + field).closest('.mb-3').find('.error-message');
                             if (errorMessageContainer.length) {
