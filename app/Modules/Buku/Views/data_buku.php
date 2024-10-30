@@ -107,7 +107,7 @@ use Modules\Auth\Models\AuthModel; ?>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            <button type="submit" id="btn-update" data-id_buku="" onclick="validateSimpan()" class="btn btn-primary">Simpan</button>
+                            <button type="submit" id="btn-update" data-id_buku="" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>
                 </div>
@@ -124,37 +124,37 @@ use Modules\Auth\Models\AuthModel; ?>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="kode_buku" class="form-label">Kode Buku</label>
-                                <input type="text" class="form-control" id="kode_buku" name="kode_buku" required>
+                                <label for="kode_buku_add" class="form-label">Kode Buku</label>
+                                <input type="text" class="form-control" id="kode_buku_add" name="kode_buku" required>
                             </div>
                             <div class="mb-3">
-                                <label for="judul_buku" class="form-label">Judul Buku</label>
-                                <input type="text" class="form-control" id="judul_buku" name="judul_buku" required>
+                                <label for="judul_buku_add" class="form-label">Judul Buku</label>
+                                <input type="text" class="form-control" id="judul_buku_add" name="judul_buku" required>
                             </div>
                             <div class="mb-3">
-                                <label for="pengarang" class="form-label">Pengarang</label>
-                                <input type="text" class="form-control" id="pengarang" name="pengarang" required>
+                                <label for="pengarang_add" class="form-label">Pengarang</label>
+                                <input type="text" class="form-control" id="pengarang_add" name="pengarang" required>
                             </div>
                             <div class="mb-3">
-                                <label for="target_terbit" class="form-label">Target Terbit</label>
-                                <input type="year" class="form-control" id="target_terbit" name="target_terbit" required>
+                                <label for="target_terbit_add" class="form-label">Target Terbit</label>
+                                <input type="year" class="form-control" id="target_terbit_add" name="target_terbit" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Warna</label><br>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="warna_bw" name="warna" value="BW" required>
+                                    <input type="radio" id="warna_bw" name="warna_add" value="BW">
                                     <label for="warna_bw">BW</label>
                                 </div>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="warna_2-2" name="warna" value="2/2" required>
+                                    <input type="radio" id="warna_2-2" name="warna_add" value="2/2">
                                     <label for="warna_2-2">2/2</label>
                                 </div>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="warna_3-3" name="warna" value="3/3" required>
+                                    <input type="radio" id="warna_3-3" name="warna_add" value="3/3">
                                     <label for="warna_3-3">3/3</label>
                                 </div>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="warna_4-4" name="warna" value="4/4" required>
+                                    <input type="radio" id="warna_4-4" name="warna_add" value="4/4">
                                     <label for="warna_4-4">4/4</label>
                                 </div>
                             </div>
@@ -234,12 +234,12 @@ use Modules\Auth\Models\AuthModel; ?>
     }
 
     // kode_buku
-    // document.getElementById("kode_buku_add").oninput = function(event) {
-    //     event.target.setCustomValidity("");
-    // };
-    // document.getElementById("kode_buku_add").oninvalid = function(event) {
-    //     event.target.setCustomValidity("Kode Buku Wajib Diisi!");
-    // };
+    document.getElementById("kode_buku_add").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("kode_buku_add").oninvalid = function(event) {
+        event.target.setCustomValidity("Kode Buku Wajib Diisi!");
+    };
     document.getElementById("kode_buku").oninput = function(event) {
         event.target.setCustomValidity("");
     };
@@ -247,12 +247,12 @@ use Modules\Auth\Models\AuthModel; ?>
         event.target.setCustomValidity("Kode Buku Wajib Diisi!");
     };
     // judul_buku
-    // document.getElementById("judul_buku_add").oninput = function(event) {
-    //     event.target.setCustomValidity("");
-    // };
-    // document.getElementById("judul_buku_add").oninvalid = function(event) {
-    //     event.target.setCustomValidity("Judul Buku Wajib Diisi!");
-    // };
+    document.getElementById("judul_buku_add").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("judul_buku_add").oninvalid = function(event) {
+        event.target.setCustomValidity("Judul Buku Wajib Diisi!");
+    };
     document.getElementById("judul_buku").oninput = function(event) {
         event.target.setCustomValidity("");
     };
@@ -260,12 +260,12 @@ use Modules\Auth\Models\AuthModel; ?>
         event.target.setCustomValidity("Judul Buku Wajib Diisi!");
     };
     // pengarang
-    // document.getElementById("pengarang_add").oninput = function(event) {
-    //     event.target.setCustomValidity("");
-    // };
-    // document.getElementById("pengarang_add").oninvalid = function(event) {
-    //     event.target.setCustomValidity("Pengarang Wajib Diisi!");
-    // };
+    document.getElementById("pengarang_add").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("pengarang_add").oninvalid = function(event) {
+        event.target.setCustomValidity("Pengarang Wajib Diisi!");
+    };
     document.getElementById("pengarang").oninput = function(event) {
         event.target.setCustomValidity("");
     };
@@ -273,12 +273,12 @@ use Modules\Auth\Models\AuthModel; ?>
         event.target.setCustomValidity("Pengarang Wajib Diisi!");
     };
     // target_terbit
-    // document.getElementById("target_terbit_add").oninput = function(event) {
-    //     event.target.setCustomValidity("");
-    // };
-    // document.getElementById("target_terbit_add").oninvalid = function(event) {
-    //     event.target.setCustomValidity("Target Terbit Wajib Diisi!");
-    // };
+    document.getElementById("target_terbit_add").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("target_terbit_add").oninvalid = function(event) {
+        event.target.setCustomValidity("Target Terbit Wajib Diisi!");
+    };
     document.getElementById("target_terbit").oninput = function(event) {
         event.target.setCustomValidity("");
     };
@@ -400,27 +400,56 @@ use Modules\Auth\Models\AuthModel; ?>
     $(document).on('submit', '#addForm', function(event) {
         event.preventDefault(); // Mencegah pengiriman form secara default
 
-        // Ambil data dari form
-        var kode_buku = $('#kode_buku').val();
-        var judul_buku = $('#judul_buku').val();
-        var pengarang = $('#pengarang').val();
-        var target_terbit = $('#target_terbit').val();
-        var warna = $('input[name="warna"]:checked').val();
-
-        $.ajax({
-            type: 'POST',
-            url: 'http://localhost:8080/buku',
-            data: $(this).serialize(), // Serialize form data
-            success: function(response) {
-                console.log(response); // Menampilkan respon sukses
-                $('#addModal').modal('hide'); // Menutup modal
-                loadData(); // Panggil fungsi untuk memuat data (misalnya dari database)
-            },
-            error: function(xhr) {
-                console.log(xhr.responseJSON); // Menampilkan error jika ada
-            }
+        // Reset pesan kesalahan
+        $('input[name="warna_add"]').each(function() {
+            this.setCustomValidity(''); // Reset pesan kesalahan
         });
+
+        // Cek apakah ada radio button yang dipilih
+        var warnaChecked = $('input[name="warna_add"]:checked').length > 0;
+
+        // Jika tidak ada pilihan, set pesan kesalahan
+        if (!warnaChecked) {
+            $('input[name="warna_add"]').each(function() {
+                this.setCustomValidity('Warna Wajib Diisi!.'); // Set pesan kesalahan
+            });
+        }
+
+        // Validasi form sebelum pengiriman
+        if (this.checkValidity()) {
+            // Ambil data dari form
+            var kode_buku = $('#kode_buku_add').val();
+            var judul_buku = $('#judul_buku_add').val();
+            var pengarang = $('#pengarang_add').val();
+            var target_terbit = $('#target_terbit_add').val();
+            var warna = $('input[name="warna_add"]:checked').val();
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:8080/buku',
+                data: JSON.stringify({
+                    kode_buku: kode_buku,
+                    judul_buku: judul_buku,
+                    pengarang: pengarang,
+                    target_terbit: target_terbit,
+                    warna: warna
+                }),
+                contentType: 'application/json',
+                success: function(response) {
+                    console.log(response); // Menampilkan respon sukses
+                    $('#addModal').modal('hide'); // Menutup modal
+                    loadData(); // Panggil fungsi untuk memuat data (misalnya dari database)
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseJSON); // Menampilkan error jika ada
+                }
+            });
+        } else {
+            // Jika tidak valid, tampilkan pesan kesalahan dan fokus pada radio button
+            $('input[name="warna_add"]:checked').focus(); // Fokus pada elemen radio yang tidak valid
+        }
     });
+
 
     // Load data saat pertama kali halaman diakses
     loadData();
