@@ -99,17 +99,19 @@ class Auth extends BaseController
 
     public function regis()
     {
-        // Validasi input data
+        // Aturan validasi
         $rules = $this->model->validationRules();
 
         // Jika validasi gagal
         if (!$this->validate($rules)) {
             $response = [
-                'Pesan' => $this->validator->getErrors()
+                'Status' => 'error',
+                'Errors' => $this->validator->getErrors(), // Return specific field errors
             ];
             return $this->response->setJSON($response, 400);
         }
-        // Insert data into database
+
+        // Jika validasi berhasil, proses data input
         $data = [
             'nama' => esc($this->request->getVar('nama')),
             'nomor_induk' => esc($this->request->getVar('nomor_induk')),
@@ -119,11 +121,13 @@ class Auth extends BaseController
             'level_user' => esc($this->request->getVar('level_user')),
             'password' => md5(esc($this->request->getVar('password'))),
         ];
+
         $this->model->insert($data);
+
         // Response berhasil
         $response = [
-            'Pesan' => 'Data User Berhasil ditambahkan',
             'Status' => 'success',
+            'Pesan' => 'Data User Berhasil ditambahkan',
         ];
         return $this->response->setJSON($response)->setStatusCode(200);
     }

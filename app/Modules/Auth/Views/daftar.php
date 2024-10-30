@@ -68,43 +68,36 @@
                         <form id="formAuthentication" class="mb-3" action="javascript:void(0);" method="post">
                             <div class="mb-3">
                                 <label for="nama" class="form-label">Nama</label>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="nama"
-                                    name="nama"
-                                    placeholder="Masukkan Nama"
-                                    autofocus
-                                    required />
+                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama" autofocus />
+                                <div class="error-message text-danger"></div>
                             </div>
-
                             <div class="mb-3">
                                 <label for="nomor_induk" class="form-label">Nomor Induk</label>
-                                <input type="text" class="form-control" id="nomor_induk" name="nomor_induk" placeholder="Masukkan Nomor Induk" required />
+                                <input type="text" class="form-control" id="nomor_induk" name="nomor_induk" placeholder="Masukkan Nomor Induk" />
+                                <div class="error-message text-danger"></div>
                             </div>
-
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email" required />
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Masukkan Email" />
+                                <div class="error-message text-danger"></div>
                             </div>
-
                             <div class="mb-3">
-                                <label for="no_tlp" class="form-label">No.Telepon</label>
-                                <input type="text" class="form-control" id="no_tlp" name="no_tlp" placeholder="Masukkan No.Telepon" pattern="[0-9]+" required />
+                                <label for="no_tlp" class="form-label">No. Telepon</label>
+                                <input type="text" class="form-control" id="no_tlp" name="no_tlp" placeholder="Masukkan No. Telepon" />
+                                <div class="error-message text-danger"></div>
                             </div>
-
                             <div class="mb-3">
-                                <label for="jk" class="form-label">Jenis Jelamin</label>
-                                <select class="form-select" name="jk" id="jk" aria-label="Default select example" required>
+                                <label for="jk" class="form-label">Jenis Kelamin</label>
+                                <select class="form-select" name="jk" id="jk">
                                     <option value="" selected disabled>Pilih Jenis Kelamin</option>
                                     <option value="Laki-Laki">Laki-Laki</option>
                                     <option value="Perempuan">Perempuan</option>
                                 </select>
+                                <div class="error-message text-danger"></div>
                             </div>
-
                             <div class="mb-3">
                                 <label for="level_user" class="form-label">Level User</label>
-                                <select class="form-select" name="level_user" id="level_user" aria-label="Default select example" required>
+                                <select class="form-select" name="level_user" id="level_user">
                                     <option value="" selected disabled>Pilih Level User</option>
                                     <option value="1">Admin Sistem</option>
                                     <option value="2">Tim Multimedia</option>
@@ -112,31 +105,22 @@
                                     <option value="4">Koord. Editor</option>
                                     <option value="5">Manager Platform</option>
                                 </select>
+                                <div class="error-message text-danger"></div>
                             </div>
-
                             <div class="mb-3 form-password-toggle">
                                 <label class="form-label" for="password">Password</label>
                                 <div class="input-group input-group-merge">
-                                    <input
-                                        type="password"
-                                        id="password"
-                                        class="form-control"
-                                        name="password"
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                        aria-describedby="password"
-                                        required />
+                                    <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
+                                <div class="error-message text-danger"></div>
                             </div>
-
                             <div class="mb-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" required />
-                                    <label class="form-check-label" for="terms-conditions">
-                                        Saya setuju dengan
-                                        <a href="javascript:void(0);">kebijakan privasi & ketentuan</a>
-                                    </label>
+                                    <label class="form-check-label" for="terms-conditions">Saya setuju dengan <a href="javascript:void(0);">kebijakan privasi & ketentuan</a></label>
                                 </div>
+                                <div class="error-message text-danger"></div>
                             </div>
                             <button class="btn btn-primary d-grid w-100" id="mendaftar">Mendaftar</button>
                         </form>
@@ -200,64 +184,39 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 <script>
-    document.getElementById("nama").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("nama").oninvalid = function(event) {
-        event.target.setCustomValidity("Nama Wajib Diisi!");
-    };
-
-    document.getElementById("nomor_induk").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("nomor_induk").oninvalid = function(event) {
-        event.target.setCustomValidity("Nomor Induk Wajib Diisi!");
-    };
-
-    document.getElementById("email").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("email").oninvalid = function(event) {
-        event.target.setCustomValidity("Email Wajib Diisi!");
-    };
-
-    document.getElementById("no_tlp").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("no_tlp").oninvalid = function(event) {
-        event.target.setCustomValidity("No Tlp Wajib Diisi!");
-    };
-
-    document.getElementById("jk").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("jk").oninvalid = function(event) {
-        event.target.setCustomValidity("Pilih Jenis Kelamin Anda!");
-    };
-
-    document.getElementById("level_user").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("level_user").oninvalid = function(event) {
-        event.target.setCustomValidity("Pilih Level User Anda!");
-    };
-
-    document.getElementById("password").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("password").oninvalid = function(event) {
-        event.target.setCustomValidity("Password Wajib Diisi!");
-    };
-
     document.getElementById("terms-conditions").oninput = function(event) {
         event.target.setCustomValidity("");
     };
     document.getElementById("terms-conditions").oninvalid = function(event) {
-        event.target.setCustomValidity("Ceklis Wajib Diisi!");
+        event.target.setCustomValidity("Silakan klik setujui");
     };
+
     $(document).ready(function() {
         $('#formAuthentication').submit(function(event) {
             event.preventDefault();
+
+            // Clear previous error messages
+            $('.error-message').text('').hide();
+
+            // Assume form is valid until proven otherwise
+            let isValid = true;
+
+            // Check if all required fields are filled out
+            $('#formAuthentication input, #formAuthentication select').each(function() {
+                if ($(this).prop('required') && !$(this).val()) {
+                    const errorMessageContainer = $(this).closest('.mb-3').find('.error-message');
+                    errorMessageContainer.text('Field ini wajib diisi').show(); // Show error message for empty required fields
+                    isValid = false;
+                }
+            });
+
+            // Check if the checkbox is checked
+            if (!$('#terms-conditions').is(':checked')) {
+                // Show error message for the checkbox
+                $('#terms-conditions').closest('.mb-3').find('.error-message').text('Silakan klik setujui').show();
+                return; // Stop form submission
+            }
+
             var formData = $(this).serialize();
             $.ajax({
                 type: 'POST',
@@ -265,14 +224,22 @@
                 data: formData,
                 dataType: 'json',
                 success: function(response) {
+                    console.log(response); // Log the response
+                    $('.error-message').text('').hide(); // Clear previous messages
                     if (response.Status === 'success') {
                         alert(response.Pesan);
                         window.location.href = '<?php echo base_url('login'); ?>';
                     } else {
-                        alert(response.Pesan);
+                        for (const [field, message] of Object.entries(response.Errors)) {
+                            const errorMessageContainer = $('#' + field).closest('.mb-3').find('.error-message');
+                            if (errorMessageContainer.length) {
+                                errorMessageContainer.text(message).show(); // Show the error message
+                            }
+                        }
                     }
                 },
                 error: function(xhr, status, error) {
+                    console.log(xhr.responseText); // Log the raw response
                     console.log(error);
                 }
             });
