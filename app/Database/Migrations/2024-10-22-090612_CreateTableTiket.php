@@ -50,6 +50,27 @@ class CreateTableTiket extends Migration
             'id_multimedia' => [
                 'type' => 'INT',
             ],
+            'id_admin' => [
+                'type' => 'INT',
+            ],
+            'tgl_order_editor' => [
+                'type' => 'DATE',
+            ],
+            'tgl_order_koord' => [
+                'type' => 'DATE',
+            ],
+            'tgl_acc_multimedia' => [
+                'type' => 'DATE',
+            ],
+            'tgl_acc_koord' => [
+                'type' => 'DATE',
+            ],
+            'tgl_acc_manager' => [
+                'type' => 'DATE',
+            ],
+            'tgl_acc_admin' => [
+                'type' => 'DATE',
+            ],
             'approved_order_editor' => [
                 'type' => 'ENUM',
                 'constraint' => ['Y', 'N'],

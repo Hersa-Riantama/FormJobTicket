@@ -74,23 +74,23 @@
                                     id="nama"
                                     name="nama"
                                     placeholder="Masukkan Nama"
-                                    autofocus 
-                                    required/>
+                                    autofocus
+                                    required />
                             </div>
 
                             <div class="mb-3">
                                 <label for="nomor_induk" class="form-label">Nomor Induk</label>
-                                <input type="text" class="form-control" id="nomor_induk" name="nomor_induk" placeholder="Masukkan Nomor Induk" required/>
+                                <input type="text" class="form-control" id="nomor_induk" name="nomor_induk" placeholder="Masukkan Nomor Induk" required />
                             </div>
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email" required/>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email" required />
                             </div>
 
                             <div class="mb-3">
                                 <label for="no_tlp" class="form-label">No.Telepon</label>
-                                <input type="text" class="form-control" id="no_tlp" name="no_tlp" placeholder="Masukkan No.Telepon" required/>
+                                <input type="text" class="form-control" id="no_tlp" name="no_tlp" placeholder="Masukkan No.Telepon" required />
                             </div>
 
                             <div class="mb-3">
@@ -123,8 +123,8 @@
                                         class="form-control"
                                         name="password"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                        aria-describedby="password" 
-                                        required/>
+                                        aria-describedby="password"
+                                        required />
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
                             </div>
@@ -247,6 +247,13 @@
     };
     document.getElementById("password").oninvalid = function(event) {
         event.target.setCustomValidity("Password Wajib Diisi!");
+    };
+
+    document.getElementById("terms-condition").oninput = function(event) {
+        event.target.setCustomValidity("");
+    };
+    document.getElementById("terms-condition").oninvalid = function(event) {
+        event.target.setCustomValidity("Ceklis Wajib Diisi!");
     };
     $(document).ready(function() {
         $('#formAuthentication').submit(function(event) {
