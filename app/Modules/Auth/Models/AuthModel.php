@@ -44,10 +44,10 @@ class AuthModel extends Model
                 ],
             ],
             'no_tlp' => [
-                'rules' => 'required|numeric|min_length[10]|max_length[13]',
+                'rules' => 'required|regex_match[/^0[0-9]+$/]|min_length[10]|max_length[13]',
                 'errors' => [
                     'required' => 'Nomor telepon harus diisi.',
-                    'numeric' => 'Nomor telepon tidak valid.',
+                    'regex_match' => 'Nomor telepon tidak valid.',
                     'min_length' => 'Nomor telepon minimal 10 digit.',
                     'max_length' => 'Nomor telepon maksimal 13 digit.',
                 ],
