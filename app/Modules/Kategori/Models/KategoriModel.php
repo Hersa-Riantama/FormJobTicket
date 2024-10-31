@@ -27,7 +27,23 @@ class KategoriModel extends Model
     public function validationRules()
     {
         return [
-            'nama_kategori' => 'required|min_length[3]',
+            'nama_kategori' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama Kategori wajib diisi',
+                ],
+            ],
+        ];
+    }
+    public function validationRulesUpdate()
+    {
+        return [
+            'nama_kategori' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama Kategori wajib diisi',
+                ],
+            ],
         ];
     }
 
