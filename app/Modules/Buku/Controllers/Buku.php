@@ -104,8 +104,8 @@ class Buku extends BaseController
         ]);
         // Response berhasil
         $response = [
-            'Pesan' => 'Data Buku Berhasil ditambahkan',
-            'Status' => 'success'
+            'Status' => 'success',
+            'Pesan' => 'Data Buku Berhasil ditambahkan'
         ];
         return $this->response->setJSON($response);
     }
@@ -133,9 +133,9 @@ class Buku extends BaseController
         ];
         $this->model->update($id_buku, $buku);
         return $this->respondUpdated([
+            'Status' => 'success',
             'pesan' => 'Data Buku Berhasil di update',
             'data_buku' => $buku,
-            'Status' => 'success'
         ]);
     }
     public function delete($id_buku = null)

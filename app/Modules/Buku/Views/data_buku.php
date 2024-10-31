@@ -59,6 +59,7 @@ use Modules\Auth\Models\AuthModel; ?>
             </div>
         </div>
         <!--/ Basic Bootstrap Table -->
+
         <!-- Edit Modal -->
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -71,40 +72,40 @@ use Modules\Auth\Models\AuthModel; ?>
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="kode_buku_update" class="form-label">Kode Buku</label>
-                                <input type="text" class="form-control" id="kode_buku_update" name="kode_buku" >
+                                <input type="text" class="form-control" id="kode_buku_update" name="kode_buku">
                                 <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="judul_buku_update" class="form-label">Judul Buku</label>
-                                <input type="text" class="form-control" id="judul_buku_update" name="judul_buku" >
+                                <input type="text" class="form-control" id="judul_buku_update" name="judul_buku">
                                 <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="pengarang_update" class="form-label">Pengarang</label>
-                                <input type="text" class="form-control" id="pengarang_update" name="pengarang" >
+                                <input type="text" class="form-control" id="pengarang_update" name="pengarang">
                                 <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="target_terbit_update" class="form-label">Target Terbit</label>
-                                <input type="year" class="form-control" id="target_terbit_update" name="target_terbit" >
+                                <input type="year" class="form-control" id="target_terbit_update" name="target_terbit">
                                 <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Warna</label><br>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="bw" name="warna" value="BW" >
+                                    <input type="radio" id="bw" name="warna" value="BW">
                                     <label for="bw">BW</label>
                                 </div>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="2-2" name="warna" value="2/2" >
+                                    <input type="radio" id="2-2" name="warna" value="2/2">
                                     <label for="2-2">2/2</label>
                                 </div>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="3-3" name="warna" value="3/3" >
+                                    <input type="radio" id="3-3" name="warna" value="3/3">
                                     <label for="3-3">3/3</label>
                                 </div>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="4-4" name="warna" value="4/4" >
+                                    <input type="radio" id="4-4" name="warna" value="4/4">
                                     <label for="4-4">4/4</label>
                                 </div>
                             </div>
@@ -117,6 +118,7 @@ use Modules\Auth\Models\AuthModel; ?>
                 </div>
             </div>
         </div>
+
         <!-- Modal Tambah Buku -->
         <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -144,7 +146,7 @@ use Modules\Auth\Models\AuthModel; ?>
                             </div>
                             <div class="mb-3">
                                 <label for="target_terbit" class="form-label">Target Terbit</label>
-                                <input type="year" class="form-control" id="target_terbit" name="target_terbit" >
+                                <input type="year" class="form-control" id="target_terbit" name="target_terbit">
                                 <div id="target_terbitError" class="error-pesan text-danger"></div>
                             </div>
                             <div class="mb-3">
@@ -153,7 +155,7 @@ use Modules\Auth\Models\AuthModel; ?>
                                     <input type="radio" id="warna_bw" name="warna" value="BW">
                                     <label for="warna_bw">BW</label>
                                 </div>
-                                <div class="form-check-inline">
+                                <div id="pilihWarna" class="form-check-inline">
                                     <input type="radio" id="warna_2-2" name="warna" value="2/2">
                                     <label for="warna_2-2">2/2</label>
                                 </div>
@@ -243,7 +245,7 @@ use Modules\Auth\Models\AuthModel; ?>
     }
     // Fungsi untuk edit data
     $(document).on('click', '.dropdown-item-edit', function() {
-        var id_buku = $(this).data('id_buku'); 
+        var id_buku = $(this).data('id_buku');
         console.log('ID Buku:', id_buku);
 
         if (!id_buku) {
@@ -304,8 +306,8 @@ use Modules\Auth\Models\AuthModel; ?>
     // Fungsi untuk update data
     $(document).on('click', '#btn-update', function() {
         var id_buku = $(this).data('id_buku');
-        $('.error-message').text('').hide();
-        console.log(id_buku);
+        $('.error-message').text('').hide(); // Reset semua pesan kesalahan
+
         if (!id_buku) {
             console.log('ID buku tidak ditemukan!'); // Log jika ID tidak ada
             return; // Hentikan eksekusi jika ID tidak valid
@@ -317,7 +319,6 @@ use Modules\Auth\Models\AuthModel; ?>
             var target_terbit = $('#target_terbit_update').val();
             var warna = $('input[name="warna"]:checked').val();
 
-            $('#editModal').modal('show');
             $.ajax({
                 type: 'PUT',
                 url: 'http://localhost:8080/buku/' + id_buku,
@@ -330,16 +331,23 @@ use Modules\Auth\Models\AuthModel; ?>
                     warna: warna
                 }),
                 success: function(response) {
+                    console.log('Respons lengkap:', response); // Debugging: Log respons lengkap
+
                     if (response.Status === 'success') {
                         console.log('Response:', response);
-                        loadData();
                         $('#editModal').modal('hide');
-                    }else{
-                        for (const [field, message] of Object.entries(response.Errors)) {
-                            const errorMessageContainer = $('#' + field + '_update').closest('.mb-3').find('.error-message');
-                            if (errorMessageContainer.length) {
-                                errorMessageContainer.text(message).show(); // Show the error message
+                        loadData();
+                    } else {
+                        // Periksa apakah response.Errors ada dan bukan undefined
+                        if (response.Errors && typeof response.Errors === 'object') {
+                            for (const [field, message] of Object.entries(response.Errors)) {
+                                const errorMessageContainer = $('#' + field + '_update').closest('.mb-3').find('.error-message');
+                                if (errorMessageContainer.length) {
+                                    errorMessageContainer.text(message).show(); // Tampilkan pesan kesalahan
+                                }
                             }
+                        } else {
+                            console.error('Errors tidak ditemukan di respons:', response); // Log jika tidak ada Errors
                         }
                     }
                 },
@@ -347,8 +355,6 @@ use Modules\Auth\Models\AuthModel; ?>
                     console.log('Error:', xhr.responseText);
                 }
             });
-        } else {
-            console.log('ID Buku tidak ditemukan pada tombol');
         }
     });
 
@@ -365,6 +371,7 @@ use Modules\Auth\Models\AuthModel; ?>
     $(document).on('submit', '#addForm', function(event) {
         event.preventDefault();
         $('.error-pesan').text('').hide();
+
         if (this.checkValidity()) {
             // Ambil data dari form
             var kode_buku = $('#kode_buku').val();
@@ -372,11 +379,6 @@ use Modules\Auth\Models\AuthModel; ?>
             var pengarang = $('#pengarang').val();
             var target_terbit = $('#target_terbit').val();
             var warna = $('input[name="warna"]:checked').val();
-            if (!warna) {
-                $('input[name="warna"]').each(function() {
-                    this.setCustomValidity('Warna Wajib dipilih'); // Reset pesan kesalahan
-                });
-            }
 
             $.ajax({
                 type: 'POST',
@@ -394,7 +396,7 @@ use Modules\Auth\Models\AuthModel; ?>
                         console.log(response); // Menampilkan respon sukses
                         $('#addModal').modal('hide'); // Menutup modal
                         loadData(); // Panggil fungsi untuk memuat data (misalnya dari database)
-                    }else{
+                    } else {
                         for (const [field, message] of Object.entries(response.pesan)) {
                             const PesanError = $('#' + field + 'Error');
                             if (PesanError.length) {
@@ -403,16 +405,13 @@ use Modules\Auth\Models\AuthModel; ?>
                         }
                     }
                 },
-                error: function(xhr) {
-                    console.log(xhr.responseJSON); // Menampilkan error jika ada
+
+                error: function(xhr, status, error) {
+                    console.log('Error:', xhr.responseText);
                 }
-            });
-        } else {
-            // Jika tidak valid, tampilkan pesan kesalahan dan fokus pada radio button
-            $('input[name="warna"]:checked').focus(); // Fokus pada elemen radio yang tidak valid
+            })
         }
     });
-
 
     // Load data saat pertama kali halaman diakses
     loadData();
