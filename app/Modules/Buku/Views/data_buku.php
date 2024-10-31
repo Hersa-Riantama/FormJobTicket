@@ -71,36 +71,40 @@ use Modules\Auth\Models\AuthModel; ?>
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="kode_buku" class="form-label">Kode Buku</label>
-                                <input type="text" class="form-control" id="kode_buku" name="kode_buku" required>
+                                <input type="text" class="form-control" id="kode_buku" name="kode_buku" >
+                                <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="judul_buku" class="form-label">Judul Buku</label>
-                                <input type="text" class="form-control" id="judul_buku" name="judul_buku" required>
+                                <input type="text" class="form-control" id="judul_buku" name="judul_buku" >
+                                <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="pengarang" class="form-label">Pengarang</label>
-                                <input type="text" class="form-control" id="pengarang" name="pengarang" required>
+                                <input type="text" class="form-control" id="pengarang" name="pengarang" >
+                                <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="target_terbit" class="form-label">Target Terbit</label>
-                                <input type="year" class="form-control" id="target_terbit" name="target_terbit" required>
+                                <input type="year" class="form-control" id="target_terbit" name="target_terbit" >
+                                <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Warna</label><br>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="bw" name="warna" value="BW" required>
+                                    <input type="radio" id="bw" name="warna" value="BW" >
                                     <label for="bw">BW</label>
                                 </div>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="2-2" name="warna" value="2/2" required>
+                                    <input type="radio" id="2-2" name="warna" value="2/2" >
                                     <label for="2-2">2/2</label>
                                 </div>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="3-3" name="warna" value="3/3" required>
+                                    <input type="radio" id="3-3" name="warna" value="3/3" >
                                     <label for="3-3">3/3</label>
                                 </div>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="4-4" name="warna" value="4/4" required>
+                                    <input type="radio" id="4-4" name="warna" value="4/4" >
                                     <label for="4-4">4/4</label>
                                 </div>
                             </div>
@@ -124,37 +128,41 @@ use Modules\Auth\Models\AuthModel; ?>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="kode_buku_add" class="form-label">Kode Buku</label>
-                                <input type="text" class="form-control" id="kode_buku_add" name="kode_buku" required>
+                                <label for="kode_buku" class="form-label">Kode Buku</label>
+                                <input type="text" class="form-control" id="kode_buku" name="kode_buku">
+                                <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="judul_buku_add" class="form-label">Judul Buku</label>
-                                <input type="text" class="form-control" id="judul_buku_add" name="judul_buku" required>
+                                <label for="judul_buku" class="form-label">Judul Buku</label>
+                                <input type="text" class="form-control" id="judul_buku" name="judul_buku">
+                                <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="pengarang_add" class="form-label">Pengarang</label>
-                                <input type="text" class="form-control" id="pengarang_add" name="pengarang" required>
+                                <label for="pengarang" class="form-label">Pengarang</label>
+                                <input type="text" class="form-control" id="pengarang" name="pengarang">
+                                <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="target_terbit_add" class="form-label">Target Terbit</label>
-                                <input type="year" class="form-control" id="target_terbit_add" name="target_terbit" required>
+                                <label for="target_terbit" class="form-label">Target Terbit</label>
+                                <input type="year" class="form-control" id="target_terbit" name="target_terbit" >
+                                <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Warna</label><br>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="warna_bw" name="warna_add" value="BW">
+                                    <input type="radio" id="warna_bw" name="warna" value="BW">
                                     <label for="warna_bw">BW</label>
                                 </div>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="warna_2-2" name="warna_add" value="2/2">
+                                    <input type="radio" id="warna_2-2" name="warna" value="2/2">
                                     <label for="warna_2-2">2/2</label>
                                 </div>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="warna_3-3" name="warna_add" value="3/3">
+                                    <input type="radio" id="warna_3-3" name="warna" value="3/3">
                                     <label for="warna_3-3">3/3</label>
                                 </div>
                                 <div class="form-check-inline">
-                                    <input type="radio" id="warna_4-4" name="warna_add" value="4/4">
+                                    <input type="radio" id="warna_4-4" name="warna" value="4/4">
                                     <label for="warna_4-4">4/4</label>
                                 </div>
                             </div>
@@ -232,64 +240,10 @@ use Modules\Auth\Models\AuthModel; ?>
             }
         });
     }
-
-    // kode_buku
-    document.getElementById("kode_buku_add").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("kode_buku_add").oninvalid = function(event) {
-        event.target.setCustomValidity("Kode Buku Wajib Diisi!");
-    };
-    document.getElementById("kode_buku").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("kode_buku").oninvalid = function(event) {
-        event.target.setCustomValidity("Kode Buku Wajib Diisi!");
-    };
-    // judul_buku
-    document.getElementById("judul_buku_add").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("judul_buku_add").oninvalid = function(event) {
-        event.target.setCustomValidity("Judul Buku Wajib Diisi!");
-    };
-    document.getElementById("judul_buku").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("judul_buku").oninvalid = function(event) {
-        event.target.setCustomValidity("Judul Buku Wajib Diisi!");
-    };
-    // pengarang
-    document.getElementById("pengarang_add").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("pengarang_add").oninvalid = function(event) {
-        event.target.setCustomValidity("Pengarang Wajib Diisi!");
-    };
-    document.getElementById("pengarang").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("pengarang").oninvalid = function(event) {
-        event.target.setCustomValidity("Pengarang Wajib Diisi!");
-    };
-    // target_terbit
-    document.getElementById("target_terbit_add").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("target_terbit_add").oninvalid = function(event) {
-        event.target.setCustomValidity("Target Terbit Wajib Diisi!");
-    };
-    document.getElementById("target_terbit").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("target_terbit").oninvalid = function(event) {
-        event.target.setCustomValidity("Target Terbit Wajib Diisi!");
-    };
-
     // Fungsi untuk edit data
     $(document).on('click', '.dropdown-item-edit', function() {
-        var id_buku = $(this).data('id_buku'); // Ambil ID dari data-id_buku
-        console.log('ID Buku:', id_buku); // Log ID untuk memverifikasi
+        var id_buku = $(this).data('id_buku'); 
+        console.log('ID Buku:', id_buku);
 
         if (!id_buku) {
             console.log('ID tidak ditemukan!'); // Log jika ID undefined
@@ -316,7 +270,7 @@ use Modules\Auth\Models\AuthModel; ?>
 
                     $('#btn-update').data('id_buku', response.data_buku.id_buku);
                 } else {
-                    console.log('Data buku tidak ditemukan'); // Log jika data_buku tidak ada
+                    console.log('Data buku tidak ditemukan');
                 }
 
                 // Tampilkan modal setelah data berhasil diisi
@@ -349,6 +303,7 @@ use Modules\Auth\Models\AuthModel; ?>
     // Fungsi untuk update data
     $(document).on('click', '#btn-update', function() {
         var id_buku = $(this).data('id_buku');
+        $('.error-message').text('').hide();
         console.log(id_buku);
         if (!id_buku) {
             console.log('ID buku tidak ditemukan!'); // Log jika ID tidak ada
@@ -365,6 +320,7 @@ use Modules\Auth\Models\AuthModel; ?>
             $.ajax({
                 type: 'PUT',
                 url: 'http://localhost:8080/buku/' + id_buku,
+                contentType: 'application/json',
                 data: JSON.stringify({
                     kode_buku: kode_buku,
                     judul_buku: judul_buku,
@@ -372,11 +328,19 @@ use Modules\Auth\Models\AuthModel; ?>
                     target_terbit: target_terbit,
                     warna: warna
                 }),
-                contentType: 'application/json',
                 success: function(response) {
-                    console.log('Response:', response);
-                    loadData();
-                    $('#editModal').modal('hide');
+                    if (response.Status === 'success') {
+                        console.log('Response:', response);
+                        loadData();
+                        $('#editModal').modal('hide');
+                    }else{
+                        for (const [field, message] of Object.entries(response.Errors)) {
+                            const errorMessageContainer = $('#' + field).closest('.mb-3').find('.error-message');
+                            if (errorMessageContainer.length) {
+                                errorMessageContainer.text(message).show(); // Show the error message
+                            }
+                        }
+                    }
                 },
                 error: function(xhr, status, error) {
                     console.log('Error:', xhr.responseText);
@@ -398,35 +362,36 @@ use Modules\Auth\Models\AuthModel; ?>
 
     // Fungsi untuk tambah data
     $(document).on('submit', '#addForm', function(event) {
-        event.preventDefault(); // Mencegah pengiriman form secara default
+        event.preventDefault();
+        $('.error-message').text('').hide(); 
+        // // Reset pesan kesalahan
+        // $('input[name="warna"]').each(function() {
+        //     this.setCustomValidity(''); // Reset pesan kesalahan
+        // });
 
-        // Reset pesan kesalahan
-        $('input[name="warna_add"]').each(function() {
-            this.setCustomValidity(''); // Reset pesan kesalahan
-        });
+        // // Cek apakah ada radio button yang dipilih
+        // var warnaChecked = $('input[name="warna"]:checked').length > 0;
 
-        // Cek apakah ada radio button yang dipilih
-        var warnaChecked = $('input[name="warna_add"]:checked').length > 0;
-
-        // Jika tidak ada pilihan, set pesan kesalahan
-        if (!warnaChecked) {
-            $('input[name="warna_add"]').each(function() {
-                this.setCustomValidity('Warna Wajib Diisi!.'); // Set pesan kesalahan
-            });
-        }
+        // // Jika tidak ada pilihan, set pesan kesalahan
+        // if (!warnaChecked) {
+        //     $('input[name="warna"]').each(function() {
+        //         this.setCustomValidity('Warna Wajib Diisi!.'); // Set pesan kesalahan
+        //     });
+        // }
 
         // Validasi form sebelum pengiriman
         if (this.checkValidity()) {
             // Ambil data dari form
-            var kode_buku = $('#kode_buku_add').val();
-            var judul_buku = $('#judul_buku_add').val();
-            var pengarang = $('#pengarang_add').val();
-            var target_terbit = $('#target_terbit_add').val();
-            var warna = $('input[name="warna_add"]:checked').val();
+            var kode_buku = $('#kode_buku').val();
+            var judul_buku = $('#judul_buku').val();
+            var pengarang = $('#pengarang').val();
+            var target_terbit = $('#target_terbit').val();
+            var warna = $('input[name="warna"]:checked').val();
 
             $.ajax({
                 type: 'POST',
                 url: 'http://localhost:8080/buku',
+                contentType: 'application/json',
                 data: JSON.stringify({
                     kode_buku: kode_buku,
                     judul_buku: judul_buku,
@@ -434,11 +399,19 @@ use Modules\Auth\Models\AuthModel; ?>
                     target_terbit: target_terbit,
                     warna: warna
                 }),
-                contentType: 'application/json',
                 success: function(response) {
-                    console.log(response); // Menampilkan respon sukses
-                    $('#addModal').modal('hide'); // Menutup modal
-                    loadData(); // Panggil fungsi untuk memuat data (misalnya dari database)
+                    if (response.Status === 'success') {
+                        console.log(response); // Menampilkan respon sukses
+                        $('#addModal').modal('hide'); // Menutup modal
+                        loadData(); // Panggil fungsi untuk memuat data (misalnya dari database)
+                    }else{
+                        for (const [field, message] of Object.entries(response.Errors)) {
+                            const errorMessageContainer = $('#' + field).closest('.mb-3').find('.error-message');
+                            if (errorMessageContainer.length) {
+                                errorMessageContainer.text(message).show(); // Show the error message
+                            }
+                        }
+                    }
                 },
                 error: function(xhr) {
                     console.log(xhr.responseJSON); // Menampilkan error jika ada
@@ -446,7 +419,7 @@ use Modules\Auth\Models\AuthModel; ?>
             });
         } else {
             // Jika tidak valid, tampilkan pesan kesalahan dan fokus pada radio button
-            $('input[name="warna_add"]:checked').focus(); // Fokus pada elemen radio yang tidak valid
+            $('input[name="warna"]:checked').focus(); // Fokus pada elemen radio yang tidak valid
         }
     });
 

@@ -90,9 +90,10 @@ class Buku extends BaseController
         $rules = $this->model->validationRules();
         if (!$this->validate($rules)) {
             $response = [
-                'pesan' => $this->validator->getErrors()
+                'Status' => 'error',
+                'Errors' => $this->validator->getErrors(),
             ];
-            return $this->failValidationErrors($response);
+            return $this->response->setJSON($response, 400);
         }
         $this->model->insert([
             'kode_buku' => esc($this->request->getVar('kode_buku')),
@@ -105,16 +106,17 @@ class Buku extends BaseController
         $response = [
             'Pesan' => 'Data Buku Berhasil ditambahkan'
         ];
-        return $this->respondCreated($response);
+        return $this->response->setJSON($response);
     }
     public function update($id_buku = null)
     {
         $rules = $this->model->validationRulesUpdate();
         if (!$this->validate($rules)) {
             $response = [
-                'pesan' => $this->validator->getErrors()
+                'Status' => 'error',
+                'Errors' => $this->validator->getErrors(),
             ];
-            return $this->failValidationErrors($response);
+            return $this->response->setJSON($response, 400);
         }
         $buku = $this->model->find($id_buku);
         if ($buku == null) {

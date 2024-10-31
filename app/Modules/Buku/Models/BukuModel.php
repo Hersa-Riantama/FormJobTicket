@@ -21,21 +21,74 @@ class BukuModel extends Model
     public function validationRules()
     {
         return [
-            'kode_buku' => 'required|min_length[3]|is_unique[tbl_buku.kode_buku]',
-            'judul_buku' => 'required',
-            'pengarang' => 'required',
-            'target_terbit' => 'required',
-            'warna' => 'required',
+            'kode_buku' => [
+                'rules' => 'required|min_length[3]|is_unique[tbl_buku.kode_buku]',
+                'errors' => [
+                    'required' => 'Kode buku harus diisi',
+                    'min_length' => 'Kode buku minimal 3 karakter',
+                    'is_unique' => 'Kode Buku sudah terdaftar'
+                ],
+            ],
+            'judul_buku' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Judul buku harus diisi',
+                ],
+            ],
+            'pengarang' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Pengarang harus diisi',
+                ],
+            ],
+            'target_terbit' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Target terbit harus diisi'
+                ],
+            ],
+            'warna' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required'  => 'Warna wajib dipilih',
+                ],
+            ],
         ];
     }
     public function validationRulesUpdate()
     {
         return [
-            'kode_buku' => 'required|min_length[3]',
-            'judul_buku' => 'required',
-            'pengarang' => 'required',
-            'target_terbit' => 'required',
-            'warna' => 'required',
+            'kode_buku' => [
+                'rules' => 'required|min_length[3]',
+                'errors' => [
+                    'required' => 'Kode buku harus diisi',
+                    'min_length' => 'Kode buku minimal 3 karakter'
+                ],
+            ],
+            'judul_buku' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Judul buku harus diisi',
+                ],
+            ],
+            'pengarang' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Pengarang harus diisi',
+                ],
+            ],
+            'target_terbit' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Target terbit harus diisi'
+                ],
+            ],
+            'warna' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required'  => 'Warna wajib dipilih',
+                ],
+            ],
         ];
     }
 
