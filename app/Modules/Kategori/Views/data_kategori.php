@@ -44,7 +44,8 @@ use Modules\Auth\Models\AuthModel; ?>
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="nama_kategori" class="form-label">Nama Kategori</label>
-                                <input type="text" class="form-control" id="nama_kategori" name="nama_kategori" required>
+                                <input type="text" class="form-control" id="nama_kategori" name="nama_kategori">
+                                <div class="error-message text-danger"></div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -145,6 +146,7 @@ use Modules\Auth\Models\AuthModel; ?>
     // Fungsi untuk update data
     $(document).on('click', '#btn-update', function() {
         var id_kategori = $(this).data('id_kategori');
+        $('.error-message').text('').hide();
         console.log(id_kategori);
         if (!id_kategori) {
             console.log('ID Kategori tidak ditemukan!'); // Log jika ID tidak ada
@@ -162,9 +164,18 @@ use Modules\Auth\Models\AuthModel; ?>
                 }),
                 contentType: 'application/json',
                 success: function(response) {
-                    console.log('Response:', response);
-                    loadData();
-                    $('#editModal').modal('hide');
+                    if (response.Status === 'success') {
+                        console.log('Response:', response);
+                        loadData();
+                        $('#editModal').modal('hide');
+                    }else{
+                        for (const [field, message] of Object.entries(response.pesan)) {
+                            const errorMessageContainer = $('#' + field).closest('.mb-3').find('.error-message');
+                            if (errorMessageContainer.length) {
+                                errorMessageContainer.text(message).show(); // Show the error message
+                            }
+                        }
+                    }
                 },
                 error: function(xhr, status, error) {
                     console.log('Error:', xhr.responseText);

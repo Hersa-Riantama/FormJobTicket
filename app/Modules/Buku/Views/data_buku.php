@@ -148,7 +148,7 @@ use Modules\Auth\Models\AuthModel; ?>
                                 <div id="target_terbitError" class="error-pesan text-danger"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="pilihWarna" class="form-label">Warna</label><br>
+                                <label for="warna" class="form-label">Warna</label><br>
                                 <div class="form-check-inline">
                                     <input type="radio" id="warna_bw" name="warna" value="BW">
                                     <label for="warna_bw">BW</label>
@@ -165,7 +165,7 @@ use Modules\Auth\Models\AuthModel; ?>
                                     <input type="radio" id="warna_4-4" name="warna" value="4/4">
                                     <label for="warna_4-4">4/4</label>
                                 </div>
-                                <div id="pilihWarnaError" class="error-pesan text-danger"></div>
+                                <div id="warnaError" class="error-pesan text-danger"></div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -374,7 +374,7 @@ use Modules\Auth\Models\AuthModel; ?>
             var warna = $('input[name="warna"]:checked').val();
             if (!warna) {
                 $('input[name="warna"]').each(function() {
-                    this.setCustomValidity(''); // Reset pesan kesalahan
+                    this.setCustomValidity('Warna Wajib dipilih'); // Reset pesan kesalahan
                 });
             }
 
