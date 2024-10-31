@@ -42,9 +42,10 @@ class BukuModel extends Model
                 ],
             ],
             'target_terbit' => [
-                'rules' => 'required',
+                'rules' => 'required|numeric',
                 'errors' => [
-                    'required' => 'Target terbit harus diisi'
+                    'required' => 'Target terbit harus diisi',
+                    'numeric' => 'Target terbit harus berupa tahun',
                 ],
             ],
             'warna' => [
@@ -78,9 +79,10 @@ class BukuModel extends Model
                 ],
             ],
             'target_terbit' => [
-                'rules' => 'required',
+                'rules' => 'required|numeric',
                 'errors' => [
-                    'required' => 'Target terbit harus diisi'
+                    'required' => 'Target terbit harus diisi',
+                    'numeric' => 'Target terbit harus berupa tahun',
                 ],
             ],
             'warna' => [
