@@ -91,7 +91,7 @@ class Buku extends BaseController
         if (!$this->validate($rules)) {
             $response = [
                 'Status' => 'error',
-                'Errors' => $this->validator->getErrors(),
+                'pesan' => $this->validator->getErrors(),
             ];
             return $this->response->setJSON($response, 400);
         }
@@ -104,7 +104,8 @@ class Buku extends BaseController
         ]);
         // Response berhasil
         $response = [
-            'Pesan' => 'Data Buku Berhasil ditambahkan'
+            'Pesan' => 'Data Buku Berhasil ditambahkan',
+            'Status' => 'success'
         ];
         return $this->response->setJSON($response);
     }
@@ -133,7 +134,8 @@ class Buku extends BaseController
         $this->model->update($id_buku, $buku);
         return $this->respondUpdated([
             'pesan' => 'Data Buku Berhasil di update',
-            'data_buku' => $buku
+            'data_buku' => $buku,
+            'Status' => 'success'
         ]);
     }
     public function delete($id_buku = null)

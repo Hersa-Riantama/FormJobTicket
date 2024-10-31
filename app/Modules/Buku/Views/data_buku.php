@@ -70,23 +70,23 @@ use Modules\Auth\Models\AuthModel; ?>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="kode_buku" class="form-label">Kode Buku</label>
-                                <input type="text" class="form-control" id="kode_buku" name="kode_buku" >
+                                <label for="kode_buku_update" class="form-label">Kode Buku</label>
+                                <input type="text" class="form-control" id="kode_buku_update" name="kode_buku" >
                                 <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="judul_buku" class="form-label">Judul Buku</label>
-                                <input type="text" class="form-control" id="judul_buku" name="judul_buku" >
+                                <label for="judul_buku_update" class="form-label">Judul Buku</label>
+                                <input type="text" class="form-control" id="judul_buku_update" name="judul_buku" >
                                 <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="pengarang" class="form-label">Pengarang</label>
-                                <input type="text" class="form-control" id="pengarang" name="pengarang" >
+                                <label for="pengarang_update" class="form-label">Pengarang</label>
+                                <input type="text" class="form-control" id="pengarang_update" name="pengarang" >
                                 <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="target_terbit" class="form-label">Target Terbit</label>
-                                <input type="year" class="form-control" id="target_terbit" name="target_terbit" >
+                                <label for="target_terbit_update" class="form-label">Target Terbit</label>
+                                <input type="year" class="form-control" id="target_terbit_update" name="target_terbit" >
                                 <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
@@ -130,25 +130,25 @@ use Modules\Auth\Models\AuthModel; ?>
                             <div class="mb-3">
                                 <label for="kode_buku" class="form-label">Kode Buku</label>
                                 <input type="text" class="form-control" id="kode_buku" name="kode_buku">
-                                <div class="error-message text-danger"></div>
+                                <div id="kode_bukuError" class="error-pesan text-danger"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="judul_buku" class="form-label">Judul Buku</label>
                                 <input type="text" class="form-control" id="judul_buku" name="judul_buku">
-                                <div class="error-message text-danger"></div>
+                                <div id="judul_bukuError" class="error-pesan text-danger"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="pengarang" class="form-label">Pengarang</label>
                                 <input type="text" class="form-control" id="pengarang" name="pengarang">
-                                <div class="error-message text-danger"></div>
+                                <div id="pengarangError" class="error-pesan text-danger"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="target_terbit" class="form-label">Target Terbit</label>
                                 <input type="year" class="form-control" id="target_terbit" name="target_terbit" >
-                                <div class="error-message text-danger"></div>
+                                <div id="target_terbitError" class="error-pesan text-danger"></div>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Warna</label><br>
+                                <label for="pilihWarna" class="form-label">Warna</label><br>
                                 <div class="form-check-inline">
                                     <input type="radio" id="warna_bw" name="warna" value="BW">
                                     <label for="warna_bw">BW</label>
@@ -165,6 +165,7 @@ use Modules\Auth\Models\AuthModel; ?>
                                     <input type="radio" id="warna_4-4" name="warna" value="4/4">
                                     <label for="warna_4-4">4/4</label>
                                 </div>
+                                <div id="pilihWarnaError" class="error-pesan text-danger"></div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -259,10 +260,10 @@ use Modules\Auth\Models\AuthModel; ?>
 
                 // Pastikan untuk memeriksa data_buku dari respons
                 if (response.data_buku) {
-                    $('#kode_buku').val(response.data_buku.kode_buku);
-                    $('#judul_buku').val(response.data_buku.judul_buku);
-                    $('#pengarang').val(response.data_buku.pengarang);
-                    $('#target_terbit').val(response.data_buku.target_terbit);
+                    $('#kode_buku_update').val(response.data_buku.kode_buku);
+                    $('#judul_buku_update').val(response.data_buku.judul_buku);
+                    $('#pengarang_update').val(response.data_buku.pengarang);
+                    $('#target_terbit_update').val(response.data_buku.target_terbit);
 
                     // Mengatur pilihan radio button untuk warna
                     $('input[name="warna"]').prop('checked', false); // Reset pilihan
@@ -310,10 +311,10 @@ use Modules\Auth\Models\AuthModel; ?>
             return; // Hentikan eksekusi jika ID tidak valid
         }
         if (id_buku) {
-            var kode_buku = $('#kode_buku').val();
-            var judul_buku = $('#judul_buku').val();
-            var pengarang = $('#pengarang').val();
-            var target_terbit = $('#target_terbit').val();
+            var kode_buku = $('#kode_buku_update').val();
+            var judul_buku = $('#judul_buku_update').val();
+            var pengarang = $('#pengarang_update').val();
+            var target_terbit = $('#target_terbit_update').val();
             var warna = $('input[name="warna"]:checked').val();
 
             $('#editModal').modal('show');
@@ -335,7 +336,7 @@ use Modules\Auth\Models\AuthModel; ?>
                         $('#editModal').modal('hide');
                     }else{
                         for (const [field, message] of Object.entries(response.Errors)) {
-                            const errorMessageContainer = $('#' + field).closest('.mb-3').find('.error-message');
+                            const errorMessageContainer = $('#' + field + '_update').closest('.mb-3').find('.error-message');
                             if (errorMessageContainer.length) {
                                 errorMessageContainer.text(message).show(); // Show the error message
                             }
@@ -363,23 +364,7 @@ use Modules\Auth\Models\AuthModel; ?>
     // Fungsi untuk tambah data
     $(document).on('submit', '#addForm', function(event) {
         event.preventDefault();
-        $('.error-message').text('').hide(); 
-        // // Reset pesan kesalahan
-        // $('input[name="warna"]').each(function() {
-        //     this.setCustomValidity(''); // Reset pesan kesalahan
-        // });
-
-        // // Cek apakah ada radio button yang dipilih
-        // var warnaChecked = $('input[name="warna"]:checked').length > 0;
-
-        // // Jika tidak ada pilihan, set pesan kesalahan
-        // if (!warnaChecked) {
-        //     $('input[name="warna"]').each(function() {
-        //         this.setCustomValidity('Warna Wajib Diisi!.'); // Set pesan kesalahan
-        //     });
-        // }
-
-        // Validasi form sebelum pengiriman
+        $('.error-pesan').text('').hide();
         if (this.checkValidity()) {
             // Ambil data dari form
             var kode_buku = $('#kode_buku').val();
@@ -387,6 +372,11 @@ use Modules\Auth\Models\AuthModel; ?>
             var pengarang = $('#pengarang').val();
             var target_terbit = $('#target_terbit').val();
             var warna = $('input[name="warna"]:checked').val();
+            if (!warna) {
+                $('input[name="warna"]').each(function() {
+                    this.setCustomValidity(''); // Reset pesan kesalahan
+                });
+            }
 
             $.ajax({
                 type: 'POST',
@@ -405,10 +395,10 @@ use Modules\Auth\Models\AuthModel; ?>
                         $('#addModal').modal('hide'); // Menutup modal
                         loadData(); // Panggil fungsi untuk memuat data (misalnya dari database)
                     }else{
-                        for (const [field, message] of Object.entries(response.Errors)) {
-                            const errorMessageContainer = $('#' + field).closest('.mb-3').find('.error-message');
-                            if (errorMessageContainer.length) {
-                                errorMessageContainer.text(message).show(); // Show the error message
+                        for (const [field, message] of Object.entries(response.pesan)) {
+                            const PesanError = $('#' + field + 'Error');
+                            if (PesanError.length) {
+                                PesanError.text(message).show(); // Show the error message
                             }
                         }
                     }
