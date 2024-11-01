@@ -355,7 +355,7 @@
                                             <div class="col-xl-7 mb-2">
                                                 <h6 class="text-center rounded py-2 warna-pink text-hitam">Catatan</h6>
                                                 <div class="row mt-4 mx-1">
-                                                    <textarea class="form-control warna-border" id="Textarea1" name="Textarea1" rows="5" style="height:7.5rem;"></textarea>
+                                                    <textarea class="form-control warna-border" id="catatan" name="catatan" rows="5" value="" style="height:7.5rem;"><?= esc($tiketData['catatan']) ?></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -558,7 +558,7 @@
                     </div>
                 </div>
 
-                <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Tim Multimedia'])) : ?>
+                <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Tim Multimedia','Editor'])) : ?>
                     <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
                         <!-- Row 3 -->
                         <div class="row justify-content-center my-3">
@@ -658,6 +658,7 @@
         });
         const tgl_selesai = document.getElementById('tgl_selesai').value;
         const tgl_upload = document.getElementById('tgl_upload').value;
+        const catatan = document.getElementById('catatan').value;
 
         const id_tiket = <?= $tiketData['id_tiket'] ?>;
         $.ajax({
@@ -670,7 +671,8 @@
                 kelengkapan: kelengkapan.length ? kelengkapan : [''],
                 tahap_kelengkapan: tahap_kelengkapan.length ? tahap_kelengkapan : [''],
                 tgl_selesai: tgl_selesai ? tgl_selesai : null,
-                tgl_upload: tgl_upload ? tgl_upload : null
+                tgl_upload: tgl_upload ? tgl_upload : null,
+                catatan: catatan ? catatan : null,
             },
             success: function(response) {
                 if (response.status === 'success') {

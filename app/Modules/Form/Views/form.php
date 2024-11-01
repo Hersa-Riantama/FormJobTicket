@@ -53,7 +53,7 @@
                             <!-- Checkboxes and Radios -->
                             <div class="card-body pb-0 pt-2">
                                 <div class="row">
-                                    <div class="col-md px-3">
+                                    <div class="col-md px-3" for="id_kategori">
                                         <!-- <small class="text-light fw-medium">Checkboxes</small> -->
                                         <div class="row">
                                             <div class="col">
@@ -117,6 +117,7 @@
                                             <input class="form-check-input warna-border" type="checkbox" value="13" name="id_kategori[]" id="kategori13" />
                                             <label class="form-check-label text-biru" for="kategori13"> Lainnya </label>
                                         </div>
+                                        <div id="id_kategoriError" class="error-message text-danger"></div>
                                     </div>
                                 </div>
                             </div>
@@ -134,8 +135,9 @@
                                     <div class="col-md-9">
                                         <input class="form-control border-hitam text-hitam" type="text" value="<?= esc($userData['nama']) ?>" id="id_user" name="id_user" placeholder="Masukkan Pemesan" readonly />
                                     </div>
+                                    <div id="pemesanError" class="error-message text-danger"></div>
                                 </div>
-                                <div class="mb-3 row">
+                                <div class="mb-3 row" for="id_buku">
                                     <label for="kode_buku" class="form-label col-md-3 text-biru" style="font-size: var(--bs-body-font-size)">Kode Buku</label>
                                     <div class="col-md-9">
                                         <select id="kode_buku" class="form-select border-hitam text-hitam" name="id_buku">
@@ -143,12 +145,14 @@
                                             <!-- ajax -->
                                         </select>
                                     </div>
+                                    <div id="id_bukuError" class="error-message text-danger"></div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="nomor_job" class="col-md-3 col-form-label text-biru" style="font-size: var(--bs-body-font-size)">NOMOR JOB</label>
                                     <div class="col-md-9">
                                         <input class="form-control border-hitam text-hitam" type="text" value="" id="nomor_job" name="nomor_job" placeholder="Masukkan Nomor Job" />
                                     </div>
+                                    <div id="nomor_jobError" class="error-message text-danger"></div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="judul_buku" class="col-md-3 col-form-label text-biru" style="font-size: var(--bs-body-font-size)">JUDUL BUKU</label>
@@ -168,11 +172,12 @@
                                         <input class="form-control border-hitam text-hitam" type="year" value="" id="target_terbit" name="target_terbit" placeholder="Masukkan Target Terbit" readonly />
                                     </div>
                                 </div>
-                                <div class="mb-3 row">
+                                <div class="mb-3 row" for="jml_qrcode">
                                     <label for="jml_qr" class="col-md-3 col-form-label text-biru" style="font-size: var(--bs-body-font-size)">Jumlah <i>QR Code</i></label>
                                     <div class="col-md-9">
                                         <input class="form-control border-hitam text-hitam" type="text" value="" id="jml_qrcode" name="jml_qrcode" placeholder="Masukkan Jumlah QR Code" />
                                     </div>
+                                    <div id="jml_qrcodeError" class="error-message text-danger"></div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="email" class="col-md-3 col-form-label text-biru" style="font-size: var(--bs-body-font-size)">Email</label>
@@ -232,33 +237,34 @@
                                             <input class="form-check-input warna-border" type="checkbox" value="atasan" name="kelengkapan[]" id="kategori15" onclick="return false;" />
                                             <label class="form-check-label text-biru" for="kategori15"> Sudah di-<i>approve </i>atasan </label>
                                         </div>
-
-                                        <h6 class="text-left text-biru mt-4 mb-0" style="font-weight: bold;">Kelengkapan file yang di-<i>upload</i>*</h6>
-                                        <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="Video Mp4" name="kelengkapan[]" id="kelengkapan1" />
-                                            <label class="form-check-label text-biru" for="kelengkapan1"> Video Mp4 </label>
+                                        <div class="mb-3" for="kelengkapan">
+                                            <h6 class="text-left text-biru mt-4 mb-0" style="font-weight: bold;">Kelengkapan file yang di-<i>upload</i>*</h6>
+                                            <div class="form-check mt-4">
+                                                <input class="form-check-input warna-border" type="checkbox" value="Video Mp4" name="kelengkapan[]" id="kelengkapan1" />
+                                                <label class="form-check-label text-biru" for="kelengkapan1"> Video Mp4 </label>
+                                            </div>
+                                            <div class="form-check mt-4">
+                                                <input class="form-check-input warna-border" type="checkbox" value="Audio Mp3" name="kelengkapan[]" id="kelengkapan2" />
+                                                <label class="form-check-label text-biru" for="kelengkapan2"> Audio Mp3 </label>
+                                            </div>
+                                            <div class="form-check mt-4">
+                                                <input class="form-check-input warna-border" type="checkbox" value="PDF/RAR" name="kelengkapan[]" id="kelengkapan3" />
+                                                <label class="form-check-label text-biru" for="kelengkapan3"> PDF/RAR </label>
+                                            </div>
+                                            <div class="form-check mt-4">
+                                                <input class="form-check-input warna-border" type="checkbox" value="Fla/xfl (APK)" name="kelengkapan[]" id="kelengkapan4" />
+                                                <label class="form-check-label text-biru" for="kelengkapan4"> Fla/xfl (APK) </label>
+                                            </div>
+                                            <div class="form-check mt-4">
+                                                <input class="form-check-input warna-border" type="checkbox" value="Gambar/Foto/Ilustrasi" name="kelengkapan[]" id="kelengkapan5" />
+                                                <label class="form-check-label text-biru" for="kelengkapan5"> Gambar/Foto/Ilustrasi </label>
+                                            </div>
+                                            <p class="text mt-3 mb-0 text-hitam" style="font-size:x-small;">
+                                                *Ukuran file dari konten yang akan diupload tidak
+                                                melebihi 30 MB
+                                            </p>
+                                            <div id="kelengkapanError" class="error-message text-danger"></div>
                                         </div>
-                                        <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="Audio Mp3" name="kelengkapan[]" id="kelengkapan2" />
-                                            <label class="form-check-label text-biru" for="kelengkapan2"> Audio Mp3 </label>
-                                        </div>
-                                        <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="PDF/RAR" name="kelengkapan[]" id="kelengkapan3" />
-                                            <label class="form-check-label text-biru" for="kelengkapan3"> PDF/RAR </label>
-                                        </div>
-                                        <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="Fla/xfl (APK)" name="kelengkapan[]" id="kelengkapan4" />
-                                            <label class="form-check-label text-biru" for="kelengkapan4"> Fla/xfl (APK) </label>
-                                        </div>
-                                        <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="Gambar/Foto/Ilustrasi" name="kelengkapan[]" id="kelengkapan5" />
-                                            <label class="form-check-label text-biru" for="kelengkapan5"> Gambar/Foto/Ilustrasi </label>
-                                        </div>
-                                        <p class="text mt-3 mb-0 text-hitam" style="font-size:x-small;">
-                                            *Ukuran file dari konten yang akan diupload tidak
-                                            melebihi 30 MB
-                                        </p>
-
                                         <h6 class="text-left text-biru mt-4 mb-0" style="font-weight: bold;">Kelengkapan file konten*</h6>
                                         <div class="form-check mt-4">
                                             <input class="form-check-input warna-border" type="checkbox" value="Tahap 1" name="tahap_kelengkapan[]" id="stats_kelengkapan1" />
@@ -277,7 +283,6 @@
                                             bulan setelah buku terbit. Penyerahan konten
                                             dapat dilakukan sekaligus atau melalui tiga tahap.
                                         </p>
-
                                     </div>
                                 </div>
                             </div>
@@ -328,7 +333,7 @@
                                             <div class="col-xl-7 mb-2">
                                                 <h6 class="text-center rounded py-2 warna-pink text-hitam">Catatan</h6>
                                                 <div class="row mt-4 mx-1">
-                                                    <textarea class="form-control warna-border" id="Textarea1" name="Textarea1" rows="5" style="height:7.5rem;"></textarea>
+                                                    <textarea class="form-control warna-border" id="catatan" name="catatan" rows="5" style="height:7.5rem;"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -510,34 +515,35 @@
     $(document).ready(function() {
         $('#formTiket').submit(function(event) {
             event.preventDefault();
-            var isValid = true;
-            var pesanAlert = '';
+            $('.error-message').text('').hide();
+            // var isValid = true;
+            // var pesanAlert = '';
 
-            if ($('input[name="id_kategori[]"]:checked').length === 0) {
-                isValid = false;
-                pesanAlert += 'Kategori harus diisi.\n';
-            }
-            if ($('#kode_buku').val() === '' || $('#kode_buku').val() === null) {
-                isValid = false;
-                pesanAlert += 'Kode Buku harus diisi.\n';
-            }
-            if ($('#nomor_job').val().trim() === '') {
-                isValid = false;
-                pesanAlert += 'Nomor Job harus diisi.\n';
-            }
-            if ($('#jml_qrcode').val().trim() === '') {
-                isValid = false;
-                pesanAlert += 'Jumlah QR Code harus diisi.\n';
-            }
-            if ($('input[name="kelengkapan[]"]:checked').length === 0) {
-                isValid = false;
-                pesanAlert += 'Kelengkapan harus diisi.\n';
-            }
+            // if ($('input[name="id_kategori[]"]:checked').length === 0) {
+            //     isValid = false;
+            //     pesanAlert += 'Kategori harus diisi.\n';
+            // }
+            // if ($('#kode_buku').val() === '' || $('#kode_buku').val() === null) {
+            //     isValid = false;
+            //     pesanAlert += 'Kode Buku harus diisi.\n';
+            // }
+            // if ($('#nomor_job').val().trim() === '') {
+            //     isValid = false;
+            //     pesanAlert += 'Nomor Job harus diisi.\n';
+            // }
+            // if ($('#jml_qrcode').val().trim() === '') {
+            //     isValid = false;
+            //     pesanAlert += 'Jumlah QR Code harus diisi.\n';
+            // }
+            // if ($('input[name="kelengkapan[]"]:checked').length === 0) {
+            //     isValid = false;
+            //     pesanAlert += 'Kelengkapan harus diisi.\n';
+            // }
 
-            if (!isValid) {
-                alert(pesanAlert);
-                return; // Hentikan proses submit
-            }
+            // if (!isValid) {
+            //     alert(pesanAlert);
+            //     return; // Hentikan proses submit
+            // }
             // Create a new FormData object to handle the form submission
             var formData = new FormData(this);
 
@@ -555,6 +561,10 @@
             $('input[name="tahap_kelengkapan[]"]:checked').each(function() {
                 formData.append('tahap_kelengkapan[]', $(this).val());
             });
+            var catatan = $('#catatan').val().trim();
+            if (catatan) {
+                formData.append('catatan', catatan);
+            }
 
             var formUrl = 'http://localhost:8080/form'; // Ganti '/form' dengan URL endpoint yang sesuai
 
@@ -570,9 +580,12 @@
                     if (response.Status === 'success') {
                         alert(response.Pesan);
                     } else {
-                        alert(response.Pesan);
-                        $(this).trigger('reset');
-                        location.reload();
+                        for (const [field, message] of Object.entries(response.pesan)) {
+                            const PesanError = $('#' + field + 'Error');
+                            if (PesanError.length) {
+                                PesanError.text(message).show(); // Show the error message
+                            }
+                        }
                     }
                 },
                 error: function(xhr, status, error) {

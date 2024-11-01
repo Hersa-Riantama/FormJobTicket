@@ -54,9 +54,10 @@ class Form extends BaseController
         $rules = $this->model->validationRules();
         if (!$this->validate($rules)) {
             $response = [
+                'Status' => 'error',
                 'pesan' => $this->validator->getErrors()
             ];
-            return $this->response->setJSON($response);
+            return $this->response->setJSON($response,400);
         }
         $kode_buku = esc($this->request->getVar('id_buku'));
         $bukuModel = new BukuModel();
@@ -115,6 +116,7 @@ class Form extends BaseController
                 'jml_qrcode' => esc($this->request->getVar('jml_qrcode')),
                 'id_user' => $id_user,
                 'nomor_job' => esc($this->request->getVar('nomor_job')),
+                'catatan' => esc($this->request->getVar('catatan')),
                 'id_editor' => $id_editor,
                 'id_koord' => $id_koord,
                 'id_multimedia' => $id_multimedia,
@@ -189,6 +191,7 @@ class Form extends BaseController
             ]);
         }
         $response = [
+            'Status' => 'success',
             'Pesan' => 'Tiket Berhasil ditambahkan'
         ];
         return $this->response->setJSON($response);
@@ -213,64 +216,52 @@ class Form extends BaseController
             $id_multimedia = session()->get('id_user');
         }
         $id_tiket = $this->request->getVar('id_tiket');
+        $input_catatan = $this->request->getVar('catatan');
+        $catatan = null;
         $id_kategori_array = $this->request->getVar('id_kategori');
-        log_message('info', 'id_tiket: ' . $id_tiket);
-        log_message('info', 'id_kategori: ' . print_r($id_kategori_array, true));
         if (is_array($id_kategori_array) && count($id_kategori_array) > 0) {
             // Hapus duplikasi dari array id_kategori
             $id_kategori_unique = array_unique($id_kategori_array);
 
             // Konversi array unik menjadi JSON
             $id_kategori_json = json_encode($id_kategori_unique);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                log_message('error', 'Invalid JSON format for id_kategori: ' . json_last_error_msg());
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid JSON format.']);
+            }
 
+            // Ambil input tgl_selesai dan tgl_upload
             $tgl_selesai_input = $this->request->getVar('tgl_selesai');
             $tgl_upload_input = $this->request->getVar('tgl_upload');
 
-            if (!empty($tgl_selesai_input)) {
-                $tgl_selesai = esc(date('Y-m-d', strtotime($tgl_selesai_input)));
-            } else {
-                $tgl_selesai = null; // Atau bisa juga tidak mengatur variabel ini
+            $tgl_selesai = !empty($tgl_selesai_input) ? esc(date('Y-m-d', strtotime($tgl_selesai_input))) : null;
+            $tgl_upload = !empty($tgl_upload_input) ? esc(date('Y-m-d', strtotime($tgl_upload_input))) : null;
+
+            // Menentukan apakah level user boleh mengedit catatan
+            if (in_array($userData['level_user'], ['Editor', 'Tim Multimedia'])) {
+                $catatan = !empty($input_catatan) ? esc($input_catatan) : null;
             }
 
-            // Cek apakah input tgl_upload tidak kosong
-            if (!empty($tgl_upload_input)) {
-                $tgl_upload = esc(date('Y-m-d', strtotime($tgl_upload_input)));
-            } else {
-                $tgl_upload = null; // Atau bisa juga tidak mengatur variabel ini
+            // Persiapan data untuk update
+            $cobaupdate = [
+                'id_kategori' => $id_kategori_json,
+                'catatan' => $catatan,
+            ];
+
+            // Tambahkan data tambahan berdasarkan level_user
+            if ($userData['level_user'] == 'Editor') {
+                $cobaupdate['id_editor'] = $id_editor;
+                $cobaupdate['id_koord'] = $id_koord;
+            } elseif ($userData['level_user'] == 'Tim Multimedia') {
+                $cobaupdate['id_multimedia'] = $id_multimedia;
+                if ($tgl_selesai !== null) $cobaupdate['tgl_selesai'] = $tgl_selesai;
+                if ($tgl_upload !== null) $cobaupdate['tgl_upload'] = $tgl_upload;
             }
 
-
-            if (json_last_error() === JSON_ERROR_NONE) {
-                $cobaupdate = [
-                    'id_kategori' => $id_kategori_json,
-                ];
-
-                // Tambahkan id_editor dan id_koord hanya jika level_user adalah 'Editor'
-                if ($userData['level_user'] == 'Editor') {
-                    $cobaupdate['id_editor'] = $id_editor;
-                    $cobaupdate['id_koord'] = $id_koord;
-                }
-
-                // Tambahkan id_multimedia hanya jika level_user adalah 'Tim Multimedia'
-                if ($userData['level_user'] == 'Tim Multimedia') {
-                    $cobaupdate['id_multimedia'] = $id_multimedia;
-                    // Hanya masukkan tgl_selesai dan tgl_upload jika tidak null
-                    if ($tgl_selesai !== null) {
-                        $cobaupdate['tgl_selesai'] = $tgl_selesai;
-                    }
-                    if ($tgl_upload !== null) {
-                        $cobaupdate['tgl_upload'] = $tgl_upload;
-                    }
-                    log_message('debug', 'Data update: ' . json_encode($cobaupdate));
-                }
-
-                if ($this->model->update($id_tiket, $cobaupdate) === false) {
-                    log_message('error', 'Failed to update id_kategori for id_tiket: ' . $id_tiket);
-                    return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update categories.']);
-                }
-            } else {
-                log_message('error', 'Invalid JSON format for id_kategori: ' . json_last_error_msg());
-                return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid JSON format.']);
+            // Eksekusi update
+            if ($this->model->update($id_tiket, $cobaupdate) === false) {
+                log_message('error', 'Failed to update id_kategori for id_tiket: ' . $id_tiket);
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update categories.']);
             }
         } else {
             log_message('warning', 'No categories provided for id_tiket: ' . $id_tiket);
