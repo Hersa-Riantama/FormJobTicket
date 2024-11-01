@@ -21,17 +21,22 @@
             padding: 10px 20px;
             border-radius: 5px;
             margin-bottom: 10px;
-            opacity: 1; /* Set opacity to 1 to ensure visibility */
+            opacity: 1;
+            /* Set opacity to 1 to ensure visibility */
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 1000;
-            background-color: rgba(0, 0, 0, 0.8); /* Ensure background is visible */
-            transition: opacity 0.5s ease; /* Smooth transition */
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Ensure background is visible */
+            transition: opacity 0.5s ease;
+            /* Smooth transition */
         }
+
         .toast-success {
             background-color: #4CAF50;
         }
+
         .toast-error {
             background-color: #f44336;
         }
@@ -97,7 +102,7 @@
                                     name="email"
                                     placeholder="Masukkan Email"
                                     autofocus />
-                                    <span id="emailError" style="color:red; display:none;">Email wajib diisi</span>
+                                <span id="emailError" style="color:red; display:none;">Email wajib diisi</span>
                             </div>
 
                             <div class="mb-3 form-password-toggle">
@@ -142,7 +147,7 @@
 
     <!-- Footer -->
     <footer class="content-footer footer bg-footer-theme">
-        <div class="container-xxl d-flex flex-wrap justify-content-center py-2 flex-md-row flex-column">
+        <div class="container-xxl d-flex flex-wrap justify-content-center py-2 flex-md-row flex-column text-center">
             <div class="mb-2 mb-md-0">
                 ©
                 <script>
@@ -198,20 +203,20 @@
             }
 
             if (isValid) {
-                loginUser (email, password);
+                loginUser(email, password);
             }
         }
 
-        function loginUser (email, password) {
+        function loginUser(email, password) {
             $.ajax({
                 url: 'http://localhost:8080/login', // Ganti dengan URL login backend
                 method: 'POST',
                 dataType: 'json',
-                data: { 
-                    email: email, 
-                    password: password 
+                data: {
+                    email: email,
+                    password: password
                 },
-                success: function (response) {
+                success: function(response) {
                     console.log("Server response:", response);
                     if (response.Status === 'success') {
                         toastr.success('Login berhasil');
@@ -231,4 +236,5 @@
         }
     </script>
 </body>
+
 </html>
