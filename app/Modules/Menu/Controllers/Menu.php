@@ -66,7 +66,7 @@ class Menu extends BaseController
     public function beranda()
     {
         $data = [
-            'judul' => 'Form QR Code',
+            'judul' => 'Form Job Ticket',
         ];
         return view($this->folder_directory . 'beranda', $data);
     }

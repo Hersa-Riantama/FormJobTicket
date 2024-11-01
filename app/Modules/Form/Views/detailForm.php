@@ -222,7 +222,7 @@
                                     <div class="col-md px-3">
                                         <!-- <small class="text-light fw-medium">Checkboxes</small> -->
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="pemesan" name="kelengkapan[]" id="kategori14" <?= ($tiketData['approved_order_koord'] === "Y") ? 'checked' : ''; ?> onclick="return false;" />
+                                            <input class="form-check-input warna-border" type="checkbox" value="pemesan" name="kelengkapan[]" id="kategori14" <?= ($tiketData['approved_acc_koord'] === "Y") ? 'checked' : ''; ?> onclick="return false;" />
                                             <label class="form-check-label text-biru" for="kategori14"> Sudah diperiksa <i>pemesan</i> </label>
                                         </div>
                                         <div class="form-check mt-4">

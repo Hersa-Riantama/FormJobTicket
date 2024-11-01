@@ -715,9 +715,9 @@
         <img src="../../assets/img/front-pages/backgrounds/hero-bg.png" alt="hero background" class="position-absolute top-0 start-50 translate-middle-x object-fit-cover w-100 h-100" data-speed="1">
         <div class="container">
           <div class="hero-text-box text-center position-relative">
-            <h1 class="text-primary hero-title display-6 fw-extrabold">Form QR Code</h1>
+            <h1 class="text-primary hero-title display-6 fw-extrabold">Form Job Ticket</h1>
             <h2 class="hero-sub-title h6 mb-6">
-              Website Untuk Mengelola Form Tiket, <br>Mengelola Buku, Mengelola Kategori <br>dan Mengelola User.
+              Website Untuk Mengelola Form Job Ticket, <br>Mengelola Buku, Mengelola Kategori <br>dan Mengelola User.
               <!-- Form QR Code Merupakan Website <br>Untuk Melakukan Pengisian <br>Form QR Code. -->
               <!-- Production-ready &amp; easy to use Admin Template<br class="d-none d-lg-block">
               for Reliability and Customizability. -->

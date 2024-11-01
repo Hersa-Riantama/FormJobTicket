@@ -72,13 +72,13 @@
                                 <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="nomor_induk" class="form-label">Nomor Induk</label>
-                                <input type="text" class="form-control" id="nomor_induk" name="nomor_induk" placeholder="Masukkan Nomor Induk" />
+                                <label for="nomor_induk" class="form-label">Nomor Induk Karyawan</label>
+                                <input type="text" class="form-control" id="nomor_induk" name="nomor_induk" placeholder="Contoh : P1010" />
                                 <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Masukkan Email" />
+                                <label for="email" class="form-label">Email Corporate</label>
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Contoh : nama@erlangga.co.id" />
                                 <div class="error-message text-danger"></div>
                             </div>
                             <div class="mb-3">
@@ -193,7 +193,7 @@
         if (event.target.value.length < 3) {
             event.target.setCustomValidity("Nama Wajib Minimal 3 Huruf!");
             toastr.error("Nama harus lebih dari 3 karakter!", "Error");
-        }else {
+        } else {
             event.target.setCustomValidity("Nomor Induk Wajib Diisi!");
         }
     };
