@@ -471,6 +471,26 @@ class Form extends BaseController
 
     public function detailForm($id_tiket)
     {
+        // Ambil data user berdasarkan ID dari sesi
+        $userId = session()->get('id_user');
+
+        if (!empty($userId)) {
+            // Ambil data user dari database berdasarkan id_user
+            $userData = $UserModel->find($userId);
+            if ($userData && isset($userData['level_user'])) {
+                $allowUser = ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
+                if (!in_array($userData['level_user'], $allowUser)) {
+                    echo '<script>alert("Access Denied!!"); history.back();</script>';
+                    return;
+                }
+            } else {
+                echo '<script>alert("Level user tidak ditemukan."); history.back();</script>';
+                return;
+            }
+        } else {
+            return redirect()->to('/login');
+        }
+
         $decodedId = base64_decode($id_tiket);
         // Validate id_tiket (example: ensure it's an integer)
         if (!is_numeric($decodedId) || $decodedId <= 0) {
