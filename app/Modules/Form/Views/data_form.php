@@ -14,12 +14,13 @@
                 <table class="table" id="dataTables">
                     <thead>
                         <tr>
-                            <th>Kode Form</th>
-                            <th>Kategori</th>
-                            <th>User</th>
-                            <th>Nomor Job</th>
-                            <th>Buku</th>
                             <th>Kelola Tiket</th>
+                            <th>Kode Form</th>
+                            <th>Nomor Job</th>
+                            <th>Editor</th>
+                            <th>Kode Buku</th>
+                            <th>Judul Buku</th>
+                            <th>Tanggal dibuat</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0" id="formData">
@@ -70,22 +71,18 @@
             url: 'http://localhost:8080/listform',
             dataType: 'json',
             success: function(response) {
-                var kategoriMap = {};
+                var kodeBukuMap = {};
                 var bukuMap = {};
                 var userMap = {};
-
-                // Mapping kategori
-                $.each(response.kategori, function(key, kategori) {
-                    if (kategori.id_kategori && kategori.nama_kategori) {
-                        kategoriMap[kategori.id_kategori] = kategori.nama_kategori;
-                    }
-                });
 
                 // Mapping buku
                 $.each(response.buku, function(key, buku) {
                     if (buku.id_buku && buku.judul_buku) {
                         bukuMap[buku.id_buku] = buku.judul_buku;
                     }
+                    if (buku.id_buku && buku.kode_buku) {
+                        kodeBukuMap[buku.id_buku] = buku.kode_buku;
+                }
                 });
 
                 // Mapping user
@@ -98,28 +95,9 @@
                 // Generate table
                 var formData = '';
                 $.each(response.tiket, function(key, value) {
-                    // Pastikan id_kategori adalah array
-                    if (typeof value.id_kategori === 'string') {
-                        // Mengubah string JSON menjadi array jika diperlukan
-                        try {
-                            value.id_kategori = JSON.parse(value.id_kategori); // Parse JSON string
-                        } catch (e) {
-                            console.error('Error parsing id_kategori:', e);
-                            value.id_kategori = []; // Set default kosong jika parsing gagal
-                        }
-                    }
-
-                    // Map kategori
-                    var kategoriNames = value.id_kategori.map(function(id) {
-                        if (kategoriMap[id]) {
-                            return kategoriMap[id]; // Jika ID ditemukan, kembalikan nama kategori
-                        } else {
-                            console.warn('Kategori tidak ditemukan untuk ID:', id); // Log peringatan
-                            return 'Unknown Kategori'; // Jika tidak ditemukan, return unknown
-                        }
-                    }).join(', ');
 
                     // Ambil judul buku dan nama user
+                    var kode_buku = kodeBukuMap[value.id_buku] || 'Unknown Kode'
                     var judul_buku = bukuMap[value.id_buku] || 'Unknown Buku';
                     var nama = userMap[value.id_user] || 'Unknown User';
 
@@ -129,11 +107,6 @@
 
                     // Generate HTML untuk tabel
                     formData += '<tr>';
-                    formData += '<td>' + value.kode_form + '</td>';
-                    formData += '<td class="wrap-text">' + kategoriNames + '</td>';
-                    formData += '<td class="wrap-text">' + nama + '</td>';
-                    formData += '<td>' + value.nomor_job + '</td>';
-                    formData += '<td class="wrap-text">' + judul_buku + '</td>';
                     formData += '<td>';
                     formData += '<div class="dropdown">';
                     formData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
@@ -145,6 +118,12 @@
                     formData += '</div>';
                     formData += '</div>';
                     formData += '</td>';
+                    formData += '<td>' + value.kode_form + '</td>';
+                    formData += '<td class="wrap-text">' + value.nomor_job + '</td>';
+                    formData += '<td class="wrap-text">' + nama + '</td>';
+                    formData += '<td>' + kode_buku + '</td>';
+                    formData += '<td class="wrap-text">' + judul_buku + '</td>';
+                    formData += '<td class="wrap-text">' + value.created_at + '</td>';
                     formData += '</tr>';
                 });
 
