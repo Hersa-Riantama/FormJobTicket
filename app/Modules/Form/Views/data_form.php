@@ -1,5 +1,6 @@
-<?= $this->extend('template/admin_template'); 
-use Modules\Auth\Models\AuthModel;?>
+<?= $this->extend('template/admin_template');
+
+use Modules\Auth\Models\AuthModel; ?>
 <?= $this->section('content'); ?>
 <!-- Content wrapper -->
 <div class="content-wrapper">
@@ -15,6 +16,7 @@ use Modules\Auth\Models\AuthModel;?>
                 <table class="table" id="dataTables">
                     <thead>
                         <tr>
+                            <th style="display: none;">ID Tiket</th>
                             <th>Approval</th>
                             <th>Kelola Tiket</th>
                             <th>Kode Form</th>
@@ -63,12 +65,24 @@ use Modules\Auth\Models\AuthModel;?>
 <!-- / Layout wrapper -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <?php
-    $AuthModel = new AuthModel();
-    $userId = session()->get('id_user');
-    $userData = $AuthModel->find($userId);
-    $isKoordEditor = ($userData && isset($userData['level_user']) && $userData['level_user'] === 'Koord Editor') ? 'true' : 'false';
+$AuthModel = new AuthModel();
+$userId = session()->get('id_user');
+$userData = $AuthModel->find($userId);
+$isKoordEditor = ($userData && isset($userData['level_user']) && $userData['level_user'] === 'Koord Editor') ? 'true' : 'false';
 ?>
 <script>
+    function formatDate(dateString) {
+        const options = {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        };
+        const date = new Date(dateString);
+
+        // Format tanggal sesuai dengan d-m-y
+        return date.toLocaleDateString('en-GB', options); // 'en-GB' menghasilkan format d-m-y
+    }
+
     $(document).ready(function() {
         loadData();
     });
@@ -90,7 +104,7 @@ use Modules\Auth\Models\AuthModel;?>
                     }
                     if (buku.id_buku && buku.kode_buku) {
                         kodeBukuMap[buku.id_buku] = buku.kode_buku;
-                }
+                    }
                 });
 
                 // Mapping user
@@ -110,7 +124,7 @@ use Modules\Auth\Models\AuthModel;?>
                     var kode_buku = kodeBukuMap[value.id_buku] || 'Unknown Kode'
                     var judul_buku = bukuMap[value.id_buku] || 'Unknown Buku';
                     var nama = userMap[value.id_user] || 'Unknown User';
-                    
+
 
                     function encodeBase64Id(id) {
                         return btoa(id); // 'btoa' is used to encode to Base64
@@ -118,24 +132,35 @@ use Modules\Auth\Models\AuthModel;?>
 
                     // Generate HTML untuk tabel
                     formData += '<tr>';
+                    formData += '<td>' + value.id_tiket + '</td>';
                     formData += '<td>';
                     if (isKoordEditor) {
                         if (value.approved_order_koord === 'Y') {
+                            formData += '<div class="button-group d-flex">'
                             formData += '<span class="badge bg-success">Order Approved</span>';
+                            formData += '</div>'
                         } else {
+                            formData += '<div class="button-group d-flex">'
                             formData += '<button class="btn btn-success me-2" onclick="approveOrder(' + value.id_tiket + ')">Setuju Order</button>';
                             formData += '<button class="btn btn-danger me-2" onclick="rejectOrder(' + value.id_tiket + ')">Tidak Setuju Order</button>';
+                            formData += '</div>'
                         }
                         formData += '<br>';
                         if (value.approved_acc_koord === 'Y') {
+                            formData += '<div class="button-group d-flex">'
                             formData += '<span class="badge bg-success">Acc Approved</span>';
+                            formData += '</div>'
                         } else {
+                            formData += '<div class="button-group d-flex">'
                             formData += '<button class="btn btn-success me-2" onclick="approveACC(' + value.id_tiket + ')">Setuju ACC</button>';
                             formData += '<button class="btn btn-danger me-2" onclick="rejectACC(' + value.id_tiket + ')">Tidak Setuju ACC</button>';
+                            formData += '</div>'
                         }
                     } else {
+                        formData += '<div class="button-group d-flex">'
                         formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '">Setuju</button>';
                         formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '">Tidak Setuju</button>';
+                        formData += '</div>'
                     }
                     formData += '</td>';
                     formData += '<td>';
@@ -154,7 +179,7 @@ use Modules\Auth\Models\AuthModel;?>
                     formData += '<td class="wrap-text">' + nama + '</td>';
                     formData += '<td>' + kode_buku + '</td>';
                     formData += '<td class="wrap-text">' + judul_buku + '</td>';
-                    formData += '<td class="wrap-text">' + value.created_at + '</td>';
+                    formData += '<td class="wrap-text">' + formatDate(value.created_at) + '</td>';
                     formData += '</tr>';
                 });
 
@@ -165,7 +190,15 @@ use Modules\Auth\Models\AuthModel;?>
                     $('#dataTables').DataTable().destroy();
                 }
                 $('#dataTables').DataTable({
-                    responsive: true
+                    responsive: true,
+                    order: [
+                        [0, 'asc']
+                    ], // Mengurutkan berdasarkan kolom ID
+                    columnDefs: [{
+                            targets: 0,
+                            visible: false
+                        } // Sembunyikan kolom ID
+                    ]
                 });
             },
             error: function(xhr, status, error) {

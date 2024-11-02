@@ -52,12 +52,32 @@ class Menu extends BaseController
         } else {
             return redirect()->to('/login');
         }
+        $done = $form
+            ->where('approved_multimedia', 'Y')
+            ->Where('approved_order_editor', 'Y')
+            ->Where('approved_order_koord', 'Y')
+            ->Where('approved_order_admin', 'Y')
+            ->Where('approved_acc_koord', 'Y')
+            ->Where('approved_acc_manager', 'Y')
+            ->countAllResults();
+
+        $onProgress = $form
+            ->where('approved_multimedia', 'N')
+            ->orWhere('approved_order_editor', 'N')
+            ->orWhere('approved_order_koord', 'N')
+            ->orWhere('approved_order_admin', 'N')
+            ->orWhere('approved_acc_koord', 'N')
+            ->orWhere('approved_acc_manager', 'N')
+            ->countAllResults();
+
         $data = [
             'judul' => 'Dashboard',
             'user' => $user->countAllResults(),
             'kategori' => $kategori->countAllResults(),
             'buku' => $buku->countAllResults(),
             'form' => $form->countAllResults(),
+            'done' => $done,
+            'onProgress' => $onProgress,
             'userData' => $userData,
         ];
         return view($this->folder_directory . 'index', $data);

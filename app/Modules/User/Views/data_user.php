@@ -14,6 +14,7 @@
                 <table class="table" id="dataTables">
                     <thead>
                         <tr>
+                            <th style="display: none;">ID User</th>
                             <th>Status User</th>
                             <th>Nama</th>
                             <th>Nomer Induk</th>
@@ -74,6 +75,7 @@
                 var UserData = '';
                 $.each(data.user, function(key, value) {
                     UserData += '<tr>';
+                    UserData += '<td>' + value.id_user + '</td>';
                     // Tombol Verifikasi (Hanya muncul jika user belum diverifikasi)
                     if (value.verifikasi === 'N') { // Jika user belum diverifikasi
                         UserData += '<td class="center-text"><button class="badge btn btn-danger btn-verify" data-id_user="' + value.id_user + '">Verifikasi</button></td>';
@@ -106,7 +108,15 @@
                     $('#dataTables').DataTable().destroy();
                 }
                 $('#dataTables').DataTable({
-                    responsive: true
+                    responsive: true,
+                    order: [
+                        [0, 'asc']
+                    ], // Mengurutkan berdasarkan kolom ID
+                    columnDefs: [{
+                            targets: 0,
+                            visible: false
+                        } // Sembunyikan kolom ID
+                    ]
                 });
             }
         });

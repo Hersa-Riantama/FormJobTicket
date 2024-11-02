@@ -9,6 +9,54 @@
             <div class="row">
 
                 <!-- Column 1 -->
+                <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'])) : ?>
+                    <div class="col-12 col-sm-6 col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Tiket</span>
+                                <h3 class="card-title text-center fs-1 mb-3 pt-3"><?= $form; ?></h3>
+                                <div class="d-flex justify-content-center">
+                                    <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/listform">Selengkapnya</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <!-- / Column 1 -->
+
+                <!-- Column 2 -->
+                <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'])) : ?>
+                    <div class="col-12 col-sm-6 col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Tiket On Progress</span>
+                                <h3 class="card-title text-center fs-1 mb-3 pt-3"><?= $onProgress; ?></h3>
+                                <div class="d-flex justify-content-center">
+                                    <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/listform">Selengkapnya</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <!-- / Column 2 -->
+
+                <!-- Column 3 -->
+                <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'])) : ?>
+                    <div class="col-12 col-sm-6 col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Tiket Done</span>
+                                <h3 class="card-title text-center fs-1 mb-3 pt-3"><?= $done; ?></h3>
+                                <div class="d-flex justify-content-center">
+                                    <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/listform">Selengkapnya</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <!-- / Column 3 -->
+
+                <!-- Column 1 -->
                 <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Admin Sistem'])) : ?>
                     <div class="col-12 col-sm-6 col-md-4 mb-4">
                         <div class="card h-100">
@@ -53,22 +101,6 @@
                     </div>
                 <?php endif; ?>
                 <!-- / Column 3 -->
-
-                <!-- Column 4 -->
-                <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'])) : ?>
-                    <div class="col-12 col-sm-6 col-md-4 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Tiket</span>
-                                <h3 class="card-title text-center fs-1 mb-3 pt-3"><?= $form; ?></h3>
-                                <div class="d-flex justify-content-center">
-                                    <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/listform">Selengkapnya</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php endif; ?>
-                <!-- / Column 4 -->
 
             </div>
             <!-- / Row 1 -->
