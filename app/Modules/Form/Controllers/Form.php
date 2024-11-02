@@ -57,7 +57,7 @@ class Form extends BaseController
                 'Status' => 'error',
                 'pesan' => $this->validator->getErrors()
             ];
-            return $this->response->setJSON($response,400);
+            return $this->response->setJSON($response, 400);
         }
         $kode_buku = esc($this->request->getVar('id_buku'));
         $bukuModel = new BukuModel();
@@ -462,12 +462,13 @@ class Form extends BaseController
 
     public function detailForm($id_tiket)
     {
+        $AuthModel = new AuthModel();
         // Ambil data user berdasarkan ID dari sesi
         $userId = session()->get('id_user');
 
         if (!empty($userId)) {
             // Ambil data user dari database berdasarkan id_user
-            $userData = $UserModel->find($userId);
+            $userData = $AuthModel->find($userId);
             if ($userData && isset($userData['level_user'])) {
                 $allowUser = ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
                 if (!in_array($userData['level_user'], $allowUser)) {
