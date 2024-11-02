@@ -175,11 +175,11 @@ $isKoordEditor = ($userData && isset($userData['level_user']) && $userData['leve
                     formData += '</div>';
                     formData += '</td>';
                     formData += '<td>' + value.kode_form + '</td>';
-                    formData += '<td class="wrap-text">' + value.nomor_job + '</td>';
+                    formData += '<td>' + value.nomor_job + '</td>';
                     formData += '<td class="wrap-text">' + nama + '</td>';
                     formData += '<td>' + kode_buku + '</td>';
                     formData += '<td class="wrap-text">' + judul_buku + '</td>';
-                    formData += '<td class="wrap-text">' + formatDate(value.created_at) + '</td>';
+                    formData += '<td>' + formatDate(value.created_at) + '</td>';
                     formData += '</tr>';
                 });
 
