@@ -464,6 +464,7 @@ class Form extends BaseController
     {
         // Ambil data user berdasarkan ID dari sesi
         $userId = session()->get('id_user');
+        $UserModel = new UserModel();
 
         if (!empty($userId)) {
             // Ambil data user dari database berdasarkan id_user
