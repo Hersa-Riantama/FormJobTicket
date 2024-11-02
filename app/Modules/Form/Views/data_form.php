@@ -1,4 +1,5 @@
-<?= $this->extend('template/admin_template'); ?>
+<?= $this->extend('template/admin_template'); 
+use Modules\Auth\Models\AuthModel;?>
 <?= $this->section('content'); ?>
 <!-- Content wrapper -->
 <div class="content-wrapper">
@@ -14,6 +15,7 @@
                 <table class="table" id="dataTables">
                     <thead>
                         <tr>
+                            <th>Approval</th>
                             <th>Kelola Tiket</th>
                             <th>Kode Form</th>
                             <th>Nomor Job</th>
@@ -60,6 +62,12 @@
 </div>
 <!-- / Layout wrapper -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<?php
+    $AuthModel = new AuthModel();
+    $userId = session()->get('id_user');
+    $userData = $AuthModel->find($userId);
+    $isKoordEditor = ($userData && isset($userData['level_user']) && $userData['level_user'] === 'Koord Editor') ? 'true' : 'false';
+?>
 <script>
     $(document).ready(function() {
         loadData();
@@ -94,12 +102,15 @@
 
                 // Generate table
                 var formData = '';
+                var isKoordEditor = <?= $isKoordEditor; ?>;
+                console.log("Is Koord Editor:", isKoordEditor);
                 $.each(response.tiket, function(key, value) {
 
                     // Ambil judul buku dan nama user
                     var kode_buku = kodeBukuMap[value.id_buku] || 'Unknown Kode'
                     var judul_buku = bukuMap[value.id_buku] || 'Unknown Buku';
                     var nama = userMap[value.id_user] || 'Unknown User';
+                    
 
                     function encodeBase64Id(id) {
                         return btoa(id); // 'btoa' is used to encode to Base64
@@ -107,6 +118,26 @@
 
                     // Generate HTML untuk tabel
                     formData += '<tr>';
+                    formData += '<td>';
+                    if (isKoordEditor) {
+                        if (value.approved_order_koord === 'Y') {
+                            formData += '<span class="badge bg-success">Order Approved</span>';
+                        } else {
+                            formData += '<button class="btn btn-success me-2" onclick="approveOrder(' + value.id_tiket + ')">Setuju Order</button>';
+                            formData += '<button class="btn btn-danger me-2" onclick="rejectOrder(' + value.id_tiket + ')">Tidak Setuju Order</button>';
+                        }
+                        formData += '<br>';
+                        if (value.approved_acc_koord === 'Y') {
+                            formData += '<span class="badge bg-success">Acc Approved</span>';
+                        } else {
+                            formData += '<button class="btn btn-success me-2" onclick="approveACC(' + value.id_tiket + ')">Setuju ACC</button>';
+                            formData += '<button class="btn btn-danger me-2" onclick="rejectACC(' + value.id_tiket + ')">Tidak Setuju ACC</button>';
+                        }
+                    } else {
+                        formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '">Setuju</button>';
+                        formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '">Tidak Setuju</button>';
+                    }
+                    formData += '</td>';
                     formData += '<td>';
                     formData += '<div class="dropdown">';
                     formData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
