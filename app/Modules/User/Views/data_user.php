@@ -11,7 +11,7 @@
         <div class="card">
             <h5 class="card-header">List User</h5>
             <div class="table-responsive text-nowrap">
-                <table class="table">
+                <table class="table" id="dataTables">
                     <thead>
                         <tr>
                             <th>Status User</th>
@@ -100,6 +100,14 @@
                     UserData += '</tr>';
                 });
                 $('#UserData').html(UserData);
+
+                // Destroy DataTable if it exists, then initialize it
+                if ($.fn.DataTable.isDataTable('#dataTables')) {
+                    $('#dataTables').DataTable().destroy();
+                }
+                $('#dataTables').DataTable({
+                    responsive: true
+                });
             }
         });
     }

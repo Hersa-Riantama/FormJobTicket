@@ -11,7 +11,7 @@
         <div class="card">
             <h5 class="card-header">List Tiket</h5>
             <div class="table-responsive text-nowrap">
-                <table class="table">
+                <table class="table" id="dataTables">
                     <thead>
                         <tr>
                             <th>Kode Form</th>
@@ -149,6 +149,14 @@
                 });
 
                 $('#formData').html(formData);
+
+                // Destroy DataTable if it exists, then initialize it
+                if ($.fn.DataTable.isDataTable('#dataTables')) {
+                    $('#dataTables').DataTable().destroy();
+                }
+                $('#dataTables').DataTable({
+                    responsive: true
+                });
             },
             error: function(xhr, status, error) {
                 console.error('Error fetching List Form:', error);

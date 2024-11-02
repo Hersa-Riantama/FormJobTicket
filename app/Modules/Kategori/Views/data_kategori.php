@@ -19,7 +19,7 @@ use Modules\Auth\Models\AuthModel; ?>
         <div class="card">
             <h5 class="card-header">List Kategori</h5>
             <div class="table-responsive text-nowrap">
-                <table class="table">
+                <table class="table" id="dataTables">
                     <thead>
                         <tr>
                             <th>Nama Kategori</th>
@@ -86,11 +86,47 @@ use Modules\Auth\Models\AuthModel; ?>
 <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     $(document).ready(function() {
         loadData();
     });
+
+    // function loadData() {
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: 'http://localhost:8080/kategori',
+    //         dataType: 'json',
+    //         success: function(data) {
+    //             var kategoriData = '';
+    //             $.each(data.kategori, function(key, value) {
+    //                 kategoriData += '<tr>';
+    //                 kategoriData += '<td>' + value.nama_kategori + '</td>';
+    //                 kategoriData += '<td>';
+    //                 kategoriData += '<div class="dropdown">';
+    //                 kategoriData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
+    //                 kategoriData += '<i class="bx bx-dots-horizontal-rounded"></i>';
+    //                 kategoriData += '</button>';
+    //                 kategoriData += '<div class="dropdown-menu">';
+    //                 kategoriData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_kategori="' + value.id_kategori + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
+    //                 kategoriData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_kategori="' + value.id_kategori + '"><i class="bx bx-trash me-2"></i> Delete</a>';
+    //                 kategoriData += '</div>';
+    //                 kategoriData += '</div>';
+    //                 kategoriData += '</td>';
+    //                 kategoriData += '</tr>';
+    //             });
+    //             $('#kategoriData').html(kategoriData);
+
+    //             // Inisialisasi DataTable setelah data dimuat
+    //             $('#dataTables').DataTable({
+    //                 destroy: true, // Tambahkan ini agar DataTables dapat diinisialisasi ulang
+    //                 responsive: true
+    //             });
+    //         }
+    //     });
+    // }
 
     function loadData() {
         $.ajax({
@@ -116,9 +152,19 @@ use Modules\Auth\Models\AuthModel; ?>
                     kategoriData += '</tr>';
                 });
                 $('#kategoriData').html(kategoriData);
+
+                // Destroy DataTable if it exists, then initialize it
+                if ($.fn.DataTable.isDataTable('#dataTables')) {
+                    $('#dataTables').DataTable().destroy();
+                }
+                $('#dataTables').DataTable({
+                    responsive: true
+                });
             }
         });
     }
+
+
     $(document).on('click', '.dropdown-item-edit', function() {
         var id_kategori = $(this).data('id_kategori');
         if (!id_kategori) {
