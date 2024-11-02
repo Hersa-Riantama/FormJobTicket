@@ -150,6 +150,7 @@ $isKoordEditor = ($userData && isset($userData['level_user']) && $userData['leve
                         if (value.approved_acc_koord === 'Y') {
                             formData += '<div class="button-group d-flex">'
                             formData += '<span class="badge bg-success">Acc Approved</span>';
+                            formData += '<button class="btn btn-danger me-2" onclick="rejectACC(' + value.id_tiket + ')">Tidak Setuju ACC</button>';
                             formData += '</div>'
                         } else {
                             formData += '<div class="button-group d-flex">'
