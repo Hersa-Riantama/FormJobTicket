@@ -652,4 +652,61 @@ class Form extends BaseController
         }
         return $this->response->setJSON(['status' => 'success', 'Pesan' => 'Tiket Berhasil di Approve']);
     }
+    public function disapproveTicket()
+    {
+        $id_tiket = $this->request->getVar('id_tiket');
+        $approval_type = $this->request->getVar('approval_type');
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('tbl_tiket');
+
+        // Tentukan kolom mana yang perlu di-update berdasarkan tipe approval
+        if ($approval_type === 'Koord Editor') {
+            $builder->set('approved_order_koord', 'R');
+            $builder->where('id_tiket', $id_tiket);
+            $updated = $builder->update();
+            if ($updated) {
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
+            } else {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
+            }
+        } elseif ($approval_type === 'Acc Koord Editor') {
+            $builder->set('approved_acc_koord', 'R');
+            $builder->where('id_tiket', $id_tiket);
+            $updated = $builder->update();
+            if ($updated) {
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
+            } else {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
+            }
+        } elseif ($approval_type === 'Admin Sistem') {
+            $builder->set('approved_order_admin', 'R');
+            $builder->where('id_tiket', $id_tiket);
+            $updated = $builder->update();
+            if ($updated) {
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
+            } else {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
+            }
+        } elseif ($approval_type === 'Tim Multimedia') {
+            $builder->set('approved_multimedia', 'R');
+            $builder->where('id_tiket', $id_tiket);
+            $updated = $builder->update();
+            if ($updated) {
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
+            } else {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
+            }
+        } elseif ($approval_type === 'Manager Platform') {
+            $builder->set('approved_acc_manager', 'R');
+            $builder->where('id_tiket', $id_tiket);
+            $updated = $builder->update();
+            if ($updated) {
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
+            } else {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
+            }
+        }
+        return $this->response->setJSON(['status' => 'success', 'Pesan' => 'Tiket Berhasil di disapprove']);
+    }
 }

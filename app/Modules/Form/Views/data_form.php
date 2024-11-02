@@ -135,34 +135,38 @@ $isKoordEditor = ($userData && isset($userData['level_user']) && $userData['leve
                     formData += '<td>' + value.id_tiket + '</td>';
                     formData += '<td>';
                     if (isKoordEditor) {
+                        // Order Approval
+                        formData += '<div class="button-group d-flex">';
                         if (value.approved_order_koord === 'Y') {
-                            formData += '<div class="button-group d-flex">'
                             formData += '<span class="badge bg-success">Order Approved</span>';
-                            formData += '<button class="btn btn-danger me-2" onclick="rejectOrder(' + value.id_tiket + ')">Tidak Setuju Order</button>';
-                            formData += '</div>'
+                            formData += '<button class="btn btn-danger me-2" onclick="handleOrderAction(\'reject\', ' + value.id_tiket + ', \'order\')">Tidak Setuju Order</button>';
+                        } else if (value.approved_order_koord === 'R') {
+                            formData += '<span class="badge bg-danger">Tidak Setuju ACC</span>';
                         } else {
-                            formData += '<div class="button-group d-flex">'
-                            formData += '<button class="btn btn-success me-2" onclick="approveOrder(' + value.id_tiket + ')">Setuju Order</button>';
-                            formData += '<button class="btn btn-danger me-2" onclick="rejectOrder(' + value.id_tiket + ')">Tidak Setuju Order</button>';
-                            formData += '</div>'
+                            formData += '<button class="btn btn-success me-2" onclick="handleOrderAction(\'approve\', ' + value.id_tiket + ', \'order\')">Setuju Order</button>';
+                            formData += '<button class="btn btn-danger me-2" onclick="handleOrderAction(\'reject\', ' + value.id_tiket + ', \'order\')">Tidak Setuju Order</button>';
                         }
+                        formData += '</div>';
                         formData += '<br>';
+
+                        // ACC Approval
+                        formData += '<div class="button-group d-flex">';
                         if (value.approved_acc_koord === 'Y') {
-                            formData += '<div class="button-group d-flex">'
                             formData += '<span class="badge bg-success">Acc Approved</span>';
-                            formData += '<button class="btn btn-danger me-2" onclick="rejectACC(' + value.id_tiket + ')">Tidak Setuju ACC</button>';
-                            formData += '</div>'
+                            formData += '<button class="btn btn-danger me-2" onclick="handleOrderAction(\'reject\', ' + value.id_tiket + ', \'acc\')">Tidak Setuju ACC</button>';
+                        } else if (value.approved_acc_koord === 'R') {
+                            formData += '<span class="badge bg-danger">Tidak Setuju ACC</span>';
                         } else {
-                            formData += '<div class="button-group d-flex">'
-                            formData += '<button class="btn btn-success me-2" onclick="approveACC(' + value.id_tiket + ')">Setuju ACC</button>';
-                            formData += '<button class="btn btn-danger me-2" onclick="rejectACC(' + value.id_tiket + ')">Tidak Setuju ACC</button>';
-                            formData += '</div>'
+                            formData += '<button class="btn btn-success me-2" onclick="handleOrderAction(\'approve\', ' + value.id_tiket + ', \'acc\')">Setuju ACC</button>';
+                            formData += '<button class="btn btn-danger me-2" onclick="handleOrderAction(\'reject\', ' + value.id_tiket + ', \'acc\')">Tidak Setuju ACC</button>';
                         }
+                        formData += '</div>';
                     } else {
-                        formData += '<div class="button-group d-flex">'
-                        formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '">Setuju</button>';
-                        formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '">Tidak Setuju</button>';
-                        formData += '</div>'
+                        // For other user levels
+                        formData += '<div class="button-group d-flex">';
+                        formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ', \'User Level\')">Setuju</button>';
+                        formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ', \'User Level\')">Tidak Setuju</button>';
+                        formData += '</div>';
                     }
                     formData += '</td>';
                     formData += '<td>';
@@ -205,6 +209,87 @@ $isKoordEditor = ($userData && isset($userData['level_user']) && $userData['leve
             },
             error: function(xhr, status, error) {
                 console.error('Error fetching List Form:', error);
+            }
+        });
+    }
+    function handleOrderAction(action, id_tiket, type) {
+        if (action === 'approve') {
+            // Call the appropriate approval function
+            if (type === 'order') {
+                approveOrder(id_tiket);
+            } else if (type === 'acc') {
+                approveACC(id_tiket);
+            }
+        } else if (action === 'reject') {
+            // Call the appropriate rejection function
+            if (type === 'order') {
+                rejectOrder(id_tiket);
+            } else if (type === 'acc') {
+                rejectACC(id_tiket);
+            }
+        }
+    }
+    function approveOrder(id_tiket) {
+        $.ajax({
+            url: "<?= base_url('approveOrder') ?>", // Endpoint for approving the order
+            type: "POST",
+            data: { id_tiket: id_tiket },
+            success: function(response) {
+                console.log(response);
+                if (response.status === 'success') {
+                    // If successful, update the UI accordingly
+                    $('#btn-approve').hide(); // Example: hide the approve button
+                    $('.approved-status').html('<span class="badge bg-success">Order Approved</span>');
+                    location.reload(); // Reload the page to see changes
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error during approval:", error);
+            }
+        });
+    }
+    function approveACC(id_tiket) {
+        $.ajax({
+            url: "<?= base_url('approveACC') ?>", // Endpoint for approving ACC
+            type: "POST",
+            data: { id_tiket: id_tiket },
+            success: function(response) {
+                console.log(response);
+                if (response.status === 'success') {
+                    // If successful, update the UI accordingly
+                    $('#btn-approve').hide(); // Example: hide the approve button
+                    $('.approved-status').html('<span class="badge bg-success">Acc Approved</span>');
+                    location.reload(); // Reload the page to see changes
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error during approval:", error);
+            }
+        });
+    }
+    function disapproveTicket(id_tiket, disapprovalType) {
+        $.ajax({
+            url: "<?= base_url('disapprove') ?>", // Endpoint for disapproval
+            type: "POST",
+            data: {
+                id_tiket: id_tiket,
+                disapproval_type: disapprovalType
+            },
+            success: function(response) {
+                console.log(response);
+                if (response.status === 'success') {
+                    // If successful, update the UI accordingly
+                    if (disapprovalType === 'order') {
+                        $('#btn-disapprove').hide(); // Hide order approval button
+                    } else if (disapprovalType === 'acc') {
+                        $('#btn-disapprove').hide(); // Hide ACC approval button
+                    }
+                    $('.approved-status').html('<span class="label label-danger">Tidak Setuju</span>');
+                    location.reload(); // Reload the page to see changes
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error during disapproval:", error);
             }
         });
     }
