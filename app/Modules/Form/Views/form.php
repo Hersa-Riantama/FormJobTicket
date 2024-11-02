@@ -14,31 +14,15 @@
                 <div class="row justify-content-between align-items-start">
                     <div class="col-xl-4 mb-5 d-flex justify-content-center">
                         <img src="<?= base_url('/assets/img/icons/Form QR Code.jpg') ?>"
-                            style="width: 100%; max-width: 100%; max-height: 14rem; object-fit: cover;"
+                            style="width: 100%; max-width: 100%; max-height: 16rem; object-fit: cover;"
                             alt="Logo" />
                     </div>
 
-                    <div class="col-xl-3 mb-5">
-                        <h4 class="card-header text-center mb-2 text-hitam">PLATFORM DIGITAL</h4>
-                        <div class="card border border-hitam mx-4" style="height: auto; max-height: 14rem; overflow: hidden;">
-                            <div class="card-body p-2">
-                                <div class="row justify-content-between">
-                                    <div class="col-7">
-                                        <div class="card warna-pink oval-atas">
-                                            <h3 class="text-center oval mb-0 p-2 warna-darkpink text-hitam"><i>Form</i></h3>
-                                            <div class="card-body m-0 p-2">
-                                                <h1 class="text-center mb-0 display-1 text-hitam" style="font-size: 4rem;">C</h1>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-5" style="padding-left:0;">
-                                        <h1 class="text-center display-1 mb-0 mt-1 text-hitam" style="font-size: 7rem; overflow: hidden;">1</h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-xl-4 mb-5 d-flex justify-content-center">
+                        <img src="<?= base_url('/assets/img/icons/C1.png') ?>"
+                            style="width: 70%; max-width: 100%; max-height: 16rem; object-fit: cover;"
+                            alt="Form C1" />
                     </div>
-
                 </div>
             </div>
 

@@ -45,6 +45,7 @@ use Modules\Auth\Models\AuthModel; ?>
                 <table class="table" id="dataTables">
                     <thead>
                         <tr>
+                            <th style="display: none;">ID Buku</th>
                             <th>Kode Buku</th>
                             <th>Judul Buku</th>
                             <th>Pengarang</th>
@@ -221,6 +222,7 @@ use Modules\Auth\Models\AuthModel; ?>
                 var bukuData = '';
                 $.each(data.buku, function(key, value) {
                     bukuData += '<tr>';
+                    bukuData += '<td>' + value.id_buku + '</td>';
                     bukuData += '<td>' + value.kode_buku + '</td>';
                     bukuData += '<td class="wrap-text">' + value.judul_buku + '</td>';
                     bukuData += '<td class="wrap-text">' + value.pengarang + '</td>';
@@ -246,7 +248,15 @@ use Modules\Auth\Models\AuthModel; ?>
                     $('#dataTables').DataTable().destroy();
                 }
                 $('#dataTables').DataTable({
-                    responsive: true
+                    responsive: true,
+                    order: [
+                        [0, 'asc']
+                    ], // Mengurutkan berdasarkan kolom ID
+                    columnDefs: [{
+                            targets: 0,
+                            visible: false
+                        } // Sembunyikan kolom ID
+                    ]
                 });
             }
         });
