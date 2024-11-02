@@ -139,6 +139,7 @@ $isKoordEditor = ($userData && isset($userData['level_user']) && $userData['leve
                             formData += '<div class="button-group d-flex">'
                             formData += '<span class="badge bg-success">Order Approved</span>';
                             formData += '<button class="btn btn-danger me-2" onclick="rejectOrder(' + value.id_tiket + ')">Tidak Setuju Order</button>';
+                            formData += '</div>'
                         } else {
                             formData += '<div class="button-group d-flex">'
                             formData += '<button class="btn btn-success me-2" onclick="approveOrder(' + value.id_tiket + ')">Setuju Order</button>';
@@ -149,6 +150,7 @@ $isKoordEditor = ($userData && isset($userData['level_user']) && $userData['leve
                         if (value.approved_acc_koord === 'Y') {
                             formData += '<div class="button-group d-flex">'
                             formData += '<span class="badge bg-success">Acc Approved</span>';
+                            formData += '</div>'
                         } else {
                             formData += '<div class="button-group d-flex">'
                             formData += '<button class="btn btn-success me-2" onclick="approveACC(' + value.id_tiket + ')">Setuju ACC</button>';
