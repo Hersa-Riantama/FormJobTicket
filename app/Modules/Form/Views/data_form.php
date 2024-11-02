@@ -122,6 +122,7 @@ use Modules\Auth\Models\AuthModel;?>
                     if (isKoordEditor) {
                         if (value.approved_order_koord === 'Y') {
                             formData += '<span class="badge bg-success">Order Approved</span>';
+                            formData += '<button class="btn btn-danger me-2" onclick="rejectOrder(' + value.id_tiket + ')">Tidak Setuju Order</button>';
                         } else {
                             formData += '<button class="btn btn-success me-2" onclick="approveOrder(' + value.id_tiket + ')">Setuju Order</button>';
                             formData += '<button class="btn btn-danger me-2" onclick="rejectOrder(' + value.id_tiket + ')">Tidak Setuju Order</button>';
@@ -129,6 +130,7 @@ use Modules\Auth\Models\AuthModel;?>
                         formData += '<br>';
                         if (value.approved_acc_koord === 'Y') {
                             formData += '<span class="badge bg-success">Acc Approved</span>';
+                            formData += '<button class="btn btn-danger me-2" onclick="rejectACC(' + value.id_tiket + ')">Tidak Setuju ACC</button>';
                         } else {
                             formData += '<button class="btn btn-success me-2" onclick="approveACC(' + value.id_tiket + ')">Setuju ACC</button>';
                             formData += '<button class="btn btn-danger me-2" onclick="rejectACC(' + value.id_tiket + ')">Tidak Setuju ACC</button>';
