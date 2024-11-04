@@ -672,7 +672,7 @@ class Form extends BaseController
             } else {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
-        }else if($userLevel ===  'Tim Multimedia'){
+        } else if ($userLevel ===  'Tim Multimedia') {
             $builder->set('approved_multimedia', 'Y');
             $builder->set('tgl_acc_multimedia', $approvalDate);
             $builder->where('id_tiket', $id_tiket);
@@ -682,7 +682,7 @@ class Form extends BaseController
             } else {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
-        }else if($userLevel ===  'Manager Platform'){
+        } else if ($userLevel ===  'Manager Platform') {
             $builder->set('approved_acc_manager', 'Y');
             $builder->set('tgl_acc_manager', $approvalDate);
             $builder->where('id_tiket', $id_tiket);
@@ -711,27 +711,27 @@ class Form extends BaseController
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
             } else {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
-        }else if($userLevel ===  'Tim Multimedia'){
+        } else if ($userLevel ===  'Tim Multimedia') {
             $builder->set('approved_multimedia', 'R');
             $builder->set('tgl_acc_multimedia', $disapprovalDate);
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
             } else {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
-        }else if($userLevel ===  'Manager Platform'){
+        } else if ($userLevel ===  'Manager Platform') {
             $builder->set('approved_acc_manager', 'R');
             $builder->set('tgl_acc_manager', $disapprovalDate);
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
             } else {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
@@ -777,7 +777,7 @@ class Form extends BaseController
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
             } else {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
@@ -823,7 +823,7 @@ class Form extends BaseController
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
             } else {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }

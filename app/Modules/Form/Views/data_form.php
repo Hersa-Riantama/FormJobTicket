@@ -139,31 +139,30 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '<td>';
                     if (isKoordEditor) {
                         // Order Approval
-                        formData += '<div class="button-group d-flex">';
+                        formData += '<div class="button-group d-flex mb-2">';
                         if (value.approved_order_koord === 'Y') {
-                            formData += '<span class="label bg-success">Order Approved</span>';
-                            formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveOrder(' + value.id_tiket + ')">Batalkan Order</button>';
+                            formData += '<span class="label text-approve bg-approved me-2 badge-centers fixed-width">Order Approved</span>';
+                            formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveOrder(' + value.id_tiket + ')">Batalkan Order</button>';
                         } else if (value.approved_order_koord === 'R') {
-                            formData += '<span class="label bg-danger">Tidak Setuju Order</span>';
-                            formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveOrder(' + value.id_tiket + ')">Setuju</button>';
+                            formData += '<span class="label text-approve bg-disapproved me-2 badge-centers fixed-width">Order Ditolak</span>';
+                            formData += '<button class="btn btn-success btn-approve fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveOrder(' + value.id_tiket + ')">Setuju Order</button>';
                         } else {
-                            formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveOrder(' + value.id_tiket + ')">Setuju</button>';
-                            formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveOrder(' + value.id_tiket + ')">Batalkan Order</button>';
+                            formData += '<button class="btn btn-success btn-approve me-2 fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveOrder(' + value.id_tiket + ')">Setuju Order</button>';
+                            formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveOrder(' + value.id_tiket + ')">Batalkan Order</button>';
                         }
                         formData += '</div>';
-                        formData += '<br>';
 
                         // ACC Approval
                         formData += '<div class="button-group d-flex">';
                         if (value.approved_acc_koord === 'Y') {
-                            formData += '<span class="label bg-success">Acc Approved</span>';
-                            formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveAcc(' + value.id_tiket + ')">Batalkan Acc</button>';
+                            formData += '<span class="label text-approve bg-approved me-2 badge-centers fixed-width">ACC Approved</span>';
+                            formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveAcc(' + value.id_tiket + ')">Batalkan ACC</button>';
                         } else if (value.approved_acc_koord === 'R') {
-                            formData += '<span class="label bg-danger">Tidak Setuju ACC</span>';
-                            formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveAcc(' + value.id_tiket + ')">Setuju</button>';
+                            formData += '<span class="label text-approve bg-disapproved me-2 badge-centers fixed-width">ACC Ditolak</span>';
+                            formData += '<button class="btn btn-success btn-approve fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveAcc(' + value.id_tiket + ')">Setuju ACC</button>';
                         } else {
-                            formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveAcc(' + value.id_tiket + ')">Setuju</button>';
-                            formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveAcc(' + value.id_tiket + ')">Batalkan Acc</button>';
+                            formData += '<button class="btn btn-success btn-approve me-2 fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveAcc(' + value.id_tiket + ')">Setuju ACC</button>';
+                            formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveAcc(' + value.id_tiket + ')">Batalkan ACC</button>';
                         }
                         formData += '</div>';
                     } else if (islevel_user.length > 0) { // Check if there are valid levels
@@ -175,34 +174,34 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                         // Check if the current user level matches and if the ticket is approved
                         islevel_user.forEach(level => {
                             if (level === 'Admin Sistem' && value.approved_order_admin === 'Y') {
-                                formData += '<span class="badge bg-success">Approved</span>';
-                                formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
+                                formData += '<span class="label text-approve bg-approved me-2 badge-centers fixed-width">Approved</span>';
+                                formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
                                 isApproved = true;
-                            } else if (level === 'Admin Sistem' && value.approved_order_admin === 'R'){
-                                formData += '<span class="badge bg-danger">Ditolak</span>';
-                                formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
+                            } else if (level === 'Admin Sistem' && value.approved_order_admin === 'R') {
+                                formData += '<span class="label text-approve bg-disapproved me-2 badge-centers fixed-width">Ditolak</span>';
+                                formData += '<button class="btn btn-success btn-approve fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
                                 isApproved = true;
                             } else if (level === 'Tim Multimedia' && value.approved_multimedia === 'Y') {
-                                formData += '<span class="badge bg-success">Approved</span>';
-                                formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
+                                formData += '<span class="label text-approve bg-approved me-2 fixed-width">Approved</span>';
+                                formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
                                 isApproved = true;
                             } else if (level === 'Tim Multimedia' && value.approved_multimedia === 'R') {
-                                formData += '<span class="badge bg-danger">Ditolak</span>';
-                                formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
+                                formData += '<span class="label text-approve bg-disapproved me-2 fixed-width">Ditolak</span>';
+                                formData += '<button class="btn btn-success btn-approve fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
                                 isApproved = true;
                             } else if (level === 'Manager Platform' && value.approved_acc_manager === 'Y') {
-                                formData += '<span class="label bg-success">Approved</span>';
-                                formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
+                                formData += '<span class="label text-approve bg-approved me-2 fixed-width">Approved</span>';
+                                formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
                                 isApproved = true;
-                            } else if (level === 'Manager Platform' && value.approved_acc_manager === 'R'){
-                                formData += '<span class="badge bg-danger">Ditolak</span>';
-                                formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
+                            } else if (level === 'Manager Platform' && value.approved_acc_manager === 'R') {
+                                formData += '<span class="label text-approve bg-disapproved me-2 fixed-width">Ditolak</span>';
+                                formData += '<button class="btn btn-success btn-approve fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
                                 isApproved = true;
                             }
                         });
                         if (!isApproved) {
-                            formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
-                            formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Tidak Setuju</button>';
+                            formData += '<button class="btn btn-success btn-approve me-2 fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
+                            formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Tidak Setuju</button>';
                         }
 
                         formData += '</div>';
@@ -281,6 +280,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
         const id_tiket = $(this).data('id_tiket');
         approveTicket(id_tiket); // Reject
     });
+
     function approveTicket(id_tiket) {
         $.ajax({
             type: 'POST',
@@ -305,10 +305,11 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
             }
         });
     }
+
     function disapproveTicket(id_tiket) {
         $.ajax({
             type: 'POST',
-            url: 'disapproveTicket',  // Adjust this URL to match your route
+            url: 'disapproveTicket', // Adjust this URL to match your route
             data: {
                 id_tiket: id_tiket
             },
@@ -337,10 +338,11 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
         const id_tiket = $(this).data('id_tiket');
         disapproveOrder(id_tiket);
     });
-    function approveOrder(id_tiket){
+
+    function approveOrder(id_tiket) {
         $.ajax({
             type: 'POST',
-            url: 'approveOrderKoord',  // Adjust this URL to match your route
+            url: 'approveOrderKoord', // Adjust this URL to match your route
             data: {
                 id_tiket: id_tiket
             },
@@ -360,10 +362,11 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
             }
         });
     }
-    function disapproveOrder(id_tiket){
+
+    function disapproveOrder(id_tiket) {
         $.ajax({
             type: 'POST',
-            url: 'disapproveOrderKoord',  // Adjust this URL to match your route
+            url: 'disapproveOrderKoord', // Adjust this URL to match your route
             data: {
                 id_tiket: id_tiket
             },
@@ -391,10 +394,11 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
         const id_tiket = $(this).data('id_tiket');
         disapproveAcc(id_tiket);
     });
-    function approveAcc(id_tiket){
+
+    function approveAcc(id_tiket) {
         $.ajax({
             type: 'POST',
-            url: 'approveAccKoord',  // Adjust this URL to match your route
+            url: 'approveAccKoord', // Adjust this URL to match your route
             data: {
                 id_tiket: id_tiket
             },
@@ -414,10 +418,11 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
             }
         });
     }
-    function disapproveAcc(id_tiket){
+
+    function disapproveAcc(id_tiket) {
         $.ajax({
             type: 'POST',
-            url: 'disapprovedAccKoord',  // Adjust this URL to match your route
+            url: 'disapprovedAccKoord', // Adjust this URL to match your route
             data: {
                 id_tiket: id_tiket
             },

@@ -41,6 +41,24 @@
 /*
 * Content
 ******************************************************************************/
+.bg-disapproved{
+  background-color: #ff5370;
+}
+
+.bg-approved{
+  background-color: #2ed8b6;
+}
+
+.badge-centers {
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+.fixed-width {
+  width: 45%; /* atau gunakan persentase, misalnya 100% jika dalam kontainer */
+}
+
 .center-text {
   text-align: center; /* Tengah secara horizontal */
   vertical-align: middle; /* Tengah secara vertikal */
@@ -66,6 +84,11 @@
 
 .border-atas{
   border-top: 1.5px solid #e0b3d3;
+}
+
+.text-approve{
+  color: black;
+  font-weight: 400;
 }
 
 .text-biru{
