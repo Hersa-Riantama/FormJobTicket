@@ -18,13 +18,13 @@ use Modules\Auth\Models\AuthModel; ?>
                         <tr>
                             <th style="display: none;">ID Tiket</th>
                             <th>Approval</th>
-                            <th>Kelola Tiket</th>
                             <th>Kode Form</th>
                             <th>Nomor Job</th>
                             <th>Editor</th>
                             <th>Kode Buku</th>
                             <th>Judul Buku</th>
                             <th>Tanggal dibuat</th>
+                            <th>Kelola Tiket</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0" id="formData">
@@ -182,19 +182,19 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                                 formData += '<button class="btn btn-success btn-approve fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
                                 isApproved = true;
                             } else if (level === 'Tim Multimedia' && value.approved_multimedia === 'Y') {
-                                formData += '<span class="label text-approve bg-approved me-2 fixed-width">Approved</span>';
+                                formData += '<span class="label text-approve bg-approved me-2 badge-centers fixed-width">Approved</span>';
                                 formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
                                 isApproved = true;
                             } else if (level === 'Tim Multimedia' && value.approved_multimedia === 'R') {
-                                formData += '<span class="label text-approve bg-disapproved me-2 fixed-width">Ditolak</span>';
+                                formData += '<span class="label text-approve bg-disapproved me-2 badge-centers fixed-width">Ditolak</span>';
                                 formData += '<button class="btn btn-success btn-approve fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
                                 isApproved = true;
                             } else if (level === 'Manager Platform' && value.approved_acc_manager === 'Y') {
-                                formData += '<span class="label text-approve bg-approved me-2 fixed-width">Approved</span>';
+                                formData += '<span class="label text-approve bg-approved me-2 badge-centers fixed-width">Approved</span>';
                                 formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
                                 isApproved = true;
                             } else if (level === 'Manager Platform' && value.approved_acc_manager === 'R') {
-                                formData += '<span class="label text-approve bg-disapproved me-2 fixed-width">Ditolak</span>';
+                                formData += '<span class="label text-approve bg-disapproved me-2 badge-centers fixed-width">Ditolak</span>';
                                 formData += '<button class="btn btn-success btn-approve fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
                                 isApproved = true;
                             }
@@ -207,6 +207,12 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                         formData += '</div>';
                     }
                     formData += '</td>';
+                    formData += '<td>' + value.kode_form + '</td>';
+                    formData += '<td>' + value.nomor_job + '</td>';
+                    formData += '<td class="wrap-text">' + nama + '</td>';
+                    formData += '<td>' + kode_buku + '</td>';
+                    formData += '<td class="wrap-text">' + judul_buku + '</td>';
+                    formData += '<td>' + formatDate(value.created_at) + '</td>';
                     formData += '<td>';
                     formData += '<div class="dropdown">';
                     formData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
@@ -218,12 +224,6 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '</div>';
                     formData += '</div>';
                     formData += '</td>';
-                    formData += '<td>' + value.kode_form + '</td>';
-                    formData += '<td>' + value.nomor_job + '</td>';
-                    formData += '<td class="wrap-text">' + nama + '</td>';
-                    formData += '<td>' + kode_buku + '</td>';
-                    formData += '<td class="wrap-text">' + judul_buku + '</td>';
-                    formData += '<td>' + formatDate(value.created_at) + '</td>';
                     formData += '</tr>';
                 });
 
