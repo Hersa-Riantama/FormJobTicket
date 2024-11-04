@@ -69,6 +69,8 @@ $AuthModel = new AuthModel();
 $userId = session()->get('id_user');
 $userData = $AuthModel->find($userId);
 $isKoordEditor = ($userData && isset($userData['level_user']) && $userData['level_user'] === 'Koord Editor') ? 'true' : 'false';
+$validLevels = ['Admin Sistem', 'Tim Multimedia', 'Manager Platform'];
+$level_user = ($userData && isset($userData['level_user']) && in_array($userData['level_user'], $validLevels)) ? [$userData['level_user']] : [];
 ?>
 <script>
     function formatDate(dateString) {
@@ -117,6 +119,7 @@ $isKoordEditor = ($userData && isset($userData['level_user']) && $userData['leve
                 // Generate table
                 var formData = '';
                 var isKoordEditor = <?= $isKoordEditor; ?>;
+                var islevel_user = <?= json_encode($level_user); ?>;
                 console.log("Is Koord Editor:", isKoordEditor);
                 $.each(response.tiket, function(key, value) {
 
@@ -138,13 +141,14 @@ $isKoordEditor = ($userData && isset($userData['level_user']) && $userData['leve
                         // Order Approval
                         formData += '<div class="button-group d-flex">';
                         if (value.approved_order_koord === 'Y') {
-                            formData += '<span class="badge bg-success">Order Approved</span>';
-                            formData += '<button class="btn btn-danger me-2" onclick="handleOrderAction(\'reject\', ' + value.id_tiket + ', \'order\')">Tidak Setuju Order</button>';
+                            formData += '<span class="label bg-success">Order Approved</span>';
+                            formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveOrder(' + value.id_tiket + ')">Batalkan Order</button>';
                         } else if (value.approved_order_koord === 'R') {
-                            formData += '<span class="badge bg-danger">Tidak Setuju ACC</span>';
+                            formData += '<span class="label bg-danger">Tidak Setuju Order</span>';
+                            formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveOrder(' + value.id_tiket + ')">Setuju</button>';
                         } else {
-                            formData += '<button class="btn btn-success me-2" onclick="handleOrderAction(\'approve\', ' + value.id_tiket + ', \'order\')">Setuju Order</button>';
-                            formData += '<button class="btn btn-danger me-2" onclick="handleOrderAction(\'reject\', ' + value.id_tiket + ', \'order\')">Tidak Setuju Order</button>';
+                            formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveOrder(' + value.id_tiket + ')">Setuju</button>';
+                            formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveOrder(' + value.id_tiket + ')">Batalkan Order</button>';
                         }
                         formData += '</div>';
                         formData += '<br>';
@@ -152,20 +156,55 @@ $isKoordEditor = ($userData && isset($userData['level_user']) && $userData['leve
                         // ACC Approval
                         formData += '<div class="button-group d-flex">';
                         if (value.approved_acc_koord === 'Y') {
-                            formData += '<span class="badge bg-success">Acc Approved</span>';
-                            formData += '<button class="btn btn-danger me-2" onclick="handleOrderAction(\'reject\', ' + value.id_tiket + ', \'acc\')">Tidak Setuju ACC</button>';
+                            formData += '<span class="label bg-success">Acc Approved</span>';
+                            formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveAcc(' + value.id_tiket + ')">Batalkan Acc</button>';
                         } else if (value.approved_acc_koord === 'R') {
-                            formData += '<span class="badge bg-danger">Tidak Setuju ACC</span>';
+                            formData += '<span class="label bg-danger">Tidak Setuju ACC</span>';
+                            formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveAcc(' + value.id_tiket + ')">Setuju</button>';
                         } else {
-                            formData += '<button class="btn btn-success me-2" onclick="handleOrderAction(\'approve\', ' + value.id_tiket + ', \'acc\')">Setuju ACC</button>';
-                            formData += '<button class="btn btn-danger me-2" onclick="handleOrderAction(\'reject\', ' + value.id_tiket + ', \'acc\')">Tidak Setuju ACC</button>';
+                            formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveAcc(' + value.id_tiket + ')">Setuju</button>';
+                            formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveAcc(' + value.id_tiket + ')">Batalkan Acc</button>';
                         }
                         formData += '</div>';
-                    } else {
-                        // For other user levels
+                    } else if (islevel_user.length > 0) { // Check if there are valid levels
                         formData += '<div class="button-group d-flex">';
-                        formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ', \'User Level\')">Setuju</button>';
-                        formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ', \'User Level\')">Tidak Setuju</button>';
+
+                        // Display approval status based on other user levels
+                        let isApproved = false;
+
+                        // Check if the current user level matches and if the ticket is approved
+                        islevel_user.forEach(level => {
+                            if (level === 'Admin Sistem' && value.approved_order_admin === 'Y') {
+                                formData += '<span class="badge bg-success">Approved</span>';
+                                formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
+                                isApproved = true;
+                            } else if (level === 'Admin Sistem' && value.approved_order_admin === 'R'){
+                                formData += '<span class="badge bg-danger">Ditolak</span>';
+                                formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
+                                isApproved = true;
+                            } else if (level === 'Tim Multimedia' && value.approved_multimedia === 'Y') {
+                                formData += '<span class="badge bg-success">Approved</span>';
+                                formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
+                                isApproved = true;
+                            } else if (level === 'Tim Multimedia' && value.approved_multimedia === 'R') {
+                                formData += '<span class="badge bg-danger">Ditolak</span>';
+                                formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
+                                isApproved = true;
+                            } else if (level === 'Manager Platform' && value.approved_acc_manager === 'Y') {
+                                formData += '<span class="label bg-success">Approved</span>';
+                                formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
+                                isApproved = true;
+                            } else if (level === 'Manager Platform' && value.approved_acc_manager === 'R'){
+                                formData += '<span class="badge bg-danger">Ditolak</span>';
+                                formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
+                                isApproved = true;
+                            }
+                        });
+                        if (!isApproved) {
+                            formData += '<button class="btn btn-success btn-approve me-1" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
+                            formData += '<button class="btn btn-danger btn-disapprove" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Tidak Setuju</button>';
+                        }
+
                         formData += '</div>';
                     }
                     formData += '</td>';
@@ -212,87 +251,6 @@ $isKoordEditor = ($userData && isset($userData['level_user']) && $userData['leve
             }
         });
     }
-    function handleOrderAction(action, id_tiket, type) {
-        if (action === 'approve') {
-            // Call the appropriate approval function
-            if (type === 'order') {
-                approveOrder(id_tiket);
-            } else if (type === 'acc') {
-                approveACC(id_tiket);
-            }
-        } else if (action === 'reject') {
-            // Call the appropriate rejection function
-            if (type === 'order') {
-                rejectOrder(id_tiket);
-            } else if (type === 'acc') {
-                rejectACC(id_tiket);
-            }
-        }
-    }
-    function approveOrder(id_tiket) {
-        $.ajax({
-            url: "<?= base_url('approveOrder') ?>", // Endpoint for approving the order
-            type: "POST",
-            data: { id_tiket: id_tiket },
-            success: function(response) {
-                console.log(response);
-                if (response.status === 'success') {
-                    // If successful, update the UI accordingly
-                    $('#btn-approve').hide(); // Example: hide the approve button
-                    $('.approved-status').html('<span class="badge bg-success">Order Approved</span>');
-                    location.reload(); // Reload the page to see changes
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error("Error during approval:", error);
-            }
-        });
-    }
-    function approveACC(id_tiket) {
-        $.ajax({
-            url: "<?= base_url('approveACC') ?>", // Endpoint for approving ACC
-            type: "POST",
-            data: { id_tiket: id_tiket },
-            success: function(response) {
-                console.log(response);
-                if (response.status === 'success') {
-                    // If successful, update the UI accordingly
-                    $('#btn-approve').hide(); // Example: hide the approve button
-                    $('.approved-status').html('<span class="badge bg-success">Acc Approved</span>');
-                    location.reload(); // Reload the page to see changes
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error("Error during approval:", error);
-            }
-        });
-    }
-    function disapproveTicket(id_tiket, disapprovalType) {
-        $.ajax({
-            url: "<?= base_url('disapprove') ?>", // Endpoint for disapproval
-            type: "POST",
-            data: {
-                id_tiket: id_tiket,
-                disapproval_type: disapprovalType
-            },
-            success: function(response) {
-                console.log(response);
-                if (response.status === 'success') {
-                    // If successful, update the UI accordingly
-                    if (disapprovalType === 'order') {
-                        $('#btn-disapprove').hide(); // Hide order approval button
-                    } else if (disapprovalType === 'acc') {
-                        $('#btn-disapprove').hide(); // Hide ACC approval button
-                    }
-                    $('.approved-status').html('<span class="label label-danger">Tidak Setuju</span>');
-                    location.reload(); // Reload the page to see changes
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error("Error during disapproval:", error);
-            }
-        });
-    }
     $(document).on('click', '.dropdown-item-detail', function() {
         var id_tiket = $(this).data('id_tiket');
         window.location.href = '/detail/' + id_tiket; // Redirect to the detail page
@@ -315,5 +273,169 @@ $isKoordEditor = ($userData && isset($userData['level_user']) && $userData['leve
             });
         }
     });
+    $('.btn-approve').on('click', function() {
+        const id_tiket = $(this).data('id_tiket');
+        approveTicket(id_tiket);
+    });
+    $('.btn-disapprove').on('click', function() {
+        const id_tiket = $(this).data('id_tiket');
+        approveTicket(id_tiket); // Reject
+    });
+    function approveTicket(id_tiket) {
+        $.ajax({
+            type: 'POST',
+            url: 'approveTiket',
+            data: {
+                id_tiket: id_tiket
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    alert(response.message);
+                    $('#approveButton').hide();
+                    $('.approved-status').html('<span class="badge bg-success">Approved</span>');
+                    location.reload();
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                alert('An error occurred while trying to approve the ticket');
+            }
+        });
+    }
+    function disapproveTicket(id_tiket) {
+        $.ajax({
+            type: 'POST',
+            url: 'disapproveTicket',  // Adjust this URL to match your route
+            data: {
+                id_tiket: id_tiket
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    alert(response.message);
+                    $('#approveButton').hide();
+                    $('.approved-status').html('<span class="badge bg-success">Approved</span>');
+                    location.reload();
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                alert('An error occurred while trying to disapprove the ticket');
+            }
+        });
+    }
+    $('.btn-approve').on('click', function() {
+        const id_tiket = $(this).data('id_tiket');
+        approveOrder(id_tiket);
+    });
+    $('.btn-disapprove').on('click', function() {
+        const id_tiket = $(this).data('id_tiket');
+        disapproveOrder(id_tiket);
+    });
+    function approveOrder(id_tiket){
+        $.ajax({
+            type: 'POST',
+            url: 'approveOrderKoord',  // Adjust this URL to match your route
+            data: {
+                id_tiket: id_tiket
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    alert(response.message);
+                    $('#approveButton').hide();
+                    location.reload();
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                alert('An error occurred while trying to disapprove the ticket');
+            }
+        });
+    }
+    function disapproveOrder(id_tiket){
+        $.ajax({
+            type: 'POST',
+            url: 'disapproveOrderKoord',  // Adjust this URL to match your route
+            data: {
+                id_tiket: id_tiket
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    alert(response.message);
+                    $('#approveButton').hide();
+                    location.reload();
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                alert('An error occurred while trying to disapprove the ticket');
+            }
+        });
+    }
+    $('.btn-approve').on('click', function() {
+        const id_tiket = $(this).data('id_tiket');
+        approveAcc(id_tiket);
+    });
+    $('.btn-disapprove').on('click', function() {
+        const id_tiket = $(this).data('id_tiket');
+        disapproveAcc(id_tiket);
+    });
+    function approveAcc(id_tiket){
+        $.ajax({
+            type: 'POST',
+            url: 'approveAccKoord',  // Adjust this URL to match your route
+            data: {
+                id_tiket: id_tiket
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    alert(response.message);
+                    $('#approveButton').hide();
+                    location.reload();
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                alert('An error occurred while trying to disapprove the ticket');
+            }
+        });
+    }
+    function disapproveAcc(id_tiket){
+        $.ajax({
+            type: 'POST',
+            url: 'disapprovedAccKoord',  // Adjust this URL to match your route
+            data: {
+                id_tiket: id_tiket
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    alert(response.message);
+                    $('#approveButton').hide();
+                    location.reload();
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                alert('An error occurred while trying to disapprove the ticket');
+            }
+        });
+    }
 </script>
 <?= $this->endSection(); ?>
