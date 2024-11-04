@@ -212,6 +212,19 @@ use Modules\Auth\Models\AuthModel; ?>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    $(document).ready(function() {
+        var dataTable = $('#dataTables').DataTable({
+            responsive: true,
+            order: [[0, 'asc']], // Urutkan berdasarkan kolom ID
+            columnDefs: [
+                {
+                    targets: 0, // Target kolom ID
+                    visible: false // Sembunyikan kolom ID
+                }
+            ]
+        });
+        loadData();
+    });
     // Fungsi untuk menampilkan data dari database
     function loadData() {
         $.ajax({
@@ -242,22 +255,10 @@ use Modules\Auth\Models\AuthModel; ?>
                     bukuData += '</tr>';
                 });
                 $('#bukuData').html(bukuData);
-
-                // Destroy DataTable if it exists, then initialize it
-                if ($.fn.DataTable.isDataTable('#dataTables')) {
-                    $('#dataTables').DataTable().destroy();
-                }
-                $('#dataTables').DataTable({
-                    responsive: true,
-                    order: [
-                        [0, 'asc']
-                    ], // Mengurutkan berdasarkan kolom ID
-                    columnDefs: [{
-                            targets: 0,
-                            visible: false
-                        } // Sembunyikan kolom ID
-                    ]
-                });
+                $('#dataTables').DataTable().clear().rows.add($('#bukuData').find('tr')).draw(false);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error loading data:', xhr.responseText);
             }
         });
     }
@@ -430,9 +431,6 @@ use Modules\Auth\Models\AuthModel; ?>
             })
         }
     });
-
-    // Load data saat pertama kali halaman diakses
-    loadData();
 </script>
 
 <?= $this->endSection(); ?>

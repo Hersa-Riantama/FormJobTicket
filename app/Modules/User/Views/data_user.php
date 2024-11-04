@@ -63,9 +63,18 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
+        var dataTable = $('#dataTables').DataTable({
+            responsive: true,
+            order: [[0, 'asc']], // Urutkan berdasarkan kolom ID
+            columnDefs: [
+                {
+                    targets: 0, // Target kolom ID
+                    visible: false // Sembunyikan kolom ID
+                }
+            ]
+        });
         loadData();
     });
-
     function loadData() {
         $.ajax({
             type: 'GET',
@@ -102,22 +111,7 @@
                     UserData += '</tr>';
                 });
                 $('#UserData').html(UserData);
-
-                // Destroy DataTable if it exists, then initialize it
-                if ($.fn.DataTable.isDataTable('#dataTables')) {
-                    $('#dataTables').DataTable().destroy();
-                }
-                $('#dataTables').DataTable({
-                    responsive: true,
-                    order: [
-                        [0, 'asc']
-                    ], // Mengurutkan berdasarkan kolom ID
-                    columnDefs: [{
-                            targets: 0,
-                            visible: false
-                        } // Sembunyikan kolom ID
-                    ]
-                });
+                $('#dataTables').DataTable().clear().rows.add($('#UserData').find('tr')).draw(false);
             }
         });
     }
@@ -132,7 +126,7 @@
             },
             success: function(response) {
                 alert(response.Pesan); // Tampilkan pesan dari response
-                loadData(); // Reload data setelah verifikasi berhasil
+                loadData();
             },
             error: function(xhr) {
                 console.error('Error:', xhr.responseText);

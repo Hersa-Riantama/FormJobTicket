@@ -92,6 +92,16 @@ use Modules\Auth\Models\AuthModel; ?>
 
 <script>
     $(document).ready(function() {
+        var dataTable = $('#dataTables').DataTable({
+            responsive: true,
+            order: [[0, 'asc']], // Urutkan berdasarkan kolom ID
+            columnDefs: [
+                {
+                    targets: 0, // Target kolom ID
+                    visible: false // Sembunyikan kolom ID
+                }
+            ]
+        });
         loadData();
     });
 
@@ -120,22 +130,7 @@ use Modules\Auth\Models\AuthModel; ?>
                     kategoriData += '</tr>';
                 });
                 $('#kategoriData').html(kategoriData);
-
-                // Destroy DataTable if it exists, then initialize it
-                if ($.fn.DataTable.isDataTable('#dataTables')) {
-                    $('#dataTables').DataTable().destroy();
-                }
-                $('#dataTables').DataTable({
-                    responsive: true,
-                    order: [
-                        [0, 'asc']
-                    ], // Mengurutkan berdasarkan kolom ID
-                    columnDefs: [{
-                            targets: 0,
-                            visible: false
-                        } // Sembunyikan kolom ID
-                    ]
-                });
+                $('#dataTables').DataTable().clear().rows.add($('#kategoriData').find('tr')).draw(false);
             }
         });
     }
