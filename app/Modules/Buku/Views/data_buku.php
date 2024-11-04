@@ -215,13 +215,13 @@ use Modules\Auth\Models\AuthModel; ?>
     $(document).ready(function() {
         var dataTable = $('#dataTables').DataTable({
             responsive: true,
-            order: [[0, 'asc']], // Urutkan berdasarkan kolom ID
-            columnDefs: [
-                {
-                    targets: 0, // Target kolom ID
-                    visible: false // Sembunyikan kolom ID
-                }
-            ]
+            order: [
+                [0, 'asc']
+            ], // Urutkan berdasarkan kolom ID
+            columnDefs: [{
+                targets: 0, // Target kolom ID
+                visible: false // Sembunyikan kolom ID
+            }]
         });
         loadData();
     });
