@@ -228,22 +228,22 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                 });
 
                 $('#formData').html(formData);
-
-                // Destroy DataTable if it exists, then initialize it
                 if ($.fn.DataTable.isDataTable('#dataTables')) {
-                    $('#dataTables').DataTable().destroy();
-                }
-                $('#dataTables').DataTable({
-                    responsive: true,
-                    order: [
-                        [0, 'asc']
-                    ], // Mengurutkan berdasarkan kolom ID
-                    columnDefs: [{
-                            targets: 0,
+                    // If it is, use clear and rows.add to reload data
+                    $('#dataTables').DataTable().clear().rows.add($('#formData').find('tr')).draw(false);
+                } else {
+                    // Initialize DataTables only once, after data has been loaded
+                    $('#dataTables').DataTable({
+                        responsive: true,
+                        order: [
+                            [0, 'asc']
+                        ], // Order by ID column
+                        columnDefs: [{
+                            targets: 0, // Hide ID column
                             visible: false
-                        } // Sembunyikan kolom ID
-                    ]
-                });
+                        }]
+                    });
+                }
             },
             error: function(xhr, status, error) {
                 console.error('Error fetching List Form:', error);

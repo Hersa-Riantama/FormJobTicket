@@ -213,16 +213,6 @@ use Modules\Auth\Models\AuthModel; ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        var dataTable = $('#dataTables').DataTable({
-            responsive: true,
-            order: [
-                [0, 'asc']
-            ], // Urutkan berdasarkan kolom ID
-            columnDefs: [{
-                targets: 0, // Target kolom ID
-                visible: false // Sembunyikan kolom ID
-            }]
-        });
         loadData();
     });
     // Fungsi untuk menampilkan data dari database
@@ -255,7 +245,22 @@ use Modules\Auth\Models\AuthModel; ?>
                     bukuData += '</tr>';
                 });
                 $('#bukuData').html(bukuData);
-                $('#dataTables').DataTable().clear().rows.add($('#bukuData').find('tr')).draw(false);
+                if ($.fn.DataTable.isDataTable('#dataTables')) {
+                    // If it is, use clear and rows.add to reload data
+                    $('#dataTables').DataTable().clear().rows.add($('#bukuData').find('tr')).draw(false);
+                } else {
+                    // Initialize DataTables only once, after data has been loaded
+                    $('#dataTables').DataTable({
+                        responsive: true,
+                        order: [
+                            [0, 'asc']
+                        ], // Order by ID column
+                        columnDefs: [{
+                            targets: 0, // Hide ID column
+                            visible: false
+                        }]
+                    });
+                }
             },
             error: function(xhr, status, error) {
                 console.error('Error loading data:', xhr.responseText);

@@ -63,16 +63,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        var dataTable = $('#dataTables').DataTable({
-            responsive: true,
-            order: [
-                [0, 'asc']
-            ], // Urutkan berdasarkan kolom ID
-            columnDefs: [{
-                targets: 0, // Target kolom ID
-                visible: false // Sembunyikan kolom ID
-            }]
-        });
         loadData();
     });
 
@@ -112,7 +102,22 @@
                     UserData += '</tr>';
                 });
                 $('#UserData').html(UserData);
-                $('#dataTables').DataTable().clear().rows.add($('#UserData').find('tr')).draw(false);
+                if ($.fn.DataTable.isDataTable('#dataTables')) {
+                    // If it is, use clear and rows.add to reload data
+                    $('#dataTables').DataTable().clear().rows.add($('#UserData').find('tr')).draw(false);
+                } else {
+                    // Initialize DataTables only once, after data has been loaded
+                    $('#dataTables').DataTable({
+                        responsive: true,
+                        order: [
+                            [0, 'asc']
+                        ], // Order by ID column
+                        columnDefs: [{
+                            targets: 0, // Hide ID column
+                            visible: false
+                        }]
+                    });
+                }
             }
         });
     }
