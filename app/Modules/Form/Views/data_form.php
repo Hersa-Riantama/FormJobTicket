@@ -187,8 +187,20 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                                     formData += '<span class="label text-approve bg-disapproved me-2 badge-centers fixed-width">Ditolak</span>';
                                     formData += '<button class="btn btn-success btn-approve fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
                                     isApproved = true;
-                                } else if (level === 'Editor' && value.approved_order_editor === 'Y') {
+                                } else if (level === 'Manager Platform' && value.approved_acc_manager === 'Y') {
                                     formData += '<span class="label text-approve bg-approved me-2 badge-centers fixed-width">Approved</span>';
+                                    formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
+                                    isApproved = true;
+                                } else if (level === 'Manager Platform' && value.approved_multimedia === 'R') {
+                                    formData += '<span class="label text-approve bg-disapproved me-2 badge-centers fixed-width">Ditolak</span>';
+                                    formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
+                                    isApproved = true;
+                                } else if (level === 'Tim Multimedia' && value.approved_multimedia === 'Y') {
+                                    formData += '<span class="label text-approve bg-approved me-2 badge-centers fixed-width">Approved</span>';
+                                    formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
+                                    isApproved = true;
+                                } else if (level === 'Tim Multimedia' && value.approved_multimedia === 'R') {
+                                    formData += '<span class="label text-approve bg-disapproved me-2 badge-centers fixed-width">Ditolak</span>';
                                     formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
                                     isApproved = true;
                                 }
@@ -438,5 +450,6 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
             }
         });
     }
+
 </script>
 <?= $this->endSection(); ?>
