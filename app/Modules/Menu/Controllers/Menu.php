@@ -62,7 +62,9 @@ class Menu extends BaseController
             ->countAllResults();
 
         $onProgress = $form
-            ->Where('approved_order_editor', 'N')
+            ->Where('approved_order_editor !=', 'R') // Mengecualikan jika approved_order_editor = 'R'
+            ->groupStart() // Mulai grup kondisi untuk OR
+            ->where('approved_order_editor', 'N')
             ->orwhere('approved_multimedia', 'N')
             ->orwhere('approved_multimedia', 'R')
             ->orWhere('approved_order_koord', 'N')
@@ -73,7 +75,9 @@ class Menu extends BaseController
             ->orWhere('approved_acc_koord', 'R')
             ->orWhere('approved_acc_manager', 'N')
             ->orWhere('approved_acc_manager', 'R')
+            ->groupEnd() // Tutup grup kondisi
             ->countAllResults();
+
 
         $data = [
             'judul' => 'Dashboard',
