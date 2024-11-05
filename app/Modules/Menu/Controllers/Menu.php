@@ -62,12 +62,17 @@ class Menu extends BaseController
             ->countAllResults();
 
         $onProgress = $form
-            ->where('approved_multimedia', 'N')
-            ->orWhere('approved_order_editor', 'N')
+            ->Where('approved_order_editor', 'N')
+            ->orwhere('approved_multimedia', 'N')
+            ->orwhere('approved_multimedia', 'R')
             ->orWhere('approved_order_koord', 'N')
+            ->orWhere('approved_order_koord', 'R')
             ->orWhere('approved_order_admin', 'N')
+            ->orWhere('approved_order_admin', 'R')
             ->orWhere('approved_acc_koord', 'N')
+            ->orWhere('approved_acc_koord', 'R')
             ->orWhere('approved_acc_manager', 'N')
+            ->orWhere('approved_acc_manager', 'R')
             ->countAllResults();
 
         $data = [

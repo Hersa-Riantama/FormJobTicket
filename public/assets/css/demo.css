@@ -59,6 +59,14 @@
   width: 45%; /* atau gunakan persentase, misalnya 100% jika dalam kontainer */
 }
 
+.fixed-width-user {
+  width: 90%; /* atau gunakan persentase, misalnya 100% jika dalam kontainer */
+}
+
+.fixed-width-ditolak {
+  width: 93%; /* atau gunakan persentase, misalnya 100% jika dalam kontainer */
+}
+
 .center-text {
   text-align: center; /* Tengah secara horizontal */
   vertical-align: middle; /* Tengah secara vertikal */
