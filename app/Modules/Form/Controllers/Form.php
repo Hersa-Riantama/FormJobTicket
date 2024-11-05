@@ -35,7 +35,60 @@ class Form extends BaseController
 
     public function index()
     {
-        return view($this->folder_directory . 'formc2');
+        $GrupModel = new GrupModel();
+        $UserModel = new UserModel();
+        // Ambil data user berdasarkan ID dari sesi
+        $userId = session()->get('id_user');
+
+        if (!empty($userId)) {
+            // Ambil data user dari database berdasarkan id_user
+            $userData = $UserModel->find($userId);
+            if ($userData && isset($userData['level_user'])) {
+                $allowUser = ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
+                if (!in_array($userData['level_user'], $allowUser)) {
+                    echo '<script>alert("Access Denied!!"); history.back();</script>';
+                    return;
+                }
+            } else {
+                echo '<script>alert("Level user tidak ditemukan."); history.back();</script>';
+                return;
+            }
+        } else {
+            return redirect()->to('/login');
+        }
+        // Set nilai default
+        $namaKoord = $namaEditor = $namaMultimedia = $namaAdmin = '';
+
+        // Tentukan nilai berdasarkan level user
+        switch ($userData['level_user']) {
+            case 'Editor':
+                $editorId = $GrupModel->where('id_editor', $userId)->first();
+                $koordId = $editorId['id_koord'];
+                $namaEditor = $UserModel->find($userId)['nama'];
+                $namaKoord = $UserModel->find($koordId)['nama'];
+                break;
+            case 'Koord Editor':
+                $namaKoord = $userData['nama'];
+                break;
+            case 'Tim Multimedia':
+                $namaMultimedia = $userData['nama'];
+                break;
+            case 'Admin Sistem':
+                $namaAdmin = $userData['nama'];
+                break;
+        }
+
+        // Siapkan data untuk view
+        $data = [
+            'judul' => 'Form QR Code',
+            'userData' => $userData,
+            'namaKoord' => $namaKoord,
+            'namaEditor' => $namaEditor,
+            'namaMultimedia' => $namaMultimedia,
+            'namaAdmin' => $namaAdmin,
+        ];
+
+        return view($this->folder_directory . 'formc2', $data);
     }
 
     public function getBukuOptions()

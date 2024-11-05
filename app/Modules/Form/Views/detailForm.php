@@ -578,7 +578,7 @@
                     </div>
                 </div>
 
-                <?php 
+                <?php
                 $approved_order_editor = $tiketData['approved_order_editor'];
                 if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Tim Multimedia', 'Editor']) && $approved_order_editor !== 'R') : ?>
                     <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">

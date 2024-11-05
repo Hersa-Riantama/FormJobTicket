@@ -90,8 +90,28 @@
   border: 1.5px solid #e0b3d3;
 }
 
+.border-c2{
+  border: 1.5px solid #1c2939;
+  border-radius: 0;
+}
+
+.border-xatas{
+  border-radius: 0;
+  border-left: 1.5px solid #1c2939;
+  border-right: 1.5px solid #1c2939;
+  border-top: 1.5px solid #1c2939;
+}
+
 .border-atas{
   border-top: 1.5px solid #e0b3d3;
+}
+
+.border-atas2{
+  border-top: 1.5px solid #1c2939;
+}
+
+.border-bawah{
+  border-bottom: 1.5px solid #1c2939;
 }
 
 .text-approve{
