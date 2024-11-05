@@ -213,9 +213,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '<i class="bx bx-dots-horizontal-rounded"></i>';
                     formData += '</button>';
                     formData += '<div class="dropdown-menu">';
-                    if (value.approved_order_editor !== 'R') {
-                        formData += '<a class="dropdown-item dropdown-item-detail" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '"><i class="bx bx-edit-alt me-2"></i>Detail</a>';
-                    }
+                    formData += '<a class="dropdown-item dropdown-item-detail" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '"><i class="bx bx-edit-alt me-2"></i>Detail</a>';
                     formData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '"><i class="bx bx-trash me-2"></i> Delete</a>';
                     formData += '</div>';
                     formData += '</div>';
