@@ -741,7 +741,7 @@ class Form extends BaseController
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
             } else {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
