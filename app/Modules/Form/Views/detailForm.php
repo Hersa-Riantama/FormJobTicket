@@ -285,7 +285,9 @@
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_order_editor'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
-                                                                <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">
+                                                                    <?= $tiketData['approved_order_editor'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>
+                                                                </p>
                                                                 <?php if (!empty($tiketData['tgl_order_editor']) && $tiketData['tgl_order_editor'] !== '0000-00-00' && $tiketData['tgl_order_editor'] !== '-0001-11-30'): ?>
                                                                     <p class="text-start text-biru" style="font-size:xx-small;">
                                                                         <?= date('d/m/Y', strtotime($tiketData['tgl_order_editor'])); ?>
@@ -295,6 +297,10 @@
                                                             <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
                                                                 <div class="approved-status">
                                                                     <img src="<?= base_url('/assets/img/icons/approved.png') ?>" style="height: 3.5rem;" alt="Approved" />
+                                                                </div>
+                                                            <?php elseif ($tiketData['approved_order_editor'] === 'R'): ?>
+                                                                <div class="approved-status">
+                                                                    <img src="<?= base_url('/assets/img/icons/rejected.png') ?>" style="height: 3.5rem;" alt="Rejected" />
                                                                 </div>
                                                             <?php else: ?>
                                                                 <!-- Ruang Kosong -->
@@ -308,7 +314,9 @@
                                                         <div class="card h-100 <?= $tiketData['approved_order_koord'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <?php $level_user = session()->get('level_user'); ?>
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Koord Editor' && $tiketData['approved_order_koord'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
-                                                                <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">
+                                                                    <?= $tiketData['approved_order_koord'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>
+                                                                </p>
                                                                 <?php if (!empty($tiketData['tgl_order_koord']) && $tiketData['tgl_order_koord'] !== '0000-00-00' && $tiketData['tgl_order_koord'] !== '-0001-11-30'): ?>
                                                                     <p class="text-start text-biru" style="font-size:xx-small;">
                                                                         <?= date('d/m/Y', strtotime($tiketData['tgl_order_koord'])); ?>
@@ -321,6 +329,10 @@
                                                             <?php elseif ($tiketData['approved_order_koord'] === 'Y'): ?>
                                                                 <div class="approved-status">
                                                                     <img src="<?= base_url('/assets/img/icons/approved.png') ?>" style="height: 3.5rem;" alt="Approved" />
+                                                                </div>
+                                                            <?php elseif ($tiketData['approved_order_koord'] === 'R'): ?>
+                                                                <div class="approved-status">
+                                                                    <img src="<?= base_url('/assets/img/icons/rejected.png') ?>" style="height: 3.5rem;" alt="Rejected" />
                                                                 </div>
                                                             <?php else: ?>
                                                                 <!-- Ruang Kosong -->
@@ -362,7 +374,9 @@
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_multimedia'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <div class=" card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Tim Multimedia' && $tiketData['approved_multimedia'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
-                                                                <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">
+                                                                    <?= $tiketData['approved_multimedia'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>
+                                                                </p>
                                                                 <?php if (!empty($tiketData['tgl_acc_multimedia']) && $tiketData['tgl_acc_multimedia'] !== '0000-00-00' && $tiketData['tgl_acc_multimedia'] !== '-0001-11-30'): ?>
                                                                     <p class="text-start text-biru" style="font-size:xx-small;">
                                                                         <?= date('d/m/Y', strtotime($tiketData['tgl_acc_multimedia'])); ?>
@@ -376,6 +390,10 @@
                                                             <?php elseif ($tiketData['approved_multimedia'] === 'Y'): ?>
                                                                 <div class="approved-status">
                                                                     <img src="<?= base_url('/assets/img/icons/approved.png') ?>" style="height: 3.5rem;" alt="Approved" />
+                                                                </div>
+                                                            <?php elseif ($tiketData['approved_multimedia'] === 'R'): ?>
+                                                                <div class="approved-status">
+                                                                    <img src="<?= base_url('/assets/img/icons/rejected.png') ?>" style="height: 3.5rem;" alt="Rejected" />
                                                                 </div>
                                                             <?php else: ?>
                                                                 <!-- Ruang Kosong -->
@@ -442,7 +460,9 @@
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_acc_koord'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Koord Editor' && $tiketData['approved_acc_koord'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
-                                                                <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">
+                                                                    <?= $tiketData['approved_acc_koord'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>
+                                                                </p>
                                                                 <?php if (!empty($tiketData['tgl_acc_koord']) && $tiketData['tgl_acc_koord'] !== '0000-00-00' && $tiketData['tgl_acc_koord'] !== '-0001-11-30'): ?>
                                                                     <p class="text-start text-biru" style="font-size:xx-small;">
                                                                         <?= date('d/m/Y', strtotime($tiketData['tgl_acc_koord'])); ?>
@@ -457,6 +477,10 @@
                                                                 <div class="approved-status">
                                                                     <img src="<?= base_url('/assets/img/icons/approved.png') ?>" style="height: 3.5rem;" alt="Approved" />
                                                                 </div>
+                                                            <?php elseif ($tiketData['approved_acc_koord'] === 'R'): ?>
+                                                                <div class="approved-status">
+                                                                    <img src="<?= base_url('/assets/img/icons/rejected.png') ?>" style="height: 3.5rem;" alt="Rejected" />
+                                                                </div>
                                                             <?php else: ?>
                                                                 <!-- Ruang Kosong -->
                                                                 <div style="height: 1rem; background-color: transparent;"></div>
@@ -468,7 +492,9 @@
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_acc_manager'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Manager Platform' && $tiketData['approved_acc_manager'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
-                                                                <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">
+                                                                    <?= $tiketData['approved_acc_manager'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>
+                                                                </p>
                                                                 <?php if (!empty($tiketData['tgl_acc_manager']) && $tiketData['tgl_acc_manager'] !== '0000-00-00' && $tiketData['tgl_acc_manager'] !== '-0001-11-30'): ?>
                                                                     <p class="text-start text-biru" style="font-size:xx-small;">
                                                                         <?= date('d/m/Y', strtotime($tiketData['tgl_acc_manager'])); ?>
@@ -482,6 +508,10 @@
                                                             <?php elseif ($tiketData['approved_acc_manager'] === 'Y'): ?>
                                                                 <div class="approved-status">
                                                                     <img src="<?= base_url('/assets/img/icons/approved.png') ?>" style="height: 3.5rem;" alt="Approved" />
+                                                                </div>
+                                                            <?php elseif ($tiketData['approved_acc_manager'] === 'R'): ?>
+                                                                <div class="approved-status">
+                                                                    <img src="<?= base_url('/assets/img/icons/rejected.png') ?>" style="height: 3.5rem;" alt="Rejected" />
                                                                 </div>
                                                             <?php else: ?>
                                                                 <!-- Ruang Kosong -->
@@ -503,7 +533,9 @@
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 <?= $tiketData['approved_order_admin'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Admin Sistem' && $tiketData['approved_order_admin'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
-                                                                <p class="text-start text-biru" style="font-size:xx-small;">Tanggal: </p>
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">
+                                                                    <?= $tiketData['approved_order_admin'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>
+                                                                </p>
                                                                 <?php if (!empty($tiketData['tgl_acc_admin']) && $tiketData['tgl_acc_admin'] !== '0000-00-00' && $tiketData['tgl_acc_admin'] !== '-0001-11-30'): ?>
                                                                     <p class="text-start text-biru" style="font-size:xx-small;">
                                                                         <?= date('d/m/Y', strtotime($tiketData['tgl_acc_admin'])); ?>
@@ -517,6 +549,10 @@
                                                             <?php elseif ($tiketData['approved_order_admin'] === 'Y'): ?>
                                                                 <div class="approved-status">
                                                                     <img src="<?= base_url('/assets/img/icons/approved.png') ?>" style="height: 3.5rem;" alt="Approved" />
+                                                                </div>
+                                                            <?php elseif ($tiketData['approved_order_admin'] === 'R'): ?>
+                                                                <div class="approved-status">
+                                                                    <img src="<?= base_url('/assets/img/icons/rejected.png') ?>" style="height: 3.5rem;" alt="Rejected" />
                                                                 </div>
                                                             <?php else: ?>
                                                                 <!-- Ruang Kosong -->
@@ -586,13 +622,6 @@
 <!-- / Layout wrapper -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    // const dates = document.querySelectorAll('.text-end');
-    // const currentDate = new Date();
-    // const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
-    // dates.forEach(date => {
-    //     date.textContent = formattedDate;
-    // });
-
     // Mencegah perubahan pilihan radio
     $('input[name="inlineRadioOption"]').on('click', function(event) {
         if ($(this).is(':checked')) {

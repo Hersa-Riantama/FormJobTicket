@@ -735,6 +735,16 @@ class Form extends BaseController
             } else {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
+        } else if ($userLevel ===  'Editor') {
+            $builder->set('approved_order_editor', 'R');
+            $builder->set('tgl_order_editor', $disapprovalDate);
+            $builder->where('id_tiket', $id_tiket);
+            $updated = $builder->update();
+            if ($updated) {
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
+            } else {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
+            }
         }
         return $this->response->setJSON(['status' => 'success', 'Pesan' => 'Tiket Berhasil di Approve']);
     }
