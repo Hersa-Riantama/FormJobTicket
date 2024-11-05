@@ -85,7 +85,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
         return date.toLocaleDateString('en-GB', options); // 'en-GB' menghasilkan format d-m-y
     }
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         loadData();
     });
 
@@ -94,13 +94,13 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
             type: 'GET',
             url: 'http://localhost:8080/listform',
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 var kodeBukuMap = {};
                 var bukuMap = {};
                 var userMap = {};
 
                 // Mapping buku
-                $.each(response.buku, function(key, buku) {
+                $.each(response.buku, function (key, buku) {
                     if (buku.id_buku && buku.judul_buku) {
                         bukuMap[buku.id_buku] = buku.judul_buku;
                     }
@@ -110,7 +110,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                 });
 
                 // Mapping user
-                $.each(response.user, function(key, user) {
+                $.each(response.user, function (key, user) {
                     if (user.id_user && user.nama) {
                         userMap[user.id_user] = user.nama;
                     }
@@ -121,7 +121,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                 var isKoordEditor = <?= $isKoordEditor; ?>;
                 var islevel_user = <?= json_encode($level_user); ?>;
                 console.log("Is Koord Editor:", isKoordEditor);
-                $.each(response.tiket, function(key, value) {
+                $.each(response.tiket, function (key, value) {
 
                     // Ambil judul buku dan nama user
                     var kode_buku = kodeBukuMap[value.id_buku] || 'Unknown Kode';
@@ -241,17 +241,17 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     });
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error('Error fetching List Form:', error);
             }
         });
     }
-    $(document).on('click', '.dropdown-item-detail', function() {
+    $(document).on('click', '.dropdown-item-detail', function () {
         var id_tiket = $(this).data('id_tiket');
         window.location.href = '/detail/' + id_tiket; // Redirect to the detail page
     });
 
-    $(document).on('click', '.dropdown-item-delete', function() {
+    $(document).on('click', '.dropdown-item-delete', function () {
         var id_tiket = $(this).data('id_tiket');
         var konfirmasi = confirm("Apakah Anda yakin hapus buku ini? ");
         if (konfirmasi) {
@@ -259,20 +259,20 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                 type: 'DELETE',
                 url: 'http://localhost:8080/delete/' + id_tiket, // Redirect to the detail page
                 dataType: 'json',
-                success: function(response) {
+                success: function (response) {
                     location.reload()
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error('Error fetching List Form:', error);
                 }
             });
         }
     });
-    $('.btn-approve').on('click', function() {
+    $('.btn-approve').on('click', function () {
         const id_tiket = $(this).data('id_tiket');
         approveTicket(id_tiket);
     });
-    $('.btn-disapprove').on('click', function() {
+    $('.btn-disapprove').on('click', function () {
         const id_tiket = $(this).data('id_tiket');
         approveTicket(id_tiket); // Reject
     });
@@ -285,7 +285,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                 id_tiket: id_tiket
             },
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 if (response.status === 'success') {
                     alert(response.message);
                     $('#approveButton').hide();
@@ -295,7 +295,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     alert(response.message);
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(error);
                 alert('An error occurred while trying to approve the ticket');
             }
@@ -310,7 +310,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                 id_tiket: id_tiket
             },
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 if (response.status === 'success') {
                     alert(response.message);
                     $('#approveButton').hide();
@@ -320,17 +320,17 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     alert(response.message);
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(error);
                 alert('An error occurred while trying to disapprove the ticket');
             }
         });
     }
-    $('.btn-approve').on('click', function() {
+    $('.btn-approve').on('click', function () {
         const id_tiket = $(this).data('id_tiket');
         approveOrder(id_tiket);
     });
-    $('.btn-disapprove').on('click', function() {
+    $('.btn-disapprove').on('click', function () {
         const id_tiket = $(this).data('id_tiket');
         disapproveOrder(id_tiket);
     });
@@ -343,7 +343,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                 id_tiket: id_tiket
             },
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 if (response.status === 'success') {
                     alert(response.message);
                     $('#approveButton').hide();
@@ -352,7 +352,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     alert(response.message);
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(error);
                 alert('An error occurred while trying to disapprove the ticket');
             }
@@ -367,7 +367,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                 id_tiket: id_tiket
             },
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 if (response.status === 'success') {
                     alert(response.message);
                     $('#approveButton').hide();
@@ -376,17 +376,17 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     alert(response.message);
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(error);
                 alert('An error occurred while trying to disapprove the ticket');
             }
         });
     }
-    $('.btn-approve').on('click', function() {
+    $('.btn-approve').on('click', function () {
         const id_tiket = $(this).data('id_tiket');
         approveAcc(id_tiket);
     });
-    $('.btn-disapprove').on('click', function() {
+    $('.btn-disapprove').on('click', function () {
         const id_tiket = $(this).data('id_tiket');
         disapproveAcc(id_tiket);
     });
@@ -399,7 +399,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                 id_tiket: id_tiket
             },
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 if (response.status === 'success') {
                     alert(response.message);
                     $('#approveButton').hide();
@@ -408,7 +408,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     alert(response.message);
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(error);
                 alert('An error occurred while trying to disapprove the ticket');
             }
@@ -423,7 +423,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                 id_tiket: id_tiket
             },
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 if (response.status === 'success') {
                     alert(response.message);
                     $('#approveButton').hide();
@@ -432,7 +432,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     alert(response.message);
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(error);
                 alert('An error occurred while trying to disapprove the ticket');
             }
