@@ -7,7 +7,7 @@
         <div class="form-group">
 
             <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
-                <h4 class="py-3 mb-4"><span class="text-muted fw-light">Form /</span> Form QR Code</h4>
+                <h4 class="py-3 mb-4"><span class="text-muted fw-light">Tiket /</span> Form QR Code</h4>
                 <div class="row justify-content-between align-items-start">
                     <h6 class="mb-0 text-hitam" style="font-weight: 100;">FRM.DGT.05.01/</h6>
                 </div>
@@ -283,7 +283,7 @@
                                                 <div class="row mt-4 mx-0">
 
                                                     <div class="col-xl mb-2 px-0">
-                                                        <div class="card h-100 <?= $tiketData['approved_order_editor'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
+                                                        <div class="card h-100 <?= ($tiketData['approved_order_editor'] === 'Y' || $tiketData['approved_order_editor'] === 'R') ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">
                                                                     <?= $tiketData['approved_order_editor'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>
@@ -311,7 +311,7 @@
                                                         </div>
                                                     </div>
                                                     <div class=" col-xl mb-2 px-0">
-                                                        <div class="card h-100 <?= $tiketData['approved_order_koord'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
+                                                        <div class="card h-100 <?= ($tiketData['approved_order_koord'] === 'Y' || $tiketData['approved_order_koord'] === 'R')  ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <?php $level_user = session()->get('level_user'); ?>
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Koord Editor' && $tiketData['approved_order_koord'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">
@@ -372,7 +372,7 @@
                                                 <div class="row mt-4 mx-0">
 
                                                     <div class="col-xl mb-2 px-0">
-                                                        <div class="card h-100 <?= $tiketData['approved_multimedia'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
+                                                        <div class="card h-100 <?= ($tiketData['approved_multimedia'] === 'Y' || $tiketData['approved_multimedia'] === 'R')  ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <div class=" card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Tim Multimedia' && $tiketData['approved_multimedia'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">
                                                                     <?= $tiketData['approved_multimedia'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>
@@ -458,7 +458,7 @@
                                                 <h6 class="text-center rounded py-2 warna-pink text-hitam"><i>Approval</i></h6>
                                                 <div class="row mt-4 mx-0">
                                                     <div class="col-xl mb-2 px-0">
-                                                        <div class="card h-100 <?= $tiketData['approved_acc_koord'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
+                                                        <div class="card h-100 <?= ($tiketData['approved_acc_koord'] === 'Y' || $tiketData['approved_acc_koord'] === 'R')  ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Koord Editor' && $tiketData['approved_acc_koord'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">
                                                                     <?= $tiketData['approved_acc_koord'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>
@@ -490,7 +490,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-xl mb-2 px-0">
-                                                        <div class="card h-100 <?= $tiketData['approved_acc_manager'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
+                                                        <div class="card h-100 <?= ($tiketData['approved_acc_manager'] === 'Y' || $tiketData['approved_acc_manager'] === 'R')  ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Manager Platform' && $tiketData['approved_acc_manager'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">
                                                                     <?= $tiketData['approved_acc_manager'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>
@@ -531,7 +531,7 @@
                                                 <h6 class="text-center rounded py-2 warna-pink text-hitam">Arsip</h6>
                                                 <div class="row mt-4 mx-0">
                                                     <div class="col-xl mb-2 px-0">
-                                                        <div class="card h-100 <?= $tiketData['approved_order_admin'] === 'Y' ? 'mb-2' : 'mb-5'; ?> warna-border">
+                                                        <div class="card h-100 <?= ($tiketData['approved_order_admin'] === 'Y' || $tiketData['approved_order_admin'] === 'R') ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Admin Sistem' && $tiketData['approved_order_admin'] !== 'Y' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
                                                                 <p class="text-start text-biru" style="font-size:xx-small;">
                                                                     <?= $tiketData['approved_order_admin'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>

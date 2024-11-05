@@ -7,7 +7,7 @@ use Modules\Auth\Models\AuthModel; ?>
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Form /</span> Kelola Tiket</h4>
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Tiket /</span> Kelola Tiket</h4>
 
         <!-- Basic Bootstrap Table -->
         <div class="card">
@@ -69,7 +69,7 @@ $AuthModel = new AuthModel();
 $userId = session()->get('id_user');
 $userData = $AuthModel->find($userId);
 $isKoordEditor = ($userData && isset($userData['level_user']) && $userData['level_user'] === 'Koord Editor') ? 'true' : 'false';
-$validLevels = ['Admin Sistem', 'Tim Multimedia', 'Manager Platform','Editor'];
+$validLevels = ['Admin Sistem', 'Tim Multimedia', 'Manager Platform', 'Editor'];
 $level_user = ($userData && isset($userData['level_user']) && in_array($userData['level_user'], $validLevels)) ? [$userData['level_user']] : [];
 ?>
 <script>
@@ -136,10 +136,11 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '<tr>';
                     formData += '<td>' + value.id_tiket + '</td>';
                     formData += '<td>';
-
                     // Periksa apakah tiket sudah ditolak oleh Editor
                     if (value.approved_order_editor === 'R') {
-                        formData += '<span class="label text-approve bg-disapproved me-2 badge-centers fixed-width">Ditolak</span>';
+                        formData += '<div class="button-group d-flex">';
+                        formData += '<span class="label text-approve bg-disapproved badge-centers fixed-width-ditolak">Ditolak</span>';
+                        formData += '</div>';
                     } else {
                         // Jika belum ditolak, lanjutkan dengan logika biasa untuk rendering tombol
                         if (isKoordEditor) {
@@ -221,7 +222,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '</div>';
                     formData += '</td>';
                     formData += '</tr>';
-                    });
+                });
 
 
                 $('#formData').html(formData);

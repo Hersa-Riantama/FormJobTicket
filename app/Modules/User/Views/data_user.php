@@ -78,9 +78,9 @@
                     UserData += '<td>' + value.id_user + '</td>';
                     // Tombol Verifikasi (Hanya muncul jika user belum diverifikasi)
                     if (value.verifikasi === 'N') { // Jika user belum diverifikasi
-                        UserData += '<td class="center-text"><button class="badge btn btn-danger btn-verify" data-id_user="' + value.id_user + '">Verifikasi</button></td>';
+                        UserData += '<td class="center-text"><button class="badge btn btn-danger btn-verify fixed-width-user" data-id_user="' + value.id_user + '">Verifikasi</button></td>';
                     } else {
-                        UserData += '<td class="center-text"><span class="badge bg-success">Terverifikasi</span></td>';
+                        UserData += '<td class="center-text"><span class="badge bg-success fixed-width-user">Terverifikasi</span></td>';
                     }
                     UserData += '<td class="wrap-text">' + value.nama + '</td>';
                     UserData += '<td>' + value.nomor_induk + '</td>';

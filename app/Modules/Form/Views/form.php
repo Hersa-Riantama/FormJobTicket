@@ -7,7 +7,7 @@
         <div class="form-group">
 
             <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
-                <h4 class="py-3 mb-4"><span class="text-muted fw-light">Form /</span> Form QR Code</h4>
+                <h4 class="py-3 mb-4"><span class="text-muted fw-light">Tiket /</span> Form QR Code</h4>
                 <div class="row justify-content-between align-items-start">
                     <h6 class="mb-0 text-hitam" style="font-weight: 100;">FRM.DGT.05.01/</h6>
                 </div>
