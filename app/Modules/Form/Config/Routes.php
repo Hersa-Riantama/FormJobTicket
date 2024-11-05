@@ -22,6 +22,7 @@ $routes->group(
     ['filter' => 'sessionCheck'],
     function ($routes) {
         $routes->get('form', 'Form::form');
+        $routes->get('formc2', 'Form::index');
         $routes->get('tampilbuku', 'Form::getBukuOptions');
         $routes->get('tampilbuku/(:segment)', 'Form::getBukuDetails/$1');
         $routes->post('form', 'Form::createForm');

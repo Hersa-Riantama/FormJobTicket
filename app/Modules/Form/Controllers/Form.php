@@ -33,7 +33,9 @@ class Form extends BaseController
         $this->session = session();
     }
 
-    public function index() {}
+    public function index() {
+        return view($this->folder_directory . 'formc2');
+    }
 
     public function getBukuOptions()
     {
