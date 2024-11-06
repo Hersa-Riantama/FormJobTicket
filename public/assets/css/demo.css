@@ -114,6 +114,10 @@
   border-bottom: 1.5px solid #1c2939;
 }
 
+.border-hitam{
+  border: 1.5px solid #1c2939 !important;
+}
+
 .text-approve{
   color: black;
   font-weight: 400;
@@ -125,10 +129,6 @@
 
 .text-hitam{
   color: black;
-}
-
-.border-hitam{
-  border: 1.5px solid #1c2939 !important;
 }
 
 .oval{
