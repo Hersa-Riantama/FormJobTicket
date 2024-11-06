@@ -139,7 +139,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     // Periksa apakah tiket sudah ditolak oleh Editor
                     if (value.approved_order_editor === 'R') {
                         formData += '<div class="d-flex">';
-                        formData += '<span class="label text-approve bg-disapproved badge-centers fixed-width-ditolak">Ditolak</span>';
+                        formData += '<span class="badge  bg-label-danger badge-centers fixed-width-ditolak">Ditolak</span>';
                         formData += '</div>';
                     } else {
                         if (isKoordEditor) {
@@ -216,16 +216,16 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '<td class="wrap-text">' + judul_buku + '</td>';
                     formData += '<td>' + formatDate(value.created_at) + '</td>';
                     formData += '<td>';
-                    formData += '<div class="dropdown">';
-                    formData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
-                    formData += '<i class="bx bx-dots-horizontal-rounded"></i>';
-                    formData += '</button>';
-                    formData += '<div class="dropdown-menu">';
-                    formData += '<a class="dropdown-item dropdown-item-detail" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '"><i class="bx bx-edit-alt me-2"></i>Detail</a>';
-                    formData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '"><i class="bx bx-trash me-2"></i> Delete</a>';
-                    formData += '</div>';
+                    formData += '<div class="d-flex justify-content-start align-items-center">'; // Flex container for inline display
+                    formData += '<a class="tiket-detail" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Detail Tiket">';
+                    formData += '<i class="bx bxs-show bx-sm me-2"></i></a>'; // View icon with tooltip
+                    formData += '<a class="tiket-delete" style="color: red;" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '" title="Hapus Tiket">';
+                    formData += '<i class="bx bx-trash bx-sm me-2"></i></a>'; // Delete icon with tooltip
+                    formData += '<a class="tiket-tolak" style="color: red;" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Tolak Tiket">';
+                    formData += '<i class="bx bx-x-circle bx-sm me-2"></i></a>'; // View icon with tooltip
                     formData += '</div>';
                     formData += '</td>';
+
                     formData += '</tr>';
                 });
                 $('#formData').html(formData);
@@ -254,12 +254,12 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
             }
         });
     }
-    $(document).on('click', '.dropdown-item-detail', function() {
+    $(document).on('click', '.tiket-detail', function() {
         var id_tiket = $(this).data('id_tiket');
         window.location.href = '/detail/' + id_tiket; // Redirect to the detail page
     });
 
-    $(document).on('click', '.dropdown-item-delete', function() {
+    $(document).on('click', '.tiket-delete', function() {
         var id_tiket = $(this).data('id_tiket');
         var konfirmasi = confirm("Apakah Anda yakin hapus buku ini? ");
         if (konfirmasi) {

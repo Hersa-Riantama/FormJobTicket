@@ -155,6 +155,17 @@
   height: auto;
 }
 
+.bg-label-danger {
+  background-color:#ffe0db !important;
+  color:#ff3e1d !important
+}
+.border-label-danger {
+  border:3px solid #ffb2a5
+}
+.border-light-danger {
+  border:3px solid rgba(255,62,29,.08)
+}
+
 .switch {
   margin-right:.75rem;
   position:relative;
