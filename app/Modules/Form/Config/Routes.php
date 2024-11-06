@@ -28,11 +28,8 @@ $routes->group(
         $routes->post('form', 'Form::createForm');
         $routes->post('updateForm/(:segment)', 'Form::updateForm/$1');
         $routes->post('approveTiket', 'Form::approveTicket');
-        $routes->post('disapproveTicket', 'Form::disapproveTicket');
         $routes->post('approveOrderKoord', 'Form::approvedOrderKoord');
-        $routes->post('disapproveOrderKoord', 'Form::disapprovedOrderKoord');
         $routes->post('approveAccKoord', 'Form::approvedAccKoord');
-        $routes->post('disapprovedAccKoord', 'Form::disapprovedAccKoord');
         $routes->post('approved', 'Form::approveTicketD');
         $routes->get('detail/(:segment)', 'Form::detailForm/$1');
         $routes->delete('delete/(:segment)', 'Form::delete/$1');

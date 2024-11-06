@@ -148,7 +148,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
 
                             // Order Approval Toggle
                             formData += '<label class="switch switch-success">';
-                            formData += '<input type="checkbox" class="switch-input" ' + (value.approved_order_koord === 'Y' ? 'checked' : '') + ' onclick="toggleOrderApproval(' + value.id_tiket + ', this.checked)">';
+                            formData += '<input type="checkbox" class="switch-input" ' + (value.approved_order_koord === 'Y' ? 'checked' : '') + ' onclick="approveOrder(' + value.id_tiket + ', this.checked)">';
                             formData += '<span class="switch-toggle-slider"></span>';
                             formData += '</label>';
                             formData += '<span class="ms-5">' + (value.approved_order_koord === 'Y' ? 'Order' : 'Order') + '</span>';
@@ -157,7 +157,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                             // ACC Approval Toggle
                             formData += '<div class="d-flex">';
                             formData += '<label class="switch switch-success">';
-                            formData += '<input type="checkbox" class="switch-input"' + (value.approved_acc_koord === 'Y' ? 'checked' : '') + ' onclick="toggleAccApproval(' + value.id_tiket + ', this.checked)">';
+                            formData += '<input type="checkbox" class="switch-input"' + (value.approved_acc_koord === 'Y' ? 'checked' : '') + ' onclick="approveAcc(' + value.id_tiket + ', this.checked)">';
                             formData += '<span class="switch-toggle-slider"></span>';
                             formData += '</label>';
                             formData += '<span class="ms-5">' + (value.approved_acc_koord === 'Y' ? 'Acc' : 'ACC') + '</span>';
@@ -170,21 +170,28 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                             islevel_user.forEach(level => {
                                 if (level === 'Admin Sistem') {
                                     formData += '<label class="switch switch-success">';
-                                    formData += '<input type="checkbox" class="switch-input"' + (value.approved_order_admin === 'Y' ? 'checked' : '') + ' onclick="toggleAdminApproval(' + value.id_tiket + ', this.checked)">';
+                                    formData += '<input type="checkbox" class="switch-input"' + (value.approved_order_admin === 'Y' ? 'checked' : '') + ' onclick="approveTicket(' + value.id_tiket + ', this.checked)">';
                                     formData += '<span class="switch-toggle-slider"></span>';
                                     formData += '</label>';
                                     // formData += '<span class="ms-2">' + (value.approved_order_admin === 'Y' ? 'Approved' : 'Setuju') + '</span>';
                                     isApproved = true;
                                 } else if (level === 'Manager Platform') {
                                     formData += '<label class="switch switch-success">';
-                                    formData += '<input type="checkbox" class="switch-input"' + (value.approved_acc_manager === 'Y' ? 'checked' : '') + ' onclick="toggleManagerApproval(' + value.id_tiket + ', this.checked)">';
+                                    formData += '<input type="checkbox" class="switch-input"' + (value.approved_acc_manager === 'Y' ? 'checked' : '') + ' onclick="approveTicket(' + value.id_tiket + ', this.checked)">';
                                     formData += '<span class="switch-toggle-slider"></span>';
                                     formData += '</label>';
                                     // formData += '<span class="ms-2">' + (value.approved_acc_manager === 'Y' ? 'Approved' : 'Setuju') + '</span>';
                                     isApproved = true;
                                 } else if (level === 'Tim Multimedia') {
                                     formData += '<label class="switch switch-success">';
-                                    formData += '<input type="checkbox" class="switch-input"' + (value.approved_multimedia === 'Y' ? 'checked' : '') + ' onclick="toggleMultimediaApproval(' + value.id_tiket + ', this.checked)">';
+                                    formData += '<input type="checkbox" class="switch-input"' + (value.approved_multimedia === 'Y' ? 'checked' : '') + ' onclick="approveTicket(' + value.id_tiket + ', this.checked)">';
+                                    formData += '<span class="switch-toggle-slider"></span>';
+                                    formData += '</label>';
+                                    // formData += '<span class="ms-2">' + (value.approved_multimedia === 'Y' ? 'Approved' : 'Setuju') + '</span>';
+                                    isApproved = true;
+                                } else if (level === 'Editor') {
+                                    formData += '<label class="switch switch-success">';
+                                    formData += '<input type="checkbox" class="switch-input"' + (value.approved_order_editor === 'Y' ? 'checked' : '') + ' onclick="approveTicket(' + value.id_tiket + ', this.checked)">';
                                     formData += '<span class="switch-toggle-slider"></span>';
                                     formData += '</label>';
                                     // formData += '<span class="ms-2">' + (value.approved_multimedia === 'Y' ? 'Approved' : 'Setuju') + '</span>';
@@ -270,24 +277,20 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
         const id_tiket = $(this).data('id_tiket');
         approveTicket(id_tiket);
     });
-    $('.btn-disapprove').on('click', function () {
-        const id_tiket = $(this).data('id_tiket');
-        approveTicket(id_tiket); // Reject
-    });
 
-    function approveTicket(id_tiket) {
+    function approveTicket(id_tiket, isChecked) {
         $.ajax({
             type: 'POST',
             url: 'approveTiket',
             data: {
-                id_tiket: id_tiket
+                id_tiket: id_tiket,
+                status: isChecked ? 'Y' : 'N'
             },
             dataType: 'json',
             success: function (response) {
                 if (response.status === 'success') {
                     alert(response.message);
                     $('#approveButton').hide();
-                    $('.approved-status').html('<span class="badge bg-success">Approved</span>');
                     location.reload();
                 } else {
                     alert(response.message);
@@ -300,69 +303,18 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
         });
     }
 
-    function disapproveTicket(id_tiket) {
-        $.ajax({
-            type: 'POST',
-            url: 'disapproveTicket', // Adjust this URL to match your route
-            data: {
-                id_tiket: id_tiket
-            },
-            dataType: 'json',
-            success: function (response) {
-                if (response.status === 'success') {
-                    alert(response.message);
-                    $('#approveButton').hide();
-                    $('.approved-status').html('<span class="badge bg-success">Approved</span>');
-                    location.reload();
-                } else {
-                    alert(response.message);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error(error);
-                alert('An error occurred while trying to disapprove the ticket');
-            }
-        });
-    }
     $('.btn-approve').on('click', function () {
         const id_tiket = $(this).data('id_tiket');
         approveOrder(id_tiket);
     });
-    $('.btn-disapprove').on('click', function () {
-        const id_tiket = $(this).data('id_tiket');
-        disapproveOrder(id_tiket);
-    });
 
-    function approveOrder(id_tiket) {
+    function approveOrder(id_tiket, isChecked) {
         $.ajax({
             type: 'POST',
             url: 'approveOrderKoord', // Adjust this URL to match your route
             data: {
-                id_tiket: id_tiket
-            },
-            dataType: 'json',
-            success: function (response) {
-                if (response.status === 'success') {
-                    alert(response.message);
-                    $('#approveButton').hide();
-                    location.reload();
-                } else {
-                    alert(response.message);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error(error);
-                alert('An error occurred while trying to disapprove the ticket');
-            }
-        });
-    }
-
-    function disapproveOrder(id_tiket) {
-        $.ajax({
-            type: 'POST',
-            url: 'disapproveOrderKoord', // Adjust this URL to match your route
-            data: {
-                id_tiket: id_tiket
+                id_tiket: id_tiket,
+                status: isChecked ? 'Y' : 'N'
             },
             dataType: 'json',
             success: function (response) {
@@ -384,41 +336,14 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
         const id_tiket = $(this).data('id_tiket');
         approveAcc(id_tiket);
     });
-    $('.btn-disapprove').on('click', function () {
-        const id_tiket = $(this).data('id_tiket');
-        disapproveAcc(id_tiket);
-    });
 
-    function approveAcc(id_tiket) {
+    function approveAcc(id_tiket, isChecked) {
         $.ajax({
             type: 'POST',
             url: 'approveAccKoord', // Adjust this URL to match your route
             data: {
-                id_tiket: id_tiket
-            },
-            dataType: 'json',
-            success: function (response) {
-                if (response.status === 'success') {
-                    alert(response.message);
-                    $('#approveButton').hide();
-                    location.reload();
-                } else {
-                    alert(response.message);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error(error);
-                alert('An error occurred while trying to disapprove the ticket');
-            }
-        });
-    }
-
-    function disapproveAcc(id_tiket) {
-        $.ajax({
-            type: 'POST',
-            url: 'disapprovedAccKoord', // Adjust this URL to match your route
-            data: {
-                id_tiket: id_tiket
+                id_tiket: id_tiket,
+                status: isChecked ? 'Y' : 'N'
             },
             dataType: 'json',
             success: function (response) {

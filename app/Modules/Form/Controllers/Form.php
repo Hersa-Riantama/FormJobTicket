@@ -713,6 +713,7 @@ class Form extends BaseController
     public function approveTicket()
     {
         $id_tiket = $this->request->getVar('id_tiket');
+        $status = $this->request->getVar('status');
         $userLevel = session()->get('level_user');
         $approvalDate = date('Y-m-d');
 
@@ -721,8 +722,12 @@ class Form extends BaseController
 
         // Tentukan kolom mana yang perlu di-update berdasarkan tipe approval
         if ($userLevel === 'Admin Sistem') {
-            $builder->set('approved_order_admin', 'Y');
-            $builder->set('tgl_acc_admin', $approvalDate);
+            $builder->set('approved_order_admin', $status);
+            if ($status === 'Y') {
+                $builder->set('tgl_acc_admin', $approvalDate);  // Set tanggal approval hanya jika di-approve
+            } else {
+                $builder->set('tgl_acc_admin', null);  // Jika tidak di-approve, kosongkan tanggal
+            }
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
@@ -731,8 +736,12 @@ class Form extends BaseController
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
         } else if ($userLevel === 'Tim Multimedia') {
-            $builder->set('approved_multimedia', 'Y');
-            $builder->set('tgl_acc_multimedia', $approvalDate);
+            $builder->set('approved_multimedia', $status);
+            if ($status === 'Y') {
+                $builder->set('tgl_acc_multimedia', $approvalDate);  // Set tanggal approval hanya jika di-approve
+            } else {
+                $builder->set('tgl_acc_multimedia', null);  // Jika tidak di-approve, kosongkan tanggal
+            }
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
@@ -741,61 +750,26 @@ class Form extends BaseController
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
         } else if ($userLevel === 'Manager Platform') {
-            $builder->set('approved_acc_manager', 'Y');
-            $builder->set('tgl_acc_manager', $approvalDate);
+            $builder->set('approved_acc_manager', $status);
+            if ($status === 'Y') {
+                $builder->set('tgl_acc_manager', $approvalDate);  // Set tanggal approval hanya jika di-approve
+            } else {
+                $builder->set('tgl_acc_manager', null);  // Jika tidak di-approve, kosongkan tanggal
+            }
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
                 return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
-            } else {
-                return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
-            }
-        }
-        return $this->response->setJSON(['status' => 'success', 'Pesan' => 'Tiket Berhasil di Approve']);
-    }
-    public function disapproveTicket()
-    {
-        $id_tiket = $this->request->getVar('id_tiket');
-        $userLevel = session()->get('level_user');
-        $disapprovalDate = date('Y-m-d');
-
-        $db = \Config\Database::connect();
-        $builder = $db->table('tbl_tiket');
-
-        // Tentukan kolom mana yang perlu di-update berdasarkan tipe approval
-        if ($userLevel === 'Admin Sistem') {
-            $builder->set('approved_order_admin', 'R');
-            $builder->set('tgl_acc_admin', $disapprovalDate);
-            $builder->where('id_tiket', $id_tiket);
-            $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
-            } else {
-                return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
-            }
-        } else if ($userLevel === 'Tim Multimedia') {
-            $builder->set('approved_multimedia', 'R');
-            $builder->set('tgl_acc_multimedia', $disapprovalDate);
-            $builder->where('id_tiket', $id_tiket);
-            $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
-            } else {
-                return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
-            }
-        } else if ($userLevel === 'Manager Platform') {
-            $builder->set('approved_acc_manager', 'R');
-            $builder->set('tgl_acc_manager', $disapprovalDate);
-            $builder->where('id_tiket', $id_tiket);
-            $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
             } else {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
         } else if ($userLevel === 'Editor') {
-            $builder->set('approved_order_editor', 'R');
-            $builder->set('tgl_order_editor', $disapprovalDate);
+            $builder->set('approved_order_editor', $status);
+            if ($status === 'Y') {
+                $builder->set('tgl_order_editor', $approvalDate);  // Set tanggal approval hanya jika di-approve
+            } else {
+                $builder->set('tgl_order_editor', null);  // Jika tidak di-approve, kosongkan tanggal
+            }
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
@@ -809,6 +783,7 @@ class Form extends BaseController
     public function approvedOrderKoord()
     {
         $id_tiket = $this->request->getVar('id_tiket');
+        $status = $this->request->getVar('status');
         $userLevel = session()->get('level_user');
         $approvalDate = date('Y-m-d');
 
@@ -817,35 +792,16 @@ class Form extends BaseController
 
         // Tentukan kolom mana yang perlu di-update berdasarkan tipe approval
         if ($userLevel === 'Koord Editor') {
-            $builder->set('approved_order_koord', 'Y');
-            $builder->set('tgl_order_koord', $approvalDate);
+            $builder->set('approved_order_koord', $status);
+            if ($status === 'Y') {
+                $builder->set('tgl_order_koord', $approvalDate);  // Set tanggal approval hanya jika di-approve
+            } else {
+                $builder->set('tgl_order_koord', null);  // Jika tidak di-approve, kosongkan tanggal
+            }
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
                 return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
-            } else {
-                return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
-            }
-        }
-        return $this->response->setJSON(['status' => 'success', 'Pesan' => 'Tiket Berhasil di Approve']);
-    }
-    public function disapprovedOrderKoord()
-    {
-        $id_tiket = $this->request->getVar('id_tiket');
-        $userLevel = session()->get('level_user');
-        $approvalDate = date('Y-m-d');
-
-        $db = \Config\Database::connect();
-        $builder = $db->table('tbl_tiket');
-
-        // Tentukan kolom mana yang perlu di-update berdasarkan tipe approval
-        if ($userLevel === 'Koord Editor') {
-            $builder->set('approved_order_koord', 'R');
-            $builder->set('tgl_order_koord', $approvalDate);
-            $builder->where('id_tiket', $id_tiket);
-            $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
             } else {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
@@ -855,6 +811,7 @@ class Form extends BaseController
     public function approvedAccKoord()
     {
         $id_tiket = $this->request->getVar('id_tiket');
+        $status = $this->request->getVar('status');
         $userLevel = session()->get('level_user');
         $approvalDate = date('Y-m-d');
 
@@ -863,35 +820,16 @@ class Form extends BaseController
 
         // Tentukan kolom mana yang perlu di-update berdasarkan tipe approval
         if ($userLevel === 'Koord Editor') {
-            $builder->set('approved_acc_koord', 'Y');
-            $builder->set('tgl_acc_koord', $approvalDate);
+            $builder->set('approved_acc_koord', $status);
+            if ($status === 'Y') {
+                $builder->set('tgl_acc_koord', $approvalDate);  // Set tanggal approval hanya jika di-approve
+            } else {
+                $builder->set('tgl_acc_koord', null);  // Jika tidak di-approve, kosongkan tanggal
+            }
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
             if ($updated) {
                 return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
-            } else {
-                return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
-            }
-        }
-        return $this->response->setJSON(['status' => 'success', 'Pesan' => 'Tiket Berhasil di Approve']);
-    }
-    public function disapprovedAccKoord()
-    {
-        $id_tiket = $this->request->getVar('id_tiket');
-        $userLevel = session()->get('level_user');
-        $approvalDate = date('Y-m-d');
-
-        $db = \Config\Database::connect();
-        $builder = $db->table('tbl_tiket');
-
-        // Tentukan kolom mana yang perlu di-update berdasarkan tipe approval
-        if ($userLevel === 'Koord Editor') {
-            $builder->set('approved_acc_koord', 'R');
-            $builder->set('tgl_acc_koord', $approvalDate);
-            $builder->where('id_tiket', $id_tiket);
-            $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket disapproved successfully']);
             } else {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
