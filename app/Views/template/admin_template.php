@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 
-<html
-    lang="en"
-    class="light-style layout-menu-fixed layout-compact"
-    dir="ltr"
-    data-theme="theme-default"
-    data-assets-path="../assets/"
-    data-template="vertical-menu-template-free">
+<html lang="en" class="light-style layout-menu-fixed layout-compact" dir="ltr" data-theme="theme-default"
+    data-assets-path="../assets/" data-template="vertical-menu-template-free">
 
 <head>
     <meta charset="utf-8" />
-    <meta
-        name="viewport"
+    <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title><?= $judul; ?></title>
@@ -34,6 +28,7 @@
     <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../assets/css/demo.css" />
+    <link rel="stylesheet" href="../assets/css/core.css" />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
@@ -68,11 +63,7 @@
                 <div class="app-brand demo">
                     <a href="http://localhost:8080/dashboard" class="app-brand-link">
                         <span class="app-brand-logo demo">
-                            <svg
-                                width="25"
-                                viewBox="0 0 25 42"
-                                version="1.1"
-                                xmlns="http://www.w3.org/2000/svg"
+                            <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <defs>
                                     <path
@@ -105,8 +96,7 @@
                                                     <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-4"></use>
                                                 </g>
                                             </g>
-                                            <g
-                                                id="Triangle"
+                                            <g id="Triangle"
                                                 transform="translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000) ">
                                                 <use fill="#696cff" xlink:href="#path-5"></use>
                                                 <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-5"></use>
@@ -119,7 +109,8 @@
                         <span class="app-brand-text demo menu-text fw-bold ms-2">Sneat</span>
                     </a>
 
-                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                    <a href="javascript:void(0);"
+                        class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                         <i class="bx bx-chevron-left bx-sm align-middle"></i>
                     </a>
                 </div>
@@ -134,7 +125,7 @@
                             <div data-i18n="Basic">Dashboard</div>
                         </a>
                     </li>
-                    <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Admin Sistem'])) : ?>
+                    <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Admin Sistem'])): ?>
                         <li class="menu-item">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-user"></i>
@@ -143,9 +134,7 @@
                             </a>
                             <ul class="menu-sub">
                                 <li class="menu-item">
-                                    <a
-                                        href="http://localhost:8080/user"
-                                        class="menu-link">
+                                    <a href="http://localhost:8080/user" class="menu-link">
                                         <div data-i18n="CRM">Kelola User</div>
                                     </a>
                                 </li>
@@ -159,16 +148,14 @@
                             </a>
                             <ul class="menu-sub">
                                 <li class="menu-item">
-                                    <a
-                                        href="http://localhost:8080/kategori"
-                                        class="menu-link">
+                                    <a href="http://localhost:8080/kategori" class="menu-link">
                                         <div data-i18n="CRM">Kelola Kategori</div>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                     <?php endif; ?>
-                    <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Admin Sistem', 'Editor', 'Koord Editor'])) : ?>
+                    <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Admin Sistem', 'Editor', 'Koord Editor'])): ?>
                         <li class="menu-item">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-book-bookmark"></i>
@@ -177,16 +164,14 @@
                             </a>
                             <ul class="menu-sub">
                                 <li class="menu-item">
-                                    <a
-                                        href="http://localhost:8080/buku"
-                                        class="menu-link">
+                                    <a href="http://localhost:8080/buku" class="menu-link">
                                         <div data-i18n="CRM">Kelola Buku</div>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                     <?php endif; ?>
-                    <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'])) : ?>
+                    <?php if (isset($_SESSION['level_user']) && in_array($_SESSION['level_user'], ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'])): ?>
                         <li class="menu-item">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-detail"></i>
@@ -195,17 +180,18 @@
                             </a>
                             <ul class="menu-sub">
                                 <li class="menu-item">
-                                    <a
-                                        href="http://localhost:8080/form"
-                                        class="menu-link">
+                                    <a href="http://localhost:8080/form" class="menu-link">
                                         <div data-i18n="CRM">Form QR Code</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a
-                                        href="http://localhost:8080/listform"
-                                        class="menu-link">
+                                    <a href="http://localhost:8080/listform" class="menu-link">
                                         <div data-i18n="eCommerce">Kelola Tiket</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="http://localhost:8080/formc2" class="menu-link">
+                                        <div data-i18n="eCommerce">C2</div>
                                     </a>
                                 </li>
                             </ul>
@@ -218,8 +204,8 @@
             <!-- Layout container -->
             <div class="layout-page">
                 <!-- Navbar -->
-                <nav
-                    class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                    id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
                         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
                             <i class="bx bx-menu bx-sm"></i>
@@ -254,9 +240,11 @@
 
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                                data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img src="../assets/img/avatars/avatar.png" alt class="w-px-40 h-auto rounded-circle border-hitam" />
+                                    <img src="../assets/img/avatars/avatar.png" alt
+                                        class="w-px-40 h-auto rounded-circle border-hitam" />
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -265,7 +253,8 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="../assets/img/avatars/avatar.png" alt class="w-px-40 h-auto rounded-circle border-hitam" />
+                                                    <img src="../assets/img/avatars/avatar.png" alt
+                                                        class="w-px-40 h-auto rounded-circle border-hitam" />
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">

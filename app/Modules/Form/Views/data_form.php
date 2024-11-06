@@ -138,78 +138,66 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '<td>';
                     // Periksa apakah tiket sudah ditolak oleh Editor
                     if (value.approved_order_editor === 'R') {
-                        formData += '<div class="button-group d-flex">';
+                        formData += '<div class="d-flex">';
                         formData += '<span class="label text-approve bg-disapproved badge-centers fixed-width-ditolak">Ditolak</span>';
                         formData += '</div>';
                     } else {
-                        // Jika belum ditolak, lanjutkan dengan logika biasa untuk rendering tombol
                         if (isKoordEditor) {
-                            // Logika approval untuk Koord Editor
-                            formData += '<div class="button-group d-flex mb-2">';
+                            // Order Approval untuk Koord Editor
+                            formData += '<div class="d-flex mb-2">';
 
-                            // Order Approval
-                            if (value.approved_order_koord === 'Y') {
-                                formData += '<span class="label text-approve bg-approved me-2 badge-centers fixed-width">Order Approved</span>';
-                                formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveOrder(' + value.id_tiket + ')">Batalkan Order</button>';
-                            } else if (value.approved_order_koord === 'R') {
-                                formData += '<span class="label text-approve bg-disapproved me-2 badge-centers fixed-width">Order Ditolak</span>';
-                                formData += '<button class="btn btn-success btn-approve fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveOrder(' + value.id_tiket + ')">Setuju Order</button>';
-                            } else {
-                                formData += '<button class="btn btn-success btn-approve me-2 fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveOrder(' + value.id_tiket + ')">Setuju Order</button>';
-                                formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveOrder(' + value.id_tiket + ')">Batalkan Order</button>';
-                            }
+                            // Order Approval Toggle
+                            formData += '<label class="switch switch-success">';
+                            formData += '<input type="checkbox" class="switch-input" ' + (value.approved_order_koord === 'Y' ? 'checked' : '') + ' onclick="toggleOrderApproval(' + value.id_tiket + ', this.checked)">';
+                            formData += '<span class="switch-toggle-slider"></span>';
+                            formData += '</label>';
+                            formData += '<span class="ms-5">' + (value.approved_order_koord === 'Y' ? 'Order' : 'Order') + '</span>';
                             formData += '</div>';
 
-                            // ACC Approval
-                            formData += '<div class="button-group d-flex">';
-                            if (value.approved_acc_koord === 'Y') {
-                                formData += '<span class="label text-approve bg-approved me-2 badge-centers fixed-width">ACC Approved</span>';
-                                formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveAcc(' + value.id_tiket + ')">Batalkan ACC</button>';
-                            } else if (value.approved_acc_koord === 'R') {
-                                formData += '<span class="label text-approve bg-disapproved me-2 badge-centers fixed-width">ACC Ditolak</span>';
-                                formData += '<button class="btn btn-success btn-approve fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveAcc(' + value.id_tiket + ')">Setuju ACC</button>';
-                            } else {
-                                formData += '<button class="btn btn-success btn-approve me-2 fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveAcc(' + value.id_tiket + ')">Setuju ACC</button>';
-                                formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveAcc(' + value.id_tiket + ')">Batalkan ACC</button>';
-                            }
+                            // ACC Approval Toggle
+                            formData += '<div class="d-flex">';
+                            formData += '<label class="switch switch-success">';
+                            formData += '<input type="checkbox" class="switch-input"' + (value.approved_acc_koord === 'Y' ? 'checked' : '') + ' onclick="toggleAccApproval(' + value.id_tiket + ', this.checked)">';
+                            formData += '<span class="switch-toggle-slider"></span>';
+                            formData += '</label>';
+                            formData += '<span class="ms-5">' + (value.approved_acc_koord === 'Y' ? 'Acc' : 'ACC') + '</span>';
                             formData += '</div>';
-                        } else if (islevel_user.length > 0) { // Check if there are valid levels
-                            formData += '<div class="button-group d-flex">';
+                        } else if (islevel_user.length > 0) { // Check for valid levels
+                            formData += '<div class="d-flex">';
                             let isApproved = false;
 
-                            // Display approval status based on other user levels
+                            // Approval Toggle for other user levels
                             islevel_user.forEach(level => {
-                                if (level === 'Admin Sistem' && value.approved_order_admin === 'Y') {
-                                    formData += '<span class="label text-approve bg-approved me-2 badge-centers fixed-width">Approved</span>';
-                                    formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
+                                if (level === 'Admin Sistem') {
+                                    formData += '<label class="switch switch-success">';
+                                    formData += '<input type="checkbox" class="switch-input"' + (value.approved_order_admin === 'Y' ? 'checked' : '') + ' onclick="toggleAdminApproval(' + value.id_tiket + ', this.checked)">';
+                                    formData += '<span class="switch-toggle-slider"></span>';
+                                    formData += '</label>';
+                                    // formData += '<span class="ms-2">' + (value.approved_order_admin === 'Y' ? 'Approved' : 'Setuju') + '</span>';
                                     isApproved = true;
-                                } else if (level === 'Admin Sistem' && value.approved_order_admin === 'R') {
-                                    formData += '<span class="label text-approve bg-disapproved me-2 badge-centers fixed-width">Ditolak</span>';
-                                    formData += '<button class="btn btn-success btn-approve fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
+                                } else if (level === 'Manager Platform') {
+                                    formData += '<label class="switch switch-success">';
+                                    formData += '<input type="checkbox" class="switch-input"' + (value.approved_acc_manager === 'Y' ? 'checked' : '') + ' onclick="toggleManagerApproval(' + value.id_tiket + ', this.checked)">';
+                                    formData += '<span class="switch-toggle-slider"></span>';
+                                    formData += '</label>';
+                                    // formData += '<span class="ms-2">' + (value.approved_acc_manager === 'Y' ? 'Approved' : 'Setuju') + '</span>';
                                     isApproved = true;
-                                } else if (level === 'Manager Platform' && value.approved_acc_manager === 'Y') {
-                                    formData += '<span class="label text-approve bg-approved me-2 badge-centers fixed-width">Approved</span>';
-                                    formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
-                                    isApproved = true;
-                                } else if (level === 'Manager Platform' && value.approved_multimedia === 'R') {
-                                    formData += '<span class="label text-approve bg-disapproved me-2 badge-centers fixed-width">Ditolak</span>';
-                                    formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
-                                    isApproved = true;
-                                } else if (level === 'Tim Multimedia' && value.approved_multimedia === 'Y') {
-                                    formData += '<span class="label text-approve bg-approved me-2 badge-centers fixed-width">Approved</span>';
-                                    formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
-                                    isApproved = true;
-                                } else if (level === 'Tim Multimedia' && value.approved_multimedia === 'R') {
-                                    formData += '<span class="label text-approve bg-disapproved me-2 badge-centers fixed-width">Ditolak</span>';
-                                    formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Batalkan</button>';
+                                } else if (level === 'Tim Multimedia') {
+                                    formData += '<label class="switch switch-success">';
+                                    formData += '<input type="checkbox" class="switch-input"' + (value.approved_multimedia === 'Y' ? 'checked' : '') + ' onclick="toggleMultimediaApproval(' + value.id_tiket + ', this.checked)">';
+                                    formData += '<span class="switch-toggle-slider"></span>';
+                                    formData += '</label>';
+                                    // formData += '<span class="ms-2">' + (value.approved_multimedia === 'Y' ? 'Approved' : 'Setuju') + '</span>';
                                     isApproved = true;
                                 }
                             });
                             if (!isApproved) {
-                                formData += '<button class="btn btn-success btn-approve me-2 fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="approveTicket(' + value.id_tiket + ')">Setuju</button>';
-                                formData += '<button class="btn btn-danger btn-disapprove fixed-width" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Tidak Setuju</button>';
+                                formData += '<label class="switch switch-success">';
+                                formData += '<input type="checkbox" class="switch-input" onclick="toggleApproval(' + value.id_tiket + ', this.checked)">';
+                                formData += '<span class="switch-toggle-slider"></span>';
+                                formData += '</label>';
+                                formData += '<span class="ms-2">Setuju</span>';
                             }
-
                             formData += '</div>';
                         }
                     }
@@ -233,8 +221,6 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '</td>';
                     formData += '</tr>';
                 });
-
-
                 $('#formData').html(formData);
                 if ($.fn.DataTable.isDataTable('#dataTables')) {
                     // If it is, use clear and rows.add to reload data
