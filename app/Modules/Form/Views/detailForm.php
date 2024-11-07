@@ -945,7 +945,6 @@
             success: function(response) {
                 if (response.status === 'success') {
                     $('#btnsimpanPerubahan').hide();
-                    alert('Data berhasil diperbarui.');
                     // Update tampilan sesuai kebutuhan
                     $('#status_message').text(response.message);
                     $(this).trigger('reset');
