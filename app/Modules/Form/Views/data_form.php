@@ -2,6 +2,7 @@
 
 use Modules\Auth\Models\AuthModel; ?>
 <?= $this->section('content'); ?>
+
 <!-- Content wrapper -->
 <div class="content-wrapper">
     <!-- Content -->
@@ -25,6 +26,9 @@ use Modules\Auth\Models\AuthModel; ?>
                             <th>Judul Buku</th>
                             <th>Tanggal dibuat</th>
                             <th>Kelola Tiket</th>
+                            <?php if ($userData['level_user'] === 'Editor'): ?>
+                                <th>Tolak Tiket</th>
+                            <?php endif; ?>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0" id="formData">
@@ -221,11 +225,13 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '<i class="bx bxs-show bx-sm me-2"></i></a>'; // View icon with tooltip
                     formData += '<a class="tiket-delete" style="color: red;" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '" title="Hapus Tiket">';
                     formData += '<i class="bx bx-trash bx-sm me-2"></i></a>'; // Delete icon with tooltip
-                    formData += '<a class="tiket-tolak" style="color: red;" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Tolak Tiket">';
-                    formData += '<i class="bx bx-x-circle bx-sm me-2"></i></a>'; // View icon with tooltip
                     formData += '</div>';
                     formData += '</td>';
-
+                    if (islevel_user.includes("Editor")) {
+                        formData += '<td>';
+                        formData += '<button class="btn btn-danger btn-disapprove fixed-width-ditolak" data-id_tiket="' + value.id_tiket + '" onclick="disapproveTicket(' + value.id_tiket + ')">Tolak Tiket</button>';
+                        formData += '</td>';
+                    }
                     formData += '</tr>';
                 });
                 $('#formData').html(formData);
@@ -238,15 +244,17 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                         responsive: true,
                         order: [
                             [0, 'asc']
-                        ], // Mengurutkan berdasarkan kolom ID
+                        ], // Urutkan berdasarkan kolom kedua jika diperlukan
                         columnDefs: [{
-                            targets: 0, // Sembunyikan kolom ID
-                            visible: false
+                            targets: 0, // Kolom pertama (ID Tiket)
+                            visible: false,
+                            searchable: false
                         }],
                         language: {
                             url: "https://cdn.datatables.net/plug-ins/1.13.5/i18n/id.json"
                         }
                     });
+
                 }
             },
             error: function(xhr, status, error) {

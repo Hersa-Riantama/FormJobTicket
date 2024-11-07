@@ -64,7 +64,7 @@
 }
 
 .fixed-width-ditolak {
-  width: 93%; /* atau gunakan persentase, misalnya 100% jika dalam kontainer */
+  width: 70%; /* atau gunakan persentase, misalnya 100% jika dalam kontainer */
 }
 
 .center-text {
