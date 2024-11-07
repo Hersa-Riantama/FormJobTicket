@@ -122,13 +122,13 @@
                                 <div class="mb-3 row">
                                     <label for="kode_buku" class="form-label col-md-3 text-biru" style="font-size: var(--bs-body-font-size)">Kode Buku</label>
                                     <div class="col-md-9">
-                                        <input class="form-control text-hitam border-hitam" type="text" value="<?= esc($tiketData['kode_buku']) ?>" id="kode_buku" name="kode_buku" placeholder="" style="border: 1px solid black;" readonly />
+                                        <input class="form-control text-hitam border-hitam" type="text" value="<?= esc($tiketData['kode_buku']) ?>" id="kode_buku" name="kode_buku" placeholder="" style="border: 1px solid black;" <?php echo ($userData['level_user'] === 'Editor') ? '' : 'readonly'; ?> />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="nomor_job" class="col-md-3 col-form-label text-biru" style="font-size: var(--bs-body-font-size)">NOMOR JOB</label>
                                     <div class="col-md-9">
-                                        <input class="form-control text-hitam border-hitam" type="text" value="<?= esc($tiketData['nomor_job']) ?>" id="nomor_job" name="nomor_job" placeholder="Masukkan Nomor Job" style="border: 1px solid black;" readonly />
+                                        <input class="form-control text-hitam border-hitam" type="text" value="<?= esc($tiketData['nomor_job']) ?>" id="nomor_job" name="nomor_job" placeholder="Masukkan Nomor Job" style="border: 1px solid black;" <?php echo ($userData['level_user'] === 'Editor') ? '' : 'readonly'; ?> />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -152,7 +152,7 @@
                                 <div class="mb-3 row">
                                     <label for="jml_qr" class="col-md-3 col-form-label text-biru" style="font-size: var(--bs-body-font-size)">Jumlah <i>QR Code</i></label>
                                     <div class="col-md-9">
-                                        <input class="form-control text-hitam border-hitam" type="text" value="<?= esc($tiketData['jml_qrcode']) ?>" id="jml_qrcode" name="jml_qrcode" placeholder="Masukkan Jumlah QR Code" style="border: 1px solid black;" readonly />
+                                        <input class="form-control text-hitam border-hitam" type="text" value="<?= esc($tiketData['jml_qrcode']) ?>" id="jml_qrcode" name="jml_qrcode" placeholder="Masukkan Jumlah QR Code" style="border: 1px solid black;" <?php echo ($userData['level_user'] === 'Editor') ? '' : 'readonly'; ?> />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
