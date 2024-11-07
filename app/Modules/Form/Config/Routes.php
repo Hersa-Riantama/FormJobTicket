@@ -31,6 +31,7 @@ $routes->group(
         $routes->post('approveOrderKoord', 'Form::approvedOrderKoord');
         $routes->post('approveAccKoord', 'Form::approvedAccKoord');
         $routes->post('approved', 'Form::approveTicketD');
+        $routes->post('disapproveTicket', 'Form::disapproveTicket');
         $routes->get('detail/(:segment)', 'Form::detailForm/$1');
         $routes->delete('delete/(:segment)', 'Form::delete/$1');
     }
