@@ -257,6 +257,7 @@ class Form extends BaseController
     {
         $AuthModel = new AuthModel();
         $GrupModel = new GrupModel();
+        $BukuModel = new BukuModel();
 
         $id_user = session()->get('id_user');
         $userData = $AuthModel->find($id_user);
@@ -272,6 +273,9 @@ class Form extends BaseController
             $id_multimedia = session()->get('id_user');
         }
         $id_tiket = $this->request->getVar('id_tiket');
+        $kode_buku = $this->request->getVar('id_buku');
+        $bukuData = $BukuModel->where('kode_buku', $kode_buku)->first();
+        $id_buku = $bukuData ? $bukuData['id_buku'] : null;
         $input_catatan = $this->request->getVar('catatan');
         $catatan = null;
         $id_kategori_array = $this->request->getVar('id_kategori');
@@ -296,12 +300,14 @@ class Form extends BaseController
             // Menentukan apakah level user boleh mengedit catatan
             if (in_array($userData['level_user'], ['Editor', 'Tim Multimedia'])) {
                 $catatan = !empty($input_catatan) ? esc($input_catatan) : null;
+                $id_buku = !empty($id_buku) ? esc($id_buku) : null;
             }
 
             // Persiapan data untuk update
             $cobaupdate = [
                 'id_kategori' => $id_kategori_json,
                 'catatan' => $catatan,
+                'id_buku' => $id_buku,
             ];
 
             // Tambahkan data tambahan berdasarkan level_user
