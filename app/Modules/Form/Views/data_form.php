@@ -221,10 +221,23 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '<td>' + formatDate(value.created_at) + '</td>';
                     formData += '<td>';
                     formData += '<div class="d-flex justify-content-start align-items-center">';
-                    formData += '<a class="tiket-detail" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Detail Tiket">';
-                    formData += '<i class="bx bxs-show bx-sm me-2"></i></a>';
-                    formData += '<a class="tiket-delete" style="color: red;" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '" title="Hapus Tiket">';
-                    formData += '<i class="bx bx-trash bx-sm me-2"></i></a>';
+                    // formData += '<button type="button" class="btn rounded-pill btn-icon btn-label-primary tiket-detail" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Detail Tiket">';
+                    // formData += '<span class="tf-icons bx bx-pie-chart-alt bx-22px"></span>';
+                    // formData += '</button>';
+                    formData += '<a class="btn rounded-pill btn-icon btn-label-primary tiket-detail me-2" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Detail Tiket">';
+                    formData += '<span class="tf-icons bx bxs-show bx-sm"></span>';
+                    formData += '</a>';
+                    // formData += '<i class="bx bxs-show bx-sm me-2"></i></a>';
+
+                    // formData += '<a href="javascript:void(0);" class="btn rounded-pill btn-icon btn-label-primary tiket-detail" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Detail Tiket">';
+                    // formData += '<span class="tf-icons bx bx-pie-chart-alt bx-22px"></span>';
+                    // formData += '</a>';
+
+
+                    formData += '<a class="btn rounded-pill btn-icon btn-label-danger tiket-delete" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '" title="Hapus Tiket">';
+                    formData += '<span class="tf-icons bx bx-trash bx-sm"></span>';
+                    formData += '</a>';
+                    // formData += '<i class="bx bx-trash bx-sm me-2"></i></a>';
                     formData += '</div>';
                     formData += '</td>';
                     if (islevel_user.includes("Editor")) {
@@ -234,6 +247,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                             formData += '</td>';
                         } else {
                             formData += '<td>';
+                            formData += '<button class="btn btn-secondary btn-disapprove fixed-width-ditolak" disabled>Tolak Tiket</button>';
                             formData += '</td>';
                         }
                     }
@@ -267,6 +281,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
             }
         });
     }
+
     $(document).on('click', '.tiket-detail', function() {
         var id_tiket = $(this).data('id_tiket');
         window.location.href = '/detail/' + id_tiket; // Redirect to the detail page
@@ -284,46 +299,70 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
             allowOutsideClick: true, // Mengizinkan klik di luar untuk menutup alert
             backdrop: true // Latar belakang dengan efek
         }).then((result) => {
-            $.ajax({
-                type: 'DELETE',
-                url: 'http://localhost:8080/delete/' + id_tiket, // Redirect to the detail page
-                dataType: 'json',
-                success: function(response) {
-                    loadData()
-                    Swal.fire('Berhasil!', 'Tiket berhasil dihapus.', 'success'); // Menampilkan pesan sukses
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error fetching List Form:', error);
-                }
-            });
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: 'http://localhost:8080/delete/' + id_tiket, // Redirect to the detail page
+                    dataType: 'json',
+                    success: function(response) {
+                        loadData()
+                        Swal.fire('Berhasil!', 'Tiket berhasil dihapus.', 'success'); // Menampilkan pesan sukses
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching List Form:', error);
+                    }
+                });
+            }
         });
     });
+
     $('.btn-approve').on('click', function() {
         const id_tiket = $(this).data('id_tiket');
         approveTicket(id_tiket);
     });
 
     function approveTicket(id_tiket, isChecked) {
-        $.ajax({
-            type: 'POST',
-            url: 'approveTiket',
-            data: {
-                id_tiket: id_tiket,
-                status: isChecked ? 'Y' : 'N'
-            },
-            dataType: 'json',
-            success: function(response) {
-                if (response.status === 'success') {
-                    alert(response.message);
-                    $('#approveButton').hide();
-                    location.reload();
-                } else {
-                    alert(response.message);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-                alert('An error occurred while trying to approve the ticket');
+        // Ambil referensi ke checkbox yang mengaktifkan fungsi ini
+        const checkbox = event.target;
+
+        // Tampilkan dialog konfirmasi SweetAlert
+        Swal.fire({
+            title: isChecked ? 'Apakah Anda yakin?' : 'Apakah Anda yakin ingin membatalkan approval?',
+            text: isChecked ? 'Anda akan approve tiket ini.' : 'Anda akan membatalkan approval tiket ini.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: isChecked ? 'Ya, Approve!' : 'Ya, Batalkan Approval!',
+            cancelButtonText: 'Batal',
+            allowOutsideClick: true,
+            backdrop: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Jika pengguna mengonfirmasi, lanjutkan dengan AJAX request
+                $.ajax({
+                    type: 'POST',
+                    url: 'approveTiket',
+                    data: {
+                        id_tiket: id_tiket,
+                        status: isChecked ? 'Y' : 'N'
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            $('#approveButton').hide();
+                            const successMessage = isChecked ? 'Tiket berhasil diapprove.' : 'Approval tiket berhasil dibatalkan.';
+                            Swal.fire('Berhasil!', successMessage, 'success'); // Menampilkan pesan sukses
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        alert('Terjadi kesalahan saat mencoba mengubah status approval tiket');
+                    }
+                });
+            } else {
+                // Jika pengguna membatalkan, kembalikan status checkbox ke posisi semula
+                checkbox.checked = !isChecked;
             }
         });
     }
@@ -334,83 +373,141 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
     });
 
     function approveOrder(id_tiket, isChecked) {
-        $.ajax({
-            type: 'POST',
-            url: 'approveOrderKoord', // Adjust this URL to match your route
-            data: {
-                id_tiket: id_tiket,
-                status: isChecked ? 'Y' : 'N'
-            },
-            dataType: 'json',
-            success: function(response) {
-                if (response.status === 'success') {
-                    alert(response.message);
-                    $('#approveButton').hide();
-                    location.reload();
-                } else {
-                    alert(response.message);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-                alert('An error occurred while trying to disapprove the ticket');
+        // Tentukan judul dan teks berdasarkan nilai isChecked
+        const title = isChecked ? 'Apakah Anda yakin?' : 'Apakah Anda yakin ingin membatalkan approval?';
+        const text = isChecked ? 'Anda akan approve tiket ini.' : 'Anda akan membatalkan approval tiket ini.';
+        const confirmButtonText = isChecked ? 'Ya, Approve!' : 'Ya, Batalkan Approval!';
+
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: confirmButtonText,
+            cancelButtonText: 'Batal',
+            allowOutsideClick: true,
+            backdrop: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'approveOrderKoord', // URL endpoint yang sesuai
+                    data: {
+                        id_tiket: id_tiket,
+                        status: isChecked ? 'Y' : 'N'
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            $('#approveButton').hide();
+                            loadData(); // Panggil fungsi untuk memperbarui data
+                            const successMessage = isChecked ?
+                                'Tiket berhasil diapprove.' :
+                                'Approval tiket berhasil dibatalkan.';
+                            Swal.fire('Berhasil!', successMessage, 'success'); // Menampilkan pesan sukses
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        alert('Terjadi kesalahan saat mencoba mengubah status approval tiket');
+                    }
+                });
             }
         });
     }
+
     $('.btn-approve').on('click', function() {
         const id_tiket = $(this).data('id_tiket');
         approveAcc(id_tiket);
     });
 
     function approveAcc(id_tiket, isChecked) {
-        $.ajax({
-            type: 'POST',
-            url: 'approveAccKoord', // Adjust this URL to match your route
-            data: {
-                id_tiket: id_tiket,
-                status: isChecked ? 'Y' : 'N'
-            },
-            dataType: 'json',
-            success: function(response) {
-                if (response.status === 'success') {
-                    alert(response.message);
-                    $('#approveButton').hide();
-                    location.reload();
-                } else {
-                    alert(response.message);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-                alert('An error occurred while trying to disapprove the ticket');
+        // Tentukan judul dan teks berdasarkan nilai isChecked
+        const title = isChecked ? 'Apakah Anda yakin?' : 'Apakah Anda yakin ingin membatalkan approval?';
+        const text = isChecked ? 'Anda akan approve ACC tiket ini.' : 'Anda akan membatalkan ACC tiket ini.';
+        const confirmButtonText = isChecked ? 'Ya, Approve!' : 'Ya, Batalkan Approval!';
+
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: confirmButtonText,
+            cancelButtonText: 'Batal',
+            allowOutsideClick: true,
+            backdrop: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'approveAccKoord', // URL endpoint yang sesuai
+                    data: {
+                        id_tiket: id_tiket,
+                        status: isChecked ? 'Y' : 'N'
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            $('#approveButton').hide();
+                            location.reload(); // Reload halaman setelah berhasil
+                            const successMessage = isChecked ?
+                                'Tiket berhasil di-ACC.' :
+                                'Approval ACC tiket berhasil dibatalkan.';
+                            Swal.fire('Berhasil!', successMessage, 'success'); // Menampilkan pesan sukses
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        alert('Terjadi kesalahan saat mencoba mengubah status ACC tiket');
+                    }
+                });
             }
         });
     }
+
     $('.btn-disapprove').on('click', function() {
         const id_tiket = $(this).data('id_tiket');
         disapproveTicket(id_tiket); // Reject
     });
 
     function disapproveTicket(id_tiket) {
-        $.ajax({
-            type: 'POST',
-            url: 'disapproveTicket', // Adjust this URL to match your route
-            data: {
-                id_tiket: id_tiket
-            },
-            dataType: 'json',
-            success: function(response) {
-                if (response.status === 'success') {
-                    alert(response.message);
-                    $('#approveButton').hide();
-                    location.reload();
-                } else {
-                    alert(response.message);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-                alert('An error occurred while trying to disapprove the ticket');
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Anda akan menolak tiket ini.',
+            icon: 'warning',
+            showCancelButton: true, // Menampilkan tombol 'Batal'
+            confirmButtonText: 'Ya, Tolak!',
+            cancelButtonText: 'Batal',
+            allowOutsideClick: true, // Mengizinkan klik di luar untuk menutup alert
+            backdrop: true // Latar belakang dengan efek
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'disapproveTicket', // Adjust this URL to match your route
+                    data: {
+                        id_tiket: id_tiket
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            alert(response.message);
+                            $('#approveButton').hide();
+                            loadData();
+                            Swal.fire('Berhasil!', 'Tiket berhasil ditolak.', 'success')
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        alert('An error occurred while trying to disapprove the ticket');
+                    }
+                });
             }
         });
     }

@@ -226,17 +226,19 @@ use Modules\Auth\Models\AuthModel; ?>
             allowOutsideClick: true, // Mengizinkan klik di luar untuk menutup alert
             backdrop: true // Latar belakang dengan efek
         }).then((result) => {
-            $.ajax({
-                type: 'DELETE',
-                url: 'http://localhost:8080/kategori/' + id_kategori,
-                success: function() {
-                    loadData();
-                    Swal.fire('Berhasil!', 'Kategori berhasil dihapus.', 'success'); // Menampilkan pesan sukses
-                },
-                error: function(xhr, status, error) {
-                    alert("Gagal menghapus kategori: " + xhr.responseText); // Error handling
-                }
-            });
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: 'http://localhost:8080/kategori/' + id_kategori,
+                    success: function() {
+                        loadData();
+                        Swal.fire('Berhasil!', 'Kategori berhasil dihapus.', 'success'); // Menampilkan pesan sukses
+                    },
+                    error: function(xhr, status, error) {
+                        alert("Gagal menghapus kategori: " + xhr.responseText); // Error handling
+                    }
+                });
+            }
         });
     });
 </script>

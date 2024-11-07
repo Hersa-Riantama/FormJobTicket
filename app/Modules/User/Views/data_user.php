@@ -138,21 +138,23 @@
             backdrop: true // Latar belakang dengan efek
         }).then((result) => {
             console.log(id_user);
-            $.ajax({
-                type: 'POST',
-                url: 'http://localhost:8080/verify_user/' + id_user,
-                data: {
-                    id_user: id_user
-                },
-                success: function(response) {
-                    loadData();
-                    Swal.fire('Berhasil!', 'User berhasil diverifikasi.', 'success'); // Menampilkan pesan sukses
-                },
-                error: function(xhr) {
-                    console.error('Error:', xhr.responseText);
-                    alert('Gagal memverifikasi user.');
-                }
-            });
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:8080/verify_user/' + id_user,
+                    data: {
+                        id_user: id_user
+                    },
+                    success: function(response) {
+                        loadData();
+                        Swal.fire('Berhasil!', 'User berhasil diverifikasi.', 'success'); // Menampilkan pesan sukses
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        alert('Gagal memverifikasi user.');
+                    }
+                });
+            }
         });
     }
 
@@ -179,19 +181,21 @@
                 alert("ID user tidak ditemukan!"); // Tambahkan error handling jika id_user undefined
                 return;
             }
-            $.ajax({
-                url: 'http://localhost:8080/suspend/' + id_user, // Replace with your actual endpoint
-                type: 'PUT', // Assuming it's a PUT request to update the user's status
-                dataType: 'json',
-                success: function(response) {
-                    loadData();
-                    Swal.fire('Berhasil!', 'User berhasil disuspend.', 'success'); // Menampilkan pesan sukses
-                },
-                error: function(xhr, status, error) {
-                    console.log('AJAX Error:', xhr.responseText);
-                    alert('Terjadi Kesalahan saat Suspend user.');
-                }
-            });
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: 'http://localhost:8080/suspend/' + id_user, // Replace with your actual endpoint
+                    type: 'PUT', // Assuming it's a PUT request to update the user's status
+                    dataType: 'json',
+                    success: function(response) {
+                        loadData();
+                        Swal.fire('Berhasil!', 'User berhasil disuspend.', 'success'); // Menampilkan pesan sukses
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('AJAX Error:', xhr.responseText);
+                        alert('Terjadi Kesalahan saat Suspend user.');
+                    }
+                });
+            }
         });
     });
 </script>
