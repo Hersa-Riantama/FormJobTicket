@@ -195,6 +195,7 @@ use Modules\Auth\Models\AuthModel; ?>
                         console.log('Response:', response);
                         loadData();
                         $('#editModal').modal('hide');
+                        Swal.fire('Berhasil!', 'Kategori berhasil diperbarui.', 'success'); // Menampilkan pesan sukses
                     } else {
                         for (const [field, message] of Object.entries(response.pesan)) {
                             const errorMessageContainer = $('#' + field).closest('.mb-3').find('.error-message');
@@ -215,19 +216,28 @@ use Modules\Auth\Models\AuthModel; ?>
     // Fungsi untuk delete data
     $(document).on('click', '.dropdown-item-delete', function() {
         var id_kategori = $(this).data('id_kategori');
-        var konfirmasi = confirm("Apakah Anda yakin hapus kategori ini?");
-        if (konfirmasi) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Anda akan menghapus kategori ini.',
+            icon: 'warning',
+            showCancelButton: true, // Menampilkan tombol 'Batal'
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal',
+            allowOutsideClick: true, // Mengizinkan klik di luar untuk menutup alert
+            backdrop: true // Latar belakang dengan efek
+        }).then((result) => {
             $.ajax({
                 type: 'DELETE',
                 url: 'http://localhost:8080/kategori/' + id_kategori,
                 success: function() {
                     loadData();
+                    Swal.fire('Berhasil!', 'Kategori berhasil dihapus.', 'success'); // Menampilkan pesan sukses
                 },
                 error: function(xhr, status, error) {
                     alert("Gagal menghapus kategori: " + xhr.responseText); // Error handling
                 }
             });
-        }
+        });
     });
 </script>
 <?= $this->endSection(); ?>

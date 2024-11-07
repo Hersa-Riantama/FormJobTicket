@@ -151,12 +151,16 @@
                                     <label for="kode_buku" class="form-label col-md-3 text-biru"
                                         style="font-size: var(--bs-body-font-size)">Kode Buku</label>
                                     <div class="col-md-9">
-                                        <select id="kode_buku" class="form-select border-hitam text-hitam"
-                                            name="id_buku">
-                                            <option value="" disabled selected><?= esc($tiketData['kode_buku']) ?>
-                                            </option>
-                                            <!-- ajax -->
-                                        </select>
+                                        <?php if ($userData['level_user'] === 'Editor'): ?>
+                                            <select id="kode_buku" class="form-select border-hitam text-hitam"
+                                                name="id_buku">
+                                                <option value="" disabled selected><?= esc($tiketData['kode_buku']) ?>
+                                                </option>
+                                                <!-- ajax -->
+                                            </select>
+                                        <?php else: ?>
+                                            <input class="form-control text-hitam border-hitam" type="text" value="<?= esc($tiketData['kode_buku']) ?>" id="kode_buku" name="kode_buku" placeholder="" style="border: 1px solid black;" readonly />
+                                        <?php endif; ?>
                                     </div>
                                     <div id="id_bukuError" class="error-message text-danger"></div>
                                 </div>
@@ -167,7 +171,7 @@
                                         <input class="form-control text-hitam border-hitam" type="text"
                                             value="<?= esc($tiketData['nomor_job']) ?>" id="nomor_job" name="nomor_job"
                                             placeholder="Masukkan Nomor Job" style="border: 1px solid black;"
-                                            readonly />
+                                            <?php echo ($userData['level_user'] === 'Editor') ? '' : 'readonly'; ?> />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -206,7 +210,7 @@
                                         <input class="form-control text-hitam border-hitam" type="text"
                                             value="<?= esc($tiketData['jml_qrcode']) ?>" id="jml_qrcode"
                                             name="jml_qrcode" placeholder="Masukkan Jumlah QR Code"
-                                            style="border: 1px solid black;" readonly />
+                                            style="border: 1px solid black;" <?php echo ($userData['level_user'] === 'Editor') ? '' : 'readonly'; ?> />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -831,26 +835,26 @@
 <!-- / Layout wrapper -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $.ajax({
             url: 'http://localhost:8080/tampilbuku',
             type: 'GET',
             dataType: 'json',
-            success: function (data) {
+            success: function(data) {
                 console.log(data);
-                $.each(data, function (index, buku) {
+                $.each(data, function(index, buku) {
                     $('#kode_buku').append(`<option value="${buku.kode_buku}">${buku.kode_buku}</option>`);
                 });
             }
         });
-        $('#kode_buku').change(function () {
+        $('#kode_buku').change(function() {
             var kode_buku = $(this).val();
             if (kode_buku) {
                 $.ajax({
                     url: 'http://localhost:8080/tampilbuku/' + kode_buku, // Ganti dengan endpoint Anda
                     type: 'GET',
                     dataType: 'json',
-                    success: function (data) {
+                    success: function(data) {
                         console.log('Response data:', data);
                         // Update fields berdasarkan kode_buku yang dipilih
                         $('#judul_buku').val(data.judul_buku);
@@ -859,7 +863,7 @@
                         $('input[name="inlineRadioOption"][value="' + data.warna + '"]').prop('checked', true);
 
                         // Mencegah perubahan pilihan radio
-                        $('input[name="inlineRadioOption"]').on('click', function (event) {
+                        $('input[name="inlineRadioOption"]').on('click', function(event) {
                             if ($(this).is(':checked')) {
                                 // Mencegah pengguna untuk mengubah pilihan yang sudah tercentang
                                 event.preventDefault();
@@ -872,7 +876,7 @@
     });
 
     // Mencegah perubahan pilihan radio
-    $('input[name="inlineRadioOption"]').on('click', function (event) {
+    $('input[name="inlineRadioOption"]').on('click', function(event) {
         if ($(this).is(':checked')) {
             // Mencegah pengguna untuk mengubah pilihan yang sudah tercentang
             event.preventDefault();
@@ -890,7 +894,7 @@
                 id_tiket: id_tiket,
                 approval_type: approvalType
             },
-            success: function (response) {
+            success: function(response) {
                 console.log(response);
                 if (response.status === 'success') {
                     // Jika berhasil, sembunyikan tombol dan tampilkan gambar approved
@@ -899,7 +903,7 @@
                     location.reload()
                 }
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.error("Error during approval:", error);
             }
         });
@@ -907,15 +911,15 @@
 
     function updateForm() {
         const id_kategori = [];
-        $('input[name="id_kategori[]"]:checked').each(function () {
+        $('input[name="id_kategori[]"]:checked').each(function() {
             id_kategori.push($(this).val());
         });
         const kelengkapan = [];
-        $('input[name="kelengkapan[]"]:checked').each(function () {
+        $('input[name="kelengkapan[]"]:checked').each(function() {
             kelengkapan.push($(this).val());
         });
         const tahap_kelengkapan = [];
-        $('input[name="tahap_kelengkapan[]"]:checked').each(function () {
+        $('input[name="tahap_kelengkapan[]"]:checked').each(function() {
             tahap_kelengkapan.push($(this).val());
         });
         const tgl_selesai = document.getElementById('tgl_selesai').value;
@@ -938,19 +942,21 @@
                 tgl_upload: tgl_upload ? tgl_upload : null,
                 catatan: catatan ? catatan : null,
             },
-            success: function (response) {
+            success: function(response) {
                 if (response.status === 'success') {
                     $('#btnsimpanPerubahan').hide();
                     alert('Data berhasil diperbarui.');
                     // Update tampilan sesuai kebutuhan
                     $('#status_message').text(response.message);
                     $(this).trigger('reset');
-                    location.reload();
+                    Swal.fire('Berhasil!', 'Tiket berhasil diperbarui.', 'success').then(function() {
+                        location.reload(); // Reload halaman setelah SweetAlert ditutup
+                    });
                 } else {
                     alert('Gagal memperbarui data: ' + response.message);
                 }
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.error(error);
                 alert('Terjadi kesalahan saat memperbarui data.');
             }

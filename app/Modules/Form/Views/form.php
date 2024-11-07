@@ -635,24 +635,24 @@
     //     date.textContent = formattedDate;
     // });
 
-    $(document).ready(function () {
-        $('#formTiket').submit(function (event) {
+    $(document).ready(function() {
+        $('#formTiket').submit(function(event) {
             event.preventDefault();
             $('.error-message').text('').hide();
             var formData = new FormData(this);
 
             // Collect selected checkboxes for kategori
-            $('input[name="id_kategori[]"]:checked').each(function () {
+            $('input[name="id_kategori[]"]:checked').each(function() {
                 formData.append('id_kategori[]', $(this).val());
             });
 
             // Collect selected checkboxes for kelengkapan
-            $('input[name="kelengkapan[]"]:checked').each(function () {
+            $('input[name="kelengkapan[]"]:checked').each(function() {
                 formData.append('kelengkapan[]', $(this).val());
             });
 
             // Collect selected checkboxes for stats_kelengkapan
-            $('input[name="tahap_kelengkapan[]"]:checked').each(function () {
+            $('input[name="tahap_kelengkapan[]"]:checked').each(function() {
                 formData.append('tahap_kelengkapan[]', $(this).val());
             });
             var catatan = $('#catatan').val().trim();
@@ -669,11 +669,12 @@
                 processData: false,
                 contentType: false,
                 dataType: 'json',
-                success: function (response) {
+                success: function(response) {
                     console.log('Respons dari Server:', response);
                     if (response.Status === 'success') {
-                        alert(response.Pesan);
-                        location.reload();
+                        Swal.fire('Berhasil!', 'Tiket berhasil ditambah.', 'success').then(function() {
+                            location.reload(); // Reload halaman setelah SweetAlert ditutup
+                        });
                     } else {
                         for (const [field, message] of Object.entries(response.pesan)) {
                             const PesanError = $('#' + field + 'Error');
@@ -683,34 +684,35 @@
                         }
                     }
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     console.log('Error:', error);
                     console.log('Status:', status);
                     console.log('xhr:', xhr);
                     alert('Terjadi kesalahan saat menyimpan data.');
                 }
             });
+
         });
         $.ajax({
             url: 'http://localhost:8080/tampilbuku',
             type: 'GET',
             dataType: 'json',
-            success: function (data) {
+            success: function(data) {
                 console.log(data);
-                $.each(data, function (index, buku) {
+                $.each(data, function(index, buku) {
                     $('#kode_buku').append(`<option value="${buku.kode_buku}">${buku.kode_buku}</option>`);
                 });
             }
         });
 
-        $('#kode_buku').change(function () {
+        $('#kode_buku').change(function() {
             var kode_buku = $(this).val();
             if (kode_buku) {
                 $.ajax({
                     url: 'http://localhost:8080/tampilbuku/' + kode_buku, // Ganti dengan endpoint Anda
                     type: 'GET',
                     dataType: 'json',
-                    success: function (data) {
+                    success: function(data) {
                         console.log('Response data:', data);
                         // Update fields berdasarkan kode_buku yang dipilih
                         $('#judul_buku').val(data.judul_buku);
@@ -719,7 +721,7 @@
                         $('input[name="inlineRadioOption"][value="' + data.warna + '"]').prop('checked', true);
 
                         // Mencegah perubahan pilihan radio
-                        $('input[name="inlineRadioOption"]').on('click', function (event) {
+                        $('input[name="inlineRadioOption"]').on('click', function(event) {
                             if ($(this).is(':checked')) {
                                 // Mencegah pengguna untuk mengubah pilihan yang sudah tercentang
                                 event.preventDefault();
@@ -737,7 +739,7 @@
                 var xhr = new XMLHttpRequest();
                 xhr.open('POST', '/get-email', true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onreadystatechange = function () {
+                xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         document.getElementById('email').value = xhr.responseText;
                     }

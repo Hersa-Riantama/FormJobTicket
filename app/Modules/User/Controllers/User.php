@@ -88,7 +88,6 @@ class User extends BaseController
 
         // Response sukses
         return $this->response->setJSON([
-            'Pesan' => 'User berhasil diverifikasi',
             'Status' => 'success'
         ]);
     }
@@ -124,7 +123,6 @@ class User extends BaseController
 
         // Response sukses
         return $this->response->setJSON([
-            'Pesan' => 'User berhasil disuspend',
             'Status' => 'success'
         ]);
     }

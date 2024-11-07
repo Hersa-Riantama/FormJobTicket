@@ -127,53 +127,72 @@
     }
     // Fungsi untuk memverifikasi user
     function verifikasiUser(id_user) {
-        console.log(id_user);
-        $.ajax({
-            type: 'POST',
-            url: 'http://localhost:8080/verify_user/' + id_user,
-            data: {
-                id_user: id_user
-            },
-            success: function(response) {
-                alert(response.Pesan); // Tampilkan pesan dari response
-                loadData();
-            },
-            error: function(xhr) {
-                console.error('Error:', xhr.responseText);
-                alert('Gagal memverifikasi user.');
-            }
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Anda akan memverifikasi user ini.',
+            icon: 'warning',
+            showCancelButton: true, // Menampilkan tombol 'Batal'
+            confirmButtonText: 'Ya, Verifikasi!',
+            cancelButtonText: 'Batal',
+            allowOutsideClick: true, // Mengizinkan klik di luar untuk menutup alert
+            backdrop: true // Latar belakang dengan efek
+        }).then((result) => {
+            console.log(id_user);
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:8080/verify_user/' + id_user,
+                data: {
+                    id_user: id_user
+                },
+                success: function(response) {
+                    loadData();
+                    Swal.fire('Berhasil!', 'User berhasil diverifikasi.', 'success'); // Menampilkan pesan sukses
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr.responseText);
+                    alert('Gagal memverifikasi user.');
+                }
+            });
         });
     }
 
     // Event listener untuk tombol Verifikasi
     $(document).on('click', '.btn-verify', function() {
         var id_user = $(this).data('id_user');
-        if (confirm('Apakah Anda yakin ingin memverifikasi user ini?')) {
-            verifikasiUser(id_user);
-        }
+        verifikasiUser(id_user);
     });
     $(document).on('click', '.suspend-user', function() {
         var id_user = $(this).data('id_user');
         console.log("Selected User ID:", id_user);
-        if (!id_user) {
-            alert("ID user tidak ditemukan!"); // Tambahkan error handling jika id_user undefined
-            return;
-        }
-        if (confirm('Apakah kamu yakin untuk suspend user ini?')) {
+        // Gunakan SweetAlert2 untuk konfirmasi
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Anda akan suspend user ini.',
+            icon: 'warning',
+            showCancelButton: true, // Menampilkan tombol 'Batal'
+            confirmButtonText: 'Ya, Suspend!',
+            cancelButtonText: 'Batal',
+            allowOutsideClick: true, // Mengizinkan klik di luar untuk menutup alert
+            backdrop: true // Latar belakang dengan efek
+        }).then((result) => {
+            if (!id_user) {
+                alert("ID user tidak ditemukan!"); // Tambahkan error handling jika id_user undefined
+                return;
+            }
             $.ajax({
                 url: 'http://localhost:8080/suspend/' + id_user, // Replace with your actual endpoint
                 type: 'PUT', // Assuming it's a PUT request to update the user's status
                 dataType: 'json',
                 success: function(response) {
-                    alert(response.Pesan);
                     loadData();
+                    Swal.fire('Berhasil!', 'User berhasil disuspend.', 'success'); // Menampilkan pesan sukses
                 },
                 error: function(xhr, status, error) {
                     console.log('AJAX Error:', xhr.responseText);
                     alert('Terjadi Kesalahan saat Suspend user.');
                 }
             });
-        }
+        });
     });
 </script>
 <!-- / Layout wrapper -->

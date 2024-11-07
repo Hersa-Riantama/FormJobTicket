@@ -248,7 +248,6 @@ class Form extends BaseController
         }
         $response = [
             'Status' => 'success',
-            'Pesan' => 'Tiket Berhasil ditambahkan'
         ];
         return $this->response->setJSON($response);
     }

@@ -316,19 +316,33 @@ use Modules\Auth\Models\AuthModel; ?>
     // Fungsi untuk delete data
     $(document).on('click', '.dropdown-item-delete', function() {
         var id_buku = $(this).data('id_buku');
-        var konfirmasi = confirm("Apakah Anda yakin hapus buku ini? ");
-        if (konfirmasi) {
-            $.ajax({
-                type: 'DELETE',
-                url: 'http://localhost:8080/buku/' + id_buku,
-                success: function() {
-                    loadData();
-                },
-                error: function(xhr, status, error) {
-                    alert("Gagal menghapus buku: " + xhr.responseText); // Error handling
-                }
-            });
-        }
+
+        // Gunakan SweetAlert2 untuk konfirmasi
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Anda akan menghapus buku ini.',
+            icon: 'warning',
+            showCancelButton: true, // Menampilkan tombol 'Batal'
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal',
+            allowOutsideClick: true, // Mengizinkan klik di luar untuk menutup alert
+            backdrop: true // Latar belakang dengan efek
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Jika pengguna menekan 'Ya, Hapus!'
+                $.ajax({
+                    type: 'DELETE',
+                    url: 'http://localhost:8080/buku/' + id_buku,
+                    success: function() {
+                        loadData(); // Memuat ulang data setelah penghapusan
+                        Swal.fire('Berhasil!', 'Buku berhasil dihapus.', 'success'); // Menampilkan pesan sukses
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire('Error!', 'Gagal menghapus buku: ' + xhr.responseText, 'error'); // Menampilkan pesan error
+                    }
+                });
+            }
+        });
     });
 
     // Fungsi untuk update data
@@ -365,6 +379,7 @@ use Modules\Auth\Models\AuthModel; ?>
                         console.log('Response:', response);
                         $('#editModal').modal('hide');
                         loadData();
+                        Swal.fire('Berhasil!', 'Buku berhasil diperbarui.', 'success'); // Menampilkan pesan sukses
                     } else {
                         // Periksa apakah response.Errors ada dan bukan undefined
                         if (response.Errors && typeof response.Errors === 'object') {
@@ -424,6 +439,7 @@ use Modules\Auth\Models\AuthModel; ?>
                         console.log(response); // Menampilkan respon sukses
                         $('#addModal').modal('hide'); // Menutup modal
                         loadData(); // Panggil fungsi untuk memuat data (misalnya dari database)
+                        Swal.fire('Berhasil!', 'Buku berhasil ditambah.', 'success'); // Menampilkan pesan sukses
                     } else {
                         for (const [field, message] of Object.entries(response.pesan)) {
                             const PesanError = $('#' + field + 'Error');
