@@ -143,7 +143,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     // Periksa apakah tiket sudah ditolak oleh Editor
                     if (value.approved_order_editor === 'R') {
                         formData += '<div class="d-flex">';
-                        formData += '<span class="badge  bg-label-danger badge-centers fixed-width-ditolak">Ditolak</span>';
+                        formData += '<span class="badge  bg-label-danger badge-centers fixed-width-ditolak">Ditolak!</span>';
                         formData += '</div>';
                     } else {
                         if (isKoordEditor) {
