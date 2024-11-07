@@ -211,19 +211,19 @@
 .btn-label-danger:focus,
 .btn-label-danger.focus {
   color:#fff !important;
-  background:#5f61e6
+  background:#e6381a
 }
 .btn-label-danger:active,
 .btn-label-danger.active,
 .btn-label-danger.show.dropdown-toggle,
 .show>.btn-label-danger.dropdown-toggle {
   color:#fff !important;
-  background-color:#5f61e6 !important;
+  background-color:#e6381a !important;
   border-color:rgba(0,0,0,0) !important
 }
 .btn-label-danger.disabled,
 .btn-label-danger:disabled {
-  color:#696cff !important;
+  color:#ff3e1d !important;
   border-color:rgba(0,0,0,0) !important;
   background:#e7e7ff !important
 }
