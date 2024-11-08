@@ -13,14 +13,6 @@ use Modules\Auth\Models\AuthModel; ?>
         <!-- Basic Bootstrap Table -->
         <div class="card">
             <h5 class="card-header">List Tiket</h5>
-            <div class="px-4">
-                <select id="statusFilter" class="form-select">
-                    <option value="">Semua Status</option>
-                    <option value="2">Ditolak</option>
-                    <option value="10">Approved</option>
-                    <option value="5">Menunggu</option>
-                </select>
-            </div>
             <div class="table-responsive text-nowrap">
                 <table class="table" id="dataTables">
                     <thead>
