@@ -62,7 +62,7 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         loadData();
     });
 
@@ -71,13 +71,15 @@
             type: 'GET',
             url: 'http://localhost:8080/user',
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 var UserData = '';
-                $.each(data.user, function(key, value) {
+                $.each(data.user, function (key, value) {
                     UserData += '<tr>';
                     UserData += '<td>' + value.id_user + '</td>';
                     // Tombol Verifikasi (Hanya muncul jika user belum diverifikasi)
                     if (value.verifikasi === 'N') { // Jika user belum diverifikasi
+                        UserData += '<td class="center-text"><button class="badge btn btn-danger btn-verify fixed-width-user" data-id_user="' + value.id_user + '">Verifikasi</button></td>';
+                    } else if (value.verifikasi === 'R') {
                         UserData += '<td class="center-text"><button class="badge btn btn-danger btn-verify fixed-width-user" data-id_user="' + value.id_user + '">Verifikasi</button></td>';
                     } else {
                         UserData += '<td class="center-text"><span class="badge bg-success fixed-width-user">Terverifikasi</span></td>';
@@ -145,11 +147,11 @@
                     data: {
                         id_user: id_user
                     },
-                    success: function(response) {
+                    success: function (response) {
                         loadData();
                         Swal.fire('Berhasil!', 'User berhasil diverifikasi.', 'success'); // Menampilkan pesan sukses
                     },
-                    error: function(xhr) {
+                    error: function (xhr) {
                         console.error('Error:', xhr.responseText);
                         alert('Gagal memverifikasi user.');
                     }
@@ -159,11 +161,11 @@
     }
 
     // Event listener untuk tombol Verifikasi
-    $(document).on('click', '.btn-verify', function() {
+    $(document).on('click', '.btn-verify', function () {
         var id_user = $(this).data('id_user');
         verifikasiUser(id_user);
     });
-    $(document).on('click', '.suspend-user', function() {
+    $(document).on('click', '.suspend-user', function () {
         var id_user = $(this).data('id_user');
         console.log("Selected User ID:", id_user);
         // Gunakan SweetAlert2 untuk konfirmasi
@@ -186,11 +188,11 @@
                     url: 'http://localhost:8080/suspend/' + id_user, // Replace with your actual endpoint
                     type: 'PUT', // Assuming it's a PUT request to update the user's status
                     dataType: 'json',
-                    success: function(response) {
+                    success: function (response) {
                         loadData();
                         Swal.fire('Berhasil!', 'User berhasil disuspend.', 'success'); // Menampilkan pesan sukses
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         console.log('AJAX Error:', xhr.responseText);
                         alert('Terjadi Kesalahan saat Suspend user.');
                     }

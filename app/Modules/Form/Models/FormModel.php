@@ -6,10 +6,10 @@ use CodeIgniter\Model;
 
 class FormModel extends Model
 {
-    protected $table            = 'tbl_tiket';
-    protected $primaryKey       = 'id_tiket';
+    protected $table = 'tbl_tiket';
+    protected $primaryKey = 'id_tiket';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = [
+    protected $allowedFields = [
         'kode_form',
         'id_kategori',
         'tgl_selesai',
@@ -39,21 +39,21 @@ class FormModel extends Model
 
     // Dates
     protected $useTimestamps = true;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
+    protected $dateFormat = 'datetime';
+    protected $createdField = 'created_at';
+    protected $updatedField = 'updated_at';
 
     // Fungsi untuk validasi data sebelum insert
     public function validationRules()
     {
         return [
-            'id_kategori' =>  [
-              'rules'  => 'required',
-              'errors' => [
-                'required' => 'Kategori Wajib pilih salah satu!'
-              ],
+            'id_kategori' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kategori Wajib pilih salah satu!'
+                ],
             ],
-            'id_user' =>  [
+            'id_user' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'User Wajib pilih'

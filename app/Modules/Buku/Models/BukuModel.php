@@ -6,27 +6,26 @@ use CodeIgniter\Model;
 
 class BukuModel extends Model
 {
-    protected $table            = 'tbl_buku';
-    protected $primaryKey       = 'id_buku';
+    protected $table = 'tbl_buku';
+    protected $primaryKey = 'id_buku';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['kode_buku', 'judul_buku', 'pengarang', 'target_terbit', 'warna'];
+    protected $allowedFields = ['kode_buku', 'judul_buku', 'pengarang', 'target_terbit', 'warna'];
 
     // Dates
     protected $useTimestamps = true;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
+    protected $dateFormat = 'datetime';
+    protected $createdField = 'created_at';
+    protected $updatedField = 'updated_at';
 
     // Fungsi untuk validasi data sebelum insert
     public function validationRules()
     {
         return [
             'kode_buku' => [
-                'rules' => 'required|min_length[3]|is_unique[tbl_buku.kode_buku]',
+                'rules' => 'required|max_length[10]',
                 'errors' => [
                     'required' => 'Kode buku harus diisi',
-                    'min_length' => 'Kode buku minimal 3 karakter',
-                    'is_unique' => 'Kode Buku sudah terdaftar'
+                    'max_length' => 'Kode buku maksimal 10 karakter'
                 ],
             ],
             'judul_buku' => [
@@ -52,7 +51,7 @@ class BukuModel extends Model
             'warna' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required'  => 'Warna wajib dipilih',
+                    'required' => 'Warna wajib dipilih',
                 ],
             ],
         ];
@@ -61,10 +60,10 @@ class BukuModel extends Model
     {
         return [
             'kode_buku' => [
-                'rules' => 'required|min_length[3]',
+                'rules' => 'required|max_length[10]',
                 'errors' => [
                     'required' => 'Kode buku harus diisi',
-                    'min_length' => 'Kode buku minimal 3 karakter'
+                    'max_length' => 'Kode buku maksimal 10 karakter'
                 ],
             ],
             'judul_buku' => [
@@ -90,7 +89,7 @@ class BukuModel extends Model
             'warna' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required'  => 'Warna wajib dipilih',
+                    'required' => 'Warna wajib dipilih',
                 ],
             ],
         ];

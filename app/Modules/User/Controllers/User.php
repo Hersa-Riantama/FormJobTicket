@@ -117,8 +117,8 @@ class User extends BaseController
         }
 
         // Ubah status verifikasi user menjadi 'N' (unverified)
-        $user['verifikasi'] = 'N';
-        $user['status_user'] = 'nonaktif';
+        $user['verifikasi'] = 'R';
+        $user['status_user'] = 'suspend';
         $model->update($id_user, $user);
 
         // Response sukses
