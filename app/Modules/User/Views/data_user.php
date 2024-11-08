@@ -94,7 +94,7 @@
                     UserData += '<td>';
                     UserData += '<div class="d-flex justify-content-start align-items-center">';
 
-                    if (value.verifikasi === 'N') {
+                    if (['R', 'N'].includes(value.verifikasi)) {
                         UserData += '<a class="btn rounded-pill btn-icon btn-label-secondary disabled" href="javascript:void(0);" title="Suspend User">';
                         UserData += '<span class="tf-icons bx bx-user-x bx-sm"></span>';
                         UserData += '</a>';
