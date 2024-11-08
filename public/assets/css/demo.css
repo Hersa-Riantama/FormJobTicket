@@ -67,6 +67,10 @@
   width: 70%; /* atau gunakan persentase, misalnya 100% jika dalam kontainer */
 }
 
+.fixed-width-status-ditolak {
+  width: 50%; /* atau gunakan persentase, misalnya 100% jika dalam kontainer */
+}
+
 .center-text {
   text-align: center; /* Tengah secara horizontal */
   vertical-align: middle; /* Tengah secara vertikal */
@@ -267,6 +271,20 @@
 .input-group .btn-label-secondary {
   border-right:var(--bs-border-width) solid #d8dce2 !important;
   border-left:var(--bs-border-width) solid #d8dce2 !important
+}
+
+select.form-control,
+select.form-control:focus,
+select.form-control:hover {
+  border-top:none;
+  border-right:none;
+  border-left:none;
+  -webkit-box-shadow:none;
+  box-shadow:none
+}
+
+.vertical-spacing {
+  margin-bottom: 10px; /* Atur jarak antar elemen */
 }
 
 .switch {
