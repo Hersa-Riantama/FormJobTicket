@@ -231,15 +231,18 @@ use Modules\Auth\Models\AuthModel; ?>
                     bukuData += '<td class="wrap-text">' + value.pengarang + '</td>';
                     bukuData += '<td>' + value.target_terbit + '</td>';
                     bukuData += '<td>' + value.warna + '</td>';
+
                     bukuData += '<td>';
-                    bukuData += '<div class="dropdown">';
-                    bukuData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
-                    bukuData += '<i class="bx bx-dots-horizontal-rounded"></i>';
-                    bukuData += '</button>';
-                    bukuData += '<div class="dropdown-menu">';
-                    bukuData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
-                    bukuData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_buku="' + value.id_buku + '"><i class="bx bx-trash me-2"></i> Delete</a>';
-                    bukuData += '</div>';
+                    bukuData += '<div class="d-flex justify-content-start align-items-center">';
+
+                    bukuData += '<a class="btn rounded-pill btn-icon btn-label-primary item-edit me-2" href="javascript:void(0);" data-id_buku="' + value.id_buku + '" title="Edit Buku">';
+                    bukuData += '<span class="tf-icons bx bx-edit bx-sm"></span>';
+                    bukuData += '</a>';
+
+                    bukuData += '<a class="btn rounded-pill btn-icon btn-label-danger item-delete" href="javascript:void(0);" data-id_buku="' + value.id_buku + '" title="Hapus Buku">';
+                    bukuData += '<span class="tf-icons bx bx-trash bx-sm"></span>';
+                    bukuData += '</a>';
+
                     bukuData += '</div>';
                     bukuData += '</td>';
                     bukuData += '</tr>';
@@ -272,7 +275,7 @@ use Modules\Auth\Models\AuthModel; ?>
         });
     }
     // Fungsi untuk edit data
-    $(document).on('click', '.dropdown-item-edit', function() {
+    $(document).on('click', '.item-edit', function() {
         var id_buku = $(this).data('id_buku');
         console.log('ID Buku:', id_buku);
 
@@ -314,7 +317,7 @@ use Modules\Auth\Models\AuthModel; ?>
     });
 
     // Fungsi untuk delete data
-    $(document).on('click', '.dropdown-item-delete', function() {
+    $(document).on('click', '.item-delete', function() {
         var id_buku = $(this).data('id_buku');
 
         // Gunakan SweetAlert2 untuk konfirmasi

@@ -13,6 +13,14 @@ use Modules\Auth\Models\AuthModel; ?>
         <!-- Basic Bootstrap Table -->
         <div class="card">
             <h5 class="card-header">List Tiket</h5>
+            <div class="px-4">
+                <select id="statusFilter" class="form-select">
+                    <option value="">Semua Status</option>
+                    <option value="2">Ditolak</option>
+                    <option value="10">Approved</option>
+                    <option value="5">Menunggu</option>
+                </select>
+            </div>
             <div class="table-responsive text-nowrap">
                 <table class="table" id="dataTables">
                     <thead>
@@ -143,7 +151,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     // Periksa apakah tiket sudah ditolak oleh Editor
                     if (value.approved_order_editor === 'R') {
                         formData += '<div class="d-flex">';
-                        formData += '<span class="badge  bg-label-danger badge-centers fixed-width-ditolak">Ditolak!</span>';
+                        formData += '<span class="badge  bg-label-danger badge-centers fixed-width-ditolak">Ditolak</span>';
                         formData += '</div>';
                     } else {
                         if (isKoordEditor) {
@@ -221,23 +229,15 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '<td>' + formatDate(value.created_at) + '</td>';
                     formData += '<td>';
                     formData += '<div class="d-flex justify-content-start align-items-center">';
-                    // formData += '<button type="button" class="btn rounded-pill btn-icon btn-label-primary tiket-detail" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Detail Tiket">';
-                    // formData += '<span class="tf-icons bx bx-pie-chart-alt bx-22px"></span>';
-                    // formData += '</button>';
-                    formData += '<a class="btn rounded-pill btn-icon btn-label-primary tiket-detail me-2" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Detail Tiket">';
-                    formData += '<span class="tf-icons bx bxs-show bx-sm"></span>';
+
+                    formData += '<a class="btn rounded-pill btn-icon btn-label-primary item-detail me-2" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Detail Tiket">';
+                    formData += '<span class="tf-icons bx bx-show bx-sm"></span>';
                     formData += '</a>';
-                    // formData += '<i class="bx bxs-show bx-sm me-2"></i></a>';
 
-                    // formData += '<a href="javascript:void(0);" class="btn rounded-pill btn-icon btn-label-primary tiket-detail" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Detail Tiket">';
-                    // formData += '<span class="tf-icons bx bx-pie-chart-alt bx-22px"></span>';
-                    // formData += '</a>';
-
-
-                    formData += '<a class="btn rounded-pill btn-icon btn-label-danger tiket-delete" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '" title="Hapus Tiket">';
+                    formData += '<a class="btn rounded-pill btn-icon btn-label-danger item-delete" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '" title="Hapus Tiket">';
                     formData += '<span class="tf-icons bx bx-trash bx-sm"></span>';
                     formData += '</a>';
-                    // formData += '<i class="bx bx-trash bx-sm me-2"></i></a>';
+
                     formData += '</div>';
                     formData += '</td>';
                     if (islevel_user.includes("Editor")) {
@@ -247,7 +247,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                             formData += '</td>';
                         } else {
                             formData += '<td>';
-                            formData += '<button class="btn btn-secondary btn-disapprove fixed-width-ditolak" disabled>Tolak Tiket</button>';
+                            formData += '<button class="btn btn-secondary disabled btn-disapprove fixed-width-ditolak">Tolak Tiket</button>';
                             formData += '</td>';
                         }
                     }
@@ -282,12 +282,12 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
         });
     }
 
-    $(document).on('click', '.tiket-detail', function() {
+    $(document).on('click', '.item-detail', function() {
         var id_tiket = $(this).data('id_tiket');
         window.location.href = '/detail/' + id_tiket; // Redirect to the detail page
     });
 
-    $(document).on('click', '.tiket-delete', function() {
+    $(document).on('click', '.item-delete', function() {
         var id_tiket = $(this).data('id_tiket');
         Swal.fire({
             title: 'Apakah Anda yakin?',

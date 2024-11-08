@@ -106,15 +106,18 @@ use Modules\Auth\Models\AuthModel; ?>
                     kategoriData += '<tr>';
                     kategoriData += '<td>' + value.id_kategori + '</td>';
                     kategoriData += '<td>' + value.nama_kategori + '</td>';
+
                     kategoriData += '<td>';
-                    kategoriData += '<div class="dropdown">';
-                    kategoriData += '<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">';
-                    kategoriData += '<i class="bx bx-dots-horizontal-rounded"></i>';
-                    kategoriData += '</button>';
-                    kategoriData += '<div class="dropdown-menu">';
-                    kategoriData += '<a class="dropdown-item dropdown-item-edit" href="javascript:void(0);" data-id_kategori="' + value.id_kategori + '"><i class="bx bx-edit-alt me-2"></i> Edit</a>';
-                    kategoriData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_kategori="' + value.id_kategori + '"><i class="bx bx-trash me-2"></i> Delete</a>';
-                    kategoriData += '</div>';
+                    kategoriData += '<div class="d-flex justify-content-start align-items-center">';
+
+                    kategoriData += '<a class="btn rounded-pill btn-icon btn-label-primary item-edit me-2" href="javascript:void(0);"data-id_kategori="' + value.id_kategori + '" title="Edit Kategori">';
+                    kategoriData += '<span class="tf-icons bx bx-edit bx-sm"></span>';
+                    kategoriData += '</a>';
+
+                    kategoriData += '<a class="btn rounded-pill btn-icon btn-label-danger item-delete" href="javascript:void(0);" data-id_kategori="' + value.id_kategori + '" title="Hapus Kategori">';
+                    kategoriData += '<span class="tf-icons bx bx-trash bx-sm"></span>';
+                    kategoriData += '</a>';
+
                     kategoriData += '</div>';
                     kategoriData += '</td>';
                     kategoriData += '</tr>';
@@ -145,8 +148,7 @@ use Modules\Auth\Models\AuthModel; ?>
         });
     }
 
-
-    $(document).on('click', '.dropdown-item-edit', function() {
+    $(document).on('click', '.item-edit', function() {
         var id_kategori = $(this).data('id_kategori');
         if (!id_kategori) {
             console.log('ID Kategori :', id_kategori);
@@ -170,6 +172,7 @@ use Modules\Auth\Models\AuthModel; ?>
             }
         });
     });
+
     // Fungsi untuk update data
     $(document).on('click', '#btn-update', function() {
         var id_kategori = $(this).data('id_kategori');
@@ -213,8 +216,9 @@ use Modules\Auth\Models\AuthModel; ?>
             console.log('ID Kategori tidak ditemukan pada tombol');
         }
     });
+
     // Fungsi untuk delete data
-    $(document).on('click', '.dropdown-item-delete', function() {
+    $(document).on('click', '.item-delete', function() {
         var id_kategori = $(this).data('id_kategori');
         Swal.fire({
             title: 'Apakah Anda yakin?',

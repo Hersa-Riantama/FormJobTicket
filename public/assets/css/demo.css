@@ -166,6 +166,11 @@
   border:3px solid rgba(255,62,29,.08)
 }
 
+.bg-label-success {
+  background-color: transparent !important;
+  color:#71dd37 !important
+}
+
 .btn-label-primary {
   color:#696cff !important;
   border-color:rgba(0,0,0,0);
@@ -226,6 +231,42 @@
   color:#ff3e1d !important;
   border-color:rgba(0,0,0,0) !important;
   background:#e7e7ff !important
+}
+
+.btn-label-secondary {
+  color:#8592a3 !important;
+  border-color:rgba(0,0,0,0);
+  background:#ebeef0
+}
+.btn-label-secondary:hover {
+  border-color:rgba(0,0,0,0) !important;
+  background:#788393 !important;
+  color:#fff !important;
+  box-shadow:0 .125rem .25rem 0 rgba(133,146,163,.4) !important
+}
+.btn-label-secondary:focus,
+.btn-label-secondary.focus {
+  color:#fff !important;
+  background:#788393
+}
+.btn-label-secondary:active,
+.btn-label-secondary.active,
+.btn-label-secondary.show.dropdown-toggle,
+.show>.btn-label-secondary.dropdown-toggle {
+  color:#fff !important;
+  background-color:#788393 !important;
+  border-color:rgba(0,0,0,0) !important
+}
+.btn-label-secondary.disabled,
+.btn-label-secondary:disabled {
+  color:#8592a3 !important;
+  border-color:rgba(0,0,0,0) !important;
+  background:#ebeef0 !important
+}
+.btn-group .btn-label-secondary,
+.input-group .btn-label-secondary {
+  border-right:var(--bs-border-width) solid #d8dce2 !important;
+  border-left:var(--bs-border-width) solid #d8dce2 !important
 }
 
 .switch {
