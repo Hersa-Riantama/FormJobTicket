@@ -16,8 +16,8 @@ use Modules\Auth\Models\AuthModel; ?>
             <label for="statusFilter">Filter Status Approval:</label>
             <select id="statusFilter">
                 <option value="">Semua</option>
-                <option value="belum">Belum Disetujui</option>
                 <option value="sudah">Sudah Disetujui</option>
+                <option value="belum">Belum Disetujui</option>
                 <option value="ditolak">Ditolak</option>
             </select>
             <div class="table-responsive text-nowrap">
@@ -137,12 +137,43 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                 var islevel_user = <?= json_encode($level_user); ?>;
                 console.log("Is Koord Editor:", isKoordEditor);
                 $.each(response.tiket, function (key, value) {
-                    if (statusFilter === 'sudah' && value.approved_order_koord !== 'Y' && value.approved_order_editor !== 'Y') {
-                        return; // Skip this ticket if it's not approved by either Koord or Editor
-                    } else if (statusFilter === 'belum' && (value.approved_order_koord === 'Y' || value.approved_order_editor === 'Y' || value.approved_order_editor === 'R')) {
-                        return; // Skip this ticket if it's approved or rejected
-                    } else if (statusFilter === 'ditolak' && value.approved_order_editor !== 'R') {
-                        return; // Skip this ticket if it's not rejected
+                    var dibatalin = (value.approved_order_editor === 'R');
+                    var disetujui = false;
+                    var belum_disetujui = false;
+
+                    // Filter by level user (e.g., Admin Sistem, Manager Platform, etc.)
+                    if (islevel_user.includes('Admin Sistem') && value.approved_order_admin === 'Y') {
+                        disetujui = true;
+                    } else if (value.approved_order_admin === 'N') {
+                        belum_disetujui = true;
+                    }
+                    if (islevel_user.includes('Manager Platform') && value.approved_acc_manager === 'Y') {
+                        disetujui = true;
+                    }
+                    if (islevel_user.includes('Editor') && value.approved_order_editor === 'Y') {
+                        disetujui = true;
+                    }
+                    if (islevel_user.includes('Koord Editor') && value.approved_acc_koord === 'Y' && value.approved_order_koord === 'Y') {
+                        disetujui = true;
+                    }
+                    // if (statusFilter === 'belum') {
+                    //     // Jika tiket belum disetujui berdasarkan status 'N' atau belum dicentang
+                    //     if (
+                    //         (value.approved_order_admin === 'N' || value.approved_acc_manager === 'N' || value.approved_order_editor === 'N' || value.approved_order_koord === 'N') ||
+                    //         !$('#switch_' + value.id_tiket).prop('checked') // Pastikan switch button belum dicentang
+                    //     ) {
+                    //         belum_disetujui = true;
+                    //     } else {
+                    //         return; // Skip jika tiket sudah disetujui
+                    //     }
+                    // }
+                    // Apply status filter
+                    if (statusFilter === 'sudah' && !disetujui) {
+                        return; // Skip if not approved
+                    } else if (statusFilter === 'belum' && !belum_disetujui) {
+                        return; // Skip if already approved
+                    } else if (statusFilter === 'ditolak' && !dibatalin) {
+                        return; // Skip if not rejected
                     }
 
                     // Ambil judul buku dan nama user
@@ -170,7 +201,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
 
                             // Order Approval Toggle
                             formData += '<label class="switch switch-success">';
-                            formData += '<input type="checkbox" class="switch-input" ' + (value.approved_order_koord === 'Y' ? 'checked' : '') + ' onclick="approveOrder(' + value.id_tiket + ', this.checked)">';
+                            formData += '<input type="checkbox" class="switch-input" id="switch_1"' + (value.approved_order_koord === 'Y' ? 'checked' : '') + ' onclick="approveOrder(' + value.id_tiket + ', this.checked)">';
                             formData += '<span class="switch-toggle-slider"></span>';
                             formData += '</label>';
                             formData += '<span class="ms-5">' + (value.approved_order_koord === 'Y' ? 'Order' : 'Order') + '</span>';
@@ -179,7 +210,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                             // ACC Approval Toggle
                             formData += '<div class="d-flex">';
                             formData += '<label class="switch switch-success">';
-                            formData += '<input type="checkbox" class="switch-input"' + (value.approved_acc_koord === 'Y' ? 'checked' : '') + ' onclick="approveAcc(' + value.id_tiket + ', this.checked)">';
+                            formData += '<input type="checkbox" class="switch-input" id="switch_2"' + (value.approved_acc_koord === 'Y' ? 'checked' : '') + ' onclick="approveAcc(' + value.id_tiket + ', this.checked)">';
                             formData += '<span class="switch-toggle-slider"></span>';
                             formData += '</label>';
                             formData += '<span class="ms-5">' + (value.approved_acc_koord === 'Y' ? 'Acc' : 'ACC') + '</span>';
@@ -192,28 +223,28 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                             islevel_user.forEach(level => {
                                 if (level === 'Admin Sistem') {
                                     formData += '<label class="switch switch-success">';
-                                    formData += '<input type="checkbox" class="switch-input"' + (value.approved_order_admin === 'Y' ? 'checked' : '') + ' onclick="approveTicket(' + value.id_tiket + ', this.checked)">';
+                                    formData += '<input type="checkbox" class="switch-input" id="switch_3"' + (value.approved_order_admin === 'Y' ? 'checked' : '') + ' onclick="approveTicket(' + value.id_tiket + ', this.checked)">';
                                     formData += '<span class="switch-toggle-slider"></span>';
                                     formData += '</label>';
                                     // formData += '<span class="ms-2">' + (value.approved_order_admin === 'Y' ? 'Approved' : 'Setuju') + '</span>';
                                     isApproved = true;
                                 } else if (level === 'Manager Platform') {
                                     formData += '<label class="switch switch-success">';
-                                    formData += '<input type="checkbox" class="switch-input"' + (value.approved_acc_manager === 'Y' ? 'checked' : '') + ' onclick="approveTicket(' + value.id_tiket + ', this.checked)">';
+                                    formData += '<input type="checkbox" class="switch-input" id="switch_4"' + (value.approved_acc_manager === 'Y' ? 'checked' : '') + ' onclick="approveTicket(' + value.id_tiket + ', this.checked)">';
                                     formData += '<span class="switch-toggle-slider"></span>';
                                     formData += '</label>';
                                     // formData += '<span class="ms-2">' + (value.approved_acc_manager === 'Y' ? 'Approved' : 'Setuju') + '</span>';
                                     isApproved = true;
                                 } else if (level === 'Tim Multimedia') {
                                     formData += '<label class="switch switch-success">';
-                                    formData += '<input type="checkbox" class="switch-input"' + (value.approved_multimedia === 'Y' ? 'checked' : '') + ' onclick="approveTicket(' + value.id_tiket + ', this.checked)">';
+                                    formData += '<input type="checkbox" class="switch-input" id="switch_5"' + (value.approved_multimedia === 'Y' ? 'checked' : '') + ' onclick="approveTicket(' + value.id_tiket + ', this.checked)">';
                                     formData += '<span class="switch-toggle-slider"></span>';
                                     formData += '</label>';
                                     // formData += '<span class="ms-2">' + (value.approved_multimedia === 'Y' ? 'Approved' : 'Setuju') + '</span>';
                                     isApproved = true;
                                 } else if (level === 'Editor') {
                                     formData += '<label class="switch switch-success">';
-                                    formData += '<input type="checkbox" class="switch-input"' + (value.approved_order_editor === 'Y' ? 'checked' : '') + ' onclick="approveTicket(' + value.id_tiket + ', this.checked)">';
+                                    formData += '<input type="checkbox" class="switch-input" id="switch_6"' + (value.approved_order_editor === 'Y' ? 'checked' : '') + ' onclick="approveTicket(' + value.id_tiket + ', this.checked)">';
                                     formData += '<span class="switch-toggle-slider"></span>';
                                     formData += '</label>';
                                     // formData += '<span class="ms-2">' + (value.approved_multimedia === 'Y' ? 'Approved' : 'Setuju') + '</span>';
@@ -222,7 +253,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                             });
                             if (!isApproved) {
                                 formData += '<label class="switch switch-success">';
-                                formData += '<input type="checkbox" class="switch-input" onclick="toggleApproval(' + value.id_tiket + ', this.checked)">';
+                                formData += '<input type="checkbox" class="switch-input id="switch_7"" onclick="toggleApproval(' + value.id_tiket + ', this.checked)">';
                                 formData += '<span class="switch-toggle-slider"></span>';
                                 formData += '</label>';
                                 formData += '<span class="ms-2">Setuju</span>';
@@ -285,7 +316,6 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     });
 
                 }
-                // $('#formData').html(formData);
             },
             error: function (xhr, status, error) {
                 console.error('Error fetching List Form:', error);
