@@ -146,35 +146,52 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                         disetujui = true;
                     } else if (value.approved_order_admin === 'N') {
                         belum_disetujui = true;
-                    }
+                        if (value.approved_order_editor === 'R') {
+                            dibatalin = true;
+                        }
+                    };
                     if (islevel_user.includes('Manager Platform') && value.approved_acc_manager === 'Y') {
                         disetujui = true;
-                    }
+                    } else if (value.approved_acc_manager === 'N') {
+                        belum_disetujui = true;
+                        if (value.approved_order_editor === 'R') {
+                            dibatalin = true;
+                        }
+                    };
                     if (islevel_user.includes('Editor') && value.approved_order_editor === 'Y') {
                         disetujui = true;
-                    }
-                    if (islevel_user.includes('Koord Editor') && value.approved_acc_koord === 'Y' && value.approved_order_koord === 'Y') {
+                    } else if (value.approved_order_editor === 'N') {
+                        belum_disetujui = true;
+                        if (value.approved_order_editor === 'R') {
+                            dibatalin = true;
+                        }
+                    };
+                    if (islevel_user.includes('Tim Multimedia') && value.approved_multimedia === 'Y') {
                         disetujui = true;
-                    }
-                    // if (statusFilter === 'belum') {
-                    //     // Jika tiket belum disetujui berdasarkan status 'N' atau belum dicentang
-                    //     if (
-                    //         (value.approved_order_admin === 'N' || value.approved_acc_manager === 'N' || value.approved_order_editor === 'N' || value.approved_order_koord === 'N') ||
-                    //         !$('#switch_' + value.id_tiket).prop('checked') // Pastikan switch button belum dicentang
-                    //     ) {
-                    //         belum_disetujui = true;
-                    //     } else {
-                    //         return; // Skip jika tiket sudah disetujui
-                    //     }
-                    // }
+                    } else if (value.approved_multimedia === 'N') {
+                        belum_disetujui = true;
+                        if (value.approved_order_editor === 'R') {
+                            dibatalin = true;
+                        }
+                    };
+                    if (islevel_user.includes('Koord Editor') && value.approved_acc_koord === 'Y' || value.approved_order_koord === 'Y') {
+                        disetujui = true;
+                    } else if (value.approved_acc_koord === 'N' && value.approved_order_koord === 'N') {
+                        belum_disetujui = true;
+                        if (value.approved_order_editor === 'R') {
+                            dibatalin = true;
+                        }
+                    };
                     // Apply status filter
                     if (statusFilter === 'sudah' && !disetujui) {
                         return; // Skip if not approved
-                    } else if (statusFilter === 'belum' && !belum_disetujui) {
-                        return; // Skip if already approved
+                    } else if (statusFilter === 'belum') {
+                        if (disetujui || dibatalin && belum_disetujui) {
+                            return; // Skip if already approved or rejected
+                        }
                     } else if (statusFilter === 'ditolak' && !dibatalin) {
                         return; // Skip if not rejected
-                    }
+                    };
 
                     // Ambil judul buku dan nama user
                     var kode_buku = kodeBukuMap[value.id_buku] || 'Unknown Kode';
