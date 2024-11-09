@@ -60,7 +60,7 @@
 }
 
 .fixed-width-user {
-  width: 90%; /* atau gunakan persentase, misalnya 100% jika dalam kontainer */
+  width: 85%; /* atau gunakan persentase, misalnya 100% jika dalam kontainer */
 }
 
 .fixed-width-ditolak {
