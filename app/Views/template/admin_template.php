@@ -50,12 +50,6 @@
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <!-- CSS Padding untuk DataTables Wrapper -->
-    <style>
-        .dataTables_wrapper {
-            padding: 20px;
-            /* Sesuaikan padding sesuai kebutuhan */
-        }
-    </style>
 
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.0/dist/sweetalert2.min.css">
