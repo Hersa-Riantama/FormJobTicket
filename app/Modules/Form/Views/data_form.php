@@ -548,7 +548,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     success: function(response) {
                         if (response.status === 'success') {
                             $('#approveButton').hide();
-                            location.reload(); // Reload halaman setelah berhasil
+                            loadData(); // Reload halaman setelah berhasil
                             const successMessage = isChecked ?
                                 'Tiket berhasil di-ACC.' :
                                 'Approval ACC tiket berhasil dibatalkan.';
