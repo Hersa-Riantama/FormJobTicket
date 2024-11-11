@@ -92,13 +92,20 @@ class Menu extends BaseController
                         break;
 
                     case 'Koord Editor':
+                        $userId = session()->get('id_user'); // Ambil id_koord dari session
+
+                        // Query untuk tiket yang sudah selesai
                         $done = $form
-                            ->Where('approved_order_editor !=', 'R')
+                            ->where('id_koord', $userId) // Filter berdasarkan id_koord dari session
+                            ->where('approved_order_editor !=', 'R')
                             ->where('approved_order_koord', 'Y')
                             ->where('approved_acc_koord', 'Y')
                             ->countAllResults();
+
+                        // Query untuk tiket yang sedang dalam progress
                         $onProgress = $form
-                            ->Where('approved_order_editor !=', 'R')
+                            ->where('id_koord', $userId) // Filter berdasarkan id_koord dari session
+                            ->where('approved_order_editor !=', 'R')
                             ->groupStart()
                             ->orWhere('approved_order_koord', 'N')
                             ->orWhere('approved_order_koord', 'R')
@@ -107,6 +114,7 @@ class Menu extends BaseController
                             ->groupEnd()
                             ->countAllResults();
                         break;
+
 
                     case 'Manager Platform':
                         $done = $form

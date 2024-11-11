@@ -492,6 +492,16 @@ class Form extends BaseController
 
         // Ambil data tiket, kategori, buku, dan user dari database
         $data = $model->getTiket();
+        // Filter tiket berdasarkan id_koord jika user level adalah Koord Editor
+        if ($userData['level_user'] === 'Koord Editor') {
+            $filteredData = [];
+            foreach ($data as $tiket) {
+                if ($tiket['id_koord'] == $userId) {
+                    $filteredData[] = $tiket;
+                }
+            }
+            $data = $filteredData;
+        }
         $kategoriData = $KategoriModel->findAll();
         $bukuData = $BukuModel->findAll();
         $userDataList = $UserModel->findAll();

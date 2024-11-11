@@ -53,6 +53,9 @@ class CreateTableTiket extends Migration
             'id_admin' => [
                 'type' => 'INT',
             ],
+            'catatan' => [
+                'type' => 'TEXT',
+            ],
             'tgl_order_editor' => [
                 'type' => 'DATE',
             ],
@@ -73,27 +76,27 @@ class CreateTableTiket extends Migration
             ],
             'approved_order_editor' => [
                 'type' => 'ENUM',
-                'constraint' => ['Y', 'N'],
+                'constraint' => ['Y', 'N', 'R'],
                 'deafult' => 'N',
             ],
             'approved_order_koord' => [
                 'type' => 'ENUM',
-                'constraint' => ['Y', 'N'],
+                'constraint' => ['Y', 'N', 'R'],
                 'deafult' => 'N',
             ],
             'approved_order_admin' => [
                 'type' => 'ENUM',
-                'constraint' => ['Y', 'N'],
+                'constraint' => ['Y', 'N', 'R'],
                 'deafult' => 'N',
             ],
             'approved_acc_koord' => [
                 'type' => 'ENUM',
-                'constraint' => ['Y', 'N'],
+                'constraint' => ['Y', 'N', 'R'],
                 'deafult' => 'N',
             ],
             'approved_acc_manager' => [
                 'type' => 'ENUM',
-                'constraint' => ['Y', 'N'],
+                'constraint' => ['Y', 'N', 'R'],
                 'deafult' => 'N',
             ],
             'created_at' => [

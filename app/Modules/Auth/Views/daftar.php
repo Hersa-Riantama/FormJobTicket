@@ -47,6 +47,12 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
+
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.0/dist/sweetalert2.min.css">
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.0/dist/sweetalert2.all.min.js"></script>
 </head>
 
 <body>
@@ -222,8 +228,9 @@
                     console.log(response); // Log the response
                     $('.error-message').text('').hide(); // Clear previous messages
                     if (response.Status === 'success') {
-                        alert(response.Pesan);
-                        window.location.href = '<?php echo base_url('login'); ?>';
+                        Swal.fire('Berhasil!', 'User berhasil ditambah.', 'success').then(function() {
+                            window.location.href = '<?php echo base_url('login'); ?>';
+                        });
                     } else {
                         // toastr.error(response.Pesan, "Error");
                         for (const [field, message] of Object.entries(response.Errors)) {
