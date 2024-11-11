@@ -193,10 +193,11 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     // If order editor is rejected, it should be considered dibatalin for all levels
                     if (value.approved_order_editor === 'R') {
                         dibatalin = true;
+                        disetujui = false;
                     }
 
                     // Apply status filter
-                    if (statusFilter === 'sudah' && !disetujui) {
+                    if (statusFilter === 'sudah' && (!disetujui || dibatalin)) {
                         return;
                     } else if (statusFilter === 'belum') {
                         if (disetujui || dibatalin) {
