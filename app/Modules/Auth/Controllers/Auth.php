@@ -73,6 +73,14 @@ class Auth extends BaseController
             ];
             return $this->response->setJSON($response)->setStatusCode(403);
         }
+        if ($user['verifikasi'] == 'R') {
+            // Jika user belum diverifikasi
+            $response = [
+                'Pesan' => 'Akun Anda disuspend',
+                'Status' => 'error'
+            ];
+            return $this->response->setJSON($response)->setStatusCode(403);
+        }
         // Set session
         $this->session->set([
             'id_user' => $user['id_user'],
