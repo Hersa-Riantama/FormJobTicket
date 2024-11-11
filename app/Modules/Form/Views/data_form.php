@@ -439,6 +439,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     success: function(response) {
                         if (response.status === 'success') {
                             $('#approveButton').hide();
+                            loadData();
                             const successMessage = isChecked ? 'Tiket berhasil diapprove.' : 'Approval tiket berhasil dibatalkan.';
                             Swal.fire('Berhasil!', successMessage, 'success'); // Menampilkan pesan sukses
                         } else {
