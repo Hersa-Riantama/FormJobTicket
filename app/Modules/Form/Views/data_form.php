@@ -159,8 +159,6 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                         disetujui = true;
                     } else if (islevel_user.includes('Admin Sistem') && value.approved_order_admin === 'N') {
                         belum_disetujui = true;
-                    } else if (value.approved_order_editor === 'R') {
-                        dibatalin = true;
                     }
 
                     if (islevel_user.includes('Manager Platform') && value.approved_acc_manager === 'Y') {
