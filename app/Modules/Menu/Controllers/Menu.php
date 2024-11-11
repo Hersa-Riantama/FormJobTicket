@@ -140,19 +140,6 @@ class Menu extends BaseController
         } else {
             return redirect()->to('/login');
         }
-        // if ($userData && isset($userData['level_user']) && $userData['level_user'] === 'Admin Sistem') {
-        //     $done = $form
-        //     ->Where('approved_order_editor !=', 'R') // Mengecualikan jika approved_order_editor = 'R'
-        //     ->Where('approved_order_admin', 'Y')
-        //     ->countAllResults();
-        //     $onProgress = $form
-        //         ->Where('approved_order_editor !=', 'R') // Mengecualikan jika approved_order_editor = 'R'
-        //         ->groupStart()
-        //         ->orWhere('approved_order_admin', 'N')
-        //         ->orWhere('approved_order_admin', 'R')
-        //         ->groupEnd()
-        //         ->countAllResults();
-        // }
         // $done = $form
         //     ->where('approved_multimedia', 'Y')
         //     ->Where('approved_order_editor', 'Y')
