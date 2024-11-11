@@ -628,13 +628,6 @@
 <!-- / Layout wrapper -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    // const dates = document.querySelectorAll('.text-end');
-    // const currentDate = new Date();
-    // const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
-    // dates.forEach(date => {
-    //     date.textContent = formattedDate;
-    // });
-
     $(document).ready(function() {
         $('#formTiket').submit(function(event) {
             event.preventDefault();

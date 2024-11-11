@@ -26,6 +26,7 @@ class Menu extends BaseController
         $this->AuthModel = new AuthModel();
         $this->GrupModel = new GrupModel();
     }
+
     public function index()
     {
         $user = new UserModel();

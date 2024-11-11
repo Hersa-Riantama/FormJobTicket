@@ -18,6 +18,7 @@ $routes->group(
         $routes->get('logout', 'Auth::logout');
     }
 );
+
 $routes->group(
     '',
     ['namespace' => '\Modules\Menu\Controllers'],

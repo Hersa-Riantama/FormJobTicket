@@ -35,6 +35,7 @@ class KategoriModel extends Model
             ],
         ];
     }
+
     public function validationRulesUpdate()
     {
         return [

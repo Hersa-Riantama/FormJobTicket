@@ -25,6 +25,7 @@ class User extends BaseController
     {
         return view($this->folder_directory . 'index');
     }
+
     public function tampil()
     {
         $AuthModel = new AuthModel();
@@ -59,13 +60,9 @@ class User extends BaseController
         ];
         return view($this->folder_directory . 'data_user', $Udata);
     }
+
     public function verifyUser($id_user = null)
     {
-        // $authHeader = $this->request->getHeader('Authorization');
-        // if ($authHeader && $authHeader->getValue() === $this->value) { 
-        // }else {
-        //     return $this->failNotFound('Anda Tidak Memiliki Kunci Akses');
-        // }
         // Ambil model user
         log_message('info', 'Verifikasi user dengan ID: ' . $id_user);
         $model = new UserModel();

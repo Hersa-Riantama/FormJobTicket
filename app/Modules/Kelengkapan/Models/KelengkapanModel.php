@@ -9,7 +9,7 @@ class KelengkapanModel extends Model
     protected $table            = 'tbl_kelengkapan';
     protected $primaryKey       = 'id_kelengkapan';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['id_tiket','nama_kelengkapan'];
+    protected $allowedFields    = ['id_tiket', 'nama_kelengkapan'];
 
     // protected bool $allowEmptyInserts = false;
     // protected bool $updateOnlyChanged = true;

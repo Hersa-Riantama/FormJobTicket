@@ -186,67 +186,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 <script>
-    document.getElementById("nama").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("nama").oninvalid = function(event) {
-        if (event.target.value.length < 3) {
-            event.target.setCustomValidity("Nama Wajib Minimal 3 Huruf!");
-            toastr.error("Nama harus lebih dari 3 karakter!", "Error");
-        } else {
-            event.target.setCustomValidity("Nomor Induk Wajib Diisi!");
-        }
-    };
-
-    document.getElementById("nomor_induk").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("nomor_induk").oninvalid = function(event) {
-        event.target.setCustomValidity("Nomor Induk Wajib Diisi!");
-    };
-
-    document.getElementById("email").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("email").oninvalid = function(event) {
-        event.target.setCustomValidity("Email Wajib Diisi!");
-    };
-
-    document.getElementById("no_tlp").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("no_tlp").oninvalid = function(event) {
-        event.target.setCustomValidity("No Tlp Wajib Diisi!");
-    };
-
-    document.getElementById("jk").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("jk").oninvalid = function(event) {
-        event.target.setCustomValidity("Pilih Jenis Kelamin Anda!");
-    };
-
-    document.getElementById("level_user").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("level_user").oninvalid = function(event) {
-        event.target.setCustomValidity("Pilih Level User Anda!");
-    };
-
-    document.getElementById("password").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("password").oninvalid = function(event) {
-        event.target.setCustomValidity("Password Wajib Diisi!");
-    };
-
-    document.getElementById("terms-conditions").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("terms-conditions").oninvalid = function(event) {
-        event.target.setCustomValidity("Silakan klik setujui");
-    };
-
     $(document).ready(function() {
         $('#formAuthentication').submit(function(event) {
             event.preventDefault();

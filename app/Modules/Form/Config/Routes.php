@@ -15,7 +15,7 @@ $routes->group(
         $routes->get('/', 'Form::index');
     }
 );
-// ['filter' => 'sessionCheck'],
+
 $routes->group(
     '',
     ['namespace' => '\Modules\Form\Controllers'],
@@ -36,6 +36,7 @@ $routes->group(
         $routes->delete('delete/(:segment)', 'Form::delete/$1');
     }
 );
+
 $routes->post('/get-email', '\Modules\User\Controllers\User::getEmail');
 $routes->post('/kategori', '\Modules\Kategori\Controllers\Kategori::getKategori');
 

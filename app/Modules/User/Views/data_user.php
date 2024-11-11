@@ -152,6 +152,7 @@
             }
         });
     }
+
     // Fungsi untuk memverifikasi user
     function verifikasiUser(id_user) {
         Swal.fire({
@@ -190,6 +191,7 @@
         var id_user = $(this).data('id_user');
         verifikasiUser(id_user);
     });
+
     $(document).on('click', '.item-suspend', function() {
         var id_user = $(this).data('id_user');
         console.log("Selected User ID:", id_user);

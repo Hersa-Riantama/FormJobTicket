@@ -215,6 +215,7 @@ use Modules\Auth\Models\AuthModel; ?>
     $(document).ready(function() {
         loadData();
     });
+
     // Fungsi untuk menampilkan data dari database
     function loadData() {
         $.ajax({
@@ -294,6 +295,7 @@ use Modules\Auth\Models\AuthModel; ?>
             }
         });
     }
+
     // Fungsi untuk edit data
     $(document).on('click', '.item-edit', function() {
         var id_buku = $(this).data('id_buku');

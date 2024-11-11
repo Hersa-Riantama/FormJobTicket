@@ -705,6 +705,7 @@ class Form extends BaseController
         }
         return $this->response->setJSON(['status' => 'success', 'Pesan' => 'Tiket Berhasil di Approve']);
     }
+
     public function approveTicket()
     {
         $id_tiket = $this->request->getVar('id_tiket');
@@ -767,6 +768,7 @@ class Form extends BaseController
         }
         return $this->response->setJSON(['status' => 'success', 'Pesan' => 'Tiket Berhasil di Approve']);
     }
+
     public function approvedOrderKoord()
     {
         $id_tiket = $this->request->getVar('id_tiket');
@@ -793,6 +795,7 @@ class Form extends BaseController
         }
         return $this->response->setJSON(['status' => 'success', 'Pesan' => 'Tiket Berhasil di Approve']);
     }
+
     public function approvedAccKoord()
     {
         $id_tiket = $this->request->getVar('id_tiket');
@@ -819,6 +822,7 @@ class Form extends BaseController
         }
         return $this->response->setJSON(['status' => 'success', 'Pesan' => 'Tiket Berhasil di Approve']);
     }
+
     public function disapproveTicket()
     {
         $id_tiket = $this->request->getVar('id_tiket');

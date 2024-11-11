@@ -11,7 +11,8 @@ use CodeIgniter\Router\RouteCollection;
 
 $routes->group(
     'index',
-    ['namespace' => '\Modules\User\Controllers'],['filter' => 'sessionCheck'],
+    ['namespace' => '\Modules\User\Controllers'],
+    ['filter' => 'sessionCheck'],
     function ($routes) {
         $routes->get('/', 'User::index');
     }
@@ -19,7 +20,8 @@ $routes->group(
 
 $routes->group(
     '',
-    ['namespace' => '\Modules\User\Controllers'],['filter' => 'sessionCheck'],
+    ['namespace' => '\Modules\User\Controllers'],
+    ['filter' => 'sessionCheck'],
     function ($routes) {
         $routes->get('user', 'User::tampil');
         $routes->post('verify_user/(:segment)', 'User::verifyUser/$1');
