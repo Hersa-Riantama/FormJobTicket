@@ -51,7 +51,6 @@ class Menu extends BaseController
                 $onProgress = 0;
                 switch ($levelUser) {
                     case 'Admin Sistem':
-                        // Admin Sistem hanya menghitung tiket yang approved_order_admin = 'Y'
                         $done = $form
                             ->Where('approved_order_editor !=', 'R')
                             ->where('approved_order_admin', 'Y')
@@ -66,7 +65,6 @@ class Menu extends BaseController
                         break;
 
                     case 'Tim Multimedia':
-                        // Tim Multimedia menghitung tiket berdasarkan approval multimedia
                         $done = $form
                             ->Where('approved_order_editor !=', 'R')
                             ->where('approved_multimedia', 'Y')
@@ -81,7 +79,6 @@ class Menu extends BaseController
                         break;
 
                     case 'Editor':
-                        // Editor menghitung tiket berdasarkan approval editor
                         $done = $form
                             ->Where('approved_order_editor !=', 'R')
                             ->where('approved_order_editor', 'Y')
@@ -96,7 +93,6 @@ class Menu extends BaseController
                         break;
 
                     case 'Koord Editor':
-                        // Koord Editor menghitung tiket berdasarkan approval editor dan koordinator
                         $done = $form
                             ->Where('approved_order_editor !=', 'R')
                             ->where('approved_order_koord', 'Y')
