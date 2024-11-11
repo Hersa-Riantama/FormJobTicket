@@ -87,7 +87,6 @@ class Menu extends BaseController
                             ->Where('approved_order_editor !=', 'R')
                             ->groupStart()
                             ->orWhere('approved_order_editor', 'N')
-                            ->orWhere('approved_order_editor', 'R')
                             ->groupEnd()
                             ->countAllResults();
                         break;
