@@ -257,6 +257,7 @@ class Form extends BaseController
         $AuthModel = new AuthModel();
         $GrupModel = new GrupModel();
         $BukuModel = new BukuModel();
+        $TicketModel = new FormModel();
 
         $id_user = session()->get('id_user');
         $userData = $AuthModel->find($id_user);
@@ -273,8 +274,14 @@ class Form extends BaseController
         }
         $id_tiket = $this->request->getVar('id_tiket');
         $kode_buku = $this->request->getVar('id_buku');
-        $bukuData = $BukuModel->where('kode_buku', $kode_buku)->first();
-        $id_buku = $bukuData ? $bukuData['id_buku'] : null;
+        $currentTicketData = $TicketModel->find($id_tiket);
+        $current_id_buku = $currentTicketData['id_buku'] ?? null;
+        if ($kode_buku) {
+            $bukuData = $BukuModel->where('kode_buku', $kode_buku)->first();
+            $id_buku = $bukuData ? $bukuData['id_buku'] : null;
+        } else {
+            $id_buku = $current_id_buku;
+        }
         $input_catatan = $this->request->getVar('catatan');
         $catatan = null;
         $id_kategori_array = $this->request->getVar('id_kategori');

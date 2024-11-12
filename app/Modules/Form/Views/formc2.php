@@ -397,7 +397,7 @@
         dataTable.appendChild(newRow);
     }
 
-    // Fungsi untuk menambahkan navigasi keyboard ke setiap input atau select
+    // Fungsi untuk menambahkan navigasi keyboard ke setiap input atau select 
     function addNavigationListener(element) {
         element.addEventListener('keydown', (e) => {
             const inputs = dataTable.querySelectorAll('input, select');
@@ -412,11 +412,21 @@
             let targetIndex = -1;
 
             switch (e.key) {
-                case 'Enter':
                 case 'Tab':
-                    const nextInput = inputs[index + 1];
-                    if (nextInput) {
-                        nextInput.focus();
+                case 'Enter':
+                    if (element.tagName === 'SELECT') {
+                        // Fokus dan klik dropdown untuk membukanya
+                        element.focus();
+                        const event = new MouseEvent('mousedown', {
+                            bubbles: true
+                        });
+                        element.dispatchEvent(event)
+                    } else {
+                        // Pindah ke input atau select berikutnya jika bukan dropdown
+                        const nextInput = inputs[index + 1];
+                        if (nextInput) {
+                            nextInput.focus();
+                        }
                     }
                     break;
 
@@ -448,7 +458,9 @@
                 default:
                     break;
             }
+
         });
+
     }
 
     // Tambahkan 45 baris ke tabel saat halaman dimuat
