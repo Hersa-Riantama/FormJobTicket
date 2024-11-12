@@ -406,6 +406,11 @@
             // Mencegah aksi default
             e.preventDefault();
 
+            const currentRow = Math.floor(index / totalColumns);
+            const currentColumn = index % totalColumns;
+
+            let targetIndex = -1;
+
             switch (e.key) {
                 case 'Enter':
                 case 'Tab':
@@ -414,12 +419,14 @@
                         nextInput.focus();
                     }
                     break;
+
                 case 'ArrowLeft':
                     const prevInput = inputs[index - 1];
                     if (prevInput) {
                         prevInput.focus();
                     }
                     break;
+
                 case 'ArrowRight':
                     const nextInputRight = inputs[index + 1];
                     if (nextInputRight) {
@@ -428,13 +435,13 @@
                     break;
                 case 'ArrowUp':
                     // Panah atas: Pindah ke elemen input di baris atas
-                    if (index - totalColumns >= 0) {
+                    if ((index + 1) - totalColumns >= 0) {
                         inputs[index - totalColumns + 1].focus();
                     }
                     break;
                 case 'ArrowDown':
                     // Panah bawah: Pindah ke elemen input di baris bawah
-                    if (index + totalColumns < inputs.length) {
+                    if ((index - 1) + totalColumns < inputs.length) {
                         inputs[index + totalColumns - 1].focus();
                     }
                     break;
@@ -443,7 +450,6 @@
             }
         });
     }
-
 
     // Tambahkan 45 baris ke tabel saat halaman dimuat
     for (let i = 0; i < 45; i++) {
