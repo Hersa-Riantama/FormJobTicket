@@ -26,6 +26,7 @@ class Menu extends BaseController
         $this->AuthModel = new AuthModel();
         $this->GrupModel = new GrupModel();
     }
+
     public function index()
     {
         $user = new UserModel();
@@ -45,6 +46,96 @@ class Menu extends BaseController
                     echo '<script>alert("Access Denied!!"); history.back();</script>';
                     return;
                 }
+                $levelUser = $userData['level_user'];
+                $done = 0;
+                $onProgress = 0;
+                switch ($levelUser) {
+                    case 'Admin Sistem':
+                        $done = $form
+                            ->Where('approved_order_editor !=', 'R')
+                            ->where('approved_order_admin', 'Y')
+                            ->countAllResults();
+                        $onProgress = $form
+                            ->Where('approved_order_editor !=', 'R')
+                            ->groupStart()
+                            ->orWhere('approved_order_admin', 'N')
+                            ->orWhere('approved_order_admin', 'R')
+                            ->groupEnd()
+                            ->countAllResults();
+                        break;
+
+                    case 'Tim Multimedia':
+                        $done = $form
+                            ->Where('approved_order_editor !=', 'R')
+                            ->where('approved_multimedia', 'Y')
+                            ->countAllResults();
+                        $onProgress = $form
+                            ->Where('approved_order_editor !=', 'R')
+                            ->groupStart()
+                            ->orWhere('approved_multimedia', 'N')
+                            ->orWhere('approved_multimedia', 'R')
+                            ->groupEnd()
+                            ->countAllResults();
+                        break;
+
+                    case 'Editor':
+                        $done = $form
+                            ->Where('approved_order_editor !=', 'R')
+                            ->where('approved_order_editor', 'Y')
+                            ->countAllResults();
+                        $onProgress = $form
+                            ->Where('approved_order_editor !=', 'R')
+                            ->groupStart()
+                            ->orWhere('approved_order_editor', 'N')
+                            ->groupEnd()
+                            ->countAllResults();
+                        break;
+
+                    case 'Koord Editor':
+                        $userId = session()->get('id_user'); // Ambil id_koord dari session
+
+                        // Query untuk tiket yang sudah selesai
+                        $done = $form
+                            ->where('id_koord', $userId) // Filter berdasarkan id_koord dari session
+                            ->where('approved_order_editor !=', 'R')
+                            ->where('approved_order_koord', 'Y')
+                            ->where('approved_acc_koord', 'Y')
+                            ->countAllResults();
+
+                        // Query untuk tiket yang sedang dalam progress
+                        $onProgress = $form
+                            ->where('id_koord', $userId) // Filter berdasarkan id_koord dari session
+                            ->where('approved_order_editor !=', 'R')
+                            ->groupStart()
+                            ->orWhere('approved_order_koord', 'N')
+                            ->orWhere('approved_order_koord', 'R')
+                            ->orWhere('approved_acc_koord', 'N')
+                            ->orWhere('approved_acc_koord', 'R')
+                            ->groupEnd()
+                            ->countAllResults();
+                        break;
+
+
+                    case 'Manager Platform':
+                        $done = $form
+                            ->Where('approved_order_editor !=', 'R')
+                            ->where('approved_acc_manager', 'Y')
+                            ->countAllResults();
+                        $onProgress = $form
+                            ->Where('approved_order_editor !=', 'R')
+                            ->groupStart()
+                            ->orWhere('approved_acc_manager', 'N')
+                            ->orWhere('approved_acc_manager', 'R')
+                            ->groupEnd()
+                            ->countAllResults();
+                        break;
+
+                    default:
+                        // Jika level_user tidak dikenali, atur $done dan $onProgress ke 0
+                        $done = 0;
+                        $onProgress = 0;
+                        break;
+                }
             } else {
                 echo '<script>alert("Level user tidak ditemukan."); history.back();</script>';
                 return;
@@ -52,31 +143,31 @@ class Menu extends BaseController
         } else {
             return redirect()->to('/login');
         }
-        $done = $form
-            ->where('approved_multimedia', 'Y')
-            ->Where('approved_order_editor', 'Y')
-            ->Where('approved_order_koord', 'Y')
-            ->Where('approved_order_admin', 'Y')
-            ->Where('approved_acc_koord', 'Y')
-            ->Where('approved_acc_manager', 'Y')
-            ->countAllResults();
+        // $done = $form
+        //     ->where('approved_multimedia', 'Y')
+        //     ->Where('approved_order_editor', 'Y')
+        //     ->Where('approved_order_koord', 'Y')
+        //     ->Where('approved_order_admin', 'Y')
+        //     ->Where('approved_acc_koord', 'Y')
+        //     ->Where('approved_acc_manager', 'Y')
+        //     ->countAllResults();
 
-        $onProgress = $form
-            ->Where('approved_order_editor !=', 'R') // Mengecualikan jika approved_order_editor = 'R'
-            ->groupStart() // Mulai grup kondisi untuk OR
-            ->where('approved_order_editor', 'N')
-            ->orwhere('approved_multimedia', 'N')
-            ->orwhere('approved_multimedia', 'R')
-            ->orWhere('approved_order_koord', 'N')
-            ->orWhere('approved_order_koord', 'R')
-            ->orWhere('approved_order_admin', 'N')
-            ->orWhere('approved_order_admin', 'R')
-            ->orWhere('approved_acc_koord', 'N')
-            ->orWhere('approved_acc_koord', 'R')
-            ->orWhere('approved_acc_manager', 'N')
-            ->orWhere('approved_acc_manager', 'R')
-            ->groupEnd() // Tutup grup kondisi
-            ->countAllResults();
+        // $onProgress = $form
+        //     ->Where('approved_order_editor !=', 'R') // Mengecualikan jika approved_order_editor = 'R'
+        //     ->groupStart() // Mulai grup kondisi untuk OR
+        //     ->where('approved_order_editor', 'N')
+        //     ->orwhere('approved_multimedia', 'N')
+        //     ->orwhere('approved_multimedia', 'R')
+        //     ->orWhere('approved_order_koord', 'N')
+        //     ->orWhere('approved_order_koord', 'R')
+        //     ->orWhere('approved_order_admin', 'N')
+        //     ->orWhere('approved_order_admin', 'R')
+        //     ->orWhere('approved_acc_koord', 'N')
+        //     ->orWhere('approved_acc_koord', 'R')
+        //     ->orWhere('approved_acc_manager', 'N')
+        //     ->orWhere('approved_acc_manager', 'R')
+        //     ->groupEnd() // Tutup grup kondisi
+        //     ->countAllResults();
 
 
         $data = [

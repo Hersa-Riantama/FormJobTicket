@@ -126,12 +126,33 @@
                         }],
                         language: {
                             url: "https://cdn.datatables.net/plug-ins/1.13.5/i18n/id.json"
+                        },
+                        "stateSave": true, // Mengaktifkan penyimpanan state (pagination, sort, dll)
+                        "stateSaveCallback": function(settings, data) {
+                            // Simpan state DataTable di localStorage
+                            localStorage.setItem('DataTables_state', JSON.stringify(data));
+                        },
+                        "stateLoadCallback": function(settings) {
+                            // Ambil state DataTable dari localStorage jika ada
+                            return JSON.parse(localStorage.getItem('DataTables_state'));
                         }
+                    });
+                    // Periksa apakah ada halaman tersimpan di localStorage
+                    var savedPage = localStorage.getItem('DataTables_currentPage');
+                    if (savedPage !== null) {
+                        table.page(parseInt(savedPage)).draw(false); // Set halaman terakhir
+                    }
+
+                    // Event listener untuk menangkap perubahan halaman
+                    table.on('page', function() {
+                        var currentPage = table.page();
+                        localStorage.setItem('DataTables_currentPage', currentPage); // Simpan halaman saat ini
                     });
                 }
             }
         });
     }
+
     // Fungsi untuk memverifikasi user
     function verifikasiUser(id_user) {
         Swal.fire({
@@ -170,6 +191,7 @@
         var id_user = $(this).data('id_user');
         verifikasiUser(id_user);
     });
+
     $(document).on('click', '.item-suspend', function() {
         var id_user = $(this).data('id_user');
         console.log("Selected User ID:", id_user);

@@ -99,9 +99,18 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
         return date.toLocaleDateString('en-GB', options); // 'en-GB' menghasilkan format d-m-y
     }
 
-    $(document).ready(function () {
+    function getURLParameter(name) {
+        return new URLSearchParams(window.location.search).get(name);
+    }
+
+    $(document).ready(function() {
+        var initialStatusFilter = getURLParameter('status');
+        if (initialStatusFilter) {
+            $('#statusFilter').val(initialStatusFilter); // Set nilai filter di dropdown
+        }
+
         loadData();
-        $('#statusFilter').on('change', function () {
+        $('#statusFilter').on('change', function() {
             loadData();
         });
     });
@@ -112,13 +121,13 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
             type: 'GET',
             url: 'http://localhost:8080/listform',
             dataType: 'json',
-            success: function (response) {
+            success: function(response) {
                 var kodeBukuMap = {};
                 var bukuMap = {};
                 var userMap = {};
 
                 // Mapping buku
-                $.each(response.buku, function (key, buku) {
+                $.each(response.buku, function(key, buku) {
                     if (buku.id_buku && buku.judul_buku) {
                         bukuMap[buku.id_buku] = buku.judul_buku;
                     }
@@ -128,7 +137,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                 });
 
                 // Mapping user
-                $.each(response.user, function (key, user) {
+                $.each(response.user, function(key, user) {
                     if (user.id_user && user.nama) {
                         userMap[user.id_user] = user.nama;
                     }
@@ -140,7 +149,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                 var islevel_user = <?= json_encode($level_user); ?>;
                 console.log("Is Koord Editor:", isKoordEditor);
 
-                $.each(response.tiket, function (key, value) {
+                $.each(response.tiket, function(key, value) {
                     var dibatalin = (value.approved_order_editor === 'R');
                     var disetujui = false;
                     var belum_disetujui = false;
@@ -182,17 +191,16 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     // If order editor is rejected, it should be considered dibatalin for all levels
                     if (value.approved_order_editor === 'R') {
                         dibatalin = true;
+                        disetujui = false;
                     }
 
                     // Apply status filter
-                    if (statusFilter === 'sudah' && !disetujui) {
+                    if (statusFilter === 'sudah' && (!disetujui || dibatalin)) {
                         return;
                     } else if (statusFilter === 'belum') {
                         if (disetujui || dibatalin) {
                             return; // Skip if already approved or rejected
                         }
-                    } else if (statusFilter === 'belum' && !belum_disetujui) {
-                        return; // Skip if already approved or rejected
                     } else if (statusFilter === 'ditolak' && !dibatalin) {
                         return; // Skip if not rejected
                     }
@@ -333,23 +341,43 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                         }],
                         language: {
                             url: "https://cdn.datatables.net/plug-ins/1.13.5/i18n/id.json"
+                        },
+                        "stateSave": true, // Mengaktifkan penyimpanan state (pagination, sort, dll)
+                        "stateSaveCallback": function(settings, data) {
+                            // Simpan state DataTable di localStorage
+                            localStorage.setItem('DataTables_state', JSON.stringify(data));
+                        },
+                        "stateLoadCallback": function(settings) {
+                            // Ambil state DataTable dari localStorage jika ada
+                            return JSON.parse(localStorage.getItem('DataTables_state'));
                         }
+                    });
+                    // Periksa apakah ada halaman tersimpan di localStorage
+                    var savedPage = localStorage.getItem('DataTables_currentPage');
+                    if (savedPage !== null) {
+                        table.page(parseInt(savedPage)).draw(false); // Set halaman terakhir
+                    }
+
+                    // Event listener untuk menangkap perubahan halaman
+                    table.on('page', function() {
+                        var currentPage = table.page();
+                        localStorage.setItem('DataTables_currentPage', currentPage); // Simpan halaman saat ini
                     });
 
                 }
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.error('Error fetching List Form:', error);
             }
         });
     }
 
-    $(document).on('click', '.item-detail', function () {
+    $(document).on('click', '.item-detail', function() {
         var id_tiket = $(this).data('id_tiket');
         window.location.href = '/detail/' + id_tiket; // Redirect to the detail page
     });
 
-    $(document).on('click', '.item-delete', function () {
+    $(document).on('click', '.item-delete', function() {
         var id_tiket = $(this).data('id_tiket');
         Swal.fire({
             title: 'Apakah Anda yakin?',
@@ -366,11 +394,11 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     type: 'DELETE',
                     url: 'http://localhost:8080/delete/' + id_tiket, // Redirect to the detail page
                     dataType: 'json',
-                    success: function (response) {
+                    success: function(response) {
                         loadData()
                         Swal.fire('Berhasil!', 'Tiket berhasil dihapus.', 'success'); // Menampilkan pesan sukses
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         console.error('Error fetching List Form:', error);
                     }
                 });
@@ -378,7 +406,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
         });
     });
 
-    $('.btn-approve').on('click', function () {
+    $('.btn-approve').on('click', function() {
         const id_tiket = $(this).data('id_tiket');
         approveTicket(id_tiket);
     });
@@ -408,16 +436,17 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                         status: isChecked ? 'Y' : 'N'
                     },
                     dataType: 'json',
-                    success: function (response) {
+                    success: function(response) {
                         if (response.status === 'success') {
                             $('#approveButton').hide();
+                            loadData();
                             const successMessage = isChecked ? 'Tiket berhasil diapprove.' : 'Approval tiket berhasil dibatalkan.';
                             Swal.fire('Berhasil!', successMessage, 'success'); // Menampilkan pesan sukses
                         } else {
                             alert(response.message);
                         }
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         console.error(error);
                         alert('Terjadi kesalahan saat mencoba mengubah status approval tiket');
                     }
@@ -429,7 +458,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
         });
     }
 
-    $('.btn-approve').on('click', function () {
+    $('.btn-approve').on('click', function() {
         const id_tiket = $(this).data('id_tiket');
         approveOrder(id_tiket);
     });
@@ -461,7 +490,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                         status: isChecked ? 'Y' : 'N'
                     },
                     dataType: 'json',
-                    success: function (response) {
+                    success: function(response) {
                         if (response.status === 'success') {
                             $('#approveButton').hide();
                             loadData(); // Panggil fungsi untuk memperbarui data
@@ -473,7 +502,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                             alert(response.message);
                         }
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         console.error(error);
                         alert('Terjadi kesalahan saat mencoba mengubah status approval tiket');
                     }
@@ -485,7 +514,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
         });
     }
 
-    $('.btn-approve').on('click', function () {
+    $('.btn-approve').on('click', function() {
         const id_tiket = $(this).data('id_tiket');
         approveAcc(id_tiket);
     });
@@ -517,10 +546,10 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                         status: isChecked ? 'Y' : 'N'
                     },
                     dataType: 'json',
-                    success: function (response) {
+                    success: function(response) {
                         if (response.status === 'success') {
                             $('#approveButton').hide();
-                            location.reload(); // Reload halaman setelah berhasil
+                            loadData(); // Reload halaman setelah berhasil
                             const successMessage = isChecked ?
                                 'Tiket berhasil di-ACC.' :
                                 'Approval ACC tiket berhasil dibatalkan.';
@@ -529,7 +558,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                             alert(response.message);
                         }
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         console.error(error);
                         alert('Terjadi kesalahan saat mencoba mengubah status ACC tiket');
                     }
@@ -541,7 +570,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
         });
     }
 
-    $('.btn-disapprove').on('click', function () {
+    $('.btn-disapprove').on('click', function() {
         const id_tiket = $(this).data('id_tiket');
         disapproveTicket(id_tiket); // Reject
     });
@@ -565,9 +594,8 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                         id_tiket: id_tiket
                     },
                     dataType: 'json',
-                    success: function (response) {
+                    success: function(response) {
                         if (response.status === 'success') {
-                            alert(response.message);
                             $('#approveButton').hide();
                             loadData();
                             Swal.fire('Berhasil!', 'Tiket berhasil ditolak.', 'success')
@@ -575,7 +603,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                             alert(response.message);
                         }
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         console.error(error);
                         alert('An error occurred while trying to disapprove the ticket');
                     }

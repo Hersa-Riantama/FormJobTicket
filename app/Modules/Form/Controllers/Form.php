@@ -492,6 +492,16 @@ class Form extends BaseController
 
         // Ambil data tiket, kategori, buku, dan user dari database
         $data = $model->getTiket();
+        // Filter tiket berdasarkan id_koord jika user level adalah Koord Editor
+        if ($userData['level_user'] === 'Koord Editor') {
+            $filteredData = [];
+            foreach ($data as $tiket) {
+                if ($tiket['id_koord'] == $userId) {
+                    $filteredData[] = $tiket;
+                }
+            }
+            $data = $filteredData;
+        }
         $kategoriData = $KategoriModel->findAll();
         $bukuData = $BukuModel->findAll();
         $userDataList = $UserModel->findAll();
@@ -499,7 +509,7 @@ class Form extends BaseController
         if ($this->request->isAJAX()) {
             return $this->response->setJSON([
                 'tiket' => $data,
-                'kategori' => $kategoriData,
+                // 'kategori' => $kategoriData,
                 'buku' => $bukuData,
                 'user' => $userDataList
             ]);
@@ -667,9 +677,7 @@ class Form extends BaseController
             $builder->set('tgl_order_koord', $approvalDate);
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
-            } else {
+            if (!$updated) {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
         } elseif ($approval_type === 'Acc Koord Editor') {
@@ -677,9 +685,7 @@ class Form extends BaseController
             $builder->set('tgl_acc_koord', $approvalDate);
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
-            } else {
+            if (!$updated) {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
         } elseif ($approval_type === 'Admin Sistem') {
@@ -687,9 +693,7 @@ class Form extends BaseController
             $builder->set('tgl_acc_admin', $approvalDate);
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
-            } else {
+            if (!$updated) {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
         } elseif ($approval_type === 'Tim Multimedia') {
@@ -697,9 +701,7 @@ class Form extends BaseController
             $builder->set('tgl_acc_multimedia', $approvalDate);
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
-            } else {
+            if (!$updated) {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
         } elseif ($approval_type === 'Manager Platform') {
@@ -707,14 +709,13 @@ class Form extends BaseController
             $builder->set('tgl_acc_manager', $approvalDate);
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
-            } else {
+            if (!$updated) {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
         }
         return $this->response->setJSON(['status' => 'success', 'Pesan' => 'Tiket Berhasil di Approve']);
     }
+
     public function approveTicket()
     {
         $id_tiket = $this->request->getVar('id_tiket');
@@ -735,9 +736,7 @@ class Form extends BaseController
             }
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
-            } else {
+            if (!$updated) {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
         } else if ($userLevel === 'Tim Multimedia') {
@@ -749,9 +748,7 @@ class Form extends BaseController
             }
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
-            } else {
+            if (!$updated) {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
         } else if ($userLevel === 'Manager Platform') {
@@ -763,9 +760,7 @@ class Form extends BaseController
             }
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
-            } else {
+            if (!$updated) {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
         } else if ($userLevel === 'Editor') {
@@ -777,14 +772,13 @@ class Form extends BaseController
             }
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
-            } else {
+            if (!$updated) {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
         }
         return $this->response->setJSON(['status' => 'success', 'Pesan' => 'Tiket Berhasil di Approve']);
     }
+
     public function approvedOrderKoord()
     {
         $id_tiket = $this->request->getVar('id_tiket');
@@ -805,14 +799,13 @@ class Form extends BaseController
             }
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
-            } else {
+            if (!$updated) {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
         }
         return $this->response->setJSON(['status' => 'success', 'Pesan' => 'Tiket Berhasil di Approve']);
     }
+
     public function approvedAccKoord()
     {
         $id_tiket = $this->request->getVar('id_tiket');
@@ -833,14 +826,13 @@ class Form extends BaseController
             }
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
-            } else {
+            if (!$updated) {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
         }
         return $this->response->setJSON(['status' => 'success', 'Pesan' => 'Tiket Berhasil di Approve']);
     }
+
     public function disapproveTicket()
     {
         $id_tiket = $this->request->getVar('id_tiket');
@@ -856,9 +848,7 @@ class Form extends BaseController
             $builder->set('tgl_order_editor', $disapprovalDate);
             $builder->where('id_tiket', $id_tiket);
             $updated = $builder->update();
-            if ($updated) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Ticket approved successfully']);
-            } else {
+            if (!$updated) {
                 return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update ticket status']);
             }
         }

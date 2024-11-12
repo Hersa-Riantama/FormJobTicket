@@ -16,13 +16,9 @@ class StatusKelengkapan extends BaseController
     {
         return view($this->folder_directory . 'index');
     }
+
     public function create()
     {
-        // $authHeader = $this->request->getHeader('Authorization');
-        // if ($authHeader && $authHeader->getValue() === $this->value) {
-        // }else {
-        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
-        // }
         $rules = $this->model->validationRules();
         if (!$this->validate($rules)) {
             $response = [
@@ -40,13 +36,9 @@ class StatusKelengkapan extends BaseController
         ];
         return  $this->respondCreated($response);
     }
+
     public function updateTahapKelengkapan($id_status_kelengkapan = null, $id_tiket = null)
     {
-        // $authHeader = $this->request->getHeader('Authorization');
-        // if ($authHeader && $authHeader->getValue() === $this->value) {
-        // }else {
-        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
-        // }
         $statusKelengkapanModel = new StatusKelengkapanModel();
         $Tiket = $statusKelengkapanModel->find($id_tiket);
         if (!$Tiket) {
@@ -69,13 +61,6 @@ class StatusKelengkapan extends BaseController
     }
     public function delete($id_status_kelengkapan = null)
     {
-        // $authHeader = $this->request->getHeader('Authorization');
-        // // Mengecek apakah Authorization header valid
-        // if ($authHeader && $authHeader->getValue() === $this->value) {
-        // } else {
-        //     // Jika Authorization header tidak valid
-        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
-        // }
         $id_status_kelengkapan = base64_decode($id_status_kelengkapan);
         $statKelengkapan = $this->model->find($id_status_kelengkapan);
         if (!$statKelengkapan) {

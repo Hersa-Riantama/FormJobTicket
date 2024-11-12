@@ -9,7 +9,7 @@ class StatusKelengkapanModel extends Model
     protected $table            = 'tbl_status_kelengkapan';
     protected $primaryKey       = 'id_status_kelengkapan';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['id_tiket','tahap_kelengkapan','status_kelengkapan'];
+    protected $allowedFields    = ['id_tiket', 'tahap_kelengkapan', 'status_kelengkapan'];
 
     // protected bool $allowEmptyInserts = false;
     // protected bool $updateOnlyChanged = true;

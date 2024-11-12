@@ -47,6 +47,12 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
+
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.0/dist/sweetalert2.min.css">
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.0/dist/sweetalert2.all.min.js"></script>
 </head>
 
 <body>
@@ -186,67 +192,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 <script>
-    document.getElementById("nama").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("nama").oninvalid = function(event) {
-        if (event.target.value.length < 3) {
-            event.target.setCustomValidity("Nama Wajib Minimal 3 Huruf!");
-            toastr.error("Nama harus lebih dari 3 karakter!", "Error");
-        } else {
-            event.target.setCustomValidity("Nomor Induk Wajib Diisi!");
-        }
-    };
-
-    document.getElementById("nomor_induk").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("nomor_induk").oninvalid = function(event) {
-        event.target.setCustomValidity("Nomor Induk Wajib Diisi!");
-    };
-
-    document.getElementById("email").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("email").oninvalid = function(event) {
-        event.target.setCustomValidity("Email Wajib Diisi!");
-    };
-
-    document.getElementById("no_tlp").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("no_tlp").oninvalid = function(event) {
-        event.target.setCustomValidity("No Tlp Wajib Diisi!");
-    };
-
-    document.getElementById("jk").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("jk").oninvalid = function(event) {
-        event.target.setCustomValidity("Pilih Jenis Kelamin Anda!");
-    };
-
-    document.getElementById("level_user").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("level_user").oninvalid = function(event) {
-        event.target.setCustomValidity("Pilih Level User Anda!");
-    };
-
-    document.getElementById("password").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("password").oninvalid = function(event) {
-        event.target.setCustomValidity("Password Wajib Diisi!");
-    };
-
-    document.getElementById("terms-conditions").oninput = function(event) {
-        event.target.setCustomValidity("");
-    };
-    document.getElementById("terms-conditions").oninvalid = function(event) {
-        event.target.setCustomValidity("Silakan klik setujui");
-    };
-
     $(document).ready(function() {
         $('#formAuthentication').submit(function(event) {
             event.preventDefault();
@@ -283,8 +228,9 @@
                     console.log(response); // Log the response
                     $('.error-message').text('').hide(); // Clear previous messages
                     if (response.Status === 'success') {
-                        alert(response.Pesan);
-                        window.location.href = '<?php echo base_url('login'); ?>';
+                        Swal.fire('Berhasil!', 'User berhasil ditambah.', 'success').then(function() {
+                            window.location.href = '<?php echo base_url('login'); ?>';
+                        });
                     } else {
                         // toastr.error(response.Pesan, "Error");
                         for (const [field, message] of Object.entries(response.Errors)) {

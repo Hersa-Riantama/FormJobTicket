@@ -104,6 +104,7 @@ class FormModel extends Model
     {
         return $this->findAll();
     }
+
     public function getTiketWithDetails()
     {
         return $this->select('tbl_tiket.*, tbl_kategori.nama_kategori, tbl_buku.judul_buku')

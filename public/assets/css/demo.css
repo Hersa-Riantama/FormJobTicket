@@ -2,7 +2,6 @@
 * demo.css
 * File include item demo only specific css only
 ******************************************************************************/
-
 .menu .app-brand.demo {
   height: 64px;
   margin-top: 12px;
@@ -41,6 +40,12 @@
 /*
 * Content
 ******************************************************************************/
+
+.dataTables_wrapper {
+  padding: 1.5rem;
+  /* Sesuaikan padding sesuai kebutuhan */
+}
+
 .bg-disapproved{
   background-color: #ff5370;
 }

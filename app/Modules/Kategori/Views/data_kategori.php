@@ -140,7 +140,27 @@ use Modules\Auth\Models\AuthModel; ?>
                         }],
                         language: {
                             url: "https://cdn.datatables.net/plug-ins/1.13.5/i18n/id.json"
+                        },
+                        "stateSave": true, // Mengaktifkan penyimpanan state (pagination, sort, dll)
+                        "stateSaveCallback": function(settings, data) {
+                            // Simpan state DataTable di localStorage
+                            localStorage.setItem('DataTables_state', JSON.stringify(data));
+                        },
+                        "stateLoadCallback": function(settings) {
+                            // Ambil state DataTable dari localStorage jika ada
+                            return JSON.parse(localStorage.getItem('DataTables_state'));
                         }
+                    });
+                    // Periksa apakah ada halaman tersimpan di localStorage
+                    var savedPage = localStorage.getItem('DataTables_currentPage');
+                    if (savedPage !== null) {
+                        table.page(parseInt(savedPage)).draw(false); // Set halaman terakhir
+                    }
+
+                    // Event listener untuk menangkap perubahan halaman
+                    table.on('page', function() {
+                        var currentPage = table.page();
+                        localStorage.setItem('DataTables_currentPage', currentPage); // Simpan halaman saat ini
                     });
 
                 }

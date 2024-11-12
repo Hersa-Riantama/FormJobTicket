@@ -21,6 +21,7 @@ class Buku extends BaseController
         $this->model = new BukuModel();
         $this->AuthModel = new AuthModel();
     }
+
     public function show($id_buku = null)
     {
         $data = [
@@ -32,6 +33,7 @@ class Buku extends BaseController
         }
         return $this->response->setJSON($data, 200);
     }
+
     public function index()
     {
         $model = new BukuModel();
@@ -66,6 +68,7 @@ class Buku extends BaseController
         ];
         return view($this->folder_directory . 'data_buku', $Vdata);
     }
+
     public function create()
     {
         $AuthModel = new AuthModel();
@@ -109,6 +112,7 @@ class Buku extends BaseController
         ];
         return $this->response->setJSON($response);
     }
+
     public function update($id_buku = null)
     {
         $rules = $this->model->validationRulesUpdate();
@@ -138,6 +142,7 @@ class Buku extends BaseController
             'data_buku' => $buku,
         ]);
     }
+
     public function delete($id_buku = null)
     {
         $buku = $this->model->find($id_buku);
@@ -150,6 +155,7 @@ class Buku extends BaseController
         ];
         return $this->respondDeleted($response, 200);
     }
+
     public function data_buku()
     {
         $AuthModel = new AuthModel();

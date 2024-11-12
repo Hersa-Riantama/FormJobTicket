@@ -11,7 +11,8 @@ use CodeIgniter\Router\RouteCollection;
 
 $routes->group(
     '',
-    ['namespace' => '\Modules\Menu\Controllers'],['filter' => 'sessionCheck'],
+    ['namespace' => '\Modules\Menu\Controllers'],
+    ['filter' => 'sessionCheck'],
     function ($routes) {
         $routes->get('dashboard', 'Menu::index');
         $routes->get('/', 'Menu::beranda');

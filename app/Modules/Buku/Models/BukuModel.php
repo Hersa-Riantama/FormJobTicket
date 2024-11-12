@@ -56,6 +56,7 @@ class BukuModel extends Model
             ],
         ];
     }
+
     public function validationRulesUpdate()
     {
         return [

@@ -6,6 +6,6 @@ use CodeIgniter\Model;
 
 class MenuModel extends Model
 {
-    protected $table            = 'table'; 
+    protected $table            = 'table';
     protected $allowedFields    = [];
 }

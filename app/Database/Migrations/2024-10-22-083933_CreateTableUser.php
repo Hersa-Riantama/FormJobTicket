@@ -51,7 +51,7 @@ class CreateUsersTable extends Migration
             ],
             'status_user' => [
                 'type' => 'VARCHAR',
-                'constraint' => ['aktif', 'nonaktif'],
+                'constraint' => ['aktif', 'nonaktif', 'suspend'],
                 'null' => true,
                 'default' => 'nonaktif',
             ],

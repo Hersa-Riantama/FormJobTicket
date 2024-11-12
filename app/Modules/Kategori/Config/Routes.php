@@ -11,7 +11,8 @@ use CodeIgniter\Router\RouteCollection;
 
 $routes->group(
     'index',
-    ['namespace' => '\Modules\Kategori\Controllers'],['filter' => 'sessionCheck'],
+    ['namespace' => '\Modules\Kategori\Controllers'],
+    ['filter' => 'sessionCheck'],
     function ($routes) {
         $routes->get('/', 'Kategori::index');
     }
@@ -19,11 +20,12 @@ $routes->group(
 
 $routes->group(
     '',
-    ['namespace' => '\Modules\Kategori\Controllers'],['filter' => 'sessionCheck'],
+    ['namespace' => '\Modules\Kategori\Controllers'],
+    ['filter' => 'sessionCheck'],
     function ($routes) {
         $routes->get('kategori', 'Kategori::data_kategori');
         $routes->put('kategori/(:segment)', 'Kategori::update/$1');
         $routes->get('kategori/(:segment)', 'Kategori::show/$1');
-        $routes->delete('kategori/(:segment)','Kategori::delete/$1');
+        $routes->delete('kategori/(:segment)', 'Kategori::delete/$1');
     }
 );

@@ -77,14 +77,6 @@ class Kategori extends BaseController
     }
     public function update($id_kategori = null)
     {
-        // $authHeader = $this->request->getHeader('Authorization');
-        // // Mengecek apakah Authorization header valid
-        // if ($authHeader && $authHeader->getValue() === $this->value) {
-
-        // } else {
-        //     // Jika Authorization header tidak valid
-        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
-        // }
         $rules = $this->model->validationRulesUpdate();
         if (!$this->validate($rules)) {
             $response = [
@@ -109,13 +101,6 @@ class Kategori extends BaseController
     }
     public function delete($id_kategori = null)
     {
-        // $authHeader = $this->request->getHeader('Authorization');
-        // // Mengecek apakah Authorization header valid
-        // if ($authHeader && $authHeader->getValue() === $this->value) {
-        // } else {
-        //     // Jika Authorization header tidak valid
-        //     return $this->failUnauthorized('Anda Tidak Memiliki Kunci Akses');
-        // }
         $kategori = $this->model->find($id_kategori);
         if (!$kategori) {
             return $this->failNotFound('Data kategori tidak ditemukan');

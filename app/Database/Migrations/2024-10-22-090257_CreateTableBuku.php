@@ -15,8 +15,8 @@ class CreateTableBuku extends Migration
                 'auto_increment' => true,
             ],
             'kode_buku' => [
-                'type' => 'VARCHAR',
-                'constraint' => '255',
+                'type' => 'INT',
+                'constraint' => '12',
             ],
             'judul_buku' => [
                 'type' => 'VARCHAR',
