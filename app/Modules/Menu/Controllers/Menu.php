@@ -79,16 +79,24 @@ class Menu extends BaseController
                         break;
 
                     case 'Editor':
+                        $userId = session()->get('id_user'); // Ambil id_editor dari session
+
                         $done = $form
+                            ->where('id_editor', $userId)
                             ->Where('approved_order_editor !=', 'R')
                             ->where('approved_order_editor', 'Y')
                             ->countAllResults();
+
                         $onProgress = $form
+                            ->where('id_editor', $userId)
                             ->Where('approved_order_editor !=', 'R')
                             ->groupStart()
                             ->orWhere('approved_order_editor', 'N')
                             ->groupEnd()
                             ->countAllResults();
+
+                        $form = $form
+                            ->where('id_editor', $userId);
                         break;
 
                     case 'Koord Editor':
@@ -113,6 +121,9 @@ class Menu extends BaseController
                             ->orWhere('approved_acc_koord', 'R')
                             ->groupEnd()
                             ->countAllResults();
+
+                        $form = $form
+                            ->where('id_koord', $userId);
                         break;
 
 

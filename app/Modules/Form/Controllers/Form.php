@@ -502,6 +502,15 @@ class Form extends BaseController
             }
             $data = $filteredData;
         }
+        if ($userData['level_user'] === 'Editor') {
+            $filteredData = [];
+            foreach ($data as $tiket) {
+                if ($tiket['id_editor'] == $userId) {
+                    $filteredData[] = $tiket;
+                }
+            }
+            $data = $filteredData;
+        }
         $kategoriData = $KategoriModel->findAll();
         $bukuData = $BukuModel->findAll();
         $userDataList = $UserModel->findAll();
