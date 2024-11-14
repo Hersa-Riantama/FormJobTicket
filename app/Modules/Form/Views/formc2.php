@@ -502,13 +502,33 @@
 
                 // Kolom input data dari database atau kosong jika tidak ada data
                 if (i === 1 && data.no) {
-                    newCell.textContent = data.no; // Tampilkan data "no" atau kosong
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = data.no; // Tetapkan nilai kosong
+                    // input.textContent = data.no; // Tampilkan data "no" atau kosong
+                    newCell.appendChild(input);
+                    addNavigationListener(input);
                 } else if (i === 2 && data.no_halaman) {
-                    newCell.textContent = data.no_halaman; // Tampilkan data "no_halaman" atau kosong
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = data.no_halaman; // Tetapkan nilai kosong
+                    // input.textContent = data.no_halaman; // Tampilkan data "no_halaman" atau kosong
+                    newCell.appendChild(input);
+                    addNavigationListener(input);
                 } else if (i === 3 && data.no_konten) {
-                    newCell.textContent = data.no_konten; // Tampilkan data "no_konten" atau kosong
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = data.no_konten; // Tetapkan nilai kosong
+                    // input.textContent = data.no_konten; // Tampilkan data "no_konten" atau kosong
+                    newCell.appendChild(input);
+                    addNavigationListener(input);
                 } else if (i === 4 && data.no_hal_rev) {
-                    newCell.textContent = data.no_hal_rev; // Tampilkan data "no_hal_rev" atau kosong
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = data.no_hal_rev; // Tetapkan nilai kosong
+                    // input.textContent = data.no_hal_rev; // Tampilkan data "no_hal_rev" atau kosong
+                    newCell.appendChild(input);
+                    addNavigationListener(input);
                 } else if (i === totalColumns - 1) {
                     const select = document.createElement('select');
                     const defaultOption = document.createElement('option');
