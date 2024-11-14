@@ -12,7 +12,7 @@
     td,
     th {
         border: 1px solid #1c2939;
-        padding: 8px;
+        padding-left: 8px;
         position: relative;
         color: black;
         width: auto;
@@ -29,7 +29,7 @@
     select {
         width: 100%;
         border: none;
-        padding: 8px;
+        /* padding: 8px; */
         box-sizing: border-box;
     }
 
