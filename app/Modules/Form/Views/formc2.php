@@ -605,11 +605,11 @@
             });
         });
 
-        addRowButton.addEventListener('click', function() {
-            fetchEkstensiKonten().done(function(ekstensiOptions) {
-                addRow(ekstensiOptions);
-            });
-        });
+        // addRowButton.addEventListener('click', function() {
+        //     fetchEkstensiKonten().done(function(ekstensiOptions) {
+        //         addRow(ekstensiOptions);
+        //     });
+        // });
 
         function addNavigationListener(element) {
             element.addEventListener('keydown', (e) => {
