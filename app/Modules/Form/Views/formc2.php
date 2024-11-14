@@ -12,7 +12,7 @@
     td,
     th {
         border: 1px solid #1c2939;
-        padding-left: 8px;
+        padding: 0.1% 1% 0.1% 1%;
         position: relative;
         color: black;
         width: auto;
@@ -25,11 +25,17 @@
         text-align: center;
     }
 
-    input,
+    input {
+        width: 100%;
+        border: none;
+        padding: 0px;
+        box-sizing: border-box;
+    }
+
     select {
         width: 100%;
         border: none;
-        /* padding: 8px; */
+        padding: 0.5% 2% 0.5% 2%;
         box-sizing: border-box;
     }
 
@@ -56,6 +62,7 @@
 
     .top-aligned {
         vertical-align: top;
+        text-align: center;
         padding-top: 8px;
         /* Adjust padding as needed */
     }
@@ -556,27 +563,6 @@
         //             for (let i = 0; i < 5; i++) {
         //                 addRow(rowData, ekstensiOptions);
         //             }
-        //         });
-        //     });
-        // });
-
-        // fetchEkstensiKonten().done(function(ekstensiOptions) {
-        //     fetchData().done(function(data) {
-        //         // Tambahkan satu baris ke tabel untuk setiap item data dari database
-        //         data.forEach(rowData => {
-        //             addRow(rowData, ekstensiOptions);
-        //         });
-        //     });
-        // });
-
-        // const MAX_ROWS = 5; // Ubah sesuai jumlah baris yang diinginkan
-
-        // fetchEkstensiKonten().done(function(ekstensiOptions) {
-        //     fetchData().done(function(data) {
-        //         // Batasi jumlah baris yang ditampilkan
-        //         const limitedData = data.slice(0, MAX_ROWS);
-        //         limitedData.forEach(rowData => {
-        //             addRow(rowData, ekstensiOptions);
         //         });
         //     });
         // });
