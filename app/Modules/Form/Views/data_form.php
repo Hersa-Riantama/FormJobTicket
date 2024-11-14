@@ -309,7 +309,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '</a>';
                     if (islevel_user.includes("Editor") && (hasKategori4 || hasKategori1)) {
                         formData += '<a class="btn rounded-pill btn-icon btn-label-primary item-formc2 me-2" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Form C2">';
-                        formData += '<span class="tf-icons bx bx-show bx-sm"></span>';
+                        formData += '<span class="tf-icons bx bx-detail bx-sm"></span>';
                         formData += '</a>';
                     }
                     formData += '<a class="btn rounded-pill btn-icon btn-label-danger item-delete" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '" title="Hapus Tiket">';
