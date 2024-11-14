@@ -629,6 +629,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
+        function encodeBase64Id(id) {
+            return btoa(id); // 'btoa' digunakan untuk encoding Base64
+        }
         $('#formTiket').submit(function(event) {
             event.preventDefault();
             $('.error-message').text('').hide();
@@ -652,12 +655,19 @@
             if (catatan) {
                 formData.append('catatan', catatan);
             }
+            // Debugging: Check which categories are selected
+            const selectedCategories = [];
+            $('input[name="id_kategori[]"]:checked').each(function() {
+                selectedCategories.push($(this).val());
+            });
 
-            var formUrl = 'http://localhost:8080/form';
+            // Check if both kategori1 and kategori4 are selected
+            const kategori1Selected = selectedCategories.includes("1");
+            const kategori4Selected = selectedCategories.includes("4");
 
             $.ajax({
                 type: 'POST',
-                url: formUrl,
+                url: 'http://localhost:8080/form',
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -665,8 +675,15 @@
                 success: function(response) {
                     console.log('Respons dari Server:', response);
                     if (response.Status === 'success') {
+                        const id_tiket = encodeBase64Id(response.id_tiket);
                         Swal.fire('Berhasil!', 'Tiket berhasil ditambah.', 'success').then(function() {
-                            location.reload(); // Reload halaman setelah SweetAlert ditutup
+                            // Redirect to formC2 if both kategori1 and kategori4 are selected
+                            if (kategori1Selected || kategori4Selected) {
+                                window.location.href = 'formc2/' + id_tiket; // Replace with the actual URL of form C2
+                                return; // Stop further execution to allow redirection
+                            } else {
+                                location.reload();
+                            }
                         });
                     } else {
                         for (const [field, message] of Object.entries(response.pesan)) {
@@ -684,7 +701,6 @@
                     alert('Terjadi kesalahan saat menyimpan data.');
                 }
             });
-
         });
         $.ajax({
             url: 'http://localhost:8080/tampilbuku',

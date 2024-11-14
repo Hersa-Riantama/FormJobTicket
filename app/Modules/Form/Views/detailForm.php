@@ -922,6 +922,14 @@
         $('input[name="tahap_kelengkapan[]"]:checked').each(function() {
             tahap_kelengkapan.push($(this).val());
         });
+        const selectedCategories = [];
+        $('input[name="id_kategori[]"]:checked').each(function() {
+            selectedCategories.push($(this).val());
+        });
+
+        // Check if both kategori1 and kategori4 are selected
+        const kategori1Selected = selectedCategories.includes("1");
+        const kategori4Selected = selectedCategories.includes("4");
         const tgl_selesai = document.getElementById('tgl_selesai').value;
         const tgl_upload = document.getElementById('tgl_upload').value;
         const catatan = document.getElementById('catatan').value;
@@ -949,7 +957,12 @@
                     $('#status_message').text(response.message);
                     $(this).trigger('reset');
                     Swal.fire('Berhasil!', 'Tiket berhasil diperbarui.', 'success').then(function() {
-                        location.reload(); // Reload halaman setelah SweetAlert ditutup
+                        if (kategori1Selected || kategori4Selected) {
+                            window.location.href = 'formc2'; // Replace with the actual URL of form C2
+                            return; // Stop further execution to allow redirection
+                        } else {
+                            location.reload();
+                        }
                     });
                 } else {
                     alert('Gagal memperbarui data: ' + response.message);

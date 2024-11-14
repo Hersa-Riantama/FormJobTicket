@@ -9,6 +9,7 @@ use CodeIgniter\Database\MySQLi\Builder;
 use Modules\Auth\Controllers\Auth;
 use Modules\Auth\Models\AuthModel;
 use Modules\Form\Models\FormModel;
+use Modules\FormC2\Models\FormC2Model;
 use Modules\Grup\Models\GrupModel;
 use Modules\Kategori\Models\KategoriModel;
 use Modules\Kelengkapan\Models\KelengkapanModel;
@@ -35,7 +36,6 @@ class Form extends BaseController
 
     public function index()
     {
-        $GrupModel = new GrupModel();
         $UserModel = new UserModel();
         // Ambil data user berdasarkan ID dari sesi
         $userId = session()->get('id_user');
@@ -56,36 +56,11 @@ class Form extends BaseController
         } else {
             return redirect()->to('/login');
         }
-        // Set nilai default
-        $namaKoord = $namaEditor = $namaMultimedia = $namaAdmin = '';
-
-        // Tentukan nilai berdasarkan level user
-        switch ($userData['level_user']) {
-            case 'Editor':
-                $editorId = $GrupModel->where('id_editor', $userId)->first();
-                $koordId = $editorId['id_koord'];
-                $namaEditor = $UserModel->find($userId)['nama'];
-                $namaKoord = $UserModel->find($koordId)['nama'];
-                break;
-            case 'Koord Editor':
-                $namaKoord = $userData['nama'];
-                break;
-            case 'Tim Multimedia':
-                $namaMultimedia = $userData['nama'];
-                break;
-            case 'Admin Sistem':
-                $namaAdmin = $userData['nama'];
-                break;
-        }
 
         // Siapkan data untuk view
         $data = [
             'judul' => 'Form QR Code',
-            'userData' => $userData,
-            'namaKoord' => $namaKoord,
-            'namaEditor' => $namaEditor,
-            'namaMultimedia' => $namaMultimedia,
-            'namaAdmin' => $namaAdmin,
+            'userData' => $userData
         ];
 
         return view($this->folder_directory . 'formc2', $data);
@@ -248,6 +223,7 @@ class Form extends BaseController
         }
         $response = [
             'Status' => 'success',
+            'id_tiket' => $id_tiket,
         ];
         return $this->response->setJSON($response);
     }
@@ -274,12 +250,16 @@ class Form extends BaseController
         }
         $id_tiket = $this->request->getVar('id_tiket');
         $kode_buku = $this->request->getVar('id_buku');
-        $currentTicketData = $TicketModel->find($id_tiket);
+        // Retrieve the current data for the ticket
+        $currentTicketData = $TicketModel->find($id_tiket); // Replace $ticket_id with the actual ticket identifier
         $current_id_buku = $currentTicketData['id_buku'] ?? null;
+
+        // Determine id_buku based on kode_buku if it’s provided
         if ($kode_buku) {
             $bukuData = $BukuModel->where('kode_buku', $kode_buku)->first();
             $id_buku = $bukuData ? $bukuData['id_buku'] : null;
         } else {
+            // If kode_buku is not provided, retain the current id_buku
             $id_buku = $current_id_buku;
         }
         $input_catatan = $this->request->getVar('catatan');
@@ -869,5 +849,117 @@ class Form extends BaseController
             }
         }
         return $this->response->setJSON(['status' => 'success', 'Pesan' => 'Tiket Berhasil di Approve']);
+    }
+
+    public function detailFormc2($id_tiket)
+    {
+        $AuthModel = new AuthModel();
+        // Ambil data user berdasarkan ID dari sesi
+        $userId = session()->get('id_user');
+        // $UserModel = new UserModel();
+
+        if (!empty($userId)) {
+            // Ambil data user dari database berdasarkan id_user
+            $userData = $AuthModel->find($userId);
+            if ($userData && isset($userData['level_user'])) {
+                $allowUser = ['Admin Sistem', 'Tim Multimedia', 'Editor', 'Koord Editor', 'Manager Platform'];
+                if (!in_array($userData['level_user'], $allowUser)) {
+                    echo '<script>alert("Access Denied!!"); history.back();</script>';
+                    return;
+                }
+            } else {
+                echo '<script>alert("Level user tidak ditemukan."); history.back();</script>';
+                return;
+            }
+        } else {
+            return redirect()->to('/login');
+        }
+
+        $decodedId = base64_decode($id_tiket);
+        // Validate id_tiket (example: ensure it's an integer)
+        if (!is_numeric($decodedId) || $decodedId <= 0) {
+            return $this->response->setJSON(['error' => 'ID Tiket tidak valid'], 400);
+        }
+
+        $db = \Config\Database::connect();
+
+        // Ambil data tiket dan buku berdasarkan id_tiket
+        $builder = $db->table('tbl_tiket');
+        $builder->select('tbl_tiket.*, tbl_buku.kode_buku, tbl_buku.judul_buku');
+        $builder->join('tbl_buku', 'tbl_tiket.id_buku = tbl_buku.id_buku', 'left');
+        $builder->where('tbl_tiket.id_tiket', $decodedId);
+
+        $query = $builder->get();
+        $tiketData1 = $query->getRow();
+        $tiketData = (array) $tiketData1;
+
+
+        // Jika data tidak ditemukan
+        if (!$tiketData) {
+            return $this->response->setJSON(['error' => 'Data tidak ditemukan'], 404);
+        }
+
+        // Data yang akan diteruskan ke view
+        $data = [
+            'judul' => 'Form QR Code',
+            'userData' => $userData,
+            'tiketData' => $tiketData,
+        ];
+
+        // Tampilkan view detailForm
+        return view($this->folder_directory . 'formc2', $data);
+    }
+
+    public function createFormc2()
+    {
+        $formc2Model = new FormC2Model();
+        $id_tiket = $this->request->getVar('id_tiket'); // Ambil id_tiket yang dikirim
+
+        if (empty($id_tiket)) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'ID Tiket tidak valid atau kosong'
+            ], 400);
+        }
+
+        $dataRows = $this->request->getVar('dataRows');
+        foreach ($dataRows as $data) {
+            $dataInsert = [
+                'id_tiket' => $id_tiket,
+                'no' => $data['no'],
+                'no_halaman' => $data['no_halaman'],
+                'no_konten' => $data['no_konten'],
+                'no_hal_rev' => $data['no_halaman_revisi'],
+                'ekstensi_konten' => $data['ekstensi_konten']
+            ];
+
+            try {
+                // return $this->response->setJSON($dataInsert);
+                $formc2Model->insert($dataInsert);
+            } catch (\Exception $e) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+                ]);
+            }
+        }
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Data tiket C2 berhasil ditambahkan'
+        ]);
+    }
+
+    public function getEkstensiKonten()
+    {
+        $validEkstensi = ['MP4', 'MP3', 'PDF', 'RAR', 'APK'];
+        return $this->response->setJSON($validEkstensi);
+    }
+
+    public function getData()
+    {
+        $model = new FormC2Model(); // Pastikan model sesuai dengan yang Anda gunakan
+        $data = $model->findAll();  // Mengambil semua data
+        return $this->response->setJSON($data);
     }
 }

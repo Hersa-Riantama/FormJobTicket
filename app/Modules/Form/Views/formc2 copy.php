@@ -334,6 +334,42 @@
     const addRowButton = document.getElementById('addRowButton');
     const dataTable = document.getElementById('dataTable');
     const totalColumns = 6; // Jumlah kolom di tabel
+
+    // Fungsi untuk menambahkan satu baris ke tabel
+    // function addRow() {
+    //     const newRow = document.createElement('tr');
+
+    //     for (let i = 0; i < totalColumns; i++) {
+    //         const newCell = document.createElement('td');
+
+    //         if (i === totalColumns - 1) { // Kolom terakhir sebagai dropdown
+    //             const select = document.createElement('select');
+    //             ['Pilih', 'MP4', 'MP3', 'PDF', 'RAR', 'APK'].forEach(optionText => {
+    //                 const option = document.createElement('option');
+    //                 option.value = optionText;
+    //                 option.textContent = optionText;
+    //                 // Jika option adalah "MP4", tambahkan atribut disabled dan beri kelas
+    //                 if (optionText === 'Pilih') {
+    //                     option.disabled = true;
+    //                     option.style.color = 'gray'; // Memberikan warna abu-abu agar terlihat dinonaktifkan
+    //                 }
+    //                 select.appendChild(option);
+    //             });
+    //             newCell.appendChild(select);
+    //             addNavigationListener(select);
+    //         } else {
+    //             const input = document.createElement('input');
+    //             input.type = 'text';
+    //             newCell.appendChild(input);
+    //             addNavigationListener(input);
+    //         }
+
+    //         newRow.appendChild(newCell);
+    //     }
+
+    //     dataTable.appendChild(newRow);
+    // }
+    // let dataTable = document.getElementById('dataTable');
     let mergedCell = null; // Track the merged cell for the first column
     let rowSpanCount = 1;
 
@@ -397,64 +433,156 @@
         dataTable.appendChild(newRow);
     }
 
-    // Fungsi untuk menambahkan navigasi keyboard ke setiap input atau select 
+    // function addRow() {
+    //     const newRow = document.createElement('tr');
+
+    //     for (let i = 0; i < totalColumns; i++) {
+    //         const newCell = document.createElement('td');
+
+    //         if (i === totalColumns - 1) { // Kolom terakhir sebagai dropdown
+    //             const select = document.createElement('select');
+
+    //             // Membuat opsi pertama sebagai MP4 yang tidak dapat dipilih
+    //             const defaultOption = document.createElement('option');
+    //             defaultOption.value = '';
+    //             defaultOption.textContent = 'Pilih Ekstensi Konten';
+    //             defaultOption.disabled = true;
+    //             defaultOption.selected = true; // Membuat ini sebagai pilihan default yang tidak bisa dipilih
+    //             select.appendChild(defaultOption);
+
+    //             // Opsi lainnya tetap bisa dipilih
+    //             ['MP4', 'MP3', 'PDF', 'RAR', 'APK'].forEach(optionText => {
+    //                 const option = document.createElement('option');
+    //                 option.value = optionText;
+    //                 option.textContent = optionText;
+    //                 select.appendChild(option);
+    //             });
+    //             newCell.appendChild(select);
+    //             addNavigationListener(select);
+    //         } else {
+    //             const input = document.createElement('input');
+    //             input.type = 'text';
+    //             newCell.appendChild(input);
+    //             addNavigationListener(input);
+    //         }
+
+    //         newRow.appendChild(newCell);
+    //     }
+
+    //     dataTable.appendChild(newRow);
+    // }
+
+
+    // Fungsi untuk menambahkan navigasi keyboard ke setiap input atau select
+    // function addNavigationListener(element) {
+    //     element.addEventListener('keydown', (e) => {
+    //         const inputs = dataTable.querySelectorAll('input, select');
+    //         const index = Array.from(inputs).indexOf(e.target);
+
+    //         if (e.key === 'Enter' || e.key === 'Tab') {
+    //             e.preventDefault();
+    //             const nextInput = inputs[index + 1];
+    //             if (nextInput) {
+    //                 nextInput.focus();
+    //             }
+    //         } else if (e.key === 'ArrowLeft') {
+    //             e.preventDefault();
+    //             const prevInput = inputs[index - 1];
+    //             if (prevInput) {
+    //                 prevInput.focus();
+    //             }
+    //         } else if (e.key === 'ArrowRight') {
+    //             e.preventDefault();
+    //             const nextInput = inputs[index + 1];
+    //             if (nextInput) {
+    //                 nextInput.focus();
+    //             }
+    //         } else if (e.key === 'ArrowUp') {
+    //             e.preventDefault();
+    //             const currentRow = Math.floor(index / totalColumns);
+    //             const targetRowIndex = currentRow > 0 ? (currentRow - 1) * totalColumns + (index % totalColumns) : -1;
+    //             const targetInput = inputs[targetRowIndex];
+    //             if (targetInput) {
+    //                 targetInput.focus();
+    //             }
+    //         } else if (e.key === 'ArrowDown') {
+    //             e.preventDefault();
+    //             const currentRow = Math.floor(index / totalColumns);
+    //             const totalRows = Math.ceil(inputs.length / totalColumns);
+    //             const targetRowIndex = currentRow < totalRows - 1 ? (currentRow + 1) * totalColumns + (index % totalColumns) : -1;
+    //             const targetInput = inputs[targetRowIndex];
+    //             if (targetInput) {
+    //                 targetInput.focus();
+    //             }
+    //         }
+    //     });
+    // }
+
     function addNavigationListener(element) {
         element.addEventListener('keydown', (e) => {
-            const inputs = dataTable.querySelectorAll('input, select');
-            const index = Array.from(inputs).indexOf(e.target);
+            const inputs = Array.from(dataTable.querySelectorAll('input, select'));
+            const totalColumns = 6; // Adjust this to match your number of columns in the table
+            const skipColumn = 0; // Skip the first column (Kode Buku) with rowspan
 
-            // Mencegah aksi default
-            e.preventDefault();
-
+            const index = inputs.indexOf(e.target);
             const currentRow = Math.floor(index / totalColumns);
             const currentColumn = index % totalColumns;
 
-            let targetIndex = -1;
+            if (e.key === 'Enter' || e.key === 'Tab') {
+                e.preventDefault();
+                const nextInput = inputs[index + 1];
+                if (nextInput) {
+                    nextInput.focus();
+                }
+            }
+            // Arrow Left
+            else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                const prevInput = inputs[index - 1];
+                if (prevInput) {
+                    prevInput.focus();
+                }
+            }
+            // Arrow Right
+            else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                const nextInput = inputs[index + 1];
+                if (nextInput) {
+                    nextInput.focus();
+                }
+            }
+            // Arrow Up
+            else if (e.key === 'ArrowUp') {
+                e.preventDefault();
 
-            switch (e.key) {
-                case 'Enter':
-                case 'Tab':
-                    const nextInput = inputs[index + 1];
-                    if (nextInput) {
-                        nextInput.focus();
+                if (currentRow > 0) {
+                    const targetRowIndex = (currentRow - 1) * totalColumns + currentColumn;
+                    if (inputs[targetRowIndex]) {
+                        inputs[targetRowIndex].focus();
                     }
-                    break;
+                }
+            }
+            // Arrow Down
+            else if (e.key === 'ArrowDown') {
+                e.preventDefault();
 
-                case 'ArrowLeft':
-                    const prevInput = inputs[index - 1];
-                    if (prevInput) {
-                        prevInput.focus();
-                    }
-                    break;
+                // Calculate the next row index
+                const targetRowIndex = (currentRow + 1) * totalColumns + currentColumn;
 
-                case 'ArrowRight':
-                    const nextInputRight = inputs[index + 1];
-                    if (nextInputRight) {
-                        nextInputRight.focus();
-                    }
-                    break;
-                case 'ArrowUp':
-                    // Panah atas: Pindah ke elemen input di baris atas
-                    if ((index + 1) - totalColumns >= 0) {
-                        inputs[index - totalColumns + 1].focus();
-                    }
-                    break;
-                case 'ArrowDown':
-                    // Panah bawah: Pindah ke elemen input di baris bawah
-                    if ((index - 1) + totalColumns < inputs.length) {
-                        inputs[index + totalColumns - 1].focus();
-                    }
-                    break;
-                default:
-                    break;
+                if (inputs[targetRowIndex]) {
+                    inputs[targetRowIndex].focus();
+                }
             }
         });
     }
+
 
     // Tambahkan 45 baris ke tabel saat halaman dimuat
     for (let i = 0; i < 45; i++) {
         addRow();
     }
-</script>
 
+    // Event listener untuk tombol "Tambah Baris"
+    // addRowButton.addEventListener('click', addRow);
+</script>
 <?= $this->endSection(); ?>

@@ -150,6 +150,10 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                 console.log("Is Koord Editor:", isKoordEditor);
 
                 $.each(response.tiket, function(key, value) {
+                    var categories = JSON.parse(value.id_kategori);
+
+                    var hasKategori4 = categories.includes("1");
+                    var hasKategori1 = categories.includes("4");
                     var dibatalin = (value.approved_order_editor === 'R');
                     var disetujui = false;
                     var belum_disetujui = false;
@@ -303,7 +307,11 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '<a class="btn rounded-pill btn-icon btn-label-primary item-detail me-2" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Detail Tiket">';
                     formData += '<span class="tf-icons bx bx-show bx-sm"></span>';
                     formData += '</a>';
-
+                    if (islevel_user.includes("Editor") && (hasKategori4 || hasKategori1)) {
+                        formData += '<a class="btn rounded-pill btn-icon btn-label-primary item-formc2 me-2" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Form C2">';
+                        formData += '<span class="tf-icons bx bx-show bx-sm"></span>';
+                        formData += '</a>';
+                    }
                     formData += '<a class="btn rounded-pill btn-icon btn-label-danger item-delete" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '" title="Hapus Tiket">';
                     formData += '<span class="tf-icons bx bx-trash bx-sm"></span>';
                     formData += '</a>';
@@ -375,6 +383,10 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
     $(document).on('click', '.item-detail', function() {
         var id_tiket = $(this).data('id_tiket');
         window.location.href = '/detail/' + id_tiket; // Redirect to the detail page
+    });
+    $(document).on('click', '.item-formc2', function() {
+        var id_tiket = $(this).data('id_tiket');
+        window.location.href = '/formc2/' + id_tiket; // Redirect to the formc2 page
     });
 
     $(document).on('click', '.item-delete', function() {

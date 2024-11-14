@@ -5,6 +5,8 @@
     table {
         border-collapse: collapse;
         width: 100%;
+        table-layout: auto;
+        border-spacing: 0;
     }
 
     td,
@@ -96,7 +98,7 @@
 <!-- Content wrapper -->
 <div class="content-wrapper">
     <!-- Content -->
-    <form id="detailTiket" action="javascript:void(0);" method="get">
+    <form id="formTambah" action="javascript:void(0);">
         <div class="form-group">
 
             <div class="container-xxl flex-grow-1" style="padding-bottom: 0.25rem">
@@ -127,16 +129,16 @@
                         <label for="" class="col-12 col-md-3 col-form-label text-biru" style="font-size: large;">KODE
                             BUKU</label>
                         <div class="col-12 col-md-6">
-                            <input class="form-control text-hitam border-hitam w-100" type="text" value="" id="" name=""
-                                readonly />
+                            <input class="form-control text-hitam border-hitam w-100" type="text"
+                                value="<?= esc($tiketData['kode_buku']) ?>" id="" name="" readonly />
                         </div>
                     </div>
                     <div class="row mb-2">
                         <label for="" class="col-12 col-md-3 col-form-label text-biru" style="font-size: large;">JUDUL
                             BUKU</label>
                         <div class="col-12 col-md-6">
-                            <input class="form-control text-hitam border-hitam w-100" type="text" value="" id="" name=""
-                                readonly />
+                            <input class="form-control text-hitam border-hitam w-100" type="text"
+                                value="<?= esc($tiketData['judul_buku']) ?>" id="" name="" readonly />
                         </div>
                     </div>
                 </div>
@@ -296,7 +298,7 @@
             <!-- Row 3 -->
             <div class="row justify-content-center my-3">
                 <div class="col-xl-6">
-                    <button class="btn btn-primary d-grid w-100" id="btnsimpan">Simpan</button>
+                    <button id="btnsimpan" class="btn btn-primary d-grid w-100">Simpan</button>
                     <p id="errorMessage" class="text-danger" style="display:none;"></p>
                 </div>
             </div>
@@ -331,142 +333,369 @@
 <!-- / Layout wrapper -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    const addRowButton = document.getElementById('addRowButton');
-    const dataTable = document.getElementById('dataTable');
-    const totalColumns = 6; // Jumlah kolom di tabel
-    let mergedCell = null; // Track the merged cell for the first column
-    let rowSpanCount = 1;
+    document.addEventListener("DOMContentLoaded", function() {
+        // const addRowButton = document.getElementById('addRowButton');
+        const errorMessage = document.getElementById("errorMessage");
+        const totalColumns = 6;
+        let mergedCell = null;
+        let rowSpanCount = 0;
+        const kodeBuku = "<?= esc($tiketData['kode_buku']) ?>";
 
-    function addRow() {
-        const newRow = document.createElement('tr');
 
-        for (let i = 0; i < totalColumns; i++) {
-            const newCell = document.createElement('td');
-
-            // For the first column, merge cells by only creating one merged cell
-            if (i === 0) {
-                if (mergedCell === null) {
-                    // Create the initial merged cell and add it to the first row
-                    mergedCell = document.createElement('td');
-                    mergedCell.rowSpan = rowSpanCount;
-                    mergedCell.textContent = 'Merged Content'; // Customize the text if needed
-                    mergedCell.classList.add('top-aligned');
-                    newRow.appendChild(mergedCell);
-                } else {
-                    // Increment the row span for the existing merged cell
-                    rowSpanCount++;
-                    mergedCell.rowSpan = rowSpanCount;
-                    // Skip adding a new cell in this column for the merged rows
-                    continue;
-                }
-            } else if (i === totalColumns - 1) {
-                // Create the dropdown in the last column
-                const select = document.createElement('select');
-
-                // Default unselectable option
-                const defaultOption = document.createElement('option');
-                defaultOption.value = '';
-                defaultOption.textContent = 'Pilih Ekstensi Konten';
-                defaultOption.disabled = true;
-                defaultOption.selected = true;
-                select.appendChild(defaultOption);
-
-                // Other selectable options
-                ['MP4', 'MP3', 'PDF', 'RAR', 'APK'].forEach(optionText => {
-                    const option = document.createElement('option');
-                    option.value = optionText;
-                    option.textContent = optionText;
-                    select.appendChild(option);
-                });
-                newCell.appendChild(select);
-                addNavigationListener(select);
-            } else {
-                // Regular text input for other columns
-                const input = document.createElement('input');
-                input.type = 'text';
-                newCell.appendChild(input);
-                addNavigationListener(input);
-            }
-
-            // Append cell to the row if it's not the first merged cell (already handled)
-            if (i !== 0 || mergedCell === null) {
-                newRow.appendChild(newCell);
-            }
+        function fetchEkstensiKonten() {
+            return $.ajax({
+                url: '<?= site_url('tiket/ekstensi') ?>',
+                type: 'GET',
+                dataType: 'json'
+            });
         }
 
-        dataTable.appendChild(newRow);
-    }
+        function fetchData() {
+            return $.ajax({
+                url: '<?= site_url('tiket/getData') ?>', // Sesuaikan dengan endpoint baru
+                type: 'GET',
+                dataType: 'json'
+            });
+        }
 
-    // Fungsi untuk menambahkan navigasi keyboard ke setiap input atau select 
-    function addNavigationListener(element) {
-        element.addEventListener('keydown', (e) => {
-            const inputs = dataTable.querySelectorAll('input, select');
-            const index = Array.from(inputs).indexOf(e.target);
+        // function addRow(ekstensiOptions) {
+        //     const newRow = document.createElement('tr');
 
-            // Mencegah aksi default
-            e.preventDefault();
+        //     for (let i = 0; i < totalColumns; i++) {
+        //         const newCell = document.createElement('td');
+        //         // Tambahkan atribut data-col pada setiap cell
+        //         newCell.setAttribute('data-col', getColumnName(i)); // Mengambil nama kolom berdasarkan index
 
-            const currentRow = Math.floor(index / totalColumns);
-            const currentColumn = index % totalColumns;
+        //         if (i === 0) {
+        //             if (!mergedCell) {
+        //                 mergedCell = document.createElement('td');
+        //                 mergedCell.rowSpan = 1;
+        //                 mergedCell.textContent = kodeBuku;
+        //                 mergedCell.classList.add('top-aligned');
+        //                 newRow.appendChild(mergedCell);
+        //             }
+        //             continue;
+        //         }
 
-            let targetIndex = -1;
+        //         if (i === totalColumns - 1) {
+        //             const select = document.createElement('select');
+        //             const defaultOption = document.createElement('option');
+        //             defaultOption.value = '';
+        //             defaultOption.textContent = 'Pilih Ekstensi Konten';
+        //             defaultOption.disabled = true;
+        //             defaultOption.selected = true;
+        //             select.appendChild(defaultOption);
 
-            switch (e.key) {
-                case 'Tab':
-                case 'Enter':
-                    if (element.tagName === 'SELECT') {
-                        // Fokus dan klik dropdown untuk membukanya
-                        element.focus();
-                        const event = new MouseEvent('mousedown', {
-                            bubbles: true
-                        });
-                        element.dispatchEvent(event)
-                    } else {
-                        // Pindah ke input atau select berikutnya jika bukan dropdown
-                        const nextInput = inputs[index + 1];
-                        if (nextInput) {
-                            nextInput.focus();
+        //             ekstensiOptions.forEach(optionText => {
+        //                 const option = document.createElement('option');
+        //                 option.value = optionText;
+        //                 option.textContent = optionText;
+        //                 select.appendChild(option);
+        //             });
+        //             newCell.appendChild(select);
+        //             addNavigationListener(select);
+        //         } else {
+        //             const input = document.createElement('input');
+        //             input.type = 'text';
+        //             newCell.appendChild(input);
+        //             addNavigationListener(input);
+        //         }
+
+        //         newRow.appendChild(newCell);
+        //     }
+
+        //     if (mergedCell) {
+        //         mergedCell.rowSpan = ++rowSpanCount;
+        //     }
+
+        //     dataTable.appendChild(newRow);
+        // }
+
+        // function addRow(data, ekstensiOptions) {
+        //     const newRow = document.createElement('tr');
+
+        //     // Loop melalui kolom untuk setiap sel dalam baris
+        //     for (let i = 0; i < totalColumns; i++) {
+        //         const newCell = document.createElement('td');
+        //         newCell.setAttribute('data-col', getColumnName(i));
+
+        //         if (i === 0) {
+        //             if (!mergedCell) {
+        //                 mergedCell = document.createElement('td');
+        //                 mergedCell.rowSpan = 1;
+        //                 mergedCell.textContent = kodeBuku;
+        //                 mergedCell.classList.add('top-aligned');
+        //                 newRow.appendChild(mergedCell);
+        //             }
+        //             continue;
+        //         }
+
+        //         // Kolom input data dari database
+        //         if (i === 1) {
+        //             newCell.textContent = data.no || ''; // Tampilkan data "no"
+        //         } else if (i === 2) {
+        //             newCell.textContent = data.no_halaman || ''; // Tampilkan data "no_halaman"
+        //         } else if (i === 3) {
+        //             newCell.textContent = data.no_konten || ''; // Tampilkan data "no_konten"
+        //         } else if (i === 4) {
+        //             newCell.textContent = data.no_hal_rev || ''; // Tampilkan data "no_hal_rev"
+        //         } else if (i === totalColumns - 1) {
+        //             const select = document.createElement('select');
+        //             const defaultOption = document.createElement('option');
+        //             defaultOption.value = '';
+        //             defaultOption.textContent = 'Pilih Ekstensi Konten';
+        //             defaultOption.disabled = true;
+        //             defaultOption.selected = true;
+        //             select.appendChild(defaultOption);
+
+        //             ekstensiOptions.forEach(optionText => {
+        //                 const option = document.createElement('option');
+        //                 option.value = optionText;
+        //                 option.textContent = optionText;
+        //                 select.appendChild(option);
+        //             });
+        //             newCell.appendChild(select);
+        //             addNavigationListener(select);
+        //         } else {
+        //             const input = document.createElement('input');
+        //             input.type = 'text';
+        //             newCell.appendChild(input);
+        //             addNavigationListener(input);
+        //         }
+
+        //         newRow.appendChild(newCell);
+        //     }
+
+        //     if (mergedCell) {
+        //         mergedCell.rowSpan = ++rowSpanCount;
+        //     }
+
+        //     dataTable.appendChild(newRow);
+        // }
+
+        function addRow(data, ekstensiOptions) {
+            const newRow = document.createElement('tr');
+
+            // Loop melalui setiap kolom untuk setiap sel dalam baris
+            for (let i = 0; i < totalColumns; i++) {
+                const newCell = document.createElement('td');
+                newCell.setAttribute('data-col', getColumnName(i));
+
+                // Kolom pertama khusus
+                if (i === 0) {
+                    if (!mergedCell) {
+                        mergedCell = document.createElement('td');
+                        mergedCell.rowSpan = 1;
+                        mergedCell.textContent = kodeBuku;
+                        mergedCell.classList.add('top-aligned');
+                        newRow.appendChild(mergedCell);
+                    }
+                    continue;
+                }
+
+                // Kolom input data dari database atau kosong jika tidak ada data
+                if (i === 1 && data.no) {
+                    newCell.textContent = data.no; // Tampilkan data "no" atau kosong
+                } else if (i === 2 && data.no_halaman) {
+                    newCell.textContent = data.no_halaman; // Tampilkan data "no_halaman" atau kosong
+                } else if (i === 3 && data.no_konten) {
+                    newCell.textContent = data.no_konten; // Tampilkan data "no_konten" atau kosong
+                } else if (i === 4 && data.no_hal_rev) {
+                    newCell.textContent = data.no_hal_rev; // Tampilkan data "no_hal_rev" atau kosong
+                } else if (i === totalColumns - 1) {
+                    const select = document.createElement('select');
+                    const defaultOption = document.createElement('option');
+                    defaultOption.value = '';
+                    defaultOption.textContent = 'Pilih Ekstensi Konten';
+                    defaultOption.disabled = true;
+                    defaultOption.selected = true;
+                    select.appendChild(defaultOption);
+
+                    ekstensiOptions.forEach(optionText => {
+                        const option = document.createElement('option');
+                        option.value = optionText;
+                        option.textContent = optionText;
+                        select.appendChild(option);
+
+                        // Cek apakah nilai ini ada di data dan jika ada, set option sebagai terpilih
+                        if (data.ekstensi_konten && data.ekstensi_konten === optionText) {
+                            option.selected = true; // Pilih opsi yang sesuai dengan nilai dari database
                         }
-                    }
-                    break;
+                    });
+                    newCell.appendChild(select);
+                    addNavigationListener(select);
+                } else {
+                    // Jika kolom tidak memiliki data dari database, tambahkan input kosong
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = ''; // Tetapkan nilai kosong
+                    newCell.appendChild(input);
+                    addNavigationListener(input);
+                }
 
-                case 'ArrowLeft':
-                    const prevInput = inputs[index - 1];
-                    if (prevInput) {
-                        prevInput.focus();
-                    }
-                    break;
-
-                case 'ArrowRight':
-                    const nextInputRight = inputs[index + 1];
-                    if (nextInputRight) {
-                        nextInputRight.focus();
-                    }
-                    break;
-                case 'ArrowUp':
-                    // Panah atas: Pindah ke elemen input di baris atas
-                    if ((index + 1) - totalColumns >= 0) {
-                        inputs[index - totalColumns + 1].focus();
-                    }
-                    break;
-                case 'ArrowDown':
-                    // Panah bawah: Pindah ke elemen input di baris bawah
-                    if ((index - 1) + totalColumns < inputs.length) {
-                        inputs[index + totalColumns - 1].focus();
-                    }
-                    break;
-                default:
-                    break;
+                newRow.appendChild(newCell);
             }
 
+            if (mergedCell) {
+                mergedCell.rowSpan = ++rowSpanCount;
+            }
+
+            dataTable.appendChild(newRow);
+        }
+
+        function getColumnName(index) {
+            const columnNames = ['', 'no', 'no_halaman', 'no_konten', 'no_hal_rev', 'ekstensi_konten'];
+            return columnNames[index] || `col_${index}`; // Return default name if index is out of bounds
+        }
+
+        // Ambil ekstensi konten dari server dan tambahkan baris
+        // fetchEkstensiKonten().done(function(ekstensiOptions) {
+        //     fetchData().done(function(data) {
+        //         data.forEach(rowData => {
+        //             // Tambahkan 45 baris ke tabel saat halaman dimuat
+        //             for (let i = 0; i < 5; i++) {
+        //                 addRow(rowData, ekstensiOptions);
+        //             }
+        //         });
+        //     });
+        // });
+
+        // fetchEkstensiKonten().done(function(ekstensiOptions) {
+        //     fetchData().done(function(data) {
+        //         // Tambahkan satu baris ke tabel untuk setiap item data dari database
+        //         data.forEach(rowData => {
+        //             addRow(rowData, ekstensiOptions);
+        //         });
+        //     });
+        // });
+
+        // const MAX_ROWS = 5; // Ubah sesuai jumlah baris yang diinginkan
+
+        // fetchEkstensiKonten().done(function(ekstensiOptions) {
+        //     fetchData().done(function(data) {
+        //         // Batasi jumlah baris yang ditampilkan
+        //         const limitedData = data.slice(0, MAX_ROWS);
+        //         limitedData.forEach(rowData => {
+        //             addRow(rowData, ekstensiOptions);
+        //         });
+        //     });
+        // });
+
+        fetchEkstensiKonten().done(function(ekstensiOptions) {
+            fetchData().done(function(data) {
+                // Tentukan jumlah minimum baris yang ingin ditampilkan
+                const MIN_ROWS = 10;
+                const emptyRowCount = MIN_ROWS - data.length;
+
+                // Tambahkan baris berdasarkan data dari server
+                data.forEach(rowData => {
+                    addRow(rowData, ekstensiOptions);
+                });
+
+                // Tambahkan baris kosong jika data dari server kurang dari MIN_ROWS
+                for (let i = 0; i < emptyRowCount; i++) {
+                    addRow({}, ekstensiOptions); // Kirim objek kosong untuk baris kosong
+                }
+            });
         });
 
-    }
+        addRowButton.addEventListener('click', function() {
+            fetchEkstensiKonten().done(function(ekstensiOptions) {
+                addRow(ekstensiOptions);
+            });
+        });
 
-    // Tambahkan 45 baris ke tabel saat halaman dimuat
-    for (let i = 0; i < 45; i++) {
-        addRow();
-    }
+        function addNavigationListener(element) {
+            element.addEventListener('keydown', (e) => {
+                const inputs = dataTable.querySelectorAll('input, select');
+                const index = Array.from(inputs).indexOf(e.target);
+
+                if (index === -1) return;
+
+                let targetIndex = index;
+                if (e.target.tagName.toLowerCase() === 'select' && (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowRight')) {
+                    e.preventDefault();
+                }
+
+                switch (e.key) {
+                    case 'Enter':
+                    case 'Tab':
+                        e.preventDefault();
+                        targetIndex = index + 1;
+                        break;
+                    case 'ArrowLeft':
+                        targetIndex = index - 1;
+                        break;
+                    case 'ArrowRight':
+                        targetIndex = index + 1;
+                        break;
+                    case 'ArrowUp':
+                        targetIndex = index - totalColumns + 1;
+                        break;
+                    case 'ArrowDown':
+                        targetIndex = index + totalColumns - 1;
+                        break;
+                    default:
+                        return;
+                }
+
+                if (targetIndex >= 0 && targetIndex < inputs.length) {
+                    inputs[targetIndex].focus();
+                }
+            });
+        }
+    });
+
+    $(document).ready(function() {
+        const form = $('#formTambah');
+        const errorMessage = $('#errorMessage');
+        const dataTable = $('#dataTable')[0];
+        const idTiketC1 = <?= json_encode($tiketData['id_tiket']) ?>; // Gunakan `json_encode` agar nilainya valid di JavaScript
+
+        form.submit(function(event) {
+            event.preventDefault();
+
+            const data = [];
+            const rows = dataTable.querySelectorAll('tr');
+
+            rows.forEach(row => {
+                const rowData = {
+                    no: row.querySelector('[data-col="no"] input')?.value || row.querySelector('[data-col="no"] select')?.value || '',
+                    no_halaman: row.querySelector('[data-col="no_halaman"] input')?.value || row.querySelector('[data-col="no_halaman"] select')?.value || '',
+                    no_konten: row.querySelector('[data-col="no_konten"] input')?.value || row.querySelector('[data-col="no_konten"] select')?.value || '',
+                    no_halaman_revisi: row.querySelector('[data-col="no_hal_rev"] input')?.value || row.querySelector('[data-col="no_hal_rev"] select')?.value || '',
+                    ekstensi_konten: row.querySelector('[data-col="ekstensi_konten"] select')?.value || ''
+                };
+
+                const hasValue = Object.values(rowData).some(value => value !== '');
+                if (hasValue) {
+                    data.push(rowData);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:8080/tambahC2',
+                type: 'POST',
+                data: {
+                    id_tiket: idTiketC1, // Kirim id_tiket terpisah dari dataRows
+                    dataRows: data
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        alert("Data berhasil disimpan!");
+                        errorMessage.hide();
+                    } else {
+                        errorMessage.text(response.message || "Terjadi kesalahan saat menyimpan data.");
+                        errorMessage.show();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    errorMessage.text("Gagal terhubung ke server. Silakan coba lagi.");
+                    errorMessage.show();
+                }
+            });
+        });
+    });
 </script>
-
 <?= $this->endSection(); ?>

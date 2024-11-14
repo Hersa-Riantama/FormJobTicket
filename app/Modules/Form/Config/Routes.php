@@ -22,7 +22,7 @@ $routes->group(
     ['filter' => 'sessionCheck'],
     function ($routes) {
         $routes->get('form', 'Form::form');
-        $routes->get('formc2', 'Form::index');
+        $routes->get('formc2/(:segment)', 'Form::detailFormc2/$1');
         $routes->get('tampilbuku', 'Form::getBukuOptions');
         $routes->get('tampilbuku/(:segment)', 'Form::getBukuDetails/$1');
         $routes->post('form', 'Form::createForm');
@@ -33,7 +33,10 @@ $routes->group(
         $routes->post('approved', 'Form::approveTicketD');
         $routes->post('disapproveTicket', 'Form::disapproveTicket');
         $routes->get('detail/(:segment)', 'Form::detailForm/$1');
+        $routes->post('tambahC2', 'Form::createFormc2');
+        $routes->get('tiket/ekstensi', 'Form::getEkstensiKonten');
         $routes->delete('delete/(:segment)', 'Form::delete/$1');
+        $routes->get('tiket/getData', 'Form::getData');
     }
 );
 
