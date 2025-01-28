@@ -910,11 +910,51 @@ class Form extends BaseController
         return view($this->folder_directory . 'formc2', $data);
     }
 
-    public function createFormc2()
+    // public function createFormc2()
+    // {
+    //     $formc2Model = new FormC2Model();
+    //     $id_tiket = $this->request->getVar('id_tiket'); // Ambil id_tiket yang dikirim
+
+    //     if (empty($id_tiket)) {
+    //         return $this->response->setJSON([
+    //             'status' => 'error',
+    //             'message' => 'ID Tiket tidak valid atau kosong'
+    //         ], 400);
+    //     }
+
+    //     $dataRows = $this->request->getVar('dataRows');
+    //     foreach ($dataRows as $data) {
+    //         $dataInsert = [
+    //             'id_tiket' => $id_tiket,
+    //             'no' => $data['no'],
+    //             'no_halaman' => $data['no_halaman'],
+    //             'no_konten' => $data['no_konten'],
+    //             'no_hal_rev' => $data['no_halaman_revisi'],
+    //             'ekstensi_konten' => $data['ekstensi_konten']
+    //         ];
+
+    //         try {
+    //             $formc2Model->insert($dataInsert);
+    //         } catch (\Exception $e) {
+    //             return $this->response->setJSON([
+    //                 'status' => 'error',
+    //                 'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+    //             ]);
+    //         }
+    //     }
+
+    //     return $this->response->setJSON([
+    //         'status' => 'success',
+    //         'message' => 'Data tiket C2 berhasil ditambahkan'
+    //     ]);
+    // }
+
+    public function saveFormc2()
     {
         $formc2Model = new FormC2Model();
         $id_tiket = $this->request->getVar('id_tiket'); // Ambil id_tiket yang dikirim
 
+        // Validasi id_tiket
         if (empty($id_tiket)) {
             return $this->response->setJSON([
                 'status' => 'error',
@@ -922,31 +962,41 @@ class Form extends BaseController
             ], 400);
         }
 
-        $dataRows = $this->request->getVar('dataRows');
+        $dataRows = $this->request->getVar('dataRows'); // Ambil data dari form
         foreach ($dataRows as $data) {
-            $dataInsert = [
-                'id_tiket' => $id_tiket,
-                'no' => $data['no'],
-                'no_halaman' => $data['no_halaman'],
-                'no_konten' => $data['no_konten'],
-                'no_hal_rev' => $data['no_halaman_revisi'],
-                'ekstensi_konten' => $data['ekstensi_konten']
-            ];
+            // Pastikan data memiliki 'no' dan 'id_tiket'
+            if (!empty($data['no']) && !empty($id_tiket)) {
+                // Cari record dengan id_tiket dan no yang sama
+                $existingRow = $formc2Model
+                    ->where('id_tiket', $id_tiket)
+                    ->where('no', $data['no'])
+                    ->first();
 
-            try {
-                // return $this->response->setJSON($dataInsert);
-                $formc2Model->insert($dataInsert);
-            } catch (\Exception $e) {
-                return $this->response->setJSON([
-                    'status' => 'error',
-                    'message' => 'Terjadi kesalahan: ' . $e->getMessage()
-                ]);
+                if ($existingRow) {
+                    // Update jika data ditemukan
+                    $formc2Model->update($existingRow['id_tiket_c2'], [
+                        'no_halaman' => $data['no_halaman'],
+                        'no_konten' => $data['no_konten'],
+                        'no_hal_rev' => $data['no_halaman_revisi'],
+                        'ekstensi_konten' => $data['ekstensi_konten']
+                    ]);
+                } else {
+                    // Jika tidak ditemukan, Anda dapat memilih untuk menyisipkan data baru atau melewatkannya
+                    $formc2Model->insert([
+                        'id_tiket' => $id_tiket,
+                        'no' => $data['no'],
+                        'no_halaman' => $data['no_halaman'],
+                        'no_konten' => $data['no_konten'],
+                        'no_hal_rev' => $data['no_halaman_revisi'],
+                        'ekstensi_konten' => $data['ekstensi_konten']
+                    ]);
+                }
             }
         }
 
         return $this->response->setJSON([
             'status' => 'success',
-            'message' => 'Data tiket C2 berhasil ditambahkan'
+            'message' => 'Data tiket C2 berhasil diperbarui'
         ]);
     }
 
@@ -959,7 +1009,29 @@ class Form extends BaseController
     public function getData()
     {
         $model = new FormC2Model(); // Pastikan model sesuai dengan yang Anda gunakan
-        $data = $model->findAll();  // Mengambil semua data
+        $id_tiket = $this->request->getGet('tiket');
+        $decodedId = base64_decode($id_tiket);
+        if ($id_tiket) {
+            // Ambil data berdasarkan id_tiket
+            $data = $model->where('id_tiket', $decodedId)->findAll();
+        } else {
+            // Ambil semua data
+            $data = $model->findAll();
+        }
         return $this->response->setJSON($data);
+    }
+
+    public function hapus($id_tiket = null)
+    {
+        $model = new FormC2Model();
+        $model->where('id_tiket_c2', $id_tiket)->delete();
+
+        $response = [
+            'status' => 'success',
+            'pesan' => 'Data tiket berhasil dihapus',
+
+        ];
+
+        return $this->response->setJSON($response, 200);
     }
 }

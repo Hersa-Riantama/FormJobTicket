@@ -284,10 +284,10 @@ use Modules\Auth\Models\AuthModel; ?>
                     }
 
                     // Event listener untuk menangkap perubahan halaman
-                    table.on('page', function() {
-                        var currentPage = table.page();
-                        localStorage.setItem('DataTables_currentPage', currentPage); // Simpan halaman saat ini
-                    });
+                    // table.on('page', function() {
+                    //     var currentPage = table.page();
+                    //     localStorage.setItem('DataTables_currentPage', currentPage); // Simpan halaman saat ini
+                    // });
                 }
             },
             error: function(xhr, status, error) {

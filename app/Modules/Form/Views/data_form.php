@@ -367,10 +367,10 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     }
 
                     // Event listener untuk menangkap perubahan halaman
-                    table.on('page', function() {
-                        var currentPage = table.page();
-                        localStorage.setItem('DataTables_currentPage', currentPage); // Simpan halaman saat ini
-                    });
+                    // table.on('page', function() {
+                    //     var currentPage = table.page();
+                    //     localStorage.setItem('DataTables_currentPage', currentPage); // Simpan halaman saat ini
+                    // });
 
                 }
             },

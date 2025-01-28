@@ -12,7 +12,7 @@
     td,
     th {
         border: 1px solid #1c2939;
-        padding: 0.1% 1% 0.1% 1%;
+        padding: 0.2% 1% 0.2% 1%;
         position: relative;
         color: black;
         width: auto;
@@ -20,6 +20,13 @@
 
     th.no-column,
     td.no-column {
+        width: 5%;
+        /* Atur lebar kolom "No." */
+        text-align: center;
+    }
+
+    th.aksi,
+    td.aksi {
         width: 5%;
         /* Atur lebar kolom "No." */
         text-align: center;
@@ -170,8 +177,14 @@
                                         <th class="text-center">No. Halaman<br>Setelah direvisi</th>
                                         <th class="text-center">Ekstensi Konten<br>untuk video: MP4<br>untuk audio:
                                             MP3<br>PDF,RAR,APK</th>
+                                        <th class="text-center aksi">Aksi</th>
                                     </tr>
                                 </table>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-primary" id="addRowButton" type="button">Tambah Halaman</button>
+                                <div id="paginationContainer" class="d-flex justify-content-center mt-3"></div>
                             </div>
 
                         </div>
@@ -340,14 +353,23 @@
 <!-- / Layout wrapper -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    const idTiketC1 = <?= json_encode($tiketData['id_tiket']) ?>;
+
+    $(document).ready(function() {
         // const addRowButton = document.getElementById('addRowButton');
         const errorMessage = document.getElementById("errorMessage");
         const totalColumns = 6;
         let mergedCell = null;
         let rowSpanCount = 0;
         const kodeBuku = "<?= esc($tiketData['kode_buku']) ?>";
+        tiket = encodeBase64Id(idTiketC1);
+        let isEditMode = false;
+        let editRowId = null;
 
+
+        function encodeBase64Id(id) {
+            return btoa(id); // 'btoa' digunakan untuk encoding Base64
+        }
 
         function fetchEkstensiKonten() {
             return $.ajax({
@@ -357,131 +379,22 @@
             });
         }
 
-        function fetchData() {
+        function fetchData(tiket) {
             return $.ajax({
-                url: '<?= site_url('tiket/getData') ?>', // Sesuaikan dengan endpoint baru
+                url: '<?= site_url('tiket/getData') ?>' + '?tiket=' + tiket, // Sesuaikan dengan endpoint baru
                 type: 'GET',
                 dataType: 'json'
             });
         }
 
-        // function addRow(ekstensiOptions) {
-        //     const newRow = document.createElement('tr');
-
-        //     for (let i = 0; i < totalColumns; i++) {
-        //         const newCell = document.createElement('td');
-        //         // Tambahkan atribut data-col pada setiap cell
-        //         newCell.setAttribute('data-col', getColumnName(i)); // Mengambil nama kolom berdasarkan index
-
-        //         if (i === 0) {
-        //             if (!mergedCell) {
-        //                 mergedCell = document.createElement('td');
-        //                 mergedCell.rowSpan = 1;
-        //                 mergedCell.textContent = kodeBuku;
-        //                 mergedCell.classList.add('top-aligned');
-        //                 newRow.appendChild(mergedCell);
-        //             }
-        //             continue;
-        //         }
-
-        //         if (i === totalColumns - 1) {
-        //             const select = document.createElement('select');
-        //             const defaultOption = document.createElement('option');
-        //             defaultOption.value = '';
-        //             defaultOption.textContent = 'Pilih Ekstensi Konten';
-        //             defaultOption.disabled = true;
-        //             defaultOption.selected = true;
-        //             select.appendChild(defaultOption);
-
-        //             ekstensiOptions.forEach(optionText => {
-        //                 const option = document.createElement('option');
-        //                 option.value = optionText;
-        //                 option.textContent = optionText;
-        //                 select.appendChild(option);
-        //             });
-        //             newCell.appendChild(select);
-        //             addNavigationListener(select);
-        //         } else {
-        //             const input = document.createElement('input');
-        //             input.type = 'text';
-        //             newCell.appendChild(input);
-        //             addNavigationListener(input);
-        //         }
-
-        //         newRow.appendChild(newCell);
-        //     }
-
-        //     if (mergedCell) {
-        //         mergedCell.rowSpan = ++rowSpanCount;
-        //     }
-
-        //     dataTable.appendChild(newRow);
-        // }
-
-        // function addRow(data, ekstensiOptions) {
-        //     const newRow = document.createElement('tr');
-
-        //     // Loop melalui kolom untuk setiap sel dalam baris
-        //     for (let i = 0; i < totalColumns; i++) {
-        //         const newCell = document.createElement('td');
-        //         newCell.setAttribute('data-col', getColumnName(i));
-
-        //         if (i === 0) {
-        //             if (!mergedCell) {
-        //                 mergedCell = document.createElement('td');
-        //                 mergedCell.rowSpan = 1;
-        //                 mergedCell.textContent = kodeBuku;
-        //                 mergedCell.classList.add('top-aligned');
-        //                 newRow.appendChild(mergedCell);
-        //             }
-        //             continue;
-        //         }
-
-        //         // Kolom input data dari database
-        //         if (i === 1) {
-        //             newCell.textContent = data.no || ''; // Tampilkan data "no"
-        //         } else if (i === 2) {
-        //             newCell.textContent = data.no_halaman || ''; // Tampilkan data "no_halaman"
-        //         } else if (i === 3) {
-        //             newCell.textContent = data.no_konten || ''; // Tampilkan data "no_konten"
-        //         } else if (i === 4) {
-        //             newCell.textContent = data.no_hal_rev || ''; // Tampilkan data "no_hal_rev"
-        //         } else if (i === totalColumns - 1) {
-        //             const select = document.createElement('select');
-        //             const defaultOption = document.createElement('option');
-        //             defaultOption.value = '';
-        //             defaultOption.textContent = 'Pilih Ekstensi Konten';
-        //             defaultOption.disabled = true;
-        //             defaultOption.selected = true;
-        //             select.appendChild(defaultOption);
-
-        //             ekstensiOptions.forEach(optionText => {
-        //                 const option = document.createElement('option');
-        //                 option.value = optionText;
-        //                 option.textContent = optionText;
-        //                 select.appendChild(option);
-        //             });
-        //             newCell.appendChild(select);
-        //             addNavigationListener(select);
-        //         } else {
-        //             const input = document.createElement('input');
-        //             input.type = 'text';
-        //             newCell.appendChild(input);
-        //             addNavigationListener(input);
-        //         }
-
-        //         newRow.appendChild(newCell);
-        //     }
-
-        //     if (mergedCell) {
-        //         mergedCell.rowSpan = ++rowSpanCount;
-        //     }
-
-        //     dataTable.appendChild(newRow);
-        // }
-
         function addRow(data, ekstensiOptions) {
-            const newRow = document.createElement('tr');
+            const newRow = document.createElement('tr')
+
+            // Existing row setup for update mode
+            if (data.id_tiket) {
+                isEditMode = true;
+                editRowId = data.id_tiket;
+            }
 
             // Loop melalui setiap kolom untuk setiap sel dalam baris
             for (let i = 0; i < totalColumns; i++) {
@@ -563,6 +476,25 @@
                 newRow.appendChild(newCell);
             }
 
+            // Menambahkan tombol Delete pada row terakhir (sebagai contoh)
+            const deleteCell = document.createElement('td');
+            const deleteButton = document.createElement('a');
+            deleteButton.classList.add('rounded-pill', 'btn-icon', 'btn-label-danger');
+            deleteButton.setAttribute('type', 'button');
+            deleteButton.setAttribute('title', 'Hapus Baris');
+            // Membuat ikon dengan Font Awesome atau Boxicons
+            const icon = document.createElement('span');
+            icon.classList.add('tf-icons', 'bx', 'bx-trash', 'bx-sm'); // Menambahkan kelas untuk ikon
+            // Menambahkan ikon ke dalam tombol <a>
+            deleteButton.appendChild(icon);
+            deleteButton.addEventListener('click', function() {
+                // Panggil fungsi untuk menghapus data
+                deleteRow(data.id_tiket_c2);
+            });
+            deleteCell.appendChild(deleteButton);
+            newRow.appendChild(deleteCell);
+
+
             if (mergedCell) {
                 mergedCell.rowSpan = ++rowSpanCount;
             }
@@ -571,26 +503,15 @@
         }
 
         function getColumnName(index) {
-            const columnNames = ['', 'no', 'no_halaman', 'no_konten', 'no_hal_rev', 'ekstensi_konten'];
+            const columnNames = ['', 'no', 'no_halaman', 'no_konten', 'no_hal_rev', 'ekstensi_konten', 'Aksi'];
             return columnNames[index] || `col_${index}`; // Return default name if index is out of bounds
         }
 
-        // Ambil ekstensi konten dari server dan tambahkan baris
-        // fetchEkstensiKonten().done(function(ekstensiOptions) {
-        //     fetchData().done(function(data) {
-        //         data.forEach(rowData => {
-        //             // Tambahkan 45 baris ke tabel saat halaman dimuat
-        //             for (let i = 0; i < 5; i++) {
-        //                 addRow(rowData, ekstensiOptions);
-        //             }
-        //         });
-        //     });
-        // });
-
         fetchEkstensiKonten().done(function(ekstensiOptions) {
-            fetchData().done(function(data) {
+            fetchData(tiket).done(function(data) {
                 // Tentukan jumlah minimum baris yang ingin ditampilkan
                 const MIN_ROWS = 10;
+                let currentPage = 1;
                 const emptyRowCount = MIN_ROWS - data.length;
 
                 // Tambahkan baris berdasarkan data dari server
@@ -604,12 +525,6 @@
                 }
             });
         });
-
-        // addRowButton.addEventListener('click', function() {
-        //     fetchEkstensiKonten().done(function(ekstensiOptions) {
-        //         addRow(ekstensiOptions);
-        //     });
-        // });
 
         function addNavigationListener(element) {
             element.addEventListener('keydown', (e) => {
@@ -630,6 +545,7 @@
                         targetIndex = index + 1;
                         break;
                     case 'ArrowLeft':
+                        e.preventDefault();
                         targetIndex = index - 1;
                         break;
                     case 'ArrowRight':
@@ -650,15 +566,50 @@
                 }
             });
         }
-    });
 
-    $(document).ready(function() {
+        function deleteRow(idTiket) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: 'Anda akan menghapus baris ini.',
+                icon: 'warning',
+                showCancelButton: true, // Menampilkan tombol 'Batal'
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal',
+                allowOutsideClick: true, // Mengizinkan klik di luar untuk menutup alert
+                backdrop: true // Latar belakang dengan efek
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'http://localhost:8080/tiket/hapus/' + idTiket, // Menggunakan segment
+                        type: 'DELETE', // Sesuai dengan routing
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                // Reset mode edit setelah delete berhasil
+                                isEditMode = false;
+                                editRowId = null;
+                                Swal.fire('Berhasil!', 'Baris berhasil dihapus.', 'success').then(function() {
+                                    location.reload();
+                                }); // Menampilkan pesan sukses
+                            } else {
+                                alert("Terjadi kesalahan: " + response.message);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            alert("Gagal terhubung ke server. Silakan coba lagi.");
+                        }
+                    });
+                }
+            });
+        }
+
+        // function tambah(idTiket) {
         const form = $('#formTambah');
-        const errorMessage = $('#errorMessage');
+        // const errorMessage = $('#errorMessage');
         const dataTable = $('#dataTable')[0];
-        const idTiketC1 = <?= json_encode($tiketData['id_tiket']) ?>; // Gunakan `json_encode` agar nilainya valid di JavaScript
 
-        form.submit(function(event) {
+        // Listen for form submission
+        $('#formTambah').submit(function(event) {
             event.preventDefault();
 
             const data = [];
@@ -666,21 +617,25 @@
 
             rows.forEach(row => {
                 const rowData = {
-                    no: row.querySelector('[data-col="no"] input')?.value || row.querySelector('[data-col="no"] select')?.value || '',
-                    no_halaman: row.querySelector('[data-col="no_halaman"] input')?.value || row.querySelector('[data-col="no_halaman"] select')?.value || '',
-                    no_konten: row.querySelector('[data-col="no_konten"] input')?.value || row.querySelector('[data-col="no_konten"] select')?.value || '',
-                    no_halaman_revisi: row.querySelector('[data-col="no_hal_rev"] input')?.value || row.querySelector('[data-col="no_hal_rev"] select')?.value || '',
+                    no: row.querySelector('[data-col="no"] input')?.value || '',
+                    no_halaman: row.querySelector('[data-col="no_halaman"] input')?.value || '',
+                    no_konten: row.querySelector('[data-col="no_konten"] input')?.value || '',
+                    no_halaman_revisi: row.querySelector('[data-col="no_hal_rev"] input')?.value || '',
                     ekstensi_konten: row.querySelector('[data-col="ekstensi_konten"] select')?.value || ''
                 };
 
-                const hasValue = Object.values(rowData).some(value => value !== '');
-                if (hasValue) {
+                // If editing, send the `editRowId` as well
+                if (isEditMode) {
+                    rowData.id_tiket = editRowId;
+                }
+
+                if (Object.values(rowData).some(value => value !== '')) {
                     data.push(rowData);
                 }
             });
 
             $.ajax({
-                url: 'http://localhost:8080/tambahC2',
+                url: 'http://localhost:8080/saveC2',
                 type: 'POST',
                 data: {
                     id_tiket: idTiketC1, // Kirim id_tiket terpisah dari dataRows
@@ -689,8 +644,10 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.status === 'success') {
-                        alert("Data berhasil disimpan!");
-                        errorMessage.hide();
+                        Swal.fire('Berhasil!', 'Data berhasil disimpan.', 'success').then(function() {
+                            location.reload();
+                        });
+                        // errorMessage.hide();
                     } else {
                         errorMessage.text(response.message || "Terjadi kesalahan saat menyimpan data.");
                         errorMessage.show();
@@ -704,4 +661,946 @@
         });
     });
 </script>
+
+<!-- <script>
+    const idTiketC1 = <?= json_encode($tiketData['id_tiket']) ?>;
+
+    $(document).ready(function() {
+        const totalColumns = 6;
+        const kodeBuku = "<?= esc($tiketData['kode_buku']) ?>";
+        tiket = encodeBase64Id(idTiketC1);
+        let mergedCell = null; // Menyimpan referensi merged cell
+        let rowSpanCount = 0;
+
+        const rowsPerPage = 10; // Tentukan jumlah baris per halaman
+        let currentPage = 1; // Halaman awal
+        let allRows = []; // Menyimpan semua baris data
+
+        const dataTable = $('#dataTable tbody'); // Target tbody dalam tabel
+
+        // Fungsi untuk encode Base64
+        function encodeBase64Id(id) {
+            return btoa(id); // 'btoa' digunakan untuk encoding Base64
+        }
+
+        // Fungsi untuk fetch ekstensi konten
+        function fetchEkstensiKonten() {
+            return $.ajax({
+                url: '<?= site_url('tiket/ekstensi') ?>',
+                type: 'GET',
+                dataType: 'json'
+            });
+        }
+
+        // Fungsi untuk fetch data tiket
+        function fetchData(tiket) {
+            return $.ajax({
+                url: '<?= site_url('tiket/getData') ?>' + '?tiket=' + tiket,
+                type: 'GET',
+                dataType: 'json'
+            });
+        }
+
+        // Fungsi untuk render tabel
+        function renderTable(page) {
+            const headerRow = dataTable.find('tr').first(); // Ambil header tabel
+            dataTable.empty(); // Bersihkan semua baris
+
+            dataTable.append(headerRow); // Tambahkan kembali header tabel
+
+            const startIndex = (page - 1) * rowsPerPage;
+            const endIndex = Math.min(startIndex + rowsPerPage, allRows.length);
+
+            // Loop hanya untuk baris pada halaman tertentu
+            for (let i = startIndex; i < endIndex; i++) {
+                dataTable.append(allRows[i]); // Tambahkan baris ke dalam tabel
+            }
+
+            updatePagination(); // Perbarui tombol pagination
+        }
+
+        // Fungsi untuk update pagination
+        function updatePagination() {
+            const totalPages = Math.ceil(allRows.length / rowsPerPage);
+            const paginationContainer = $('#paginationContainer');
+            paginationContainer.empty();
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = $('<button>')
+                    .text(i)
+                    .addClass('btn btn-sm btn-primary m-1')
+                    .on('click', function() {
+                        currentPage = i;
+                        renderTable(currentPage);
+                    });
+
+                if (i === currentPage) {
+                    pageButton.addClass('active');
+                }
+
+                paginationContainer.append(pageButton);
+            }
+        }
+
+        // Fungsi untuk menambahkan baris ke dalam tabel
+        function addRow(data = {}, ekstensiOptions = []) {
+            const newRow = $('<tr>');
+
+            // Menambahkan merged cell hanya pada halaman pertama
+            if (currentPage > 0 && !mergedCell) {
+                mergedCell = $('<td>')
+                    .attr('rowspan', rowsPerPage) // Set initial rowspan
+                    .text(kodeBuku)
+                    .addClass('top-aligned');
+                newRow.append(mergedCell);
+            }
+
+            // Menambahkan kolom lainnya
+            for (let i = 1; i < totalColumns; i++) {
+                const newCell = $('<td>').attr('data-col', getColumnName(i));
+
+                if (i === 1 && data.no) {
+                    newCell.append($('<input>').attr('type', 'text').val(data.no));
+                } else if (i === 2 && data.no_halaman) {
+                    newCell.append($('<input>').attr('type', 'text').val(data.no_halaman));
+                } else if (i === 3 && data.no_konten) {
+                    newCell.append($('<input>').attr('type', 'text').val(data.no_konten));
+                } else if (i === 4 && data.no_hal_rev) {
+                    newCell.append($('<input>').attr('type', 'text').val(data.no_hal_rev));
+                } else if (i === totalColumns - 1) {
+                    const select = $('<select>');
+                    const defaultOption = $('<option>')
+                        .val('')
+                        .text('Pilih Ekstensi Konten')
+                        .prop('disabled', true)
+                        .prop('selected', true);
+
+                    select.append(defaultOption);
+
+                    ekstensiOptions.forEach(optionText => {
+                        const option = $('<option>').val(optionText).text(optionText);
+                        if (data.ekstensi_konten && data.ekstensi_konten === optionText) {
+                            option.prop('selected', true);
+                        }
+                        select.append(option);
+                    });
+
+                    newCell.append(select);
+                } else {
+                    newCell.append($('<input>').attr('type', 'text').val(''));
+                }
+
+                newRow.append(newCell);
+            }
+
+            // Tombol Hapus
+            const deleteCell = $('<td>');
+            const deleteButton = $('<a>')
+                .addClass('rounded-pill btn-icon btn-label-danger')
+                .attr('type', 'button')
+                .attr('title', 'Hapus Baris')
+                .append($('<span>').addClass('tf-icons bx bx-trash bx-sm'))
+                .on('click', function() {
+                    newRow.remove();
+                    allRows = allRows.filter(row => row !== newRow); // Hapus dari array
+                    renderTable(currentPage); // Render ulang tabel
+                });
+
+            deleteCell.append(deleteButton);
+            newRow.append(deleteCell);
+
+            // Tambahkan baris baru ke array `allRows`
+            allRows.push(newRow);
+
+            // Render ulang tabel dengan halaman aktif
+            renderTable(currentPage);
+        }
+
+        function getColumnName(index) {
+            const columnNames = ['', 'no', 'no_halaman', 'no_konten', 'no_hal_rev', 'ekstensi_konten', 'Aksi'];
+            return columnNames[index] || `col_${index}`;
+        }
+
+        // Mengambil ekstensi konten dan data tiket
+        fetchEkstensiKonten().done(function(ekstensiOptions) {
+            fetchData(tiket).done(function(data) {
+                const MIN_ROWS = 10;
+                const emptyRowCount = MIN_ROWS - data.length;
+
+                data.forEach(rowData => {
+                    addRow(rowData, ekstensiOptions);
+                });
+
+                for (let i = 0; i < emptyRowCount; i++) {
+                    addRow({}, ekstensiOptions);
+                }
+            });
+        });
+
+        // Event handler untuk menambah baris baru
+        $("#addRowButton").on("click", function() {
+            fetchEkstensiKonten().done(function(ekstensiOptions) {
+                addRow({}, ekstensiOptions);
+            });
+        });
+    });
+</script> -->
+
+<!-- <script>
+    $(document).ready(function() {
+        const idTiketC1 = <?= json_encode($tiketData['id_tiket']) ?>;
+        const totalColumns = 6;
+        const kodeBuku = "<?= esc($tiketData['kode_buku']) ?>";
+        tiket = encodeBase64Id(idTiketC1);
+        let mergedCell = null; // Menyimpan referensi merged cell
+        let rowSpanCount = 0;
+
+        const rowsPerPage = 10; // Tentukan jumlah baris per halaman
+        let currentPage = 1; // Halaman awal
+        let allRows = []; // Menyimpan semua baris data
+
+        const dataTable = $('#dataTable tbody'); // Target tbody dalam tabel
+
+        // Fungsi untuk encode Base64
+        function encodeBase64Id(id) {
+            return btoa(id); // 'btoa' digunakan untuk encoding Base64
+        }
+
+        // Fungsi untuk fetch ekstensi konten
+        function fetchEkstensiKonten() {
+            return $.ajax({
+                url: '<?= site_url('tiket/ekstensi') ?>',
+                type: 'GET',
+                dataType: 'json'
+            });
+        }
+
+        // Fungsi untuk fetch data tiket
+        function fetchData(tiket) {
+            return $.ajax({
+                url: '<?= site_url('tiket/getData') ?>' + '?tiket=' + tiket,
+                type: 'GET',
+                dataType: 'json'
+            });
+        }
+
+        // Fungsi untuk render tabel
+        function renderTable(page) {
+            const headerRow = dataTable.find('tr').first(); // Ambil header tabel
+            dataTable.empty(); // Bersihkan semua baris
+
+            dataTable.append(headerRow); // Tambahkan kembali header tabel
+
+            const startIndex = (page - 1) * rowsPerPage;
+            const endIndex = Math.min(startIndex + rowsPerPage, allRows.length);
+
+            mergedCell = $('<td>') // Buat merged cell untuk halaman ini
+                .attr('rowspan', rowsPerPage) // Atur rowspan sesuai jumlah baris per halaman
+                .text(kodeBuku) // Isi cell dengan kode buku
+                .addClass('top-aligned');
+
+            // Loop hanya untuk baris pada halaman tertentu
+            for (let i = startIndex; i < endIndex; i++) {
+                const row = allRows[i].clone(); // Clone baris untuk menjaga independensi data
+
+                // Tambahkan merged cell hanya pada baris pertama di halaman saat ini
+                if (i === startIndex) {
+                    row.prepend(mergedCell);
+                }
+
+                dataTable.append(row); // Tambahkan baris ke dalam tabel
+            }
+
+            updatePagination(); // Perbarui tombol pagination
+        }
+
+        // Fungsi untuk update pagination
+        function updatePagination() {
+            const totalPages = Math.ceil(allRows.length / rowsPerPage);
+            const paginationContainer = $('#paginationContainer');
+            paginationContainer.empty();
+
+            // Tombol Previous
+            const prevButton = $('<button>')
+                .text('Previous')
+                .addClass('btn btn-sm btn-secondary m-1')
+                .prop('disabled', currentPage === 1) // Nonaktifkan jika di halaman pertama
+                .on('click', function() {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        renderTable(currentPage);
+                    }
+                });
+
+            paginationContainer.append(prevButton);
+
+            // Tombol Nomor Halaman
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = $('<button>')
+                    .text(i)
+                    .addClass('btn btn-sm btn-primary m-1')
+                    .on('click', function() {
+                        if (currentPage !== i) { // Hanya jika nomor halaman berbeda
+                            currentPage = i;
+                            renderTable(currentPage);
+                        }
+                    });
+
+                // Jika ini adalah halaman saat ini, tambahkan kelas dan atribut `disabled`
+                if (i === currentPage) {
+                    pageButton.addClass('active').prop('disabled', true);
+                }
+
+                paginationContainer.append(pageButton);
+            }
+
+            // Tombol Next
+            const nextButton = $('<button>')
+                .text('Next')
+                .addClass('btn btn-sm btn-secondary m-1')
+                .prop('disabled', currentPage === totalPages) // Nonaktifkan jika di halaman terakhir
+                .on('click', function() {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        renderTable(currentPage);
+                    }
+                });
+
+            paginationContainer.append(nextButton);
+        }
+
+        // Fungsi untuk menambahkan baris ke dalam tabel
+        function addRow(data = {}, ekstensiOptions = []) {
+            const newRow = $('<tr>');
+
+            // Menambahkan kolom lainnya
+            for (let i = 1; i < totalColumns; i++) {
+                const newCell = $('<td>').attr('data-col', getColumnName(i));
+
+                if (i === 1 && data.no) {
+                    newCell.append($('<input>').attr('type', 'text').val(data.no));
+                } else if (i === 2 && data.no_halaman) {
+                    newCell.append($('<input>').attr('type', 'text').val(data.no_halaman));
+                } else if (i === 3 && data.no_konten) {
+                    newCell.append($('<input>').attr('type', 'text').val(data.no_konten));
+                } else if (i === 4 && data.no_hal_rev) {
+                    newCell.append($('<input>').attr('type', 'text').val(data.no_hal_rev));
+                } else if (i === totalColumns - 1) {
+                    const select = $('<select>');
+                    const defaultOption = $('<option>')
+                        .val('')
+                        .text('Pilih Ekstensi Konten')
+                        .prop('disabled', true)
+                        .prop('selected', true);
+
+                    select.append(defaultOption);
+
+                    ekstensiOptions.forEach(optionText => {
+                        const option = $('<option>').val(optionText).text(optionText);
+                        if (data.ekstensi_konten && data.ekstensi_konten === optionText) {
+                            option.prop('selected', true);
+                        }
+                        select.append(option);
+                    });
+
+                    newCell.append(select);
+                } else {
+                    newCell.append($('<input>').attr('type', 'text').val(''));
+                }
+
+                newRow.append(newCell);
+            }
+
+            // Tombol Hapus
+            const deleteCell = $('<td>');
+            const deleteButton = $('<a>')
+                .addClass('rounded-pill btn-icon btn-label-danger')
+                .attr('type', 'button')
+                .attr('title', 'Hapus Baris')
+                .append($('<span>').addClass('tf-icons bx bx-trash bx-sm'))
+                .on('click', function() {
+                    newRow.remove();
+                    allRows = allRows.filter(row => row !== newRow); // Hapus dari array
+                    renderTable(currentPage); // Render ulang tabel
+                });
+
+            deleteCell.append(deleteButton);
+            newRow.append(deleteCell);
+
+            // Tambahkan baris baru ke array `allRows`
+            allRows.push(newRow);
+
+            // Render ulang tabel dengan halaman aktif
+            renderTable(currentPage);
+        }
+
+        function getColumnName(index) {
+            const columnNames = ['', 'no', 'no_halaman', 'no_konten', 'no_hal_rev', 'ekstensi_konten', 'Aksi'];
+            return columnNames[index] || `col_${index}`;
+        }
+
+        // Mengambil ekstensi konten dan data tiket
+        fetchEkstensiKonten().done(function(ekstensiOptions) {
+            fetchData(tiket).done(function(data) {
+                const MIN_ROWS = 10;
+                const emptyRowCount = MIN_ROWS - data.length;
+
+                data.forEach(rowData => {
+                    addRow(rowData, ekstensiOptions);
+                });
+
+                for (let i = 0; i < emptyRowCount; i++) {
+                    addRow({}, ekstensiOptions);
+                }
+            });
+        });
+
+        // Event handler untuk menambah baris baru
+        $("#addRowButton").on("click", function() {
+            fetchEkstensiKonten().done(function(ekstensiOptions) {
+                const newRowsNeeded = rowsPerPage; // Jumlah baris yang diperlukan untuk satu halaman
+                for (let i = 0; i < newRowsNeeded; i++) {
+                    addRow({}, ekstensiOptions); // Tambahkan satu baris kosong
+                }
+                updatePagination(); // Perbarui pagination setelah menambahkan baris
+            });
+        });
+
+        // function tambah(idTiket) {
+        const form = $('#formTambah');
+        // const errorMessage = $('#errorMessage');
+        // const dataTable = $('#dataTable')[0];
+
+        // Listen for form submission
+        $('#formTambah').submit(function(event) {
+            event.preventDefault();
+
+            const data = [];
+            const rows = dataTable.querySelectorAll('tr');
+
+            rows.forEach(row => {
+                const rowData = {
+                    no: row.querySelector('[data-col="no"] input')?.value || '',
+                    no_halaman: row.querySelector('[data-col="no_halaman"] input')?.value || '',
+                    no_konten: row.querySelector('[data-col="no_konten"] input')?.value || '',
+                    no_halaman_revisi: row.querySelector('[data-col="no_hal_rev"] input')?.value || '',
+                    ekstensi_konten: row.querySelector('[data-col="ekstensi_konten"] select')?.value || ''
+                };
+
+                // If editing, send the `editRowId` as well
+                if (isEditMode) {
+                    rowData.id_tiket = editRowId;
+                }
+
+                if (Object.values(rowData).some(value => value !== '')) {
+                    data.push(rowData);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:8080/saveC2',
+                type: 'POST',
+                data: {
+                    id_tiket: idTiketC1, // Kirim id_tiket terpisah dari dataRows
+                    dataRows: data
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        Swal.fire('Berhasil!', 'Data berhasil disimpan.', 'success').then(function() {
+                            location.reload();
+                        });
+                        // errorMessage.hide();
+                    } else {
+                        errorMessage.text(response.message || "Terjadi kesalahan saat menyimpan data.");
+                        errorMessage.show();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    errorMessage.text("Gagal terhubung ke server. Silakan coba lagi.");
+                    errorMessage.show();
+                }
+            });
+        });
+
+
+    });
+</script> -->
+
+<!-- <script>
+    $(document).ready(function() {
+        // const addRowButton = document.getElementById('addRowButton');
+        const idTiketC1 = <?= json_encode($tiketData['id_tiket']) ?>;
+        const errorMessage = document.getElementById("errorMessage");
+        const totalColumns = 6;
+        let mergedCell = null;
+        let rowSpanCount = 0;
+        const kodeBuku = "<?= esc($tiketData['kode_buku']) ?>";
+        tiket = encodeBase64Id(idTiketC1);
+        let isEditMode = false;
+        let editRowId = null;
+        const rowsPerPage = 10; // Tentukan jumlah baris per halaman
+        let currentPage = 1; // Halaman awal
+        let allRows = []; // Menyimpan semua baris data
+        const dataTable = $('#dataTable');
+
+        function encodeBase64Id(id) {
+            return btoa(id); // 'btoa' digunakan untuk encoding Base64
+        }
+
+        function fetchEkstensiKonten() {
+            return $.ajax({
+                url: '<?= site_url('tiket/ekstensi') ?>',
+                type: 'GET',
+                dataType: 'json'
+            });
+        }
+
+        function fetchData(tiket) {
+            return $.ajax({
+                url: '<?= site_url('tiket/getData') ?>' + '?tiket=' + tiket, // Sesuaikan dengan endpoint baru
+                type: 'GET',
+                dataType: 'json'
+            });
+        }
+
+        // Fungsi untuk render tabel
+        function renderTable(page) {
+            const headerRow = dataTable.find('tr').first(); // Ambil header tabel
+            dataTable.empty(); // Bersihkan semua baris
+
+            dataTable.append(headerRow); // Tambahkan kembali header tabel
+
+            const startIndex = (page - 1) * rowsPerPage;
+            const endIndex = Math.min(startIndex + rowsPerPage, allRows.length);
+
+            mergedCell = $('<td>') // Buat merged cell untuk halaman ini
+                .attr('rowspan', rowsPerPage) // Atur rowspan sesuai jumlah baris per halaman
+                .text(kodeBuku) // Isi cell dengan kode buku
+                .addClass('top-aligned');
+
+            // Loop hanya untuk baris pada halaman tertentu
+            for (let i = startIndex; i < endIndex; i++) {
+                const row = allRows[i].clone(); // Clone baris untuk menjaga independensi data
+
+                // Tambahkan merged cell hanya pada baris pertama di halaman saat ini
+                if (i === startIndex) {
+                    row.prepend(mergedCell);
+                }
+
+                dataTable.append(row); // Tambahkan baris ke dalam tabel
+            }
+
+            updatePagination(); // Perbarui tombol pagination
+        }
+
+        // function addRow(data, ekstensiOptions) {
+        //     const newRow = document.createElement('tr')
+
+        //     // Existing row setup for update mode
+        //     if (data.id_tiket) {
+        //         isEditMode = true;
+        //         editRowId = data.id_tiket;
+        //     }
+
+        //     // Loop melalui setiap kolom untuk setiap sel dalam baris
+        //     for (let i = 0; i < totalColumns; i++) {
+        //         const newCell = document.createElement('td');
+        //         newCell.setAttribute('data-col', getColumnName(i));
+
+        //         // Kolom pertama khusus
+        //         if (i === 0) {
+        //             if (!mergedCell) {
+        //                 mergedCell = document.createElement('td');
+        //                 mergedCell.rowSpan = 1;
+        //                 mergedCell.textContent = kodeBuku;
+        //                 mergedCell.classList.add('top-aligned');
+        //                 newRow.appendChild(mergedCell);
+        //             }
+        //             continue;
+        //         }
+
+        //         // Kolom input data dari database atau kosong jika tidak ada data
+        //         if (i === 1 && data.no) {
+        //             const input = document.createElement('input');
+        //             input.type = 'text';
+        //             input.value = data.no; // Tetapkan nilai kosong
+        //             // input.textContent = data.no; // Tampilkan data "no" atau kosong
+        //             newCell.appendChild(input);
+        //             addNavigationListener(input);
+        //         } else if (i === 2 && data.no_halaman) {
+        //             const input = document.createElement('input');
+        //             input.type = 'text';
+        //             input.value = data.no_halaman; // Tetapkan nilai kosong
+        //             // input.textContent = data.no_halaman; // Tampilkan data "no_halaman" atau kosong
+        //             newCell.appendChild(input);
+        //             addNavigationListener(input);
+        //         } else if (i === 3 && data.no_konten) {
+        //             const input = document.createElement('input');
+        //             input.type = 'text';
+        //             input.value = data.no_konten; // Tetapkan nilai kosong
+        //             // input.textContent = data.no_konten; // Tampilkan data "no_konten" atau kosong
+        //             newCell.appendChild(input);
+        //             addNavigationListener(input);
+        //         } else if (i === 4 && data.no_hal_rev) {
+        //             const input = document.createElement('input');
+        //             input.type = 'text';
+        //             input.value = data.no_hal_rev; // Tetapkan nilai kosong
+        //             // input.textContent = data.no_hal_rev; // Tampilkan data "no_hal_rev" atau kosong
+        //             newCell.appendChild(input);
+        //             addNavigationListener(input);
+        //         } else if (i === totalColumns - 1) {
+        //             const select = document.createElement('select');
+        //             const defaultOption = document.createElement('option');
+        //             defaultOption.value = '';
+        //             defaultOption.textContent = 'Pilih Ekstensi Konten';
+        //             defaultOption.disabled = true;
+        //             defaultOption.selected = true;
+        //             select.appendChild(defaultOption);
+
+        //             ekstensiOptions.forEach(optionText => {
+        //                 const option = document.createElement('option');
+        //                 option.value = optionText;
+        //                 option.textContent = optionText;
+        //                 select.appendChild(option);
+
+        //                 // Cek apakah nilai ini ada di data dan jika ada, set option sebagai terpilih
+        //                 if (data.ekstensi_konten && data.ekstensi_konten === optionText) {
+        //                     option.selected = true; // Pilih opsi yang sesuai dengan nilai dari database
+        //                 }
+        //             });
+        //             newCell.appendChild(select);
+        //             addNavigationListener(select);
+        //         } else {
+        //             // Jika kolom tidak memiliki data dari database, tambahkan input kosong
+        //             const input = document.createElement('input');
+        //             input.type = 'text';
+        //             input.value = ''; // Tetapkan nilai kosong
+        //             newCell.appendChild(input);
+        //             addNavigationListener(input);
+        //         }
+
+        //         newRow.appendChild(newCell);
+        //     }
+
+        //     // Menambahkan tombol Delete pada row terakhir (sebagai contoh)
+        //     const deleteCell = document.createElement('td');
+        //     const deleteButton = document.createElement('a');
+        //     deleteButton.classList.add('rounded-pill', 'btn-icon', 'btn-label-danger');
+        //     deleteButton.setAttribute('type', 'button');
+        //     deleteButton.setAttribute('title', 'Hapus Baris');
+        //     // Membuat ikon dengan Font Awesome atau Boxicons
+        //     const icon = document.createElement('span');
+        //     icon.classList.add('tf-icons', 'bx', 'bx-trash', 'bx-sm'); // Menambahkan kelas untuk ikon
+        //     // Menambahkan ikon ke dalam tombol <a>
+        //     deleteButton.appendChild(icon);
+        //     deleteButton.addEventListener('click', function() {
+        //         // Panggil fungsi untuk menghapus data
+        //         deleteRow(data.id_tiket_c2);
+        //     });
+        //     deleteCell.appendChild(deleteButton);
+        //     newRow.appendChild(deleteCell);
+
+
+        //     if (mergedCell) {
+        //         mergedCell.rowSpan = ++rowSpanCount;
+        //     }
+
+        //     dataTable.appendChild(newRow);
+        // }
+
+        function addRow(data = {}, ekstensiOptions = []) {
+            const newRow = $('<tr>');
+
+            // Menambahkan kolom lainnya
+            for (let i = 1; i < totalColumns; i++) {
+                const newCell = $('<td>').attr('data-col', getColumnName(i));
+
+                if (i === 1 && data.no) {
+                    newCell.append($('<input>').attr('type', 'text').val(data.no));
+                } else if (i === 2 && data.no_halaman) {
+                    newCell.append($('<input>').attr('type', 'text').val(data.no_halaman));
+                } else if (i === 3 && data.no_konten) {
+                    newCell.append($('<input>').attr('type', 'text').val(data.no_konten));
+                } else if (i === 4 && data.no_hal_rev) {
+                    newCell.append($('<input>').attr('type', 'text').val(data.no_hal_rev));
+                } else if (i === totalColumns - 1) {
+                    const select = $('<select>');
+                    const defaultOption = $('<option>')
+                        .val('')
+                        .text('Pilih Ekstensi Konten')
+                        .prop('disabled', true)
+                        .prop('selected', true);
+
+                    select.append(defaultOption);
+
+                    ekstensiOptions.forEach(optionText => {
+                        const option = $('<option>').val(optionText).text(optionText);
+                        if (data.ekstensi_konten && data.ekstensi_konten === optionText) {
+                            option.prop('selected', true);
+                        }
+                        select.append(option);
+                    });
+
+                    newCell.append(select);
+                } else {
+                    newCell.append($('<input>').attr('type', 'text').val(''));
+                }
+
+                newRow.append(newCell);
+            }
+
+            // Tombol Hapus
+            const deleteCell = $('<td>');
+            const deleteButton = $('<a>')
+                .addClass('rounded-pill btn-icon btn-label-danger')
+                .attr('type', 'button')
+                .attr('title', 'Hapus Baris')
+                .append($('<span>').addClass('tf-icons bx bx-trash bx-sm'))
+                .on('click', function() {
+                    // newRow.remove();
+                    // allRows = allRows.filter(row => row !== newRow); // Hapus dari array
+                    deleteRow(data.id_tiket_c2);
+                    // renderTable(currentPage); // Render ulang tabel
+                });
+
+            deleteCell.append(deleteButton);
+            newRow.append(deleteCell);
+
+            // Tambahkan baris baru ke array `allRows`
+            allRows.push(newRow);
+
+            // Render ulang tabel dengan halaman aktif
+            renderTable(currentPage);
+        }
+
+        // Fungsi untuk update pagination
+        function updatePagination() {
+            const totalPages = Math.ceil(allRows.length / rowsPerPage);
+            const paginationContainer = $('#paginationContainer');
+            paginationContainer.empty();
+
+            // Tombol Previous
+            const prevButton = $('<button>')
+                .text('Previous')
+                .attr('type', 'button')
+                .addClass('btn btn-sm btn-secondary m-1')
+                .prop('disabled', currentPage === 1) // Nonaktifkan jika di halaman pertama
+                .on('click', function() {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        renderTable(currentPage);
+                    }
+                });
+
+            paginationContainer.append(prevButton);
+
+            // Tombol Nomor Halaman
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = $('<button>')
+                    .text(i)
+                    .attr('type', 'button')
+                    .addClass('btn btn-sm btn-primary m-1')
+                    .on('click', function() {
+                        if (currentPage !== i) { // Hanya jika nomor halaman berbeda
+                            currentPage = i;
+                            renderTable(currentPage);
+                        }
+                    });
+
+                // Jika ini adalah halaman saat ini, tambahkan kelas dan atribut `disabled`
+                if (i === currentPage) {
+                    pageButton.addClass('active').prop('disabled', true);
+                }
+
+                paginationContainer.append(pageButton);
+            }
+
+            // Tombol Next
+            const nextButton = $('<button>')
+                .text('Next')
+                .attr('type', 'button')
+                .addClass('btn btn-sm btn-secondary m-1')
+                .prop('disabled', currentPage === totalPages) // Nonaktifkan jika di halaman terakhir
+                .on('click', function() {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        renderTable(currentPage);
+                    }
+                });
+
+            paginationContainer.append(nextButton);
+        }
+
+        function getColumnName(index) {
+            const columnNames = ['', 'no', 'no_halaman', 'no_konten', 'no_hal_rev', 'ekstensi_konten', 'Aksi'];
+            return columnNames[index] || `col_${index}`; // Return default name if index is out of bounds
+        }
+
+        fetchEkstensiKonten().done(function(ekstensiOptions) {
+            fetchData(tiket).done(function(data) {
+                // Tentukan jumlah minimum baris yang ingin ditampilkan
+                const MIN_ROWS = 10;
+                const emptyRowCount = MIN_ROWS - data.length;
+
+                // Tambahkan baris berdasarkan data dari server
+                data.forEach(rowData => {
+                    addRow(rowData, ekstensiOptions);
+                });
+
+                // Tambahkan baris kosong jika data dari server kurang dari MIN_ROWS
+                for (let i = 0; i < emptyRowCount; i++) {
+                    addRow({}, ekstensiOptions); // Kirim objek kosong untuk baris kosong
+                }
+            });
+        });
+
+        // Event handler untuk menambah baris baru
+        $("#addRowButton").on("click", function() {
+            fetchEkstensiKonten().done(function(ekstensiOptions) {
+                const newRowsNeeded = rowsPerPage; // Jumlah baris yang diperlukan untuk satu halaman
+                for (let i = 0; i < newRowsNeeded; i++) {
+                    addRow({}, ekstensiOptions); // Tambahkan satu baris kosong
+                }
+                updatePagination(); // Perbarui pagination setelah menambahkan baris
+            });
+        });
+
+        function addNavigationListener(element) {
+            element.addEventListener('keydown', (e) => {
+                const inputs = dataTable.querySelectorAll('input, select');
+                const index = Array.from(inputs).indexOf(e.target);
+
+                if (index === -1) return;
+
+                let targetIndex = index;
+                if (e.target.tagName.toLowerCase() === 'select' && (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowRight')) {
+                    e.preventDefault();
+                }
+
+                switch (e.key) {
+                    case 'Enter':
+                    case 'Tab':
+                        e.preventDefault();
+                        targetIndex = index + 1;
+                        break;
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        targetIndex = index - 1;
+                        break;
+                    case 'ArrowRight':
+                        targetIndex = index + 1;
+                        break;
+                    case 'ArrowUp':
+                        targetIndex = index - totalColumns + 1;
+                        break;
+                    case 'ArrowDown':
+                        targetIndex = index + totalColumns - 1;
+                        break;
+                    default:
+                        return;
+                }
+
+                if (targetIndex >= 0 && targetIndex < inputs.length) {
+                    inputs[targetIndex].focus();
+                }
+            });
+        }
+
+        function deleteRow(idTiket) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: 'Anda akan menghapus baris ini.',
+                icon: 'warning',
+                showCancelButton: true, // Menampilkan tombol 'Batal'
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal',
+                allowOutsideClick: true, // Mengizinkan klik di luar untuk menutup alert
+                backdrop: true // Latar belakang dengan efek
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'http://localhost:8080/tiket/hapus/' + idTiket, // Menggunakan segment
+                        type: 'DELETE', // Sesuai dengan routing
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                // Reset mode edit setelah delete berhasil
+                                isEditMode = false;
+                                editRowId = null;
+                                Swal.fire('Berhasil!', 'Baris berhasil dihapus.', 'success').then(function() {
+                                    location.reload();
+                                }); // Menampilkan pesan sukses
+                            } else {
+                                alert("Terjadi kesalahan: " + response.message);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            alert("Gagal terhubung ke server. Silakan coba lagi.");
+                        }
+                    });
+                }
+            });
+        }
+
+        // function tambah(idTiket) {
+        const form = $('#formTambah');
+        // const errorMessage = $('#errorMessage');
+        // const dataTable = $('#dataTable')[0];
+
+        // Listen for form submission
+        $('#formTambah').submit(function(event) {
+            event.preventDefault();
+
+            const data = [];
+            const rows = dataTable.find('tr');
+            const rowArray = rows.toArray();
+
+            rowArray.forEach(row => {
+                const rowData = {
+                    no: row.querySelector('[data-col="no"] input')?.value || '',
+                    no_halaman: row.querySelector('[data-col="no_halaman"] input')?.value || '',
+                    no_konten: row.querySelector('[data-col="no_konten"] input')?.value || '',
+                    no_halaman_revisi: row.querySelector('[data-col="no_hal_rev"] input')?.value || '',
+                    ekstensi_konten: row.querySelector('[data-col="ekstensi_konten"] select')?.value || ''
+                };
+
+                // If editing, send the `editRowId` as well
+                if (isEditMode) {
+                    rowData.id_tiket = editRowId;
+                }
+
+                if (Object.values(rowData).some(value => value !== '')) {
+                    data.push(rowData);
+                }
+            });
+
+            $.ajax({
+                url: 'http://localhost:8080/saveC2',
+                type: 'POST',
+                data: {
+                    id_tiket: idTiketC1, // Kirim id_tiket terpisah dari dataRows
+                    dataRows: data
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        Swal.fire('Berhasil!', 'Data berhasil disimpan.', 'success').then(function() {
+                            location.reload();
+                        });
+                        // errorMessage.hide();
+                    } else {
+                        errorMessage.text(response.message || "Terjadi kesalahan saat menyimpan data.");
+                        errorMessage.show();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    errorMessage.text("Gagal terhubung ke server. Silakan coba lagi.");
+                    errorMessage.show();
+                }
+            });
+        });
+    });
+</script> -->
+
 <?= $this->endSection(); ?>
