@@ -101,7 +101,6 @@
                     </div>
                 <?php endif; ?>
                 <!-- / Column 3 -->
-
             </div>
             <!-- / Row 1 -->
 
@@ -127,7 +126,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- / Content -->
 

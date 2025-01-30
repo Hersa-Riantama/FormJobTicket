@@ -377,7 +377,8 @@ class Form extends BaseController
 
         $response = [
             'status' => 'success',
-            'Pesan' => 'Tiket Berhasil diupdate'
+            'Pesan' => 'Tiket Berhasil diupdate',
+            'id_tiket' => $id_tiket,
         ];
         return $this->response->setJSON($response);
     }
@@ -718,6 +719,7 @@ class Form extends BaseController
         $status = $this->request->getVar('status');
         $userLevel = session()->get('level_user');
         $approvalDate = date('Y-m-d');
+        $id_user = session()->get('id_user');
 
         $db = \Config\Database::connect();
         $builder = $db->table('tbl_tiket');
@@ -727,6 +729,7 @@ class Form extends BaseController
             $builder->set('approved_order_admin', $status);
             if ($status === 'Y') {
                 $builder->set('tgl_acc_admin', $approvalDate);  // Set tanggal approval hanya jika di-approve
+                $builder->set('id_admin', $id_user);
             } else {
                 $builder->set('tgl_acc_admin', null);  // Jika tidak di-approve, kosongkan tanggal
             }
@@ -739,6 +742,7 @@ class Form extends BaseController
             $builder->set('approved_multimedia', $status);
             if ($status === 'Y') {
                 $builder->set('tgl_acc_multimedia', $approvalDate);  // Set tanggal approval hanya jika di-approve
+                $builder->set('id_multimedia', $id_user);
             } else {
                 $builder->set('tgl_acc_multimedia', null);  // Jika tidak di-approve, kosongkan tanggal
             }
@@ -763,6 +767,7 @@ class Form extends BaseController
             $builder->set('approved_order_editor', $status);
             if ($status === 'Y') {
                 $builder->set('tgl_order_editor', $approvalDate);  // Set tanggal approval hanya jika di-approve
+                $builder->set('id_editor', $id_user);
             } else {
                 $builder->set('tgl_order_editor', null);  // Jika tidak di-approve, kosongkan tanggal
             }
@@ -781,6 +786,7 @@ class Form extends BaseController
         $status = $this->request->getVar('status');
         $userLevel = session()->get('level_user');
         $approvalDate = date('Y-m-d');
+        $id_user = session()->get('id_user');
 
         $db = \Config\Database::connect();
         $builder = $db->table('tbl_tiket');
@@ -790,6 +796,7 @@ class Form extends BaseController
             $builder->set('approved_order_koord', $status);
             if ($status === 'Y') {
                 $builder->set('tgl_order_koord', $approvalDate);  // Set tanggal approval hanya jika di-approve
+                $builder->set('id_koord', $id_user);
             } else {
                 $builder->set('tgl_order_koord', null);  // Jika tidak di-approve, kosongkan tanggal
             }
@@ -808,6 +815,7 @@ class Form extends BaseController
         $status = $this->request->getVar('status');
         $userLevel = session()->get('level_user');
         $approvalDate = date('Y-m-d');
+        $id_user = session()->get('id_user');
 
         $db = \Config\Database::connect();
         $builder = $db->table('tbl_tiket');
@@ -817,6 +825,7 @@ class Form extends BaseController
             $builder->set('approved_acc_koord', $status);
             if ($status === 'Y') {
                 $builder->set('tgl_acc_koord', $approvalDate);  // Set tanggal approval hanya jika di-approve
+                $builder->set('id_koord', $id_user);
             } else {
                 $builder->set('tgl_acc_koord', null);  // Jika tidak di-approve, kosongkan tanggal
             }
@@ -885,8 +894,13 @@ class Form extends BaseController
 
         // Ambil data tiket dan buku berdasarkan id_tiket
         $builder = $db->table('tbl_tiket');
-        $builder->select('tbl_tiket.*, tbl_buku.kode_buku, tbl_buku.judul_buku');
+        $builder->select('tbl_tiket.*, tbl_buku.kode_buku, tbl_buku.judul_buku, 
+                        editor.nama as editor_nama, koord.nama as koord_nama, multimedia.nama as multimedia_nama, admin.nama as admin_nama');
         $builder->join('tbl_buku', 'tbl_tiket.id_buku = tbl_buku.id_buku', 'left');
+        $builder->join('tbl_user as editor', 'tbl_tiket.id_editor = editor.id_user', 'left');
+        $builder->join('tbl_user as koord', 'tbl_tiket.id_koord = koord.id_user', 'left');
+        $builder->join('tbl_user as multimedia', 'tbl_tiket.id_multimedia = multimedia.id_user', 'left');
+        $builder->join('tbl_user as admin', 'tbl_tiket.id_admin = admin.id_user', 'left');
         $builder->where('tbl_tiket.id_tiket', $decodedId);
 
         $query = $builder->get();
@@ -964,12 +978,12 @@ class Form extends BaseController
 
         $dataRows = $this->request->getVar('dataRows'); // Ambil data dari form
         foreach ($dataRows as $data) {
-            // Pastikan data memiliki 'no' dan 'id_tiket'
-            if (!empty($data['no']) && !empty($id_tiket)) {
-                // Cari record dengan id_tiket dan no yang sama
+            // Pastikan data memiliki 'id_tiket'
+            if (!empty($data['id_tiket_c2']) && !empty($id_tiket)) {
+                // Cari record dengan id_tiket yang sama
                 $existingRow = $formc2Model
                     ->where('id_tiket', $id_tiket)
-                    ->where('no', $data['no'])
+                    ->where('id_tiket_c2', $data['id_tiket_c2'])
                     ->first();
 
                 if ($existingRow) {
@@ -984,7 +998,6 @@ class Form extends BaseController
                     // Jika tidak ditemukan, Anda dapat memilih untuk menyisipkan data baru atau melewatkannya
                     $formc2Model->insert([
                         'id_tiket' => $id_tiket,
-                        'no' => $data['no'],
                         'no_halaman' => $data['no_halaman'],
                         'no_konten' => $data['no_konten'],
                         'no_hal_rev' => $data['no_halaman_revisi'],

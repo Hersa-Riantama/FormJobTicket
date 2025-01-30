@@ -13,13 +13,11 @@
                 </div>
                 <div class="row justify-content-between align-items-start">
                     <div class="col-xl-4 mb-5 d-flex justify-content-center">
-                        <img src="<?= base_url('/assets/img/icons/Form QR Code.jpg') ?>"
-                            style="width: 100%; max-width: 100%; max-height: 16rem; object-fit: cover;" alt="Logo" />
+                        <img src="<?= base_url('/assets/img/icons/Form QR Code.jpg') ?>" style="width: 100%; max-width: 100%; max-height: 16rem; object-fit: cover;" alt="Logo" />
                     </div>
 
                     <div class="col-xl-4 mb-5 d-flex justify-content-center">
-                        <img src="<?= base_url('/assets/img/icons/C1.png') ?>"
-                            style="width: 70%; max-width: 100%; max-height: 16rem; object-fit: cover;" alt="Form C1" />
+                        <img src="<?= base_url('/assets/img/icons/C1.png') ?>" style="width: 70%; max-width: 100%; max-height: 16rem; object-fit: cover;" alt="Form C1" />
                     </div>
                 </div>
             </div>
@@ -42,88 +40,65 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-check mt-4">
-                                                    <input class="form-check-input warna-border" type="checkbox"
-                                                        value="1" name="id_kategori[]" id="kategori1" <?php echo in_array(1, $kategori) ? 'checked' : ''; ?> />
-                                                    <label class="form-check-label text-biru" for="kategori1"> <i>QR
-                                                            CODE</i> </label>
+                                                    <input class="form-check-input warna-border" type="checkbox" value="1" name="id_kategori[]" id="kategori1" <?php echo in_array(1, $kategori) ? 'checked' : ''; ?> />
+                                                    <label class="form-check-label text-biru" for="kategori1"> <i>QR CODE</i> </label>
                                                 </div>
                                             </div>
                                             <div class="col mt-4">
                                                 <div class="row">
                                                     <div class="form-check my-0" style="font-size:0.696rem;">
-                                                        <input class="form-check-input warna-border" type="checkbox"
-                                                            value="2" name="id_kategori[]" id="kategori2" <?php echo in_array(2, $kategori) ? 'checked' : ''; ?> />
-                                                        <label class="form-check-label text-biru" for="kategori2">
-                                                            <i>DUMMY</i> </label>
+                                                        <input class="form-check-input warna-border" type="checkbox" value="2" name="id_kategori[]" id="kategori2" <?php echo in_array(2, $kategori) ? 'checked' : ''; ?> />
+                                                        <label class="form-check-label text-biru" for="kategori2"> <i>DUMMY</i> </label>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-check my-0" style="font-size:0.696rem;">
-                                                        <input class="form-check-input warna-border" type="checkbox"
-                                                            value="3" name="id_kategori[]" id="kategori3" <?php echo in_array(3, $kategori) ? 'checked' : ''; ?> />
-                                                        <label class="form-check-label text-biru" for="kategori3">
-                                                            KONTEN TERSEDIA </label>
+                                                        <input class="form-check-input warna-border" type="checkbox" value="3" name="id_kategori[]" id="kategori3" <?php echo in_array(3, $kategori) ? 'checked' : ''; ?> />
+                                                        <label class="form-check-label text-biru" for="kategori3"> KONTEN TERSEDIA </label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-check mt-0">
-                                            <input class="form-check-input warna-border" type="checkbox" value="4"
-                                                name="id_kategori[]" id="kategori4" <?php echo in_array(4, $kategori) ? 'checked' : ''; ?> />
-                                            <label class="form-check-label text-biru" for="kategori4"> <i>Link QR
-                                                    Code</i> </label>
+                                            <input class="form-check-input warna-border" type="checkbox" value="4" name="id_kategori[]" id="kategori4" <?php echo in_array(4, $kategori) ? 'checked' : ''; ?> />
+                                            <label class="form-check-label text-biru" for="kategori4"> <i>Link QR Code</i> </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="5"
-                                                name="id_kategori[]" id="kategori5" <?php echo in_array(5, $kategori) ? 'checked' : ''; ?> />
+                                            <input class="form-check-input warna-border" type="checkbox" value="5" name="id_kategori[]" id="kategori5" <?php echo in_array(5, $kategori) ? 'checked' : ''; ?> />
                                             <label class="form-check-label text-biru" for="kategori5"> CBT/Aplikasi
                                             </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="6"
-                                                name="id_kategori[]" id="kategori6" <?php echo in_array(6, $kategori) ? 'checked' : ''; ?> />
+                                            <input class="form-check-input warna-border" type="checkbox" value="6" name="id_kategori[]" id="kategori6" <?php echo in_array(6, $kategori) ? 'checked' : ''; ?> />
                                             <label class="form-check-label text-biru" for="kategori6"> Edit Video/Audio
                                             </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="7"
-                                                name="id_kategori[]" id="kategori7" <?php echo in_array(7, $kategori) ? 'checked' : ''; ?> />
-                                            <label class="form-check-label text-biru" for="kategori7"> <i>Template</i>
-                                                Media Mengajar </label>
+                                            <input class="form-check-input warna-border" type="checkbox" value="7" name="id_kategori[]" id="kategori7" <?php echo in_array(7, $kategori) ? 'checked' : ''; ?> />
+                                            <label class="form-check-label text-biru" for="kategori7"> <i>Template</i> Media Mengajar </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="8"
-                                                name="id_kategori[]" id="kategori8" <?php echo in_array(8, $kategori) ? 'checked' : ''; ?> />
-                                            <label class="form-check-label text-biru" for="kategori8"> Standarisasi
-                                                Media Mengajar </label>
+                                            <input class="form-check-input warna-border" type="checkbox" value="8" name="id_kategori[]" id="kategori8" <?php echo in_array(8, $kategori) ? 'checked' : ''; ?> />
+                                            <label class="form-check-label text-biru" for="kategori8"> Standarisasi Media Mengajar </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="9"
-                                                name="id_kategori[]" id="kategori9" <?php echo in_array(9, $kategori) ? 'checked' : ''; ?> />
-                                            <label class="form-check-label text-biru" for="kategori9"> <i>Template</i>
-                                                Video </label>
+                                            <input class="form-check-input warna-border" type="checkbox" value="9" name="id_kategori[]" id="kategori9" <?php echo in_array(9, $kategori) ? 'checked' : ''; ?> />
+                                            <label class="form-check-label text-biru" for="kategori9"> <i>Template</i> Video </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="10"
-                                                name="id_kategori[]" id="kategori10" <?php echo in_array(10, $kategori) ? 'checked' : ''; ?> />
-                                            <label class="form-check-label text-biru" for="kategori10">
-                                                Animasi/<i>Motion</i> </label>
+                                            <input class="form-check-input warna-border" type="checkbox" value="10" name="id_kategori[]" id="kategori10" <?php echo in_array(10, $kategori) ? 'checked' : ''; ?> />
+                                            <label class="form-check-label text-biru" for="kategori10"> Animasi/<i>Motion</i> </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="11"
-                                                name="id_kategori[]" id="kategori11" <?php echo in_array(11, $kategori) ? 'checked' : ''; ?> />
-                                            <label class="form-check-label text-biru" for="kategori11"> <i>Augmented
-                                                    Reality</i> (AR) </label>
+                                            <input class="form-check-input warna-border" type="checkbox" value="11" name="id_kategori[]" id="kategori11" <?php echo in_array(11, $kategori) ? 'checked' : ''; ?> />
+                                            <label class="form-check-label text-biru" for="kategori11"> <i>Augmented Reality</i> (AR) </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="12"
-                                                name="id_kategori[]" id="kategori12" <?php echo in_array(12, $kategori) ? 'checked' : ''; ?> />
-                                            <label class="form-check-label text-biru" for="kategori12"> <i>Game</i>
-                                                Edukasi </label>
+                                            <input class="form-check-input warna-border" type="checkbox" value="12" name="id_kategori[]" id="kategori12" <?php echo in_array(12, $kategori) ? 'checked' : ''; ?> />
+                                            <label class="form-check-label text-biru" for="kategori12"> <i>Game</i> Edukasi </label>
                                         </div>
                                         <div class="form-check mt-4">
-                                            <input class="form-check-input warna-border" type="checkbox" value="13"
-                                                name="id_kategori[]" id="kategori13" <?php echo in_array(13, $kategori) ? 'checked' : ''; ?> />
+                                            <input class="form-check-input warna-border" type="checkbox" value="13" name="id_kategori[]" id="kategori13" <?php echo in_array(13, $kategori) ? 'checked' : ''; ?> />
                                             <label class="form-check-label text-biru" for="kategori13"> Lainnya </label>
                                         </div>
                                     </div>
@@ -139,23 +114,17 @@
                             <div class="card-body pb-0">
 
                                 <div class="mb-3 row">
-                                    <label for="pemesan" class="col-md-3 col-form-label text-biru"
-                                        style="font-size: var(--bs-body-font-size)">PEMESAN</label>
+                                    <label for="pemesan" class="col-md-3 col-form-label text-biru" style="font-size: var(--bs-body-font-size)">PEMESAN</label>
                                     <div class="col-md-9">
-                                        <input class="form-control text-hitam border-hitam" type="text"
-                                            value="<?= esc($tiketData['user_nama']) ?>" id="id_user" name="id_user"
-                                            placeholder="Masukkan Pemesan" style="border: 1px solid black;" readonly />
+                                        <input class="form-control text-hitam border-hitam" type="text" value="<?= esc($tiketData['user_nama']) ?>" id="id_user" name="id_user" placeholder="Masukkan Pemesan" style="border: 1px solid black;" readonly />
                                     </div>
                                 </div>
                                 <div class="mb-3 row" for="id_buku">
-                                    <label for="kode_buku" class="form-label col-md-3 text-biru"
-                                        style="font-size: var(--bs-body-font-size)">Kode Buku</label>
+                                    <label for="kode_buku" class="form-label col-md-3 text-biru" style="font-size: var(--bs-body-font-size)">Kode Buku</label>
                                     <div class="col-md-9">
                                         <?php if ($userData['level_user'] === 'Editor'): ?>
-                                            <select id="kode_buku" class="form-select border-hitam text-hitam"
-                                                name="id_buku">
-                                                <option value="" disabled selected><?= esc($tiketData['kode_buku']) ?>
-                                                </option>
+                                            <select id="kode_buku" class="form-select border-hitam text-hitam" name="id_buku">
+                                                <option value="" disabled selected><?= esc($tiketData['kode_buku']) ?> </option>
                                                 <!-- ajax -->
                                             </select>
                                         <?php else: ?>
@@ -165,71 +134,47 @@
                                     <div id="id_bukuError" class="error-message text-danger"></div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="nomor_job" class="col-md-3 col-form-label text-biru"
-                                        style="font-size: var(--bs-body-font-size)">NOMOR JOB</label>
+                                    <label for="nomor_job" class="col-md-3 col-form-label text-biru" style="font-size: var(--bs-body-font-size)">NOMOR JOB</label>
                                     <div class="col-md-9">
-                                        <input class="form-control text-hitam border-hitam" type="text"
-                                            value="<?= esc($tiketData['nomor_job']) ?>" id="nomor_job" name="nomor_job"
-                                            placeholder="Masukkan Nomor Job" style="border: 1px solid black;"
+                                        <input class="form-control text-hitam border-hitam" type="text" value="<?= esc($tiketData['nomor_job']) ?>" id="nomor_job" name="nomor_job" placeholder="Masukkan Nomor Job" style="border: 1px solid black;"
                                             <?php echo ($userData['level_user'] === 'Editor') ? '' : 'readonly'; ?> />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="judul_buku" class="col-md-3 col-form-label text-biru"
-                                        style="font-size: var(--bs-body-font-size)">JUDUL BUKU</label>
+                                    <label for="judul_buku" class="col-md-3 col-form-label text-biru" style="font-size: var(--bs-body-font-size)">JUDUL BUKU</label>
                                     <div class="col-md-9">
-                                        <textarea class="form-control text-hitam border-hitam" value="" id="judul_buku"
-                                            name="judul_buku" row="2" placeholder="Masukkan Judul Buku"
-                                            style="border: 1px solid black;"
-                                            readonly><?= esc($tiketData['judul_buku']) ?></textarea>
+                                        <textarea class="form-control text-hitam border-hitam" value="" id="judul_buku" name="judul_buku" row="2" placeholder="Masukkan Judul Buku" style="border: 1px solid black;" readonly><?= esc($tiketData['judul_buku']) ?></textarea>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="pengarang" class="col-md-3 col-form-label text-biru"
-                                        style="font-size: var(--bs-body-font-size)">PENULIS</label>
+                                    <label for="pengarang" class="col-md-3 col-form-label text-biru" style="font-size: var(--bs-body-font-size)">PENULIS</label>
                                     <div class="col-md-9">
-                                        <input class="form-control text-hitam border-hitam" type="text"
-                                            value="<?= esc($tiketData['pengarang']) ?>" id="pengarang" name="pengarang"
-                                            placeholder="Masukkan Penulis" style="border: 1px solid black;" readonly />
+                                        <input class="form-control text-hitam border-hitam" type="text" value="<?= esc($tiketData['pengarang']) ?>" id="pengarang" name="pengarang" placeholder="Masukkan Penulis" style="border: 1px solid black;" readonly />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="target_terbit" class="col-md-3 col-form-label text-biru"
-                                        style="font-size: var(--bs-body-font-size)">TARGET TERBIT</label>
+                                    <label for="target_terbit" class="col-md-3 col-form-label text-biru" style="font-size: var(--bs-body-font-size)">TARGET TERBIT</label>
                                     <div class="col-md-9">
-                                        <input class="form-control text-hitam border-hitam" type="year"
-                                            value="<?= esc($tiketData['target_terbit']) ?>" id="target_terbit"
-                                            name="target_terbit" placeholder="Masukkan Target Terbit"
-                                            style="border: 1px solid black;" readonly />
+                                        <input class="form-control text-hitam border-hitam" type="year" value="<?= esc($tiketData['target_terbit']) ?>" id="target_terbit" name="target_terbit" placeholder="Masukkan Target Terbit" style="border: 1px solid black;" readonly />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="jml_qr" class="col-md-3 col-form-label text-biru"
-                                        style="font-size: var(--bs-body-font-size)">Jumlah <i>QR Code</i></label>
+                                    <label for="jml_qr" class="col-md-3 col-form-label text-biru" style="font-size: var(--bs-body-font-size)">Jumlah <i>QR Code</i></label>
                                     <div class="col-md-9">
-                                        <input class="form-control text-hitam border-hitam" type="text"
-                                            value="<?= esc($tiketData['jml_qrcode']) ?>" id="jml_qrcode"
-                                            name="jml_qrcode" placeholder="Masukkan Jumlah QR Code"
-                                            style="border: 1px solid black;" <?php echo ($userData['level_user'] === 'Editor') ? '' : 'readonly'; ?> />
+                                        <input class="form-control text-hitam border-hitam" type="text" value="<?= esc($tiketData['jml_qrcode']) ?>" id="jml_qrcode" name="jml_qrcode" placeholder="Masukkan Jumlah QR Code" style="border: 1px solid black;" <?php echo ($userData['level_user'] === 'Editor') ? '' : 'readonly'; ?> />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="email" class="col-md-3 col-form-label text-biru"
-                                        style="font-size: var(--bs-body-font-size)">Email</label>
+                                    <label for="email" class="col-md-3 col-form-label text-biru" style="font-size: var(--bs-body-font-size)">Email</label>
                                     <div class="col-md-9">
-                                        <input class="form-control text-hitam border-hitam" type="email"
-                                            value="<?= esc($tiketData['user_email']) ?>" id="email" name="email"
-                                            placeholder="Masukkan Email" style="border: 1px solid black;" readonly />
+                                        <input class="form-control text-hitam border-hitam" type="email" value="<?= esc($tiketData['user_email']) ?>" id="email" name="email" placeholder="Masukkan Email" style="border: 1px solid black;" readonly />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="warna" class="col-md-3 col-form-label text-biru"
-                                        style="font-size: var(--bs-body-font-size)">WARNA</label>
+                                    <label for="warna" class="col-md-3 col-form-label text-biru" style="font-size: var(--bs-body-font-size)">WARNA</label>
                                     <div class="col-md">
-                                        <div class="form-check form-check-inline rounded p-2 mb-2 border-hitam"
-                                            style="border: 1px solid black;">
-                                            <input class="form-check-input mx-1 warna-border" type="radio"
-                                                id="inlineRadio1" name="inlineRadioOption" value="BW"
+                                        <div class="form-check form-check-inline rounded p-2 mb-2 border-hitam" style="border: 1px solid black;">
+                                            <input class="form-check-input mx-1 warna-border" type="radio" id="inlineRadio1" name="inlineRadioOption" value="BW"
                                                 <?= ($tiketData['warna'] === 'BW') ? 'checked' : '' ?> />
                                             <label class="form-check-label text-biru px-2" for="inlineRadio1">BW</label>
                                         </div>
@@ -389,25 +334,19 @@
                                                 <div class="row mt-4 mx-0">
 
                                                     <div class="col-xl mb-2 px-0">
-                                                        <div
-                                                            class="card h-100 <?= in_array($tiketData['approved_order_editor'], ['Y', 'R']) ? 'mb-2' : 'mb-5'; ?> warna-border">
-                                                            <div class="card-body p-2 d-flex justify-content-left"
-                                                                id="CurentDate" style="height:1.5rem;">
-                                                                <p class="text-start text-biru"
-                                                                    style="font-size:xx-small;">
+                                                        <div class="card h-100 <?= in_array($tiketData['approved_order_editor'], ['Y', 'R']) ? 'mb-2' : 'mb-5'; ?> warna-border">
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="height:1.5rem;">
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">
                                                                     <?= $tiketData['approved_order_editor'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>
                                                                 </p>
                                                                 <?php if (!empty($tiketData['tgl_order_editor']) && $tiketData['tgl_order_editor'] !== '0000-00-00' && $tiketData['tgl_order_editor'] !== '-0001-11-30'): ?>
-                                                                    <p class="text-start text-biru"
-                                                                        style="font-size:xx-small;">
-                                                                        <?= date('d/m/Y', strtotime($tiketData['tgl_order_editor'])); ?>
+                                                                    <p class="text-start text-biru" style="font-size:xx-small;"> <?= date('d/m/Y', strtotime($tiketData['tgl_order_editor'])); ?>
                                                                     </p>
                                                                 <?php endif; ?>
                                                             </div>
                                                             <?php if ($tiketData['approved_order_editor'] === 'Y'): ?>
                                                                 <div class="approved-status">
-                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>"
-                                                                        style="height: 3.5rem;" alt="Approved" />
+                                                                    <img src="<?= base_url('/assets/img/icons/approved.png') ?>" style="height: 3.5rem;" alt="Approved" />
                                                                 </div>
                                                             <?php elseif ($tiketData['approved_order_editor'] === 'R'): ?>
                                                                 <div class="approved-status">
@@ -419,8 +358,7 @@
                                                                 <div style="height: 1rem; background-color: transparent;">
                                                                 </div>
                                                             <?php endif; ?>
-                                                            <p class="text-start mb-0 px-1 text-hitam"
-                                                                style="font-size:x-small;">
+                                                            <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;">
                                                                 <?= esc($tiketData['editor_nama'] ?? '     ') ?>
                                                             </p>
                                                             <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-biru"
@@ -428,19 +366,14 @@
                                                         </div>
                                                     </div>
                                                     <div class=" col-xl mb-2 px-0">
-                                                        <div
-                                                            class="card h-100 <?= in_array($tiketData['approved_order_koord'], ['Y', 'R']) ? 'mb-2' : 'mb-5'; ?> warna-border">
+                                                        <div class="card h-100 <?= in_array($tiketData['approved_order_koord'], ['Y', 'R']) ? 'mb-2' : 'mb-5'; ?> warna-border">
                                                             <?php $level_user = session()->get('level_user'); ?>
-                                                            <div class="card-body p-2 d-flex justify-content-left"
-                                                                id="CurentDate"
-                                                                style="<?= $level_user === 'Koord Editor' && $tiketData['approved_order_koord'] === 'N' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
-                                                                <p class="text-start text-biru"
-                                                                    style="font-size:xx-small;">
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Koord Editor' && $tiketData['approved_order_koord'] === 'N' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">
                                                                     <?= $tiketData['approved_order_koord'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>
                                                                 </p>
                                                                 <?php if (!empty($tiketData['tgl_order_koord']) && $tiketData['tgl_order_koord'] !== '0000-00-00' && $tiketData['tgl_order_koord'] !== '-0001-11-30'): ?>
-                                                                    <p class="text-start text-biru"
-                                                                        style="font-size:xx-small;">
+                                                                    <p class="text-start text-biru" style="font-size:xx-small;">
                                                                         <?= date('d/m/Y', strtotime($tiketData['tgl_order_koord'])); ?>
                                                                     </p>
                                                                 <?php endif; ?>
@@ -467,8 +400,7 @@
                                                                 <div style="height: 1rem; background-color: transparent;">
                                                                 </div>
                                                             <?php endif; ?>
-                                                            <p class="text-start mb-0 px-1 text-hitam"
-                                                                style="font-size:x-small;">
+                                                            <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;">
                                                                 <?= esc($tiketData['koord_nama'] ?? '     ') ?>
                                                             </p>
                                                             <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-biru"
@@ -510,16 +442,12 @@
                                                     <div class="col-xl mb-2 px-0">
                                                         <div
                                                             class="card h-100 <?= in_array($tiketData['approved_multimedia'], ['Y', 'R']) ? 'mb-2' : 'mb-5'; ?> warna-border">
-                                                            <div class=" card-body p-2 d-flex justify-content-left"
-                                                                id="CurentDate"
-                                                                style="<?= $level_user === 'Tim Multimedia' && $tiketData['approved_multimedia'] === 'N' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
-                                                                <p class="text-start text-biru"
-                                                                    style="font-size:xx-small;">
+                                                            <div class=" card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Tim Multimedia' && $tiketData['approved_multimedia'] === 'N' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">
                                                                     <?= $tiketData['approved_multimedia'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>
                                                                 </p>
                                                                 <?php if (!empty($tiketData['tgl_acc_multimedia']) && $tiketData['tgl_acc_multimedia'] !== '0000-00-00' && $tiketData['tgl_acc_multimedia'] !== '-0001-11-30'): ?>
-                                                                    <p class="text-start text-biru"
-                                                                        style="font-size:xx-small;">
+                                                                    <p class="text-start text-biru" style="font-size:xx-small;">
                                                                         <?= date('d/m/Y', strtotime($tiketData['tgl_acc_multimedia'])); ?>
                                                                     </p>
                                                                 <?php endif; ?>
@@ -546,8 +474,7 @@
                                                                 <div style="height: 1rem; background-color: transparent;">
                                                                 </div>
                                                             <?php endif; ?>
-                                                            <p class="text-start mb-0 px-1 text-hitam"
-                                                                style="font-size:x-small;">
+                                                            <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;">
                                                                 <?php if ($userData['level_user'] === 'Tim Multimedia'): ?>
                                                                     <?= esc($tiketData['multimedia_nama'] ?? $userData['nama']); ?>
                                                                 <?php else: ?>
@@ -565,16 +492,14 @@
                                             </div>
 
                                             <div class="col-xl-9">
-                                                <h6 class="text-center rounded py-2 warna-pink text-hitam">Keterangan
-                                                    Tanggal</h6>
+                                                <h6 class="text-center rounded py-2 warna-pink text-hitam">Keterangan Tanggal</h6>
                                                 <div class="row mt-4 mx-1">
                                                     <div class="col-xl mb-2 px-0">
                                                         <div class="card h-100 mb-3 warna-border">
                                                             <div class="card-body p-0">
                                                                 <div class="row mt-2 mb-3 px-2">
                                                                     <label for="tgl_selesai"
-                                                                        class="col-12 col-md-6 col-form-label text-biru">Tgl
-                                                                        selesai pengerjaan</label>
+                                                                        class="col-12 col-md-6 col-form-label text-biru">Tgl selesai pengerjaan</label>
                                                                     <div class="col-12 col-md-6">
                                                                         <input
                                                                             class="form-control text-hitam border-hitam w-100"
@@ -586,8 +511,7 @@
                                                                 </div>
                                                                 <div class="row mb-2 px-2">
                                                                     <label for="tgl_upload"
-                                                                        class="col-12 col-md-6 col-form-label text-biru">Tgl
-                                                                        <i>upload</i> konten <i>QR Code</i></label>
+                                                                        class="col-12 col-md-6 col-form-label text-biru">Tgl <i>upload</i> konten <i>QR Code</i></label>
                                                                     <div class="col-12 col-md-6">
                                                                         <input
                                                                             class="form-control text-hitam border-hitam w-100"
@@ -674,11 +598,8 @@
                                                     <div class="col-xl mb-2 px-0">
                                                         <div
                                                             class="card h-100 <?= in_array($tiketData['approved_acc_manager'], ['Y', 'R']) ? 'mb-2' : 'mb-5'; ?> warna-border">
-                                                            <div class="card-body p-2 d-flex justify-content-left"
-                                                                id="CurentDate"
-                                                                style="<?= $level_user === 'Manager Platform' && $tiketData['approved_acc_manager'] === 'N' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
-                                                                <p class="text-start text-biru"
-                                                                    style="font-size:xx-small;">
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Manager Platform' && $tiketData['approved_acc_manager'] === 'N' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">
                                                                     <?= $tiketData['approved_acc_manager'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>
                                                                 </p>
                                                                 <?php if (!empty($tiketData['tgl_acc_manager']) && $tiketData['tgl_acc_manager'] !== '0000-00-00' && $tiketData['tgl_acc_manager'] !== '-0001-11-30'): ?>
@@ -710,10 +631,8 @@
                                                                 <div style="height: 1rem; background-color: transparent;">
                                                                 </div>
                                                             <?php endif; ?>
-                                                            <p class="text-start mb-0 px-1 text-hitam"
-                                                                style="font-size:x-small;">Suksma</p>
-                                                            <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-biru"
-                                                                style="font-size:x-small;">Manager</br>Platform Digital
+                                                            <p class="text-start mb-0 px-1 text-hitam" style="font-size:x-small;">Suksma</p>
+                                                            <p class="text-center text-biru rounded-bottom mb-0 py-1 warna-pink border-atas text-biru" style="font-size:x-small;">Manager</br>Platform Digital
                                                             </p>
                                                         </div>
                                                     </div>
@@ -729,16 +648,12 @@
                                                     <div class="col-xl mb-2 px-0">
                                                         <div
                                                             class="card h-100 <?= in_array($tiketData['approved_order_admin'], ['Y', 'R']) ? 'mb-2' : 'mb-5'; ?> warna-border">
-                                                            <div class="card-body p-2 d-flex justify-content-left"
-                                                                id="CurentDate"
-                                                                style="<?= $level_user === 'Admin Sistem' && $tiketData['approved_order_admin'] === 'N' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
-                                                                <p class="text-start text-biru"
-                                                                    style="font-size:xx-small;">
+                                                            <div class="card-body p-2 d-flex justify-content-left" id="CurentDate" style="<?= $level_user === 'Admin Sistem' && $tiketData['approved_order_admin'] === 'N' ? 'height:1rem;' : 'height:1.5rem;'; ?>">
+                                                                <p class="text-start text-biru" style="font-size:xx-small;">
                                                                     <?= $tiketData['approved_order_admin'] === 'R' ? 'Tanggal Rejected:' : 'Tanggal:' ?>
                                                                 </p>
                                                                 <?php if (!empty($tiketData['tgl_acc_admin']) && $tiketData['tgl_acc_admin'] !== '0000-00-00' && $tiketData['tgl_acc_admin'] !== '-0001-11-30'): ?>
-                                                                    <p class="text-start text-biru"
-                                                                        style="font-size:xx-small;">
+                                                                    <p class="text-start text-biru" style="font-size:xx-small;">
                                                                         <?= date('d/m/Y', strtotime($tiketData['tgl_acc_admin'])); ?>
                                                                     </p>
                                                                 <?php endif; ?>
@@ -765,8 +680,7 @@
                                                                 <div style="height: 1rem; background-color: transparent;">
                                                                 </div>
                                                             <?php endif; ?>
-                                                            <p class="text-center mb-0 px-1 text-hitam"
-                                                                style="font-size:x-small;">
+                                                            <p class="text-center mb-0 px-1 text-hitam" style="font-size:x-small;">
                                                                 <?php if ($userData['level_user'] === 'Admin Sistem'): ?>
                                                                     <?= esc($tiketData['admin_nama'] ?? $userData['nama']); ?>
                                                                 <?php else: ?>
@@ -836,6 +750,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
+
         $.ajax({
             url: 'http://localhost:8080/tampilbuku',
             type: 'GET',
@@ -909,6 +824,10 @@
         });
     }
 
+    function encodeBase64Id(id) {
+        return btoa(id); // 'btoa' digunakan untuk encoding Base64
+    }
+
     function updateForm() {
         const id_kategori = [];
         $('input[name="id_kategori[]"]:checked').each(function() {
@@ -952,13 +871,14 @@
             },
             success: function(response) {
                 if (response.status === 'success') {
+                    const id_tiket = encodeBase64Id(response.id_tiket);
                     $('#btnsimpanPerubahan').hide();
                     // Update tampilan sesuai kebutuhan
                     $('#status_message').text(response.message);
                     $(this).trigger('reset');
                     Swal.fire('Berhasil!', 'Tiket berhasil diperbarui.', 'success').then(function() {
                         if (kategori1Selected || kategori4Selected) {
-                            window.location.href = 'formc2'; // Replace with the actual URL of form C2
+                            window.location.href = "<?= base_url('formc2/') ?>" + id_tiket; // Replace with the actual URL of form C2
                             return; // Stop further execution to allow redirection
                         } else {
                             location.reload();

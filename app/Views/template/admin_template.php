@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 
-<html lang="en" class="light-style layout-menu-fixed layout-compact" dir="ltr" data-theme="theme-default"
-    data-assets-path="../assets/" data-template="vertical-menu-template-free">
+<html lang="en" class="light-style layout-menu-fixed layout-compact" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title><?= $judul; ?></title>
 
@@ -18,10 +16,9 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
 
+    <!-- Boxicon -->
     <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
 
     <!-- Core CSS -->
@@ -32,8 +29,6 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
-
-    <!-- Page CSS -->
 
     <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
@@ -56,7 +51,6 @@
 
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.0/dist/sweetalert2.all.min.js"></script>
-
 </head>
 
 <body>
@@ -135,13 +129,13 @@
                         <li class="menu-item">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-user"></i>
-                                <div data-i18n="Dashboards">User</div>
+                                <div>User</div>
                                 <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
                             </a>
                             <ul class="menu-sub">
                                 <li class="menu-item">
                                     <a href="http://localhost:8080/user" class="menu-link">
-                                        <div data-i18n="CRM">Kelola User</div>
+                                        <div>Kelola User</div>
                                     </a>
                                 </li>
                             </ul>
@@ -149,13 +143,12 @@
                         <li class="menu-item">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-category"></i>
-                                <div data-i18n="Dashboards">Kategori</div>
-                                <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
+                                <div>Kategori</div>
                             </a>
                             <ul class="menu-sub">
                                 <li class="menu-item">
                                     <a href="http://localhost:8080/kategori" class="menu-link">
-                                        <div data-i18n="CRM">Kelola Kategori</div>
+                                        <div>Kelola Kategori</div>
                                     </a>
                                 </li>
                             </ul>
@@ -165,13 +158,13 @@
                         <li class="menu-item">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-book-bookmark"></i>
-                                <div data-i18n="Dashboards">Buku</div>
+                                <div>Buku</div>
                                 <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
                             </a>
                             <ul class="menu-sub">
                                 <li class="menu-item">
                                     <a href="http://localhost:8080/buku" class="menu-link">
-                                        <div data-i18n="CRM">Kelola Buku</div>
+                                        <div>Kelola Buku</div>
                                     </a>
                                 </li>
                             </ul>
@@ -181,18 +174,18 @@
                         <li class="menu-item">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-detail"></i>
-                                <div data-i18n="Dashboards">Tiket</div>
+                                <div>Tiket</div>
                                 <!-- <div class="badge bg-danger rounded-pill ms-auto">5</div> -->
                             </a>
                             <ul class="menu-sub">
                                 <li class="menu-item">
                                     <a href="http://localhost:8080/form" class="menu-link">
-                                        <div data-i18n="CRM">Form QR Code</div>
+                                        <div>Form QR Code</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">
                                     <a href="http://localhost:8080/listform" class="menu-link">
-                                        <div data-i18n="eCommerce">Kelola Tiket</div>
+                                        <div>Kelola Tiket</div>
                                     </a>
                                 </li>
                             </ul>
@@ -228,17 +221,6 @@
                     <!-- /Search -->
 
                     <ul class="navbar-nav flex-row align-items-center ms-auto">
-                        <!-- Place this tag where you want the button to render. -->
-                        <!-- <li class="nav-item lh-1 me-3">
-                        <a
-                            class="github-button"
-                            href="https://github.com/themeselection/sneat-html-admin-template-free"
-                            data-icon="octicon-star"
-                            data-size="large"
-                            data-show-count="true"
-                            aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-                    </li> -->
-
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
@@ -274,21 +256,6 @@
                                         <span class="align-middle">My Profile</span>
                                     </a>
                                 </li>
-                                <!-- <li>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="bx bx-cog me-2"></i>
-                                        <span class="align-middle">Settings</span>
-                                    </a>
-                                </li> -->
-                                <!-- <li>
-                                    <a class="dropdown-item" href="#">
-                                        <span class="d-flex align-items-center align-middle">
-                                            <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                            <span class="flex-grow-1 align-middle ms-1">Billing</span>
-                                            <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                        </span>
-                                    </a>
-                                </li> -->
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
@@ -307,6 +274,7 @@
                 <!-- / Navbar -->
 
                 <?= $this->renderSection('content'); ?>
+
                 <!-- Core JS -->
                 <!-- build:js assets/vendor/js/core.js -->
 

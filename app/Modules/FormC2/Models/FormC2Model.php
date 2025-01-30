@@ -12,7 +12,6 @@ class FormC2Model extends Model
     protected $allowedFields = [
         'id_buku',
         'id_tiket',
-        'no',
         'no_halaman',
         'no_konten',
         'no_hal_rev',

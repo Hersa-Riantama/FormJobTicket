@@ -14,12 +14,12 @@
                 <div class="row justify-content-between align-items-start">
                     <div class="col-xl-4 mb-5 d-flex justify-content-center">
                         <img src="<?= base_url('/assets/img/icons/Form QR Code.jpg') ?>"
-                            style="width: 100%; max-width: 100%; max-height: 16rem; object-fit: cover;" alt="Logo" />
+                            style="width: 100%; max-width: 100%; max-height: 16rem; object-fit: contain;" alt="Logo" />
                     </div>
 
                     <div class="col-xl-4 mb-5 d-flex justify-content-center">
                         <img src="<?= base_url('/assets/img/icons/C1.png') ?>"
-                            style="width: 70%; max-width: 100%; max-height: 16rem; object-fit: cover;" alt="Form C1" />
+                            style="width: 70%; max-width: 100%; max-height: 16rem; object-fit: contain;" alt="Form C1" />
                     </div>
                 </div>
             </div>
@@ -673,7 +673,6 @@
                 contentType: false,
                 dataType: 'json',
                 success: function(response) {
-                    console.log('Respons dari Server:', response);
                     if (response.Status === 'success') {
                         const id_tiket = encodeBase64Id(response.id_tiket);
                         Swal.fire('Berhasil!', 'Tiket berhasil ditambah.', 'success').then(function() {

@@ -33,7 +33,7 @@ $routes->group(
         $routes->post('approved', 'Form::approveTicketD');
         $routes->post('disapproveTicket', 'Form::disapproveTicket');
         $routes->get('detail/(:segment)', 'Form::detailForm/$1');
-        // $routes->post('tambahC2', 'Form::createFormc2');
+        $routes->post('tambahC2', 'Form::createFormc2');
         $routes->post('saveC2', 'Form::saveFormc2');
         $routes->get('tiket/ekstensi', 'Form::getEkstensiKonten');
         $routes->delete('delete/(:segment)', 'Form::delete/$1');

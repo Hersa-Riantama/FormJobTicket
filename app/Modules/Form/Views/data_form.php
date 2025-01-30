@@ -147,13 +147,13 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                 var formData = '';
                 var isKoordEditor = <?= $isKoordEditor; ?>;
                 var islevel_user = <?= json_encode($level_user); ?>;
-                console.log("Is Koord Editor:", isKoordEditor);
+                // console.log("Is Koord Editor:", isKoordEditor);
 
                 $.each(response.tiket, function(key, value) {
                     var categories = JSON.parse(value.id_kategori);
 
-                    var hasKategori4 = categories.includes("1");
-                    var hasKategori1 = categories.includes("4");
+                    var hasKategori1 = categories.includes("1");
+                    var hasKategori4 = categories.includes("4");
                     var dibatalin = (value.approved_order_editor === 'R');
                     var disetujui = false;
                     var belum_disetujui = false;
@@ -307,7 +307,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '<a class="btn rounded-pill btn-icon btn-label-primary item-detail me-2" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Detail Tiket">';
                     formData += '<span class="tf-icons bx bx-show bx-sm"></span>';
                     formData += '</a>';
-                    if (islevel_user.includes("Editor") && (hasKategori4 || hasKategori1)) {
+                    if (islevel_user.includes("Editor") && (hasKategori1 || hasKategori4)) {
                         formData += '<a class="btn rounded-pill btn-icon btn-label-primary item-formc2 me-2" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Form C2">';
                         formData += '<span class="tf-icons bx bx-detail bx-sm"></span>';
                         formData += '</a>';
