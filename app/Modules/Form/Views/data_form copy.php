@@ -128,7 +128,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     var judul_buku = bukuMap[value.id_buku] || 'Unknown Buku';
                     var nama = userMap[value.id_user] || 'Unknown User';
 
-                    function encodeBase64Id(id) {
+                    function encodeBase64(id) {
                         return btoa(id); // 'btoa' digunakan untuk encoding Base64
                     }
 
@@ -226,7 +226,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '<i class="bx bx-dots-horizontal-rounded"></i>';
                     formData += '</button>';
                     formData += '<div class="dropdown-menu">';
-                    formData += '<a class="dropdown-item dropdown-item-detail" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '"><i class="bx bx-edit-alt me-2"></i>Detail</a>';
+                    formData += '<a class="dropdown-item dropdown-item-detail" href="javascript:void(0);" data-id_tiket="' + encodeBase64(value.id_tiket) + '"><i class="bx bx-edit-alt me-2"></i>Detail</a>';
                     formData += '<a class="dropdown-item dropdown-item-delete" style="color: red;" href="javascript:void(0);" data-id_tiket="' + value.id_tiket + '"><i class="bx bx-trash me-2"></i> Delete</a>';
                     formData += '</div>';
                     formData += '</div>';

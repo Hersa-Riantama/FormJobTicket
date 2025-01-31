@@ -214,7 +214,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     var judul_buku = bukuMap[value.id_buku] || 'Unknown Buku';
                     var nama = userMap[value.id_user] || 'Unknown User';
 
-                    function encodeBase64Id(id) {
+                    function encodeBase64(id) {
                         return btoa(id); // 'btoa' digunakan untuk encoding Base64
                     }
 
@@ -304,11 +304,11 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
                     formData += '<td>';
                     formData += '<div class="d-flex justify-content-start align-items-center">';
 
-                    formData += '<a class="btn rounded-pill btn-icon btn-label-primary item-detail me-2" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Detail Tiket">';
+                    formData += '<a class="btn rounded-pill btn-icon btn-label-primary item-detail me-2" href="javascript:void(0);" data-id_tiket="' + encodeBase64(value.id_tiket) + '" title="Detail Tiket">';
                     formData += '<span class="tf-icons bx bx-show bx-sm"></span>';
                     formData += '</a>';
                     if (islevel_user.includes("Editor") && (hasKategori1 || hasKategori4)) {
-                        formData += '<a class="btn rounded-pill btn-icon btn-label-primary item-formc2 me-2" href="javascript:void(0);" data-id_tiket="' + encodeBase64Id(value.id_tiket) + '" title="Form C2">';
+                        formData += '<a class="btn rounded-pill btn-icon btn-label-primary item-formc2 me-2" href="javascript:void(0);" data-id_tiket="' + encodeBase64(value.id_tiket) + '" title="Form C2">';
                         formData += '<span class="tf-icons bx bx-detail bx-sm"></span>';
                         formData += '</a>';
                     }

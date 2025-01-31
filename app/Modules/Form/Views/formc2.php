@@ -74,12 +74,12 @@
                 <h6 class="mb-0 text-hitam" style="font-weight: 100;">FRM.DGT.05.02/</h6>
             </div>
             <div class="row justify-content-between align-items-start">
-                <div class="col-xl-4 mb-5 d-flex justify-content-center">
+                <div class="col-12 col-sm-5 col-md-4 mb-5 d-flex justify-content-center">
                     <img src="<?= base_url('/assets/img/icons/Form QR Code.jpg') ?>"
                         style="width: 100%; max-width: 100%; max-height: 16rem; object-fit: contain;" alt="Logo" />
                 </div>
 
-                <div class="col-xl-4 mb-5 d-flex justify-content-center">
+                <div class="col-12 col-sm-5 col-md-4 mb-5 d-flex justify-content-center">
                     <img src="<?= base_url('/assets/img/icons/C2.png') ?>"
                         style="width: 70%; max-width: 100%; max-height: 16rem; object-fit: contain;" alt="Form C2" />
                 </div>
@@ -116,20 +116,37 @@
                 <div class="col-xl-12 mb-2">
                     <!-- <button id="addRowButton">Tambah Baris</button> -->
                     <div class="table-container">
-                        <table id="dataTable">
+                        <table id="tableC2">
                             <tr>
-                                <th class="text-center" style="width: 100px;">Kode Buku<br>(10 digit, cnth:<br>0024200260)</th>
+                                <th class="text-center" style="width: 150px;">Kode Buku<br>(10 digit, cnth:<br>0024200260)</th>
                                 <th class="text-center d-none">ID Tiket C2</th>
                                 <th class="text-center" style="width: 50px;">No.</th>
                                 <th class="text-center" style="width: 150px;">No. Halaman<br>(4 digit, cnth: 0001)</th>
                                 <th class="text-center" style="width: 150px;">No. Konten<br>(2 digit, cnth: 01)</th>
                                 <th class="text-center" style="width: 150px;">No. Halaman<br>Setelah direvisi</th>
-                                <th class="text-center" style="width: 150px;">Ekstensi Konten<br>untuk video: MP4<br>untuk audio:
-                                    MP3<br>PDF,RAR,APK</th>
+                                <th class="text-center" style="width: 150px;">Ekstensi Konten<br>untuk video: MP4<br>untuk audio: MP3<br>PDF,RAR,APK</th>
                                 <th class="text-center" style="width: 50px;">Aksi</th>
                             </tr>
-                            <!-- Tambahkan baris data di sini -->
                         </table>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-primary" id="addRowButton" type="button">Tambah Baris</button>
+                        <!-- <div id="paginationContainer" class="d-flex justify-content-center mt-3"></div> -->
+                        <!-- <nav aria-label="...">
+                            <ul class="pagination">
+                                <li class="page-item disabled">
+                                    <span class="page-link">Previous</span>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item active" aria-current="page">
+                                    <span class="page-link">2</span>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav> -->
                     </div>
                 </div>
             </div>
@@ -392,18 +409,64 @@
     const idTiketC1 = <?= json_encode($tiketData['id_tiket']) ?>;
 
     $(document).ready(function() {
-        // const addRowButton = document.getElementById('addRowButton');
+        const addRowButton = document.getElementById('addRowButton');
         const errorMessage = document.getElementById("errorMessage");
         const totalColumns = 7;
         let mergedCell = null;
         let rowSpanCount = 0;
         const kodeBuku = "<?= esc($tiketData['kode_buku']) ?>";
-        tiket = encodeBase64Id(idTiketC1);
+        tiket = encodeBase64(idTiketC1);
         let isEditMode = false;
         let editRowId = null;
 
-        function encodeBase64Id(id) {
+        function encodeBase64(id) {
             return btoa(id); // 'btoa' digunakan untuk encoding Base64
+        }
+
+        function addNavigationListener(element) {
+            element.addEventListener('keydown', (e) => {
+                const inputs = tableC2.querySelectorAll('input, select');
+                const index = Array.from(inputs).indexOf(e.target);
+
+                if (index === -1) return;
+
+                let targetIndex = index;
+                if (e.target.tagName.toLowerCase() === 'select' && (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowRight')) {
+                    e.preventDefault();
+                }
+
+                switch (e.key) {
+                    case 'Enter':
+                    case 'Tab':
+                        e.preventDefault();
+                        targetIndex = index + 1;
+                        break;
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        targetIndex = index - 1;
+                        break;
+                    case 'ArrowRight':
+                        targetIndex = index + 1;
+                        break;
+                    case 'ArrowUp':
+                        targetIndex = index - totalColumns + 2;
+                        break;
+                    case 'ArrowDown':
+                        targetIndex = index + totalColumns - 2;
+                        break;
+                    default:
+                        return;
+                }
+
+                if (targetIndex >= 0 && targetIndex < inputs.length) {
+                    inputs[targetIndex].focus();
+                }
+            });
+        }
+
+        function getColumnName(index) {
+            const columnNames = ['', 'id_tiket_c2', 'no', 'no_halaman', 'no_konten', 'no_hal_rev', 'ekstensi_konten', 'Aksi'];
+            return columnNames[index] || `col_${index}`; // Return default name if index is out of bounds
         }
 
         function fetchEkstensiKonten() {
@@ -421,6 +484,36 @@
                 dataType: 'json'
             });
         }
+
+        fetchEkstensiKonten().done(function(ekstensiOptions) {
+            fetchData(tiket).done(function(data) {
+                // Tentukan jumlah minimum baris yang ingin ditampilkan
+                const MIN_ROWS = 10;
+                let currentPage = 1;
+                const emptyRowCount = MIN_ROWS - data.length;
+                let number = 1;
+                // Tambahkan baris berdasarkan data dari server
+                data.forEach(rowData => {
+                    addRow(rowData, ekstensiOptions, number);
+                    number++;
+                });
+
+                // Tambahkan baris kosong jika data dari server kurang dari MIN_ROWS
+                for (let i = 0; i < emptyRowCount; i++) {
+                    addRow({}, ekstensiOptions, number); // Kirim objek kosong untuk baris kosong
+                    number++;
+                }
+            });
+        });
+
+        // Menambahkan event listener ke tombol addRowButton
+        $('#addRowButton').on('click', function() {
+            fetchEkstensiKonten().done(function(ekstensiOptions) {
+                const tableC2 = $('#tableC2')[0];
+                const number = tableC2.rows.length; // Menentukan nomor urut baris baru
+                addRow({}, ekstensiOptions, number); // Menambahkan baris baru dengan data kosong
+            });
+        });
 
         function addRow(data, ekstensiOptions, number) {
             const newRow = document.createElement('tr')
@@ -546,74 +639,7 @@
                 mergedCell.rowSpan = ++rowSpanCount;
             }
 
-            dataTable.appendChild(newRow);
-        }
-
-        function getColumnName(index) {
-            const columnNames = ['', 'id_tiket_c2', 'no', 'no_halaman', 'no_konten', 'no_hal_rev', 'ekstensi_konten', 'Aksi'];
-            return columnNames[index] || `col_${index}`; // Return default name if index is out of bounds
-        }
-
-        fetchEkstensiKonten().done(function(ekstensiOptions) {
-            fetchData(tiket).done(function(data) {
-                // Tentukan jumlah minimum baris yang ingin ditampilkan
-                const MIN_ROWS = 10;
-                let currentPage = 1;
-                const emptyRowCount = MIN_ROWS - data.length;
-                let number = 1;
-                // Tambahkan baris berdasarkan data dari server
-                data.forEach(rowData => {
-                    addRow(rowData, ekstensiOptions, number);
-                    number++;
-                });
-
-                // Tambahkan baris kosong jika data dari server kurang dari MIN_ROWS
-                for (let i = 0; i < emptyRowCount; i++) {
-                    addRow({}, ekstensiOptions, number); // Kirim objek kosong untuk baris kosong
-                    number++;
-                }
-            });
-        });
-
-        function addNavigationListener(element) {
-            element.addEventListener('keydown', (e) => {
-                const inputs = dataTable.querySelectorAll('input, select');
-                const index = Array.from(inputs).indexOf(e.target);
-
-                if (index === -1) return;
-
-                let targetIndex = index;
-                if (e.target.tagName.toLowerCase() === 'select' && (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowRight')) {
-                    e.preventDefault();
-                }
-
-                switch (e.key) {
-                    case 'Enter':
-                    case 'Tab':
-                        e.preventDefault();
-                        targetIndex = index + 1;
-                        break;
-                    case 'ArrowLeft':
-                        e.preventDefault();
-                        targetIndex = index - 1;
-                        break;
-                    case 'ArrowRight':
-                        targetIndex = index + 1;
-                        break;
-                    case 'ArrowUp':
-                        targetIndex = index - totalColumns + 2;
-                        break;
-                    case 'ArrowDown':
-                        targetIndex = index + totalColumns - 2;
-                        break;
-                    default:
-                        return;
-                }
-
-                if (targetIndex >= 0 && targetIndex < inputs.length) {
-                    inputs[targetIndex].focus();
-                }
-            });
+            tableC2.appendChild(newRow);
         }
 
         function deleteRow(idTiket) {
@@ -655,14 +681,14 @@
         // function tambah(idTiket) {
         const form = $('#formTambah');
         // const errorMessage = $('#errorMessage');
-        const dataTable = $('#dataTable')[0];
+        const tableC2 = $('#tableC2')[0];
 
         // Listen for form submission
         $('#formTambah').submit(function(event) {
             event.preventDefault();
 
             const data = [];
-            const rows = dataTable.querySelectorAll('tr');
+            const rows = tableC2.querySelectorAll('tr');
 
             rows.forEach(row => {
                 const rowData = {

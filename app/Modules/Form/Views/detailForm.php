@@ -824,7 +824,7 @@
         });
     }
 
-    function encodeBase64Id(id) {
+    function encodeBase64(id) {
         return btoa(id); // 'btoa' digunakan untuk encoding Base64
     }
 
@@ -871,7 +871,7 @@
             },
             success: function(response) {
                 if (response.status === 'success') {
-                    const id_tiket = encodeBase64Id(response.id_tiket);
+                    const id_tiket = encodeBase64(response.id_tiket);
                     $('#btnsimpanPerubahan').hide();
                     // Update tampilan sesuai kebutuhan
                     $('#status_message').text(response.message);

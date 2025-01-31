@@ -629,7 +629,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        function encodeBase64Id(id) {
+        function encodeBase64(id) {
             return btoa(id); // 'btoa' digunakan untuk encoding Base64
         }
         $('#formTiket').submit(function(event) {
@@ -674,7 +674,7 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.Status === 'success') {
-                        const id_tiket = encodeBase64Id(response.id_tiket);
+                        const id_tiket = encodeBase64(response.id_tiket);
                         Swal.fire('Berhasil!', 'Tiket berhasil ditambah.', 'success').then(function() {
                             // Redirect to formC2 if both kategori1 and kategori4 are selected
                             if (kategori1Selected || kategori4Selected) {

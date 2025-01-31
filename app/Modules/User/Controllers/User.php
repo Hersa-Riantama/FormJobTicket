@@ -123,4 +123,29 @@ class User extends BaseController
             'Status' => 'success'
         ]);
     }
+
+    public function profile()
+    {
+        $AuthModel = new AuthModel();
+        // Ambil data user berdasarkan ID dari sesi
+        $userId = session()->get('id_user');
+
+        if (!empty($userId)) {
+            // Ambil data user dari database berdasarkan id_user
+            $userData = $AuthModel->find($userId);
+        } else {
+            return redirect()->to('/login');
+        }
+        $model = new UserModel();
+        $data = $model->getUser();
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON(['user' => $data]);
+        }
+        $Udata = [
+            'user' => $data,
+            'judul' => 'Profile',
+            'userData' => $userData,
+        ];
+        return view($this->folder_directory . 'profile', $Udata);
+    }
 }
