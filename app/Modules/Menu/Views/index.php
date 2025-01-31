@@ -16,7 +16,7 @@
                                 <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Tiket</span>
                                 <h3 class="card-title text-center fs-1 mb-3 pt-3"><?= $form; ?></h3>
                                 <div class="d-flex justify-content-center">
-                                    <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/listform">Selengkapnya</a>
+                                    <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/kelola_tiket">Selengkapnya</a>
                                 </div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                                 <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Tiket On Progress</span>
                                 <h3 class="card-title text-center fs-1 mb-3 pt-3"><?= $onProgress; ?></h3>
                                 <div class="d-flex justify-content-center">
-                                    <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/listform?status=belum">Selengkapnya</a>
+                                    <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/kelola_tiket?status=belum">Selengkapnya</a>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                                 <span class="fw-bold text-center fs-4 d-block mb-3">Jumlah Tiket Done</span>
                                 <h3 class="card-title text-center fs-1 mb-3 pt-3"><?= $done; ?></h3>
                                 <div class="d-flex justify-content-center">
-                                    <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/listform?status=sudah">Selengkapnya</a>
+                                    <a class="smal-box-footer p-3 mx-5" href="http://localhost:8080/kelola_tiket?status=sudah">Selengkapnya</a>
                                 </div>
                             </div>
                         </div>

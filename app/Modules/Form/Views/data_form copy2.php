@@ -143,7 +143,7 @@ $level_user = ($userData && isset($userData['level_user']) && in_array($userData
         var statusFilter = $('#statusFilter').val();
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:8080/listform',
+            url: 'http://localhost:8080/kelola_tiket',
             dataType: 'json',
             success: function(response) {
                 var kodeBukuMap = {};

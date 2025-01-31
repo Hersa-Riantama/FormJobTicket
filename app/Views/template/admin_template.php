@@ -184,7 +184,7 @@
                                     </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href="http://localhost:8080/listform" class="menu-link">
+                                    <a href="http://localhost:8080/kelola_tiket" class="menu-link">
                                         <div>Kelola Tiket</div>
                                     </a>
                                 </li>
@@ -226,17 +226,17 @@
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                 data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img src="../assets/img/avatars/avatar.png" alt
+                                    <img src="../assets/img/avatars/<?= esc($userData['avatar']) ?>" alt
                                         class="w-px-40 h-auto rounded-circle border-hitam" />
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="http://localhost:8080/profil">
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="../assets/img/avatars/avatar.png" alt
+                                                    <img src="../assets/img/avatars/<?= esc($userData['avatar']) ?>" alt
                                                         class="w-px-40 h-auto rounded-circle border-hitam" />
                                                 </div>
                                             </div>
@@ -251,9 +251,9 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="http://localhost:8080/profil">
                                         <i class="bx bx-user me-2"></i>
-                                        <span class="align-middle">My Profile</span>
+                                        <span class="align-middle">My profil</span>
                                     </a>
                                 </li>
                                 <li>

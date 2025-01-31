@@ -119,6 +119,7 @@ class Auth extends BaseController
             'jk' => esc($this->request->getVar('jk')),
             'level_user' => esc($this->request->getVar('level_user')),
             'password' => md5(esc($this->request->getVar('password'))),
+            'avatar' => "avatar.png",
         ];
 
         $this->model->insert($data);

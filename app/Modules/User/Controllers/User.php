@@ -124,7 +124,7 @@ class User extends BaseController
         ]);
     }
 
-    public function profile()
+    public function profil()
     {
         $AuthModel = new AuthModel();
         // Ambil data user berdasarkan ID dari sesi
@@ -143,9 +143,72 @@ class User extends BaseController
         }
         $Udata = [
             'user' => $data,
-            'judul' => 'Profile',
+            'judul' => 'profil',
             'userData' => $userData,
         ];
-        return view($this->folder_directory . 'profile', $Udata);
+        return view($this->folder_directory . 'profil', $Udata);
+    }
+
+    public function updateProfil()
+    {
+        // Aturan validasi
+        $rules = $this->model->validationRules();
+
+        // Jika validasi gagal
+        if (!$this->validate($rules)) {
+            $response = [
+                'Status' => 'error',
+                'Errors' => $this->validator->getErrors(), // Return specific field errors
+            ];
+            return $this->response->setJSON($response, 400);
+        }
+
+        // Jika validasi berhasil, proses data input
+        $data = [
+            'nama' => esc($this->request->getVar('nama')),
+            'nomor_induk' => esc($this->request->getVar('nomor_induk')),
+            'email' => esc($this->request->getVar('email')),
+            'no_tlp' => esc($this->request->getVar('no_tlp')),
+            'jk' => esc($this->request->getVar('jk')),
+            'level_user' => esc($this->request->getVar('level_user')),
+            'password' => md5(esc($this->request->getVar('password'))),
+            'avatar' => "avatar.png",
+        ];
+
+        $this->model->insert($data);
+
+        // Response berhasil
+        $response = [
+            'Status' => 'success',
+            'Pesan' => 'Data User Berhasil ditambahkan',
+        ];
+        return $this->response->setJSON($response)->setStatusCode(200);
+    }
+
+    public function uploadAvatar()
+    {
+        $file = $this->request->getFile('upload');
+
+        if ($file->isValid() && !$file->hasMoved()) {
+            $idUser = session()->get('id_user');
+            $newName = 'user_' . $idUser . '.' . $file->getExtension();
+            $uploadPath = FCPATH . 'assets/img/avatars/';
+
+            // 🔥 Cek jika file lama ada, hapus terlebih dahulu
+            $oldAvatar = $this->model->find($idUser)['avatar'];
+            if ($oldAvatar && file_exists($uploadPath . $oldAvatar)) {
+                unlink($uploadPath . $oldAvatar);
+            }
+
+            // 🆕 Simpan file baru
+            $file->move($uploadPath, $newName);
+
+            // 📝 Update database dengan nama file baru
+            $this->model->update($idUser, ['avatar' => $newName]);
+
+            return $this->response->setJSON(['status' => 'success', 'filename' => $newName]);
+        }
+
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Upload gagal!']);
     }
 }

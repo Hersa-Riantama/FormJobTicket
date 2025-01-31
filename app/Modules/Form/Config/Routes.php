@@ -50,6 +50,6 @@ $routes->group(
     ['namespace' => '\Modules\Form\Controllers'],
     ['filter' => 'sessionCheck'],
     function ($routes) {
-        $routes->get('listform', 'Form::data_form');
+        $routes->get('kelola_tiket', 'Form::data_form');
     }
 );

@@ -919,7 +919,7 @@ class Form extends BaseController
             'userData' => $userData,
             'tiketData' => $tiketData,
         ];
-
+        // return $this->response->setJSON($tiketData);
         // Tampilkan view detailForm
         return view($this->folder_directory . 'formc2', $data);
     }
