@@ -169,10 +169,10 @@ class User extends BaseController
             'nomor_induk' => esc($this->request->getVar('nomor_induk')),
             'email' => esc($this->request->getVar('email')),
             'no_tlp' => esc($this->request->getVar('no_tlp')),
-            'jk' => esc($this->request->getVar('jk')),
-            'level_user' => esc($this->request->getVar('level_user')),
-            'password' => md5(esc($this->request->getVar('password'))),
-            'avatar' => "avatar.png",
+            // 'jk' => esc($this->request->getVar('jk')),
+            // 'level_user' => esc($this->request->getVar('level_user')),
+            'password' => md5(esc($this->request->getVar('password_baru'))),
+            // 'avatar' => "avatar.png",
         ];
 
         $this->model->insert($data);
@@ -180,7 +180,7 @@ class User extends BaseController
         // Response berhasil
         $response = [
             'Status' => 'success',
-            'Pesan' => 'Data User Berhasil ditambahkan',
+            'Pesan' => 'Data Profil Berhasil diperbarui',
         ];
         return $this->response->setJSON($response)->setStatusCode(200);
     }
